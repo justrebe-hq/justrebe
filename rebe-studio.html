@@ -120,8 +120,8 @@
   .conf-epics{min-height:56px;align-items:flex-start}
   .conf-tag{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--body);line-height:1.5;margin:0 0 14px}
   .conf-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--green-ink);text-decoration:none;margin-top:auto;justify-content:center}
-  .conf-epics{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:0 0 14px}
-  .epic-pill{display:inline-block;flex:0 0 auto;white-space:nowrap;font-family:var(--sans);font-size:9.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--green-ink);padding:3px 8px;border-radius:999px;border:1px solid transparent;line-height:1.4}
+  .conf-epics{text-align:center;margin:0 0 14px;font-size:0;line-height:1}
+  .epic-pill{display:inline-block;margin:0 3px 5px;white-space:normal;max-width:100%;font-family:var(--sans);font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--green-ink);padding:4px 10px;border-radius:999px;border:1px solid transparent;line-height:1.35;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal}
   .epic-pill.emotional{background:#F06905}
   .epic-pill.physical{background:#638D13}
   .epic-pill.intellectual{background:#034E64}
@@ -290,7 +290,7 @@
   section.dark-chapter [style*="color:var(--muted)"]{color:rgba(245,235,211,.55)!important}
 
   /* Confidant cards — sophisticated, no tilt, no star badge */
-  .conf-card{transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+  .conf-card{transition:transform .22s var(--ease),box-shadow .22s var(--ease);min-width:0;overflow:hidden}
   .conf-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
   /* Subtle role indicator on hover */
   .conf-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,var(--yellow-deep),transparent);opacity:0;transition:opacity .22s var(--ease);pointer-events:none}
