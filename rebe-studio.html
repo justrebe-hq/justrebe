@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>ReBe Studio · ReBe Membership · $30/month</title>
+<meta name="description" content="Every confidant. Every session. Every recording. A monthly membership home — for anyone ready to keep the work going. $30/month or $300/year." />
+<meta property="og:title" content="ReBe Studio · ReBe Membership" />
+<meta property="og:description" content="Every confidant. Every session. Every recording. A monthly membership home." />
+<meta property="og:url" content="https://justrebe.com/rebe-studio" />
+<meta property="og:type" content="website" />
+<meta name="robots" content="noindex,nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@400;700;900&family=Anton&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:#FFFFFF; --mist:#FAF9F7; --cream:#FDF9EE;
+    --navy:#060B50; --navy-dark:#040832; --navy-soft:#EEEEF6; --slate:#212B37;
+    --green:#449945; --green-ink:#3A8438; --green-deep:#2D6A2C; --green-wash:#F2F8F2;
+    --yellow:#F5B82E; --yellow-deep:#E3A01F; --yellow-ink:#B07D14; --yellow-wash:#FBF4E4;
+    --body:#4A535E; --muted:#9DA1A8; --bone:#E2E2E2;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --display:'Anton','Arial Narrow',Impact,sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+    --shadow:0 8px 30px rgba(6,11,80,.08);
+    --shadow-lg:0 14px 40px rgba(6,11,80,.14);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--mist);color:var(--body);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* NAV */
+  nav.top{position:sticky;top:0;background:rgba(250,249,247,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--bone);z-index:50;padding:14px 0}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brand{font-family:var(--sans);font-weight:900;font-size:18px;letter-spacing:.01em;color:var(--navy);text-decoration:none}
+  .brand span{color:var(--green-ink)}
+  .brand em{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--muted);font-size:14px;margin-left:8px}
+  .nav-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:var(--green-ink);color:#fff;font-family:var(--sans);font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:999px;transition:transform .15s var(--ease),background .15s var(--ease)}
+  .nav-cta:hover{background:var(--green-deep);transform:translateY(-1px)}
+
+  /* HERO */
+  .hero{position:relative;padding:clamp(60px,10vh,120px) 0 clamp(50px,8vh,90px);background:linear-gradient(180deg,#FDF9EE 0%,#FAF9F7 100%);overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(245,184,46,.20) 0%,rgba(245,184,46,0) 70%);pointer-events:none}
+  .hero::after{content:"";position:absolute;bottom:-300px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(68,153,69,.13) 0%,rgba(68,153,69,0) 70%);pointer-events:none}
+  .hero .wrap{position:relative}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:900;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--yellow-ink);margin:0 0 22px}
+  .hero-eyebrow::before{content:"✦";color:var(--yellow-deep);font-size:14px}
+  .hero-eyebrow::after{content:"✦";color:var(--yellow-deep);font-size:14px}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(52px,8.5vw,110px);line-height:.98;letter-spacing:-.025em;color:var(--navy);margin:0 0 20px}
+  .hero h1 em{font-style:italic;font-weight:600;color:var(--yellow-ink)}
+  .hero-sub{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(20px,2.6vw,30px);line-height:1.5;color:var(--slate);max-width:680px;margin:0 0 36px}
+  .hero-sub strong{font-style:normal;font-weight:600;color:var(--navy)}
+  .rotate{display:inline-block;color:var(--green-ink);font-weight:700;font-style:italic;transition:opacity .35s var(--ease),transform .35s var(--ease);will-change:opacity,transform;position:relative}
+  .rotate::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:linear-gradient(90deg,rgba(68,153,69,0) 0%,rgba(68,153,69,.45) 50%,rgba(68,153,69,0) 100%)}
+  .rotate.out{opacity:0;transform:translateY(-8px)}
+  .rotate.in{opacity:0;transform:translateY(8px)}
+  @media (prefers-reduced-motion:reduce){.rotate{transition:none}.rotate.out,.rotate.in{opacity:1;transform:none}}
+  .price-row{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:32px 0 0}
+  .price-row-label{font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 12px 4px;width:100%}
+  .price-tag{position:relative;display:inline-flex;flex-direction:column;padding:14px 22px 14px 30px;background:#fff;border:1px solid var(--bone);border-radius:10px;box-shadow:var(--shadow);transform:rotate(-1.2deg);transition:transform .2s var(--ease)}
+  .price-tag:hover{transform:rotate(0)}
+  .price-tag::before{content:"";position:absolute;left:10px;top:12px;bottom:12px;border-left:2px dashed rgba(6,11,80,.18)}
+  .price-tag::after{content:"";position:absolute;left:-7px;top:50%;transform:translateY(-50%);width:14px;height:14px;border-radius:50%;background:var(--mist);box-shadow:inset 0 0 0 1px var(--bone)}
+  .price-tag .p-amount{font-family:var(--display);font-size:30px;font-weight:400;line-height:1;color:var(--navy);letter-spacing:.01em}
+  .price-tag .p-per{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .price-tag.annual{background:linear-gradient(135deg,var(--yellow-wash) 0%,#FFF8E7 100%);border-color:#f5d4a8;transform:rotate(1.2deg)}
+  .price-tag.annual:hover{transform:rotate(0)}
+  .price-tag.annual::after{background:var(--yellow-wash);box-shadow:inset 0 0 0 1px #f5d4a8}
+  .price-tag .p-save{display:inline-block;margin-top:4px;font-family:var(--sans);font-size:10px;font-weight:900;color:var(--yellow-ink);letter-spacing:.14em;text-transform:uppercase}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 32px;font-family:var(--sans);font-weight:900;font-size:14px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:999px;border:none;cursor:pointer;transition:transform .15s var(--ease),box-shadow .15s var(--ease),background .15s var(--ease)}
+  .btn-primary{background:linear-gradient(135deg,var(--green) 0%,var(--green-ink) 100%);color:#fff;box-shadow:0 6px 20px rgba(68,153,69,.32)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(68,153,69,.42)}
+  .btn-secondary{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+  .btn-secondary:hover{background:var(--navy);color:#fff;transform:translateY(-2px)}
+  .btn-large{padding:20px 44px;font-size:15px}
+  .cancel-note{margin-top:14px;font-family:var(--sans);font-size:12px;color:var(--muted);font-style:italic}
+
+  /* SECTION HEADS */
+  section{padding:clamp(70px,10vh,110px) 0}
+  section.tint{background:var(--cream)}
+  section.cream{background:linear-gradient(180deg,var(--mist) 0%,#FDF9EE 100%)}
+  .sec-eyebrow{font-family:var(--sans);font-weight:900;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--green-ink);margin:0 0 16px}
+  .sec-h{font-family:var(--serif);font-weight:600;font-size:clamp(34px,4.5vw,54px);line-height:1.08;letter-spacing:-.015em;color:var(--navy);margin:0 0 20px}
+  .sec-h em{font-style:italic;color:var(--green-ink)}
+  .sec-h em.yellow{color:var(--yellow-ink)}
+  .sec-sub{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,22px);line-height:1.55;color:var(--body);max-width:660px;margin:0 0 30px}
+  .section-intro{max-width:740px;font-size:17px;line-height:1.75;color:var(--body);margin:0 0 44px}
+  .section-intro p{margin:0 0 16px}
+  .section-intro p:last-child{margin:0}
+  .section-intro strong{color:var(--navy);font-weight:700}
+  .section-intro em{font-style:italic;font-weight:600;color:var(--green-ink)}
+
+  /* WHAT YOU GET */
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .value-card{background:#fff;border:1px solid var(--bone);border-radius:18px;padding:28px 26px;transition:transform .18s var(--ease),box-shadow .18s var(--ease);position:relative;overflow:hidden}
+  .value-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .value-icon{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:14px;background:var(--yellow-wash);color:var(--yellow-ink);font-size:24px;margin-bottom:18px}
+  .value-card:nth-child(2n) .value-icon{background:var(--green-wash);color:var(--green-ink)}
+  .value-card:nth-child(3n) .value-icon{background:var(--navy-soft);color:var(--navy)}
+  .value-h{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--navy);margin:0 0 8px;line-height:1.25}
+  .value-p{margin:0;font-size:15px;line-height:1.6;color:var(--body)}
+
+  /* CONFIDANTS GRID */
+  .conf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+  .conf-card{background:#fff;border-radius:20px;padding:0;overflow:hidden;text-align:center;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease);border:none;font:inherit;color:inherit;width:100%;display:flex;flex-direction:column}
+  .conf-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .conf-photo{width:100%;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(135deg,#F5F1E7 0%,#EDE7D8 100%);flex-shrink:0}
+  .conf-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+  .conf-card:hover .conf-photo img{transform:scale(1.05)}
+  .conf-body{padding:22px 18px 26px;display:flex;flex-direction:column;flex:1}
+  .conf-role{font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--green-ink);margin:0 0 10px;line-height:1.4;min-height:2.8em}
+  .conf-name{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--navy);margin:0 0 12px;line-height:1.2;min-height:2.4em}
+  .conf-name em{font-style:italic}
+  .conf-epics{min-height:56px;align-items:flex-start}
+  .conf-tag{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--body);line-height:1.5;margin:0 0 14px}
+  .conf-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--green-ink);text-decoration:none;margin-top:auto;justify-content:center}
+  .conf-epics{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:0 0 14px}
+  .epic-pill{display:inline-block;font-family:var(--sans);font-size:9.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--green-ink);padding:3px 8px;border-radius:999px;border:1px solid transparent}
+  .epic-pill.emotional{background:#F06905}
+  .epic-pill.physical{background:#638D13}
+  .epic-pill.intellectual{background:#034E64}
+  .epic-pill.cultural{background:#FEB909;color:#3D2600}
+  .epic-pill.spiritual{background:#6B3AA0}
+  .bio-epics{margin:14px 0 0;padding:12px 16px;background:var(--green-wash);border-left:3px solid var(--green-ink);border-radius:0 8px 8px 0}
+  .bio-epics-label{font-family:var(--sans);font-size:10.5px;font-weight:900;letter-spacing:.20em;text-transform:uppercase;color:var(--green-deep);margin:0 0 8px}
+  .bio-epics-pills{display:flex;flex-wrap:wrap;gap:6px}
+  .bio-epics-pills .epic-pill{font-size:10.5px;padding:4px 10px}
+
+  /* SESSION CARDS */
+  .session-card{background:#fff;border:1px solid var(--bone);border-radius:18px;padding:28px 30px;margin:0 0 18px;position:relative}
+  .sc-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+  .sc-date{font-family:var(--display);font-size:14px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--green-ink);background:var(--green-wash);padding:5px 14px;border-radius:999px}
+  .sc-tag{font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow-ink);background:var(--yellow-wash);padding:5px 12px;border-radius:999px}
+  .sc-recur{font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:var(--navy-soft);padding:5px 12px;border-radius:999px}
+  .session-card h3{font-family:var(--serif);font-weight:600;font-size:24px;color:var(--navy);margin:0 0 6px;line-height:1.25}
+  .sc-facil{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--body);margin:0 0 16px}
+  .sc-desc{margin:0 0 14px;font-size:15px;line-height:1.65;color:var(--body)}
+
+  /* THE MATH */
+  .math-card{background:#fff;border:1px solid var(--bone);border-radius:22px;padding:clamp(28px,4vw,44px);box-shadow:var(--shadow)}
+  .math-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px dashed var(--bone)}
+  .math-row:last-child{border-bottom:none}
+  .math-row .m-label{font-family:var(--serif);font-size:17px;color:var(--body)}
+  .math-row .m-label strong{color:var(--navy);font-weight:600}
+  .math-row .m-amount{font-family:var(--display);font-size:26px;color:var(--navy);letter-spacing:.02em;white-space:nowrap}
+  .math-row.total{padding-top:22px;margin-top:6px;border-top:2px solid var(--navy);border-bottom:none}
+  .math-row.total .m-label{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--navy);font-size:20px}
+  .math-row.total .m-amount{color:var(--green-ink);font-size:34px}
+  .math-callout{margin-top:22px;padding:20px 24px;background:linear-gradient(135deg,var(--yellow-wash) 0%,#FFF8E7 100%);border-radius:14px;border-left:4px solid var(--yellow-deep);font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.55;color:var(--navy)}
+  .math-callout strong{font-style:normal;font-weight:700}
+
+  /* TESTIMONIALS */
+  .quote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+  .quote{background:#fff;border:1px solid var(--bone);border-radius:20px;padding:32px 30px;position:relative}
+  .quote::before{content:"\201C";position:absolute;top:12px;left:20px;font-family:var(--serif);font-weight:700;font-size:76px;color:var(--yellow-deep);line-height:1;opacity:.35}
+  .quote-body{position:relative;font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.55;color:var(--navy);margin:0 0 22px}
+  .quote-attr{display:flex;align-items:center;gap:12px;font-family:var(--sans);font-size:13px;color:var(--body);border-top:1px solid var(--bone);padding-top:16px}
+  .quote-attr strong{font-weight:900;color:var(--navy);letter-spacing:.02em}
+  .quote-attr .q-badge{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--green-ink);background:var(--green-wash);padding:3px 8px;border-radius:999px}
+
+  /* FAQ */
+  .faq-list{max-width:800px}
+  .faq-item{background:#fff;border:1px solid var(--bone);border-radius:14px;margin:0 0 12px;overflow:hidden}
+  .faq-item summary{padding:20px 26px;font-family:var(--serif);font-weight:600;font-size:19px;color:var(--navy);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:"+";font-family:var(--sans);font-weight:900;font-size:22px;color:var(--green-ink);line-height:1;transition:transform .2s var(--ease);flex-shrink:0}
+  .faq-item[open] summary::after{content:"–"}
+  .faq-item .faq-body{padding:0 26px 22px;font-size:16px;line-height:1.7;color:var(--body)}
+  .faq-item .faq-body strong{color:var(--navy)}
+
+  /* FINAL CTA */
+  .final-cta{padding:clamp(70px,10vh,120px) 0;background:linear-gradient(135deg,var(--green-wash) 0%,#FFF8E7 60%,var(--yellow-wash) 100%);text-align:center;position:relative;overflow:hidden}
+  .final-cta::before{content:"✦";position:absolute;top:40px;left:15%;font-size:32px;color:var(--yellow-deep);opacity:.55}
+  .final-cta::after{content:"✦";position:absolute;bottom:40px;right:15%;font-size:32px;color:var(--green);opacity:.5}
+  .final-cta .wrap{max-width:820px}
+  .final-cta h2{font-family:var(--serif);font-weight:600;font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.02em;color:var(--navy);margin:0 0 22px}
+  .final-cta h2 em{font-style:italic;color:var(--yellow-ink)}
+  .final-cta p{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.2vw,24px);line-height:1.5;color:var(--slate);margin:0 0 38px}
+
+  /* FOOTER */
+  footer{padding:38px 0;background:var(--navy);color:rgba(255,255,255,.75);text-align:center;font-family:var(--sans);font-size:14px}
+  footer .brand{color:#fff}
+  footer .brand span{color:var(--green)}
+  footer p{margin:8px 0 0;font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.65)}
+  footer a{color:var(--yellow);text-decoration:none;font-weight:700}
+
+  /* BIO MODAL */
+  dialog.bio-modal{border:none;border-radius:20px;padding:0;max-width:640px;width:calc(100vw - 32px);max-height:calc(100vh - 32px);box-shadow:0 30px 80px rgba(6,11,80,.3);background:#fff;overflow:hidden}
+  dialog.bio-modal::backdrop{background:rgba(6,11,80,.55);backdrop-filter:blur(4px)}
+  .bio-inner{padding:32px 34px 30px;max-height:calc(100vh - 32px);overflow-y:auto}
+  .bio-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.9);color:var(--navy);font-size:22px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(6,11,80,.12);transition:background .15s var(--ease)}
+  .bio-close:hover{background:#fff}
+  .bio-photo{width:100%;max-width:360px;aspect-ratio:3/4;overflow:hidden;border-radius:12px;background:linear-gradient(135deg,#F5F1E7 0%,#EDE7D8 100%);margin:0 auto 20px}
+  .bio-photo img{width:100%;height:100%;object-fit:cover}
+  .bio-name{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--navy);margin:0 0 4px;line-height:1.2}
+  .bio-name em{font-style:italic}
+  .bio-role{font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink);margin:0 0 18px}
+  .bio-body{font-size:15.5px;line-height:1.7;color:var(--body)}
+  .bio-body p{margin:0 0 12px}
+  .bio-sessions{margin:18px 0 0;padding:14px 16px;background:var(--green-wash);border-left:3px solid var(--green-ink);border-radius:0 8px 8px 0}
+  .bio-sessions-label{font-family:var(--sans);font-size:10.5px;font-weight:900;letter-spacing:.20em;text-transform:uppercase;color:var(--green-deep);margin:0 0 8px}
+  .bio-sessions ul{margin:0;padding:0 0 0 18px;font-size:14.5px;line-height:1.6;color:var(--body)}
+  .bio-sessions li{margin:0 0 4px}
+  .bio-sessions li:last-child{margin:0}
+  .bio-sessions li strong{color:var(--navy);font-weight:700}
+  .bio-video{display:block;margin:0 auto 18px;width:auto;height:auto;max-width:100%;max-height:65vh;border-radius:12px;background:#000}
+
+  /* Dr Q inline video */
+  .quintal-video-wrap{margin:0 0 16px}
+  .quintal-video-wrap .qv-eyebrow{margin:0 0 8px;font-family:var(--sans);font-size:11px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--green-ink)}
+  .quintal-video-wrap video{display:block;margin:0 auto;width:100%;max-width:320px;aspect-ratio:9/16;border-radius:12px;background:#000;box-shadow:0 4px 14px rgba(6,11,80,.10);object-fit:cover}
+
+  /* ==================== MOVIE STUDIO LAYER ==================== */
+
+  /* Hero: cinematic backdrop with optional background image */
+  .hero{background:linear-gradient(180deg,#040832 0%,#060B50 55%,#0A0F5C 100%);color:#F5EBD3;position:relative;overflow:hidden}
+  /* Optional background image slot — save a movie theater / studio photo at Images/hero-cinema.jpg */
+  .hero-bg-image{position:absolute;inset:0;background-image:url('Images/bg-hero-clapperboard.png');background-size:cover;background-position:center;opacity:.95;z-index:0;pointer-events:none;filter:saturate(1) brightness(1)}
+  .hero-bg-image::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,8,50,.88) 0%,rgba(4,8,50,.72) 30%,rgba(4,8,50,.35) 55%,rgba(4,8,50,.10) 75%,rgba(4,8,50,.30) 100%),linear-gradient(180deg,rgba(4,8,50,.20) 0%,rgba(4,8,50,0) 30%,rgba(4,8,50,0) 70%,rgba(4,8,50,.40) 100%)}
+  .hero-curtain{position:absolute;top:0;bottom:0;width:140px;pointer-events:none;z-index:1}
+  .hero-curtain.left{left:0;background:repeating-linear-gradient(90deg,rgba(6,11,80,.06) 0px,rgba(6,11,80,.09) 6px,rgba(6,11,80,.03) 14px,rgba(6,11,80,0) 30px),linear-gradient(90deg,rgba(6,11,80,.16) 0%,rgba(6,11,80,0) 100%)}
+  .hero-curtain.right{right:0;background:repeating-linear-gradient(90deg,rgba(6,11,80,0) 0px,rgba(6,11,80,.03) 16px,rgba(6,11,80,.09) 24px,rgba(6,11,80,.06) 30px),linear-gradient(90deg,rgba(6,11,80,0) 0%,rgba(6,11,80,.16) 100%)}
+  /* Spotlight beam behind title */
+  .hero::before{content:"";position:absolute;top:-40px;left:50%;transform:translateX(-50%) rotate(0.001deg);width:min(80vw,900px);height:60vh;background:conic-gradient(from 180deg at 50% 0%,rgba(245,184,46,0) 340deg,rgba(245,184,46,.16) 360deg,rgba(245,184,46,0) 380deg);z-index:1;pointer-events:none;opacity:.7}
+  .hero .wrap{position:relative;z-index:2}
+  /* Subtle grain texture — CSS noise */
+  .hero::after{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /><feColorMatrix values='0 0 0 0 0.2  0 0 0 0 0.15  0 0 0 0 0.1  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");opacity:.06;pointer-events:none;z-index:1;mix-blend-mode:multiply}
+
+  /* A24 dark-hero text overrides */
+  .hero .hero-eyebrow{color:var(--yellow)}
+  .hero .hero-eyebrow::before,.hero .hero-eyebrow::after{color:var(--yellow)}
+  .hero h1{color:#F5EBD3}
+  .hero h1 em{color:var(--yellow)}
+  .hero-sub{color:rgba(245,235,211,.85)}
+  .hero-sub strong{color:#F5EBD3}
+  .hero .rotate{color:var(--yellow)}
+  .hero .rotate::after{background:linear-gradient(90deg,rgba(245,184,46,0) 0%,rgba(245,184,46,.55) 50%,rgba(245,184,46,0) 100%)}
+  .hero .btn-secondary{background:transparent;color:#F5EBD3;border-color:rgba(245,235,211,.5)}
+  .hero .btn-secondary:hover{background:#F5EBD3;color:var(--navy);border-color:#F5EBD3}
+  .hero .cancel-note{color:rgba(245,235,211,.55)}
+  .hero .price-row-label{color:rgba(245,235,211,.55)}
+  .hero .price-tag{background:rgba(255,255,255,.06);border:1px solid rgba(245,235,211,.22);transform:none;padding:14px 22px;backdrop-filter:blur(4px)}
+  .hero .price-tag::before,.hero .price-tag::after{display:none}
+  .hero .price-tag:hover{transform:translateY(-2px)}
+  .hero .price-tag .p-amount{color:#F5EBD3}
+  .hero .price-tag .p-per{color:rgba(245,235,211,.55)}
+  .hero .price-tag.annual{background:rgba(245,184,46,.14);border-color:rgba(245,184,46,.4);transform:none}
+  .hero .price-tag.annual .p-amount{color:var(--yellow)}
+  .hero .price-tag.annual .p-save{color:var(--yellow)}
+
+  /* Marquee bulbs decorative row — pulsing */
+  .marquee-row{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 0 22px;position:relative}
+  .marquee-row .bulbs{flex:1;max-width:140px;height:14px;background:radial-gradient(circle,var(--yellow) 34%,transparent 36%);background-size:20px 14px;background-repeat:repeat-x;background-position:center;filter:drop-shadow(0 0 6px rgba(245,184,46,.6));animation:bulbGlow 2.4s ease-in-out infinite}
+  .marquee-row .bulbs:nth-child(3){animation-delay:1.2s}
+  .marquee-row .star{font-size:16px;color:var(--yellow-deep);letter-spacing:.4em;text-shadow:0 0 12px rgba(245,184,46,.5)}
+  @keyframes bulbGlow{0%,100%{opacity:.6;filter:drop-shadow(0 0 4px rgba(245,184,46,.5))}50%{opacity:1;filter:drop-shadow(0 0 10px rgba(245,184,46,.8))}}
+  @media (prefers-reduced-motion:reduce){.marquee-row .bulbs{animation:none;opacity:.85}}
+
+  /* A24 dark chapter sections (alternate with cream) */
+  section.dark-chapter{background:linear-gradient(180deg,#060B50 0%,#040832 100%);color:#F5EBD3;position:relative;overflow:hidden}
+  section.dark-chapter .sec-eyebrow{color:var(--yellow)}
+  section.dark-chapter .sec-h{color:#F5EBD3}
+  section.dark-chapter .sec-h em{color:var(--yellow)}
+  section.dark-chapter .sec-sub{color:rgba(245,235,211,.75)}
+  section.dark-chapter .session-card{background:rgba(255,255,255,.03);border:1px solid rgba(245,235,211,.14);color:#F5EBD3;backdrop-filter:blur(6px)}
+  section.dark-chapter .session-card h3{color:#F5EBD3}
+  section.dark-chapter .sc-facil{color:rgba(245,235,211,.80)}
+  section.dark-chapter .sc-desc{color:rgba(245,235,211,.80)}
+  section.dark-chapter .sc-date{background:rgba(245,184,46,.14);color:var(--yellow)}
+  section.dark-chapter .sc-tag{background:rgba(245,184,46,.14);color:var(--yellow)}
+  section.dark-chapter .sc-recur{background:rgba(245,235,211,.10);color:#F5EBD3}
+  section.dark-chapter .quintal-video-wrap .qv-eyebrow{color:var(--yellow)}
+  section.dark-chapter .ribbon{color:var(--yellow)!important;border-left-color:var(--yellow)!important}
+  section.dark-chapter .math-card{background:rgba(255,255,255,.03);border:1px solid rgba(245,235,211,.14)}
+  section.dark-chapter .math-row .m-label{color:rgba(245,235,211,.85)}
+  section.dark-chapter .math-row .m-label strong{color:#F5EBD3}
+  section.dark-chapter .math-row .m-amount{color:#F5EBD3}
+  section.dark-chapter .math-row{border-bottom-color:rgba(245,235,211,.15)}
+  section.dark-chapter .math-row.total{border-top-color:rgba(245,235,211,.4)}
+  section.dark-chapter .math-row.total .m-label{color:var(--yellow)}
+  section.dark-chapter .math-row.total .m-amount{color:var(--yellow)}
+  section.dark-chapter .math-callout{background:rgba(245,184,46,.10);border-left-color:var(--yellow);color:#F5EBD3}
+  section.dark-chapter .math-callout strong{color:var(--yellow)}
+  section.dark-chapter [style*="color:var(--muted)"]{color:rgba(245,235,211,.55)!important}
+
+  /* Confidant cards — sophisticated, no tilt, no star badge */
+  .conf-card{transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+  .conf-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  /* Subtle role indicator on hover */
+  .conf-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,var(--yellow-deep),transparent);opacity:0;transition:opacity .22s var(--ease);pointer-events:none}
+  .conf-card:hover::after{opacity:1}
+  .conf-card{position:relative}
+
+  /* Session cards — refined, subtle status label instead of ribbon */
+  .session-card{position:relative}
+  .session-card .ribbon{position:absolute;top:20px;right:26px;background:transparent;color:var(--yellow-ink);padding:0;font-family:var(--sans);font-size:10px;font-weight:900;letter-spacing:.28em;text-transform:uppercase;box-shadow:none;z-index:2;pointer-events:none;border-left:2px solid var(--yellow-deep);padding-left:10px}
+  .session-card .ribbon.premiere{color:var(--yellow-deep);border-left-color:var(--yellow-deep)}
+  .session-card .ribbon.encore{color:var(--green-ink);border-left-color:var(--green-ink)}
+
+  /* Film strip divider — image backdrop (falls back to gradient if no image) */
+  .film-strip{position:relative;background:linear-gradient(rgba(4,8,50,.75),rgba(4,8,50,.75)),url('Images/bg-filmstrip.jpg') center/cover,linear-gradient(90deg,var(--navy-dark) 0%,#0A0F5C 50%,var(--navy-dark) 100%);height:64px;margin:70px 0;box-shadow:0 6px 22px rgba(6,11,80,.20)}
+  .film-strip::before,.film-strip::after{content:"";position:absolute;left:0;right:0;height:10px;background:radial-gradient(circle,var(--mist) 30%,transparent 32%);background-size:24px 10px;background-repeat:repeat-x;background-position:12px center;opacity:.85}
+  .film-strip::before{top:8px}
+  .film-strip::after{bottom:8px}
+  .film-strip .strip-caption{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,.55);font-family:var(--display);font-size:12px;letter-spacing:.4em;text-transform:uppercase;text-align:center;white-space:nowrap}
+
+  /* Now-Playing marquee for scheduling section */
+  .marquee-plaque{position:relative;display:inline-block;background:linear-gradient(180deg,#040832 0%,#060B50 100%);color:#fff;padding:12px 30px 12px 30px;border-radius:6px;margin:0 0 30px;box-shadow:0 8px 24px rgba(6,11,80,.28),inset 0 1px 0 rgba(255,255,255,.08)}
+  .marquee-plaque::before,.marquee-plaque::after{content:"";position:absolute;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--yellow-soft),var(--yellow-deep));box-shadow:0 0 12px rgba(245,184,46,.7),inset 0 -2px 4px rgba(0,0,0,.15)}
+  .marquee-plaque::before{left:-30px}
+  .marquee-plaque::after{right:-30px}
+  .marquee-plaque .plaque-eyebrow{font-family:var(--sans);font-size:10px;font-weight:900;letter-spacing:.28em;text-transform:uppercase;color:var(--yellow-soft);margin:0 0 2px}
+  .marquee-plaque .plaque-title{font-family:var(--serif);font-weight:600;font-size:22px;color:#fff;letter-spacing:.02em}
+  .marquee-plaque .plaque-title em{font-style:italic;color:var(--yellow-soft)}
+
+  /* Final CTA — image backdrop with warm overlay (falls back to gradient if no image) */
+  .final-cta{background:linear-gradient(135deg,rgba(242,248,242,.90) 0%,rgba(255,248,231,.90) 60%,rgba(251,244,228,.90) 100%),url('Images/bg-final-cta.jpg') center/cover,radial-gradient(ellipse at 50% 0%,rgba(245,184,46,.25) 0%,rgba(245,184,46,0) 55%),linear-gradient(135deg,var(--green-wash) 0%,#FFF8E7 60%,var(--yellow-wash) 100%);position:relative}
+
+  /* Footer — image backdrop with dark navy overlay (falls back to solid navy if no image) */
+  footer{background:linear-gradient(rgba(6,11,80,.94),rgba(6,11,80,.94)),url('Images/bg-footer.jpg') center/cover,var(--navy)}
+
+  /* Cinematic grain overlay — whole page, subtle */
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.04;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  /* Roll credits footer */
+  footer .credits{margin:16px 0 0;font-family:var(--serif);font-style:italic;font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.16em;text-transform:uppercase}
+
+  @media (max-width:640px){
+    .conf-card{transform:none}
+    .conf-card:nth-child(2n){transform:none}
+    .conf-card::before{width:30px;height:30px;font-size:16px}
+    .hero-curtain{width:40px}
+    .marquee-plaque{padding:10px 20px}
+    .marquee-plaque .plaque-title{font-size:18px}
+    .marquee-plaque::before,.marquee-plaque::after{width:14px;height:14px;left:-24px}
+    .marquee-plaque::after{left:auto;right:-24px}
+    .session-card .ribbon{font-size:9px;top:18px;right:-40px;padding:4px 40px}
+    .film-strip{height:44px;margin:44px 0}
+    .film-strip::before,.film-strip::after{background-size:20px 10px}
+  }
+
+  @media (max-width:640px){
+    .wrap{padding:0 18px}
+    .hero{padding:44px 0 40px}
+    section{padding:60px 0}
+    .hero h1{font-size:52px}
+    .price-tag{padding:12px 18px}
+    .price-tag .p-amount{font-size:26px}
+    .btn{width:100%;justify-content:center}
+    .btn-large{padding:18px 32px}
+    .value-card,.session-card,.quote,.faq-item{padding:22px 20px}
+    .session-card{padding:24px 22px}
+    .math-row{flex-direction:column;align-items:flex-start;gap:4px}
+    .math-row .m-amount{font-size:22px}
+    .math-row.total .m-amount{font-size:28px}
+    dialog.bio-modal{border-radius:16px}
+    .bio-inner{padding:22px 20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="wrap">
+    <a href="/" class="brand">Re<span>Be</span> <em>· ReBe Studio</em></a>
+    <a href="https://buy.stripe.com/dRmeV68WxdlMaPD4zL2Fa01" class="nav-cta">Join · $30/mo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-image" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="marquee-row" aria-hidden="true">
+      <span class="bulbs"></span>
+      <span class="star">★ ★ ★</span>
+      <span class="bulbs"></span>
+    </div>
+    <p class="hero-eyebrow">Now Showing · Monthly Membership</p>
+    <h1>ReBe <em>Studio.</em></h1>
+    <p class="hero-sub">Come to <span class="rotate" data-words="Rewrite|Restore|Refresh|Reclaim|Reimagine">Rewrite</span>. Stay to <span class="rotate" data-words="Be Seen|Be Inspired|Be Held|Belong">Be Seen</span>. <strong>Every confidant. Every session. Every recording</strong> — yours, all month.</p>
+    <div class="hero-ctas">
+      <a href="#join" class="btn btn-primary btn-large">Come find your seat →</a>
+      <a href="#what" class="btn btn-secondary">Peek inside</a>
+    </div>
+    <div class="price-row">
+      <p class="price-row-label">🎟️ Tickets · Cancel anytime</p>
+      <div class="price-tag"><span class="p-amount">$30</span><span class="p-per">/ month</span></div>
+      <div class="price-tag annual"><span class="p-amount">$300</span><span class="p-per">/ year</span><span class="p-save">Save 17%</span></div>
+    </div>
+    <p class="cancel-note">No contracts. Open to anyone.</p>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section id="what" class="tint">
+  <div class="wrap">
+    <p class="sec-eyebrow">What's inside</p>
+    <h2 class="sec-h">An entire studio dedicated to <em>Rewriting</em> your story.</h2>
+    <p class="sec-sub">This is where you take back the pen. Where the role you were cast in doesn't have to keep running the show. Where you're seen, heard, and remembered by name.</p>
+    <div class="section-intro">
+      <p>ReBe Studio is <strong>a community — a place to finally Be known</strong>. Not for the role you were cast in. Not for the story you were handed. Not for the version of yourself you built to survive somewhere else. For who you actually are underneath all of it.</p>
+      <p>Here, you <em>Reflect</em> together. You <em>Rewrite</em> what's ready to change. You <em>Restore</em> what's been fragmented. You <em>Belong</em> before you have to earn it.</p>
+      <p>Every month, you get <strong>live Zoom sessions with the full confidant team</strong>, a growing <strong>library of resources and videos</strong>, <strong>in-person pop-up events</strong>, and the <strong>option to join the next ReFresh Cohort</strong> — all built across the five <strong>EPICS</strong>: <strong>Emotional Health, Physical Health, Intellectual Health, Cultural Health, and Spiritual Health</strong>. Whether you're returning to yourself or meeting yourself for the first time — the room is here, and it stays.</p>
+    </div>
+    <div class="grid-3">
+      <div class="value-card">
+        <div class="value-icon">🎬</div>
+        <h3 class="value-h">Every confidant session</h3>
+        <p class="value-p">Live workshops with Dr. Jason Quintal, Kindsey Pentecost Chadwick, Beth &amp; Fred, and every new confidant that joins the roster. Unlimited. All included.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📼</div>
+        <h3 class="value-h">Complete video library</h3>
+        <p class="value-p">The full ReBe archive — teachings, guided meditations, past workshops, on-demand short-form pieces. New content added every month.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🎞️</div>
+        <h3 class="value-h">Every session recorded</h3>
+        <p class="value-p">Miss a live workshop? Watch it whenever. Rewatch the ones that landed. Every session is added to your library within 24 hours.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🥂</div>
+        <h3 class="value-h">Happy Hour · Twice a month</h3>
+        <p class="value-p">First and third Fridays at 5 PM ET. Drop in. No agenda. Just community, laughter, and the ongoing conversation. Bring your drink of choice.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">✨</div>
+        <h3 class="value-h">In-person pop-up events</h3>
+        <p class="value-p">Real-world gatherings a few times a year — retreats, coffees, dinners. Announced first to members. Priority ticket access.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🎟️</div>
+        <h3 class="value-h">First access to the next Cohort</h3>
+        <p class="value-p">Members get priority booking and member pricing for the next 5-week ReFresh Cohort — a deep-dive experience for members ready to go further.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIDANTS -->
+<section class="cream">
+  <div class="wrap">
+    <p class="sec-eyebrow">Meet the Team</p>
+    <h2 class="sec-h">Your <em>Confidants.</em></h2>
+    <p class="sec-sub">The people who <em>Reflect</em> alongside you. Each one bringing their own experience, their own specialty, their own way of holding space. Each one here to help you <em>Rewrite</em> what's ready to change — and <em>Be</em> seen in what's not.</p>
+    <div class="conf-grid">
+      <button type="button" class="conf-card" data-bio="bio-elizabeth" aria-label="Read about Elizabeth Good">
+        <div class="conf-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good" loading="lazy"></picture></div>
+        <div class="conf-body">
+          <p class="conf-role">Founder · M.A. Clinical Psychology</p>
+          <p class="conf-name">Elizabeth <em>Good</em></p>
+          <div class="conf-epics"><span class="epic-pill emotional">Emotional Health</span><span class="epic-pill intellectual">Intellectual Health</span><span class="epic-pill cultural">Cultural Health</span></div>
+          <span class="conf-link">Meet Elizabeth →</span>
+        </div>
+      </button>
+
+      <button type="button" class="conf-card" data-bio="bio-osil" aria-label="Read about Osil Pistole">
+        <div class="conf-photo"><picture><source type="image/webp" srcset="Images/osil-pistole.webp"><img src="Images/osil-pistole.jpg" alt="Osil Pistole" loading="lazy"></picture></div>
+        <div class="conf-body">
+          <p class="conf-role">Purpose &amp; Destiny Coach</p>
+          <p class="conf-name">Osil <em>Pistole</em></p>
+          <div class="conf-epics"><span class="epic-pill emotional">Emotional Health</span><span class="epic-pill cultural">Cultural Health</span><span class="epic-pill spiritual">Spiritual Health</span></div>
+          <span class="conf-link">Meet Osil →</span>
+        </div>
+      </button>
+
+      <button type="button" class="conf-card" data-bio="bio-quintal" aria-label="Read about Dr. Jason Quintal">
+        <div class="conf-photo"><picture><source type="image/webp" srcset="Images/jason-quintal.webp"><img src="Images/jason-quintal.jpg" alt="Dr. Jason Quintal" loading="lazy"></picture></div>
+        <div class="conf-body">
+          <p class="conf-role">PhD · Trauma Resolution Specialist</p>
+          <p class="conf-name">Dr. Jason <em>Quintal</em></p>
+          <div class="conf-epics"><span class="epic-pill emotional">Emotional Health</span><span class="epic-pill physical">Physical Health</span><span class="epic-pill intellectual">Intellectual Health</span></div>
+          <span class="conf-link">Meet Dr. Q →</span>
+        </div>
+      </button>
+
+      <button type="button" class="conf-card" data-bio="bio-kindsey" aria-label="Read about Kindsey Pentecost Chadwick">
+        <div class="conf-photo"><picture><img src="Images/kindsey.png" alt="Kindsey Pentecost Chadwick" loading="lazy"></picture></div>
+        <div class="conf-body">
+          <p class="conf-role">Holistic Wellness Expert</p>
+          <p class="conf-name">Kindsey <em>Pentecost Chadwick</em></p>
+          <div class="conf-epics"><span class="epic-pill emotional">Emotional Health</span><span class="epic-pill physical">Physical Health</span><span class="epic-pill spiritual">Spiritual Health</span></div>
+          <span class="conf-link">Meet Kindsey →</span>
+        </div>
+      </button>
+
+      <button type="button" class="conf-card" data-bio="bio-beth" aria-label="Read about Beth Rech">
+        <div class="conf-photo"><picture><source type="image/webp" srcset="Images/beth.webp"><img src="Images/beth.jpg" alt="Beth Rech" loading="lazy"></picture></div>
+        <div class="conf-body">
+          <p class="conf-role">Inner Healing Mentor</p>
+          <p class="conf-name">Beth <em>Rech</em></p>
+          <div class="conf-epics"><span class="epic-pill emotional">Emotional Health</span><span class="epic-pill spiritual">Spiritual Health</span></div>
+          <span class="conf-link">Meet Beth →</span>
+        </div>
+      </button>
+
+      <button type="button" class="conf-card" data-bio="bio-fred" aria-label="Read about Fred Feller">
+        <div class="conf-photo"><picture><source type="image/webp" srcset="Images/fred-feller.webp"><img src="Images/fred-feller.jpg" alt="Fred Feller" loading="lazy"></picture></div>
+        <div class="conf-body">
+          <p class="conf-role">Leadership &amp; Identity Mentor</p>
+          <p class="conf-name">Fred <em>Feller</em></p>
+          <div class="conf-epics"><span class="epic-pill emotional">Emotional Health</span><span class="epic-pill spiritual">Spiritual Health</span></div>
+          <span class="conf-link">Meet Fred →</span>
+        </div>
+      </button>
+
+      <button type="button" class="conf-card" data-bio="bio-jean" aria-label="Read about Jean Park">
+        <div class="conf-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park" loading="lazy"></picture></div>
+        <div class="conf-body">
+          <p class="conf-role">Relational Healing &amp; Family Therapist</p>
+          <p class="conf-name">Jean <em>Park</em></p>
+          <div class="conf-epics"><span class="epic-pill emotional">Emotional Health</span><span class="epic-pill intellectual">Intellectual Health</span><span class="epic-pill cultural">Cultural Health</span></div>
+          <span class="conf-link">Meet Jean →</span>
+        </div>
+      </button>
+
+      <button type="button" class="conf-card" data-bio="bio-christophe" aria-label="Read about Christophe Dessaigne">
+        <div class="conf-photo"><picture><source type="image/webp" srcset="Images/Christophe.webp"><img src="Images/Christophe.png" alt="Christophe Dessaigne" loading="lazy"></picture></div>
+        <div class="conf-body">
+          <p class="conf-role">Restoration &amp; Transformation Coach</p>
+          <p class="conf-name">Christophe <em>Dessaigne</em></p>
+          <div class="conf-epics"><span class="epic-pill emotional">Emotional Health</span><span class="epic-pill intellectual">Intellectual Health</span><span class="epic-pill cultural">Cultural Health</span></div>
+          <span class="conf-link">Meet Christophe →</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- UPCOMING SESSIONS -->
+<section class="dark-chapter">
+  <div class="wrap">
+    <p class="sec-eyebrow">Now Playing</p>
+    <h2 class="sec-h">This month in <em class="yellow">ReBe Studio.</em></h2>
+    <p class="sec-sub">Every session is a chance to <em>Rewrite</em> something you've been carrying, or <em>Be seen</em> exactly as you are. New workshops added every month — members get every single one, no add-on fee.</p>
+
+    <article class="session-card">
+      <span class="ribbon">Now Showing</span>
+      <div class="sc-meta">
+        <span class="sc-date">Thu · Jul 9 · 7 PM ET</span>
+        <span class="sc-tag">Identity Work</span>
+      </div>
+      <h3>"Who am I?" with Beth &amp; Fred</h3>
+      <p class="sc-facil">A grounded workshop on identity — the parts you know and the parts still becoming clear.</p>
+    </article>
+
+    <article class="session-card">
+      <span class="ribbon premiere">Premiere</span>
+      <div class="sc-meta">
+        <span class="sc-date">Wed · Jul 15 + Jul 22 · 4:30 PM ET</span>
+        <span class="sc-recur">2-Part series</span>
+        <span class="sc-tag">Mental Health</span>
+      </div>
+      <h3>"How to use your brain for a CHANGE" with Dr. Jason Quintal</h3>
+      <p class="sc-facil">A two-part series on neuroplasticity, trauma resolution, and the science of rewiring your own patterns.</p>
+      <div class="quintal-video-wrap">
+        <p class="qv-eyebrow">A quick hello from Dr. Q</p>
+        <video controls preload="metadata" playsinline poster="Images/jason-quintal.jpg">
+          <source src="videos/dr-quintal-intro.mov" type="video/mp4">
+          <source src="videos/dr-quintal-intro.mov" type="video/quicktime">
+          Your browser doesn't support embedded video.
+        </video>
+      </div>
+    </article>
+
+    <article class="session-card">
+      <span class="ribbon encore">Encore</span>
+      <div class="sc-meta">
+        <span class="sc-date">Sat · Aug 1 · 9 AM ET</span>
+        <span class="sc-tag">Physical Health</span>
+      </div>
+      <h3>"Limitless" — with Kindsey Pentecost Chadwick</h3>
+      <p class="sc-facil">Physical health as a doorway to freedom — Balance, Freedom, Purpose. Round 2.</p>
+    </article>
+
+    <article class="session-card">
+      <div class="sc-meta">
+        <span class="sc-date">1st + 3rd Fridays · 5 PM ET</span>
+        <span class="sc-recur">Twice a month · Drop-in</span>
+        <span class="sc-tag">Community</span>
+      </div>
+      <h3>Happy Hour with Osil</h3>
+      <p class="sc-facil">Come be refreshed in community. Process. Chat. Make connections. No agenda.</p>
+    </article>
+
+    <p style="margin:22px 0 0;text-align:center;font-family:var(--serif);font-style:italic;font-size:16px;color:var(--muted)"><strong style="font-style:normal;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--green-ink);font-size:12px;display:inline-block;margin-right:8px">Only for members:</strong>More sessions announced every month. Members hear about them first.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="cream">
+  <div class="wrap">
+    <p class="sec-eyebrow">A few questions</p>
+    <h2 class="sec-h">You might be <em>wondering</em>...</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What if I have to cancel?</summary>
+        <div class="faq-body">Cancel any time. Two clicks. No fee. No guilt. Your access continues through the end of your current billing period, and then it just stops. Come back whenever.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What if I miss a live session?</summary>
+        <div class="faq-body">Every session is recorded and posted to your library within 24 hours. Watch on your schedule. Rewatch the ones that landed. <strong>You don't lose anything by missing a live.</strong></div>
+      </details>
+      <details class="faq-item">
+        <summary>When are the in-person pop-up events?</summary>
+        <div class="faq-body">A few times a year, in different cities. Announced first to members with priority ticket access. First one is being planned for late 2026 — details coming.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can I try it for one month?</summary>
+        <div class="faq-body">Yes. The monthly plan is exactly that — try it for $30, decide by the end of the month. If it's not for you, cancel. If it is, we'll be glad you stayed.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can members book private 1:1 sessions?</summary>
+        <div class="faq-body">Yes — private 1:1s with any confidant are $197/session and available separately. That's <a href="/refresh-private" style="color:var(--green-ink);font-weight:700;text-decoration:none;border-bottom:1px dotted var(--green-ink)">on a different page</a>.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="join" class="final-cta">
+  <div class="wrap">
+    <h2>Come <em>Rewrite.</em><br>Come <em>Belong.</em><br>Come <em>Be known.</em></h2>
+    <p>Try ReBe Studio for a month. Cancel anytime. See what happens when you finally have a room to come back to — to Rewrite the story, to Be seen, to Be with your people.</p>
+    <div class="hero-ctas" style="justify-content:center">
+      <a href="https://buy.stripe.com/dRmeV68WxdlMaPD4zL2Fa01" class="btn btn-primary btn-large">Join for $30/mo →</a>
+      <a href="https://buy.stripe.com/4gM00cgoZ4Pg1f3git2Fa02" class="btn btn-secondary btn-large">$300/year · Save 17%</a>
+    </div>
+    <p style="margin-top:24px;font-family:var(--sans);font-size:13px;color:var(--muted);font-style:normal">Cancel anytime · No contracts · Secure checkout via Stripe</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="brand">Re<span>Be</span></a>
+  <p>Rebuilding people from the inside out. · <a href="mailto:hello@justrebe.com">hello@justrebe.com</a></p>
+</footer>
+
+<!-- ==================== BIO MODALS ==================== -->
+
+<dialog class="bio-modal" id="bio-elizabeth"><div class="bio-inner">
+  <button class="bio-close" aria-label="Close">&times;</button>
+  <div class="bio-photo"><picture><img src="Images/Elizabeth.png" alt="Elizabeth Good"></picture></div>
+  <h3 class="bio-name">Elizabeth <em>Good</em></h3>
+  <p class="bio-role">Founder · M.A. Clinical Psychology</p>
+  <div class="bio-body">
+    <p>For nearly three decades, Elizabeth Good has guided individuals, leaders, and organizations through transformational growth, emotional healing, and identity-centered development.</p>
+    <p>As founder of The Foundation United, Elizabeth is recognized for facilitating courageous conversations that foster emotional intelligence, healthy relationships, and sustainable transformation.</p>
+    <p>She is the author of <em>Speak the Unspeakable</em> and <em>Groomed</em> (HarperCollins, 2020), and a two-time TEDx speaker.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-osil"><div class="bio-inner">
+  <button class="bio-close" aria-label="Close">&times;</button>
+  <video class="bio-video" controls preload="metadata" playsinline poster="Images/osil-pistole.jpg">
+    <source src="videos/osil.mp4" type="video/mp4">
+  </video>
+  <h3 class="bio-name">Osil <em>Pistole</em></h3>
+  <p class="bio-role">Purpose &amp; Destiny Coach</p>
+  <div class="bio-body">
+    <p>Osil is a speaker and intuitive coach with 20+ years of experience and a particular gift for speaking into a person's true identity. She tells people who they actually are, what they carry, and the purpose they're here for — often the first time anyone has named it out loud.</p>
+    <p>Known for her honest, empowering, and engaging approach, Osil creates spaces where people feel seen — not just for what they're working on, but for who they actually are underneath it.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-quintal"><div class="bio-inner">
+  <button class="bio-close" aria-label="Close">&times;</button>
+  <video class="bio-video" controls preload="metadata" playsinline poster="Images/jason-quintal.jpg">
+    <source src="videos/dr-quintal-intro.mov" type="video/mp4">
+    <source src="videos/dr-quintal-intro.mov" type="video/quicktime">
+  </video>
+  <h3 class="bio-name">Dr. Jason <em>Quintal</em></h3>
+  <p class="bio-role">PhD · Trauma Resolution Specialist</p>
+  <div class="bio-body">
+    <p>Dr. Jason Quintal is a trauma specialist with more than 25 years of experience helping people heal from severe and complex trauma — PTSD, grief, shame, abuse recovery, and emotional wounds. He works in TTR (Trauma &amp; Tension Release).</p>
+    <p>As a master practitioner in trauma resolution and Neurolinguistic Programming (NLP), he's continually inspired by the profound shifts these accelerated healing methods bring.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-kindsey"><div class="bio-inner">
+  <button class="bio-close" aria-label="Close">&times;</button>
+  <video class="bio-video" controls preload="metadata" playsinline poster="Images/kindsey.png">
+    <source src="videos/kindsey.mp4" type="video/mp4">
+  </video>
+  <h3 class="bio-name">Kindsey <em>Pentecost Chadwick</em></h3>
+  <p class="bio-role">Holistic Wellness Expert</p>
+  <div class="bio-body">
+    <p>Kindsey teaches the LIMITLESS framework — Balance, Freedom, Purpose — a way of relating to the body that isn't about aesthetics or performance. It's about coming home to yourself, one breath at a time.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-beth"><div class="bio-inner">
+  <button class="bio-close" aria-label="Close">&times;</button>
+  <video class="bio-video" controls preload="metadata" playsinline poster="Images/beth.jpg">
+    <source src="videos/beth.mp4" type="video/mp4">
+  </video>
+  <h3 class="bio-name">Beth <em>Rech</em></h3>
+  <p class="bio-role">Inner Healing Mentor · 30+ yrs</p>
+  <div class="bio-body">
+    <p>Beth has spent more than 30 years mentoring women and helping individuals navigate emotional healing, personal growth, and self-discovery. With advanced training in spiritual formation and more than 15 years of inner healing work, she is passionate about helping people break free from limiting beliefs, unresolved trauma, generational patterns, and emotional wounds.</p>
+    <p>Known for her warmth, authenticity, and nurturing presence, she helps people move toward greater wholeness, emotional resilience, and personal transformation.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-fred"><div class="bio-inner">
+  <button class="bio-close" aria-label="Close">&times;</button>
+  <video class="bio-video" controls preload="metadata" playsinline poster="Images/fred-feller.jpg">
+    <source src="videos/fred.mp4" type="video/mp4">
+  </video>
+  <h3 class="bio-name">Fred <em>Feller</em></h3>
+  <p class="bio-role">Leadership &amp; Identity Mentor · 35+ yrs</p>
+  <div class="bio-body">
+    <p>For more than 35 years, Fred Feller has helped leaders, teams, and individuals navigate transformation, breakthrough, and personal growth with clarity, wisdom, and stability.</p>
+    <p>Having worked internationally across nine countries, Fred is recognized for bringing stability in high-pressure environments. A husband of nearly 50 years, father of four, and grandfather of seven, he leads from a foundation of consistency, integrity, and deep relational wisdom.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-jean"><div class="bio-inner">
+  <button class="bio-close" aria-label="Close">&times;</button>
+  <div class="bio-photo"><picture><source type="image/webp" srcset="Images/jean-park.webp"><img src="Images/jean-park.jpg" alt="Jean Park"></picture></div>
+  <h3 class="bio-name">Jean <em>Park</em></h3>
+  <p class="bio-role">Relational Healing &amp; Family Therapist</p>
+  <div class="bio-body">
+    <p>With 20+ years of experience, Jean Park helps individuals, parents, and leaders build healthier relationships, strengthen emotional awareness, and break unhealthy generational patterns. Her work is deeply informed by her experience growing up between Korean and American cultural expectations and her journey as a mother raising three teenage boys.</p>
+    <p>After earning her degree in Economics from Caltech, Jean transitioned into counseling and family systems work, earning her Master's in Marriage and Family Therapy from Fuller Theological Seminary.</p>
+  </div>
+</div></dialog>
+
+<dialog class="bio-modal" id="bio-christophe"><div class="bio-inner">
+  <button class="bio-close" aria-label="Close">&times;</button>
+  <video class="bio-video" controls preload="metadata" playsinline poster="Images/Christophe.png">
+    <source src="videos/christophe.mp4" type="video/mp4">
+  </video>
+  <h3 class="bio-name">Christophe <em>Dessaigne</em></h3>
+  <p class="bio-role">Restoration &amp; Transformation Coach</p>
+  <div class="bio-body">
+    <p>His own story of healing and restoration shapes how he walks with others through theirs. Helps people break the patterns that quietly run their lives — with the honesty of someone who's been there.</p>
+  </div>
+</div></dialog>
+
+<script>
+  document.querySelectorAll('.conf-card[data-bio]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dlg = document.getElementById(btn.dataset.bio);
+      if (dlg) dlg.showModal();
+    });
+  });
+  document.querySelectorAll('dialog.bio-modal').forEach(dlg => {
+    dlg.querySelector('.bio-close')?.addEventListener('click', () => {
+      dlg.querySelectorAll('video').forEach(v => v.pause());
+      dlg.close();
+    });
+    dlg.addEventListener('click', e => {
+      const rect = dlg.getBoundingClientRect();
+      if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+        dlg.querySelectorAll('video').forEach(v => v.pause());
+        dlg.close();
+      }
+    });
+    dlg.addEventListener('close', () => {
+      dlg.querySelectorAll('video').forEach(v => v.pause());
+    });
+  });
+
+  // Rotating Re-/Be- words in hero
+  document.querySelectorAll('.rotate').forEach((el, idx) => {
+    const words = el.dataset.words.split('|');
+    let i = 0;
+    setTimeout(() => {
+      setInterval(() => {
+        el.classList.add('out');
+        setTimeout(() => {
+          i = (i + 1) % words.length;
+          el.textContent = words[i];
+          el.classList.remove('out');
+          el.classList.add('in');
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => el.classList.remove('in'));
+          });
+        }, 350);
+      }, 3200);
+    }, idx * 1600);
+  });
+</script>
+
+</body>
+</html>
