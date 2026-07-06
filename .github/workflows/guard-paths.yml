@@ -1,0 +1,68 @@
+name: Guard restricted paths
+
+# This workflow watches every push to main.
+# If a NON-OWNER collaborator touches any file outside the allowed paths,
+# the check FAILS and Osil gets an email notification.
+#
+# Allowed paths (edit the ALLOWED_REGEX line below if this list changes):
+#   - education/  (entire folder)
+#   - NAESP.html  (single file)
+#
+# Owner pushes (justrebe-hq) skip this check entirely.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  check-paths:
+    name: Path allowlist check
+    runs-on: ubuntu-latest
+    if: github.actor != 'justrebe-hq'
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify all changed files are within allowed paths
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+        run: |
+          set -e
+
+          echo "Push author: ${{ github.actor }}"
+          echo ""
+
+          # Handle initial commit / first push (BEFORE is all zeros)
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            CHANGED=$(git ls-tree -r --name-only "$AFTER")
+          else
+            CHANGED=$(git diff --name-only "$BEFORE" "$AFTER")
+          fi
+
+          echo "Files touched in this push:"
+          echo "$CHANGED"
+          echo ""
+
+          # Allowed paths — anything matching this regex is OK
+          ALLOWED_REGEX='^(education/|NAESP\.html$)'
+
+          UNAUTHORIZED=$(echo "$CHANGED" | grep -vE "$ALLOWED_REGEX" || true)
+
+          if [ -n "$UNAUTHORIZED" ]; then
+            echo "❌ Push by ${{ github.actor }} touched files OUTSIDE the allowed paths."
+            echo ""
+            echo "Unauthorized files:"
+            echo "$UNAUTHORIZED"
+            echo ""
+            echo "Allowed paths for non-owner collaborators:"
+            echo "  - education/ (entire folder)"
+            echo "  - NAESP.html (single file)"
+            echo ""
+            echo "If this change is intentional, Osil can revert or manually override."
+            exit 1
+          fi
+
+          echo "✅ All changes are within allowed paths — push accepted."
