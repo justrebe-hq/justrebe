@@ -107,7 +107,7 @@
   .value-p{margin:0;font-size:15px;line-height:1.6;color:var(--body)}
 
   /* CONFIDANTS GRID */
-  .conf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+  .conf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
   .conf-card{background:#fff;border-radius:20px;padding:0;overflow:hidden;text-align:center;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease);border:none;font:inherit;color:inherit;width:100%;display:flex;flex-direction:column}
   .conf-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
   .conf-photo{width:100%;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(135deg,#F5F1E7 0%,#EDE7D8 100%);flex-shrink:0}
@@ -120,9 +120,9 @@
   .conf-epics{min-height:5.4em}
   .conf-tag{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--body);line-height:1.5;margin:0 0 14px}
   .conf-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--green-ink);text-decoration:none;margin-top:auto;justify-content:center}
-  .conf-epics{text-align:center;margin:0 0 14px;padding:0 6px;line-height:1.5}
-  .epic-pill{display:block;margin:0 auto 3px;padding:0;background:transparent!important;border:0!important;color:#1A1A1A;font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;vertical-align:baseline;border-radius:0;box-shadow:none;white-space:normal;overflow-wrap:normal}
-  .epic-pill::before{content:"●";display:inline-block;margin-right:6px;font-size:12px;line-height:1;vertical-align:baseline}
+  .conf-epics{text-align:center;margin:0 0 14px;padding:0 6px;line-height:1.6}
+  .epic-pill{display:block;margin:0 auto 2px;padding:0;background:transparent!important;border:0!important;color:#4A535E;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;vertical-align:baseline;border-radius:0;box-shadow:none;white-space:nowrap}
+  .epic-pill::before{content:"●";display:inline-block;margin-right:5px;font-size:11px;line-height:1;vertical-align:baseline}
   .epic-pill.emotional{color:#1A1A1A}
   .epic-pill.emotional::before{color:#F06905}
   .epic-pill.physical{color:#1A1A1A}
