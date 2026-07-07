@@ -120,13 +120,19 @@
   .conf-epics{min-height:56px;align-items:flex-start}
   .conf-tag{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--body);line-height:1.5;margin:0 0 14px}
   .conf-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--green-ink);text-decoration:none;margin-top:auto;justify-content:center}
-  .conf-epics{text-align:center;margin:0 0 14px;line-height:1.2}
-  .epic-pill{display:inline-block;margin:0 3px 6px;white-space:nowrap;font-family:var(--sans);font-size:10px;font-weight:900;letter-spacing:.10em;text-transform:uppercase;color:#fff;background:var(--green-ink);padding:5px 11px;border-radius:999px;border:1px solid transparent;line-height:1.4;vertical-align:middle;-webkit-text-size-adjust:none;-moz-text-size-adjust:none;text-size-adjust:none}
-  .epic-pill.emotional{background:#F06905}
-  .epic-pill.physical{background:#638D13}
-  .epic-pill.intellectual{background:#034E64}
-  .epic-pill.cultural{background:#FEB909;color:#3D2600}
-  .epic-pill.spiritual{background:#6B3AA0}
+  .conf-epics{text-align:center;margin:0 0 14px;padding:0 6px;line-height:1.7}
+  .epic-pill{display:inline-block;margin:0 6px 2px;padding:0;background:transparent!important;border:0!important;color:#1A1A1A;font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;vertical-align:baseline;border-radius:0;box-shadow:none}
+  .epic-pill::before{content:"●";display:inline-block;margin-right:5px;font-size:12px;line-height:1;vertical-align:baseline}
+  .epic-pill.emotional{color:#1A1A1A}
+  .epic-pill.emotional::before{color:#F06905}
+  .epic-pill.physical{color:#1A1A1A}
+  .epic-pill.physical::before{color:#638D13}
+  .epic-pill.intellectual{color:#1A1A1A}
+  .epic-pill.intellectual::before{color:#034E64}
+  .epic-pill.cultural{color:#1A1A1A}
+  .epic-pill.cultural::before{color:#B78500}
+  .epic-pill.spiritual{color:#1A1A1A}
+  .epic-pill.spiritual::before{color:#7D0AAB}
   .bio-epics{margin:14px 0 0;padding:12px 16px;background:var(--green-wash);border-left:3px solid var(--green-ink);border-radius:0 8px 8px 0}
   .bio-epics-label{font-family:var(--sans);font-size:10.5px;font-weight:900;letter-spacing:.20em;text-transform:uppercase;color:var(--green-deep);margin:0 0 8px}
   .bio-epics-pills{display:flex;flex-wrap:wrap;gap:6px}
