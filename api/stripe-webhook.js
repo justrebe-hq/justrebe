@@ -21,6 +21,7 @@
 
 const crypto = require('crypto');
 const { kitSubscribe } = require('./_kit.js');
+const { createOpenPhoneContact } = require('./_openphone.js');
 
 // Tell Vercel to give us the raw body, not a parsed JSON object.
 module.exports.config = {
@@ -482,6 +483,93 @@ The customer's welcome email (with their Zoom link) has already been sent.
         });
       } catch (e) {
         console.error('Admin notification email failed:', e);
+      }
+    }
+
+    // ------- ReBe Studio CRM sync (contacts + customer_tags + Quo) -------
+    // Runs only for Studio signups. Mirrors what Osil was doing by hand:
+    //   1. Upsert into `contacts` so they appear in the admin/CRM customer list
+    //   2. Insert 4 rows into `customer_tags`: ReBe Studio, Paid, price, plan
+    //   3. Push to OpenPhone/Quo as a contact (only if a phone was collected)
+    // Failures on any one step are logged and swallowed so the welcome
+    // email still fires.
+    if (kind === 'studio' && customerEmail) {
+      const [firstName, ...lastRest] = (customerName || '').trim().split(/\s+/);
+      const lastName = lastRest.join(' ');
+      const isAnnual = session.amount_total === 30000;
+      const planTag  = isAnnual ? 'Annual' : 'Monthly';
+      const priceTag = isAnnual ? '$300'   : '$30';
+
+      const url = supabaseBaseUrl();
+      const key = supabaseKey();
+
+      // 1) Contacts upsert (on_conflict=email so re-signups don't error out).
+      try {
+        const r = await fetch(`${url}/rest/v1/contacts?on_conflict=email`, {
+          method: 'POST',
+          headers: {
+            apikey: key,
+            Authorization: `Bearer ${key}`,
+            'Content-Type': 'application/json',
+            Prefer: 'resolution=merge-duplicates,return=minimal',
+          },
+          body: JSON.stringify({
+            first_name: firstName || null,
+            last_name: lastName || null,
+            email: customerEmail,
+            phone: customerPhone || null,
+          }),
+        });
+        if (!r.ok) {
+          const detail = await r.text();
+          console.error(`contacts upsert ${r.status}:`, detail);
+        }
+      } catch (e) {
+        console.error('contacts upsert threw:', e);
+      }
+
+      // 2) customer_tags: 4 tags per Studio signup.
+      const nowIso = new Date().toISOString();
+      const tagRows = ['ReBe Studio', 'Paid', priceTag, planTag].map((tag) => ({
+        customer_email: customerEmail,
+        tag,
+        added_by_email: 'stripe-webhook@justrebe.com',
+        added_at: nowIso,
+      }));
+      try {
+        const r = await fetch(`${url}/rest/v1/customer_tags`, {
+          method: 'POST',
+          headers: {
+            apikey: key,
+            Authorization: `Bearer ${key}`,
+            'Content-Type': 'application/json',
+            Prefer: 'return=minimal',
+          },
+          body: JSON.stringify(tagRows),
+        });
+        // 409 = duplicate (webhook retry) — safe to ignore. Anything else logs.
+        if (!r.ok && r.status !== 409) {
+          const detail = await r.text();
+          console.error(`customer_tags insert ${r.status}:`, detail);
+        }
+      } catch (e) {
+        console.error('customer_tags insert threw:', e);
+      }
+
+      // 3) OpenPhone / Quo contact — only fires when a phone was collected.
+      // Enable phone collection on the Studio Payment Links to activate this.
+      if (customerPhone) {
+        try {
+          await createOpenPhoneContact({
+            firstName: firstName || '',
+            lastName: lastName || '',
+            email: customerEmail,
+            phone: customerPhone,
+            source: `ReBe Studio · Paid · ${planTag}`,
+          });
+        } catch (e) {
+          console.error('OpenPhone push (studio):', e);
+        }
       }
     }
 
