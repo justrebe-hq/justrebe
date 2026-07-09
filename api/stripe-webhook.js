@@ -7,6 +7,8 @@
 // Stripe → Dashboard → Developers → Webhooks → Add endpoint
 //   URL:     https://justrebe.com/api/stripe-webhook
 //   Events:  checkout.session.completed
+//            customer.subscription.updated    (Studio: status + period-end sync)
+//            customer.subscription.deleted    (Studio: mark cancelled)
 //   Copy the "Signing secret" (whsec_...) into STRIPE_WEBHOOK_SECRET env var.
 //
 // Required env vars (Vercel → Settings → Environment Variables):
@@ -132,6 +134,78 @@ async function supabaseInsert({ table, row }) {
   return r.json();
 }
 
+// Handle Studio subscription lifecycle events. Maps Stripe subscription
+// status to our simpler set — 'active' | 'past_due' | 'cancelled' — and
+// keeps current_period_end + cancelled_at fresh so the admin view stays
+// accurate as members renew, fail payment, or quit.
+async function handleStudioSubscriptionEvent(event, res) {
+  const sub = (event.data && event.data.object) || {};
+  const subId = sub.id;
+  if (!subId) {
+    console.error('Subscription event missing id', event.type);
+    return res.status(200).json({ ok: true, skipped: 'missing subscription id' });
+  }
+
+  // Stripe statuses: incomplete, incomplete_expired, trialing, active,
+  // past_due, canceled, unpaid, paused.
+  let ourStatus = null;
+  if (event.type === 'customer.subscription.deleted' || sub.status === 'canceled') {
+    ourStatus = 'cancelled';
+  } else if (sub.status === 'past_due' || sub.status === 'unpaid') {
+    ourStatus = 'past_due';
+  } else if (sub.status === 'active' || sub.status === 'trialing') {
+    ourStatus = 'active';
+  }
+  // For incomplete/paused/etc. we leave status alone.
+
+  const patch = {};
+  if (ourStatus) patch.status = ourStatus;
+  if (sub.canceled_at) {
+    patch.cancelled_at = new Date(sub.canceled_at * 1000).toISOString();
+  } else if (ourStatus === 'cancelled') {
+    patch.cancelled_at = new Date().toISOString();
+  }
+  if (sub.current_period_end) {
+    patch.current_period_end = new Date(sub.current_period_end * 1000).toISOString();
+  }
+
+  if (Object.keys(patch).length === 0) {
+    return res.status(200).json({ ok: true, skipped: 'nothing to update', subId });
+  }
+
+  try {
+    const url = supabaseBaseUrl();
+    const key = supabaseKey();
+    const r = await fetch(
+      `${url}/rest/v1/studio_members?stripe_subscription_id=eq.${encodeURIComponent(subId)}`,
+      {
+        method: 'PATCH',
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+          'Content-Type': 'application/json',
+          Prefer: 'return=representation',
+        },
+        body: JSON.stringify(patch),
+      }
+    );
+    if (!r.ok) {
+      const detail = await r.text();
+      throw new Error(`Supabase PATCH ${r.status}: ${detail}`);
+    }
+    const rows = await r.json();
+
+    // rows.length === 0 means we don't have this subscription in our table.
+    // Not an error — it just means the sub was created before we started
+    // tracking, or it belongs to a different product. Skip silently.
+    console.log(`Subscription ${event.type} — updated ${rows.length} row(s) for ${subId}:`, patch);
+    return res.status(200).json({ ok: true, updated: rows.length, subId, patch });
+  } catch (err) {
+    console.error('Subscription event update failed:', err);
+    return res.status(200).json({ ok: false, error: String(err && err.message || err), subId });
+  }
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -165,14 +239,21 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid JSON' });
   }
 
-  // We only care about completed Checkout Sessions.
+  // Studio subscription lifecycle events go through their own handler
+  // (mark cancelled, update current_period_end, etc.). They don't touch
+  // the checkout flow below.
+  if (event.type === 'customer.subscription.updated' || event.type === 'customer.subscription.deleted') {
+    return handleStudioSubscriptionEvent(event, res);
+  }
+
+  // Everything else must be a checkout completion.
   if (event.type !== 'checkout.session.completed') {
     return res.status(200).json({ ok: true, ignored: event.type });
   }
 
   const session = (event.data && event.data.object) || {};
   const metadata = session.metadata || {};
-  const kind = metadata.kind;          // 'cohort' | 'private'
+  const kind = metadata.kind;          // 'cohort' | 'private' | 'studio'
   const signup_id = metadata.signup_id;
 
   if (!kind) {
@@ -183,6 +264,7 @@ module.exports = async function handler(req, res) {
   const table =
     kind === 'cohort'  ? 'refresh_signups' :
     kind === 'private' ? 'confidant_requests' :
+    kind === 'studio'  ? 'studio_members' :
     null;
 
   if (!table) {
@@ -228,6 +310,25 @@ module.exports = async function handler(req, res) {
           paid_amount_cents: session.amount_total ?? null,
           paid_at: new Date().toISOString(),
         };
+      } else if (table === 'studio_members') {
+        // ReBe Studio subscription. Plan is inferred from amount:
+        //   $30.00 (3000c)  → monthly
+        //   $300.00 (30000c) → annual
+        // Anything else defaults to 'monthly' so a partial/pro-rated payment
+        // still lands somewhere sane (admin can correct in Supabase later).
+        const plan = session.amount_total === 30000 ? 'annual' : 'monthly';
+        row = {
+          full_name: customerName || 'Stripe Customer',
+          email: customerEmail,
+          phone: customerPhone || '',
+          plan,
+          status: 'active',
+          stripe_customer_id: session.customer || null,
+          stripe_session_id: session.id,
+          stripe_subscription_id: session.subscription || null,
+          paid_amount_cents: session.amount_total ?? null,
+          paid_at: new Date().toISOString(),
+        };
       } else {
         // Defensive — should never hit this for 1:1 since we always pre-create
         row = {
@@ -260,6 +361,17 @@ module.exports = async function handler(req, res) {
           email: customerEmail,
           first_name: customerName.trim().split(/\s+/)[0] || '',
           tags: ['ReBe — All', 'ReBe — Cohort', 'ReBe — Customer (Paid)', slotTag],
+        });
+      } catch (e) {
+        console.error('Kit (stripe-webhook):', e);
+      }
+    } else if (customerEmail && kind === 'studio') {
+      // Studio subscription — tag with the full Studio member set
+      try {
+        await kitSubscribe({
+          email: customerEmail,
+          first_name: customerName.trim().split(/\s+/)[0] || '',
+          tags: ['ReBe — All', 'ReBe — Studio', 'ReBe — Studio · Paid', 'ReBe — Customer (Paid)'],
         });
       } catch (e) {
         console.error('Kit (stripe-webhook):', e);
@@ -370,6 +482,99 @@ The customer's welcome email (with their Zoom link) has already been sent.
         });
       } catch (e) {
         console.error('Admin notification email failed:', e);
+      }
+    }
+
+    // ReBe Studio welcome email (subscription product).
+    // Fires once, on the initial checkout.session.completed. Renewals fire
+    // invoice.paid, which this webhook ignores — so no duplicate welcomes.
+    if (kind === 'studio' && customerEmail && process.env.RESEND_API_KEY) {
+      const firstName = (customerName || '').trim().split(/\s+/)[0] || 'friend';
+      const fromAddr  = process.env.NOTIFY_FROM || 'ReBe ReFresh <refresh@justrebe.com>';
+      const adminAddr = process.env.NOTIFY_ADMIN || 'refresh@justrebe.com';
+      const resendKey = process.env.RESEND_API_KEY;
+
+      // Customer welcome
+      try {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: fromAddr,
+            to: customerEmail,
+            subject: `You're in — welcome to ReBe Studio, ${firstName}`,
+            text:
+`Hi ${firstName},
+
+You're in. Welcome to ReBe Studio.
+
+You said yes — and that mattered. Your seat is set.
+
+ReBe Studio is a community across the five EPICS: Emotional, Physical, Intellectual, Cultural, and Spiritual Health. Live Confidant sessions, a growing library of videos and resources, in-person pop-ups, and priority access to the next ReFresh Cohort.
+
+WHAT'S ON THE CALENDAR THIS MONTH:
+
+"Who Am I?" with Beth Rech and Fred Feller
+Thursday, July 9, 7 PM Eastern
+Emotional Health
+
+"How to Use Your Brain for a CHANGE" with Dr. Jason Quintal
+Wednesday, July 15 and July 22, 4:30 PM Eastern (two parts, one registration)
+Mental Health
+
+Happy Hour with Osil Pistole
+1st and 3rd Friday of the month, 5 PM Eastern
+Drop in — no registration needed
+
+YOUR STUDIO HUB (bookmark this):
+https://www.justrebe.com/rebe-studio
+
+Every session, every replay, every resource lives there. That's your room.
+
+Come Rewrite. Come Belong. Come Be known.
+
+Something on your heart before your first session? Just reply to this email — we read every single one.
+
+With so much warmth,
+Elizabeth and the ReBe team
+refresh@justrebe.com
+https://www.justrebe.com/rebe-studio`,
+          }),
+        });
+      } catch (e) {
+        console.error('Studio welcome email (customer) failed:', e);
+      }
+
+      // Admin notification
+      try {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: fromAddr,
+            to: adminAddr,
+            subject: `New ReBe Studio member — ${customerName || customerEmail}`,
+            text:
+`A new ReBe Studio member just signed up.
+
+CUSTOMER
+  Name:               ${customerName || '(not given)'}
+  Email:              ${customerEmail}
+  Phone:              ${customerPhone || '(not given)'}
+  Amount paid:        $${((session.amount_total || 0) / 100).toFixed(2)}
+
+STRIPE
+  Session id:         ${session.id}
+  Event id:           ${event.id}
+  Paid at:            ${new Date().toISOString()}
+
+The customer's welcome email has already been sent.
+
+— ReBe webhook`,
+          }),
+        });
+      } catch (e) {
+        console.error('Studio admin notification failed:', e);
       }
     }
 
