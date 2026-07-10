@@ -346,17 +346,36 @@
   .print-btn-float:hover { background: var(--teal); color: #fff; }
 
   @media print {
+    @page { size: letter; margin: 0.4in 0.5in; }
     /* Reset the page for a clean paper look */
-    body { background: #FFFFFF; padding: 0; font-size: 11px; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { background: #FFFFFF; padding: 0; font-size: 10.5px; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; line-height: 1.4; }
     .page { border-radius: 0; box-shadow: none; max-width: 100%; }
     .no-print { display: none !important; }
-    .head-badge, .instructions { break-inside: avoid; }
-    .prow { break-inside: avoid; }
-    .payment-choice { break-inside: avoid; }
-    .sec { padding: 20px 40px; break-inside: avoid; }
-    .head { padding: 24px 40px 20px; }
-    .instructions { padding: 14px 40px; font-size: 10px; }
+    /* Only keep small atomic items from splitting — sections can flow */
+    .prow, .payment-choice, .auth-check { break-inside: avoid; }
+    .sec { padding: 10px 28px; }
+    .sec-h { margin-bottom: 10px; padding-bottom: 5px; font-size: 10.5px; letter-spacing: .12em; }
+    .head { padding: 14px 28px 10px; gap: 16px; }
+    .head-logo { height: 68px !important; }
+    .head-title { font-size: 18px; margin-bottom: 2px; }
+    .head-sub { font-size: 11px; }
+    .head-badge { margin-top: 4px; }
+    .instructions { padding: 8px 28px; font-size: 10px; }
+    .field-row { gap: 8px 18px; margin-bottom: 8px; }
+    .products, .payment-block { gap: 6px; }
+    .prow, .payment-choice { padding: 8px 12px; }
+    .prow { grid-template-columns: 24px 1fr 100px; gap: 12px; }
+    .ptitle { font-size: 11px; margin-bottom: 2px; }
+    .pdesc { font-size: 10px; line-height: 1.35; }
+    .pprice .amt { font-size: 13px; }
+    .pprice.free .amt { font-size: 12px; }
+    .pprice .lbl { font-size: 8.5px; margin-bottom: 1px; }
+    .payment-choice-txt { font-size: 10.5px; line-height: 1.35; }
+    .auth-legal { padding: 8px 12px; font-size: 10px; margin-bottom: 10px; }
+    .auth-check { margin-bottom: 12px; gap: 8px; }
+    .auth-check-txt { font-size: 10.5px; }
     .submit-row { display: none; }
+    .foot { padding: 10px 28px 14px; font-size: 9.5px; line-height: 1.5; }
 
     /* Turn field inputs into underlines so it looks like a proper paper form */
     .field input[type="text"],
