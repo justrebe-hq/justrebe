@@ -61,6 +61,13 @@
   .top-tag { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); padding: 8px 14px; background: rgba(3,78,100,.08); border-radius: 999px; }
   @media (max-width: 600px) { .top-tag { display: none; } }
 
+  /* Safari fix — prevent pills, badges and eyebrows from wrapping/scaling weirdly */
+  .top-tag, .fhead-ey, .field label, .form-tinytext {
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+  .top-tag, .fhead-ey, .field label { white-space: nowrap; }
+
   /* Form wrapper */
   main { flex: 1; padding: 56px 24px 80px; }
   .fwrap {
