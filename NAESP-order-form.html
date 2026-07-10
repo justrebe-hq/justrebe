@@ -346,10 +346,108 @@
   .print-btn-float:hover { background: var(--teal); color: #fff; }
 
   @media print {
-    body { background: #FFFFFF; padding: 0; font-size: 12px; }
+    /* Reset the page for a clean paper look */
+    body { background: #FFFFFF; padding: 0; font-size: 11px; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .page { border-radius: 0; box-shadow: none; max-width: 100%; }
     .no-print { display: none !important; }
+    .head-badge, .instructions { break-inside: avoid; }
     .prow { break-inside: avoid; }
+    .payment-choice { break-inside: avoid; }
+    .sec { padding: 20px 40px; break-inside: avoid; }
+    .head { padding: 24px 40px 20px; }
+    .instructions { padding: 14px 40px; font-size: 10px; }
+    .submit-row { display: none; }
+
+    /* Turn field inputs into underlines so it looks like a proper paper form */
+    .field input[type="text"],
+    .field input[type="email"],
+    .field input[type="tel"],
+    .field input[type="date"] {
+      border: none !important; border-bottom: 1.2px solid #000 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      padding: 0 4px !important;
+      height: 26px !important;
+      box-shadow: none !important;
+      font-size: 11px !important;
+    }
+    .field label { font-size: 9px !important; color: #333 !important; margin-bottom: 3px !important; }
+
+    /* Product / payment rows */
+    .prow, .payment-choice {
+      background: #fff !important;
+      border: 1px solid #333 !important;
+      padding: 10px 12px !important;
+      box-shadow: none !important;
+    }
+    .prow.selected, .payment-choice.selected {
+      background: #fff !important;
+      border: 1.5px solid #000 !important;
+    }
+    .prow input[type="checkbox"],
+    .payment-choice input[type="radio"],
+    .auth-check input[type="checkbox"] {
+      -webkit-appearance: none !important; appearance: none !important;
+      border: 1.5px solid #000 !important;
+      background: #fff !important;
+    }
+    .prow input[type="checkbox"]:checked,
+    .auth-check input[type="checkbox"]:checked {
+      background: #fff !important;
+    }
+    .prow input[type="checkbox"]:checked::after,
+    .auth-check input[type="checkbox"]:checked::after {
+      border-color: #000 !important;
+    }
+    .payment-choice input[type="radio"]:checked::after {
+      background: #000 !important;
+    }
+    .ptitle, .payment-choice-txt strong { color: #000 !important; }
+    .pdesc, .payment-choice-txt, .instructions, .auth-legal, .auth-check-txt { color: #333 !important; }
+    .sec-h { color: #000 !important; border-bottom-color: #000 !important; }
+    .head-title { color: #000 !important; }
+    .head-badge {
+      background: #fff !important;
+      color: #000 !important;
+      border: 1px solid #000 !important;
+    }
+    .head { border-bottom-color: #000 !important; }
+    .instructions { background: #f5f5f5 !important; border-bottom: 1px solid #000 !important; }
+    .auth-legal { background: #f7f7f7 !important; border: 1px solid #ccc !important; }
+    .foot { background: #fff !important; padding: 14px 40px 20px; font-size: 10px; }
+    a { color: #000 !important; }
+  }
+
+  /* Big header CTA to download printable version */
+  .print-cta {
+    background: linear-gradient(135deg, #FDF9EE 0%, #FAF3E4 100%);
+    border-bottom: 1px solid #F0E6D0;
+    padding: 16px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .print-cta-txt {
+    font-size: 13.5px; color: var(--ink); font-weight: 600;
+    line-height: 1.5;
+  }
+  .print-cta-txt strong { color: var(--teal); font-weight: 800; }
+  .print-cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    background: var(--teal); color: #fff;
+    font-size: 13px; font-weight: 800;
+    letter-spacing: .04em;
+    border: none; border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 6px 16px rgba(3,78,100,.22);
+    transition: background .15s ease, transform .15s ease;
+    white-space: nowrap;
+  }
+  .print-cta-btn:hover { background: var(--teal-deep); transform: translateY(-1px); }
+  @media (max-width: 640px) {
+    .print-cta { padding: 14px 24px; }
+    .print-cta-txt { font-size: 12.5px; }
   }
 
   sup { font-size: .55em; font-weight: 700; vertical-align: super; line-height: 0; margin-left: 1px; opacity: .82; }
@@ -372,9 +470,17 @@
       </div>
     </div>
 
+    <!-- Print / Download CTA -->
+    <div class="print-cta no-print">
+      <div class="print-cta-txt">
+        <strong>Prefer to print?</strong> Download this form as a PDF or print it to submit through your district's paper process.
+      </div>
+      <button type="button" class="print-cta-btn" onclick="window.print()">Download printable form &rarr;</button>
+    </div>
+
     <!-- Instructions -->
     <div class="instructions">
-      <strong>Fill this out online</strong> and we'll email you a formal quote and invoice within one business day. You can also <a href="#" onclick="window.print();return false;" style="color:var(--purple);font-weight:700;text-decoration:underline;">print this form</a> to submit through your district's paper process.
+      Fill this out online and we'll email you a formal quote and invoice within one business day. Or click <strong>Download printable form</strong> above to save this as a PDF and hand it to your district's business office.
     </div>
 
     <!-- Purchaser info -->
