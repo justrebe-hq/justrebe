@@ -347,11 +347,14 @@
   .print-btn-float:hover { background: var(--teal); color: #fff; }
 
   @media print {
-    @page { size: letter; margin: 0.3in 0.4in; }
-    /* Reset the page for a clean paper look — force exact text sizing so Safari
-       does not inflate small text via its minimum-font-size accessibility floor. */
+    @page { size: letter; margin: 0.25in 0.35in; }
+    /* Reset the page for a clean paper look. `zoom` on the page container is the
+       nuclear option that bypasses Safari's minimum-font-size floor — everything
+       inside gets scaled down proportionally so 8px CSS actually renders at 8px
+       on paper instead of Safari's 10-12px accessibility minimum. */
     html { -webkit-text-size-adjust: 100% !important; text-size-adjust: 100% !important; }
     body { background: #FFFFFF; padding: 0; font-size: 8.5px; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; line-height: 1.28; letter-spacing: 0; -webkit-text-size-adjust: 100% !important; text-size-adjust: 100% !important; }
+    .page { zoom: 0.72; }
     .page { border-radius: 0; box-shadow: none; max-width: 100%; }
     .no-print { display: none !important; }
     /* Remove break-avoidance entirely — let content flow naturally */
