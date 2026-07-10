@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>3-Minute Teaching · Where Hope Actually Lives</title>
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700;1,900&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #05081A;
+    color: #F5F0E1;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+    padding: 40px 24px 80px;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(255,180,0,.08) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 80%, rgba(77,225,255,.05) 0%, transparent 55%),
+      #05081A;
+    line-height: 1.65;
+  }
+
+  :root {
+    --night:      #05081A;
+    --cream:      #F5F0E1;
+    --amber:      #FFB400;
+    --amber-hot:  #FFCC33;
+    --lightning:  #FEB909;
+    --deep-teal:  #034E64;
+    --neon-cyan:  #4DE1FF;
+    --neon-pink:  #FF3C87;
+    --smoke:      #A9A6A0;
+    --serif:      'Fraunces', Georgia, serif;
+    --mono:       'Space Mono', monospace;
+    --sans:       'Inter', sans-serif;
+  }
+
+  .stars {
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1.5px 1.5px at 45% 8%, rgba(255,255,255,.85), transparent),
+      radial-gradient(1px 1px at 30% 78%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1px 1px at 70% 55%, rgba(255,255,255,.75), transparent),
+      radial-gradient(1.5px 1.5px at 92% 82%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1px 1px at 8% 60%, rgba(255,255,255,.6), transparent);
+    pointer-events: none; z-index: 0;
+  }
+
+  .wrap { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ===== Header ===== */
+  .header { text-align: center; margin-bottom: 44px; }
+  .marquee {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: .38em;
+    color: var(--amber-hot);
+    text-transform: uppercase;
+  }
+  .marquee::before, .marquee::after {
+    content: '★'; color: var(--lightning); font-size: 14px;
+  }
+  .header-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1;
+    letter-spacing: -.01em;
+    color: var(--cream);
+    margin: 24px 0 14px;
+  }
+  .header-title em { color: var(--amber); font-style: italic; }
+  .header-meta {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .3em;
+    color: rgba(245,240,225,.5);
+    text-transform: uppercase;
+  }
+  .header-meta .dot { color: var(--lightning); margin: 0 8px; }
+
+  /* ===== Timing bar ===== */
+  .timing {
+    display: flex; justify-content: center; gap: 10px;
+    margin: 30px auto 40px;
+    padding: 12px 20px;
+    background: rgba(255,180,0,.05);
+    border: 1px solid rgba(255,180,0,.28);
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(245,240,225,.7);
+    max-width: 520px;
+    flex-wrap: wrap;
+  }
+  .timing .item { display: flex; align-items: center; gap: 6px; }
+  .timing .time { color: var(--lightning); font-weight: 700; }
+  .timing .sep { color: rgba(255,180,0,.4); }
+
+  /* ===== Act blocks ===== */
+  .act {
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .act::before {
+    content: '';
+    position: absolute; top: 0; left: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--lightning), rgba(254,185,9,.2));
+  }
+  .act-label {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .act-num {
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: .28em;
+    color: var(--lightning);
+    background: rgba(254,185,9,.12);
+    border: 1px solid rgba(254,185,9,.4);
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .act-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--amber-hot);
+  }
+  .act p {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--cream);
+    margin-bottom: 18px;
+  }
+  .act p:last-child { margin-bottom: 0; }
+  .act p em {
+    color: var(--amber);
+    font-style: italic;
+    font-weight: 700;
+  }
+  .act p strong {
+    color: var(--amber-hot);
+    font-weight: 800;
+  }
+  .act p .cyan {
+    color: var(--neon-cyan);
+    font-style: italic;
+    font-weight: 600;
+  }
+  .act p .pink {
+    color: var(--neon-pink);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  /* Quote callout inside acts */
+  .callout {
+    padding: 22px 28px;
+    background: rgba(254,185,9,.06);
+    border-left: 3px solid var(--lightning);
+    border-radius: 4px;
+    margin: 20px 0;
+  }
+  .callout p {
+    font-family: var(--serif) !important;
+    font-style: italic;
+    font-size: 22px !important;
+    color: var(--lightning) !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+  }
+  .callout .cite {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(245,240,225,.5);
+    margin-top: 12px;
+    display: block;
+  }
+
+  /* Beat markers */
+  .beat {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .28em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    padding: 3px 9px;
+    background: rgba(77,225,255,.08);
+    border: 1px solid rgba(77,225,255,.3);
+    border-radius: 4px;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  /* Big-move blocks — for the tool section */
+  .tool-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 22px 0;
+  }
+  .tool-card {
+    padding: 24px;
+    background: rgba(255,60,135,.05);
+    border: 1.5px solid rgba(255,60,135,.35);
+    border-radius: 14px;
+  }
+  .tool-card.past { background: rgba(77,225,255,.05); border-color: rgba(77,225,255,.35); }
+  .tool-card .tc-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--neon-pink);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .tool-card.past .tc-label { color: var(--neon-cyan); }
+  .tool-card p {
+    font-family: var(--serif) !important;
+    font-size: 19px !important;
+    line-height: 1.5 !important;
+    color: var(--cream) !important;
+    margin: 0 !important;
+  }
+  .tool-card p em { color: var(--amber); font-style: italic; font-weight: 700; }
+  @media (max-width: 640px) {
+    .tool-block { grid-template-columns: 1fr; }
+  }
+
+  /* Closer emphasis */
+  .closer {
+    text-align: center;
+    padding: 40px 24px;
+    margin: 40px 0 20px;
+  }
+  .closer .line {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(30px, 4.2vw, 48px);
+    line-height: 1.2;
+    color: var(--amber);
+    text-shadow: 0 0 40px rgba(254,185,9,.35);
+  }
+  .closer .final {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: .3em;
+    color: var(--lightning);
+    text-transform: uppercase;
+    margin-top: 28px;
+  }
+
+  /* Focus tools */
+  .toolbar {
+    position: fixed; top: 20px; right: 24px;
+    display: flex; gap: 10px;
+    z-index: 10;
+  }
+  .toolbar button {
+    padding: 8px 14px;
+    background: rgba(255,180,0,.12);
+    color: var(--lightning);
+    border: 1px solid rgba(255,180,0,.4);
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .toolbar button:hover {
+    background: var(--lightning);
+    color: var(--night);
+  }
+  .toolbar button.active {
+    background: var(--lightning);
+    color: var(--night);
+  }
+
+  /* Focus mode */
+  body.focus .act p, body.focus .callout p, body.focus .tool-card p {
+    font-size: 26px !important;
+    line-height: 1.5 !important;
+  }
+  body.focus .act { padding: 40px 44px; }
+
+  @media print {
+    body { background: #fff !important; color: #000; padding: 20px; }
+    .stars, .toolbar { display: none !important; }
+    .act, .callout, .tool-card { background: #fff; border-color: #333; break-inside: avoid; }
+    .act::before { background: #333; }
+    .act p, .callout p, .tool-card p { color: #000 !important; }
+    .act p em, .callout p, .tool-card p em, .header-title em, .closer .line { color: #000 !important; }
+    .beat, .act-num, .tc-label, .final { color: #333 !important; border-color: #333 !important; background: transparent !important; }
+    .callout { background: #F5F5F5 !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<div class="toolbar">
+  <button onclick="toggleFocus()" id="focusBtn">Focus mode</button>
+  <button onclick="window.print()">Print</button>
+</div>
+
+<div class="wrap">
+
+  <div class="header">
+    <div class="marquee">3-Minute Teaching &middot; ReBe Happy Hour</div>
+    <h1 class="header-title">Where Hope <em>Actually</em> Lives.</h1>
+    <p class="header-meta">Reading time <span class="dot">·</span> 3:00 <span class="dot">·</span> Delivered by Osil</p>
+  </div>
+
+  <div class="timing">
+    <div class="item"><span class="time">0:00</span> Frankl</div>
+    <span class="sep">·</span>
+    <div class="item"><span class="time">0:45</span> Define</div>
+    <span class="sep">·</span>
+    <div class="item"><span class="time">1:15</span> Science</div>
+    <span class="sep">·</span>
+    <div class="item"><span class="time">2:00</span> Tool</div>
+    <span class="sep">·</span>
+    <div class="item"><span class="time">2:45</span> Close</div>
+  </div>
+
+  <!-- Act 1: Frankl hook -->
+  <div class="act">
+    <div class="act-label">
+      <span class="act-num">01 &middot; Open</span>
+      <span class="act-name">The man who walked out</span>
+    </div>
+    <p>In 1945, a man named <em>Viktor Frankl</em> walked out of a Nazi concentration camp with almost nothing. <em>Almost.</em> He walked out with an idea that changed psychology forever.</p>
+    <p>Frankl had watched thousands of people die around him. And he noticed something surprising. It wasn't the strongest, or the healthiest, or the best-fed who survived. It was the ones who had something to live <em>for.</em> A wife waiting. Unfinished work. A specific hope pointed at the future.</p>
+    <p>He wrote it down in a book you might know &mdash; <em>Man's Search for Meaning.</em> And he said this:</p>
+
+    <div class="callout">
+      <p>&ldquo;Those who have a <span style="color:var(--amber-hot);font-weight:800;">why</span> to live can bear with almost any <span style="color:var(--amber-hot);font-weight:800;">how.</span>&rdquo;</p>
+      <span class="cite">— Viktor Frankl, 1946</span>
+    </div>
+
+    <p>That was eighty years ago. And we're still learning the same lesson.</p>
+  </div>
+
+  <!-- Act 2: What is hope -->
+  <div class="act">
+    <div class="act-label">
+      <span class="act-num">02 &middot; Define</span>
+      <span class="act-name">What hope actually is</span>
+    </div>
+    <p>Hope isn't a mood. It's not fingers crossed. It's not wishing.</p>
+    <p>Hope is the <em>joyful expectation of something good.</em> It's a <strong>posture.</strong> You're leaning toward something you can't fully see yet &mdash; and that lean, that trust, is already <span class="cyan">doing something real to you right now.</span></p>
+  </div>
+
+  <!-- Act 3: Science -->
+  <div class="act">
+    <div class="act-label">
+      <span class="act-num">03 &middot; Science</span>
+      <span class="act-name">Hope is a muscle</span>
+    </div>
+    <p>Modern research backs Frankl up. A psychologist named <em>Charles Snyder</em> studied hope for decades. He found that hopeful people don't just <strong>feel</strong> better. They live longer. They heal faster. They perform better in school. They recover from trauma more completely.</p>
+    <p>And here's the wild part: hope isn't a personality trait you're born with. It's a <em>muscle.</em> It can be trained. It can be borrowed. It can be practiced.</p>
+  </div>
+
+  <!-- Act 4: The turn -->
+  <div class="act">
+    <div class="act-label">
+      <span class="act-num">04 &middot; The Turn</span>
+      <span class="act-name">If you're feeling flat right now</span>
+    </div>
+    <p>Which is a really big deal. Because some of us tonight aren't feeling especially hopeful. We're sitting here <span class="pink">stuck. Flat. Fogged in.</span> And that's OK &mdash; that's actually why you're here.</p>
+    <p>So let me give you one tool.</p>
+  </div>
+
+  <!-- Act 5: The tool -->
+  <div class="act">
+    <div class="act-label">
+      <span class="act-num">05 &middot; The Tool</span>
+      <span class="act-name">Borrow from past and future</span>
+    </div>
+    <p style="text-align:center;font-size:26px !important;">If you're hopeless right now &mdash; <em>borrow.</em></p>
+
+    <div class="tool-block">
+      <div class="tool-card past">
+        <div class="tc-label">Past</div>
+        <p>Find one moment &mdash; just one &mdash; when good broke through for you. A door that opened. A person who showed up. You survived something you didn't think you could. That memory is <em>evidence.</em> Evidence that good has visited you before.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tc-label">Future</div>
+        <p>Name one thing &mdash; even something small &mdash; that you're leaning toward. You don't have to see the road. You don't have to know how. You just have to name the good you're <em>trusting toward.</em></p>
+      </div>
+    </div>
+
+    <p>Because here's what happens when you do that: joy shows up in your <em>now.</em> Not because your circumstances changed. But because your <strong>posture</strong> did.</p>
+  </div>
+
+  <!-- Closer -->
+  <div class="closer">
+    <p class="line">That's the thing about hope.<br>It doesn't wait for permission.<br>It doesn't wait for evidence.</p>
+    <p class="line" style="margin-top:24px;color:var(--lightning);text-shadow:0 0 60px rgba(254,185,9,.5);">It just <em style="color:var(--amber-hot);">leans.</em></p>
+    <p class="final">Where we're going &mdash; we don't need roads.</p>
+  </div>
+
+</div>
+
+<script>
+  function toggleFocus() {
+    document.body.classList.toggle('focus');
+    document.getElementById('focusBtn').classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>
