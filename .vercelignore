@@ -1,8 +1,7 @@
 # Files present in the repo but NOT deployed to justrebe.com
 # (still fine to preview locally via `python3 -m http.server 8080`)
 
-# Happy Hour tools — most are internal facilitator prep, not public.
-# Exception: the AUDIENCE deck and the Dear Future Me card need to be
-# reachable so attendees can view them during the session.
-happy-hour-bttf.html
-happy-hour-teaching.html
+# Happy Hour tools — kept local only, not deployed to justrebe.com.
+# Osil shares her screen from her own browser tab; nothing needs to
+# be publicly reachable.
+happy-hour*.html
