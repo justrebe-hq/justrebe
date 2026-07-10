@@ -330,6 +330,7 @@
   }
   .foot strong { color: var(--teal); font-weight: 800; }
   .foot a { color: var(--purple); font-weight: 700; text-decoration: none; }
+  .print-only { display: none; }
 
   /* ===== Print utility ===== */
   .print-btn-float {
@@ -401,6 +402,8 @@
     .foot { padding: 4px 24px 6px; font-size: 7px; line-height: 1.35; border-top: 1px solid #000 !important; letter-spacing: 0; }
     .foot p { margin: 0 !important; }
     .foot p + p { margin-top: 1px !important; }
+    .print-only { display: block !important; }
+    .foot-return { white-space: nowrap; font-size: 7px; overflow: visible; }
 
     /* Turn field inputs into underlines so it looks like a proper paper form */
     .field input[type="text"],
@@ -708,7 +711,7 @@
 
     <!-- Footer -->
     <div class="foot">
-      <p><strong>Return this form to:</strong> hello@justrebe.com &nbsp;&middot;&nbsp; 13118 State Rd 64 E., Suite 362, Bradenton, FL 34212 &nbsp;&middot;&nbsp; <strong>www.justrebe.com</strong></p>
+      <p class="print-only foot-return"><strong>Return this form to:</strong> v.ellery@justrebe.com &nbsp;&middot;&nbsp; 13118 State Rd 64 E., Suite 362, Bradenton, FL 34212 &nbsp;&middot;&nbsp; <strong>www.justrebe.com</strong></p>
       <p style="margin-top:8px;">Questions? Valerie Ellery <a href="mailto:v.ellery@justrebe.com">v.ellery@justrebe.com</a> &nbsp;&middot;&nbsp; Abbey Pace <a href="mailto:a.pace@justrebe.com">a.pace@justrebe.com</a></p>
     </div>
 
