@@ -9,7 +9,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,700;0,900;1,400;1,600;1,900&family=Space+Mono:wght@400;700&family=Caveat:wght@500;700&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,700;0,900;1,400;1,600;1,900&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
 
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,11 +33,9 @@
     --neon-pink:  #FF3C87;
     --neon-cyan:  #4DE1FF;
     --cream:      #F5F0E1;
-    --paper:      #FDFBF4;
     --smoke:      #A9A6A0;
     --serif:      'Fraunces', Georgia, serif;
     --mono:       'Space Mono', monospace;
-    --hand:       'Caveat', cursive;
     --sans:       'Inter', -apple-system, sans-serif;
   }
 
@@ -88,7 +86,7 @@
     50% { opacity: .55; }
   }
 
-  /* ============ Subtle brand mark only ============ */
+  /* ============ Minimal chrome ============ */
   .brand-mark {
     position: fixed; bottom: 24px; right: 32px;
     font-family: var(--mono);
@@ -240,7 +238,79 @@
   }
   .prompt-slide .question em { font-style: italic; color: var(--amber-hot); }
 
-  /* ============ Contrast (hope vs wishing) ============ */
+  /* ============ Frankl / teaching slide ============ */
+  .teaching-slide { text-align: left; }
+  .teaching-slide .body-text {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.4;
+    color: var(--cream);
+    max-width: 900px;
+    margin-bottom: 24px;
+  }
+  .teaching-slide .body-text em {
+    color: var(--amber);
+    font-style: italic;
+    font-weight: 700;
+  }
+  .teaching-slide .body-text strong {
+    color: var(--amber-hot);
+    font-weight: 800;
+  }
+  .frankl-quote {
+    padding: 32px 40px;
+    background: rgba(254,185,9,.06);
+    border-left: 4px solid var(--lightning);
+    border-radius: 4px;
+    margin: 32px 0;
+    max-width: 900px;
+  }
+  .frankl-quote p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(28px, 3.6vw, 44px);
+    line-height: 1.3;
+    color: var(--lightning);
+    margin: 0;
+  }
+  .frankl-quote p em {
+    font-style: italic;
+    color: var(--amber-hot);
+    font-weight: 800;
+  }
+  .frankl-quote .cite {
+    display: block;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: rgba(245,240,225,.5);
+    margin-top: 16px;
+  }
+
+  /* ============ Hope definition slide ============ */
+  .definition-slide { text-align: center; }
+  .definition-slide .h-big em { color: var(--amber); font-style: italic; }
+  .definition-slide .def-text {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.4vw, 42px);
+    line-height: 1.4;
+    color: var(--cream);
+    max-width: 900px;
+    margin: 30px auto 0;
+    font-style: italic;
+  }
+  .definition-slide .def-text em {
+    color: var(--amber);
+    font-style: italic;
+    font-weight: 700;
+  }
+  .definition-slide .def-text strong {
+    color: var(--amber-hot);
+    font-weight: 800;
+  }
+
+  /* ============ Hope vs Wishing ============ */
   .contrast-slide .h-med { text-align: center; }
   .contrast-cards {
     display: grid;
@@ -258,9 +328,7 @@
     position: relative;
     display: flex; flex-direction: column;
   }
-  .contrast-card.wishing {
-    border-color: rgba(169,166,160,.3);
-  }
+  .contrast-card.wishing { border-color: rgba(169,166,160,.3); }
   .contrast-card.hope {
     border-color: rgba(255,180,0,.5);
     background: linear-gradient(180deg, rgba(255,180,0,.08), rgba(255,180,0,.02));
@@ -316,7 +384,109 @@
     .contrast-arrow { padding: 20px 0; transform: rotate(90deg); }
   }
 
-  /* ============ Undercurrent ============ */
+  /* ============ Science slide ============ */
+  .science-slide { text-align: left; }
+  .science-slide .h-big em { color: var(--amber); font-style: italic; }
+  .science-slide .body-text {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.45;
+    color: var(--cream);
+    max-width: 900px;
+    margin-bottom: 24px;
+  }
+  .science-slide .body-text em {
+    color: var(--amber);
+    font-style: italic;
+    font-weight: 700;
+  }
+  .science-slide .body-text strong {
+    color: var(--amber-hot);
+    font-weight: 800;
+  }
+  .science-slide .cyan {
+    color: var(--neon-cyan);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* ============ Borrow tool (Past + Future) ============ */
+  .borrow-slide .h-big em { color: var(--amber); font-style: italic; }
+  .borrow-slide .h-big { text-align: center; }
+  .borrow-lead {
+    font-family: var(--serif);
+    font-style: italic;
+    text-align: center;
+    font-size: clamp(24px, 2.6vw, 34px);
+    color: var(--cream);
+    margin-bottom: 40px;
+    max-width: 900px;
+    margin-left: auto; margin-right: auto;
+  }
+  .borrow-lead em { color: var(--amber); font-style: italic; font-weight: 700; }
+  .borrow-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 20px;
+  }
+  .borrow-card {
+    padding: 36px 32px;
+    border-radius: 18px;
+    background: rgba(77,225,255,.05);
+    border: 1.5px solid rgba(77,225,255,.35);
+    position: relative;
+  }
+  .borrow-card.future {
+    background: rgba(255,60,135,.05);
+    border-color: rgba(255,60,135,.35);
+  }
+  .borrow-card .b-label {
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--neon-cyan);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .borrow-card.future .b-label { color: var(--neon-pink); }
+  .borrow-card .b-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(28px, 3vw, 40px);
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 16px;
+    font-weight: 800;
+  }
+  .borrow-card .b-body {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.6vw, 22px);
+    line-height: 1.5;
+    color: rgba(245,240,225,.85);
+  }
+  .borrow-card .b-body em {
+    color: var(--amber);
+    font-style: italic;
+    font-weight: 700;
+  }
+  .borrow-close {
+    text-align: center;
+    margin-top: 36px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 32px);
+    color: var(--amber-hot);
+    max-width: 900px;
+    margin-left: auto; margin-right: auto;
+  }
+  @media (max-width: 900px) {
+    .borrow-cards { grid-template-columns: 1fr; }
+  }
+
+  /* ============ Undercurrent slide ============ */
   .undercurrent-slide { text-align: center; }
   .undercurrent-slide .quote-mark {
     color: var(--neon-cyan);
@@ -340,180 +510,45 @@
     margin-top: 32px;
   }
 
-  /* ============ Dear Future Me slide (Activation) ============ */
-  .dfm-slide {
-    padding: 4vh 6vw;
-  }
-  .dfm-slide .slide-inner {
-    max-width: 1400px;
-    display: grid;
-    grid-template-columns: 1fr 480px;
-    gap: 50px;
-    align-items: center;
-  }
-  .dfm-copy .eyebrow { color: var(--lightning); }
-  .dfm-copy .h-big em { color: var(--neon-pink); font-style: italic; }
-  .dfm-copy .lead {
+  /* ============ Write / Dear Future Me prompt ============ */
+  .write-slide { text-align: center; }
+  .write-slide .h-big em { color: var(--neon-pink); font-style: italic; }
+  .write-prompt {
     font-family: var(--serif);
     font-style: italic;
-    font-size: clamp(22px, 2.3vw, 30px);
+    font-size: clamp(30px, 4vw, 52px);
+    line-height: 1.3;
     color: var(--amber);
-    line-height: 1.4;
-    margin-bottom: 24px;
-  }
-  .dfm-link-block {
-    margin-top: 20px;
-    padding: 20px 24px;
-    background: rgba(254,185,9,.08);
-    border: 1.5px solid rgba(254,185,9,.4);
-    border-radius: 14px;
-  }
-  .dfm-link-block .lbl {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .3em;
-    text-transform: uppercase;
-    color: var(--lightning);
-    margin-bottom: 8px;
-    font-weight: 700;
-  }
-  .dfm-link-block .url {
-    font-family: var(--mono);
-    font-size: 22px;
-    color: var(--cream);
-    letter-spacing: -.005em;
-    font-weight: 700;
-    word-break: break-all;
-  }
-  .dfm-link-block .url .path { color: var(--amber-hot); }
-  .dfm-link-block .instructions {
-    font-family: var(--sans);
-    font-size: 15px;
-    color: rgba(245,240,225,.7);
-    margin-top: 10px;
-    line-height: 1.5;
-  }
-  .dfm-alt-text {
-    font-family: var(--sans);
-    font-size: 15px;
-    color: rgba(245,240,225,.55);
-    margin-top: 20px;
-    font-style: italic;
-  }
-
-  /* Mini card preview */
-  .dfm-mini {
-    background: var(--paper);
-    color: #1A1A1A;
-    padding: 28px 30px 26px;
-    border-radius: 18px;
-    box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 40px rgba(254,185,9,.2);
+    padding: 44px 40px;
+    background: rgba(254,185,9,.05);
+    border: 1.5px dashed rgba(255,180,0,.4);
+    border-radius: 20px;
+    margin: 40px auto;
+    max-width: 900px;
     position: relative;
-    transform: rotate(-1.5deg);
   }
-  .dfm-mini::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(45deg, transparent, transparent 24px, rgba(254,185,9,.05) 24px, rgba(254,185,9,.05) 26px);
-    border-radius: 18px;
-    pointer-events: none;
-  }
-  .dfm-stamp {
-    position: absolute;
-    top: 14px; right: 16px;
-    width: 60px; height: 74px;
-    background: linear-gradient(135deg, var(--amber), #FF7A00);
-    color: #1A1A1A;
-    border: 2px dashed rgba(0,0,0,.25);
-    border-radius: 4px;
-    padding: 6px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center;
-    transform: rotate(6deg);
-  }
-  .dfm-stamp .icon { font-size: 16px; line-height: 1; margin-bottom: 3px; }
-  .dfm-stamp .txt {
-    font-family: var(--mono);
-    font-size: 7px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    line-height: 1.2;
-  }
-  .dfm-mini-eyebrow {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: .26em;
-    text-transform: uppercase;
-    color: var(--deep-teal);
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .dfm-mini h3 {
-    font-family: var(--serif);
-    font-weight: 900;
-    font-style: italic;
-    font-size: 36px;
-    line-height: 1;
-    color: #1A1A1A;
-    margin-bottom: 8px;
-    letter-spacing: -.01em;
-  }
-  .dfm-mini h3 em {
-    background: linear-gradient(90deg, var(--amber), #FF7A00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .dfm-mini .mini-sub {
-    font-family: var(--serif);
-    font-size: 12px;
-    font-style: italic;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.4;
-    max-width: 320px;
-  }
-  .dfm-mini .mini-body {
-    background:
-      repeating-linear-gradient(180deg, transparent 0, transparent 25px, rgba(0,0,0,.06) 25px, rgba(0,0,0,.06) 26px);
-    min-height: 120px;
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 14px;
-    border: 1.5px solid rgba(0,0,0,.12);
-  }
-  .dfm-mini .mini-body p {
-    font-family: var(--hand);
-    font-size: 22px;
-    line-height: 26px;
-    color: rgba(0,0,0,.35);
+  .write-prompt::before {
+    content: '✎';
+    display: block;
+    font-size: 44px;
+    color: var(--lightning);
+    margin-bottom: 20px;
     font-style: normal;
   }
-  .dfm-mini .mini-foot {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-top: 12px;
-    border-top: 1.5px dashed rgba(0,0,0,.15);
-  }
-  .dfm-mini .mini-foot .brand {
-    font-family: var(--serif);
-    font-weight: 800;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--deep-teal);
-  }
-  .dfm-mini .mini-foot .brand em { color: var(--amber); font-style: italic; }
-  .dfm-mini .mini-foot .tag {
+  .write-tools {
+    display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+    margin-top: 20px;
     font-family: var(--mono);
-    font-size: 8px;
-    letter-spacing: .2em;
-    color: #666;
+    font-size: 13px;
+    letter-spacing: .16em;
     text-transform: uppercase;
+    color: rgba(245,240,225,.55);
   }
-  @media (max-width: 1000px) {
-    .dfm-slide .slide-inner { grid-template-columns: 1fr; gap: 30px; }
-    .dfm-mini { transform: rotate(-1deg); max-width: 420px; margin: 0 auto; }
+  .write-tools span::before {
+    content: '◆';
+    color: var(--amber);
+    margin-right: 8px;
+    opacity: .6;
   }
 
   /* ============ Close ============ */
@@ -591,7 +626,7 @@
     </div>
   </section>
 
-  <!-- 02 · WELCOME -->
+  <!-- 02 · WARM-UP -->
   <section class="slide prompt-slide">
     <div class="ambient"></div><div class="stars"></div>
     <div class="slide-inner">
@@ -603,7 +638,7 @@
     </div>
   </section>
 
-  <!-- 03 · FRAME -->
+  <!-- 03 · FRAME QUESTION -->
   <section class="slide prompt-slide">
     <div class="ambient"></div><div class="stars"></div>
     <div class="slide-inner">
@@ -615,7 +650,41 @@
     </div>
   </section>
 
-  <!-- 04 · HOPE vs WISHING -->
+  <!-- 04 · FRANKL HOOK -->
+  <section class="slide teaching-slide">
+    <div class="ambient"></div><div class="stars"></div>
+    <div class="slide-inner">
+      <span class="eyebrow">A True Story</span>
+      <h2 class="h-big" style="margin-bottom:32px;">The man who <em style="color:var(--amber);font-style:italic;">walked out.</em></h2>
+
+      <p class="body-text">In <em>1945,</em> a man named <em>Viktor Frankl</em> walked out of a Nazi concentration camp with almost nothing. Almost.</p>
+      <p class="body-text">He noticed something surprising: it wasn't the strongest, or the healthiest, who survived. It was the ones who had something to <em>live for.</em> A wife waiting. Unfinished work. A specific hope pointed at the future.</p>
+    </div>
+  </section>
+
+  <!-- 05 · FRANKL QUOTE -->
+  <section class="slide teaching-slide">
+    <div class="ambient"></div><div class="stars"></div>
+    <div class="slide-inner">
+      <div class="frankl-quote">
+        <p>"Those who have a <em>why</em> to live<br>can bear with almost any <em>how.</em>"</p>
+        <span class="cite">— Viktor Frankl, Man's Search for Meaning</span>
+      </div>
+      <p class="body-text" style="margin-top:32px;">That was eighty years ago.<br>And we're still learning the <strong>same lesson.</strong></p>
+    </div>
+  </section>
+
+  <!-- 06 · WHAT HOPE IS (definition) -->
+  <section class="slide definition-slide">
+    <div class="ambient"></div><div class="stars"></div>
+    <div class="slide-inner">
+      <span class="eyebrow">Definition</span>
+      <h2 class="h-big" style="text-align:center;">Hope is the <em>joyful expectation</em> of something good.</h2>
+      <p class="def-text">Not a mood. Not fingers crossed. Not wishing.<br>Hope is a <strong>posture</strong> &mdash; you're leaning toward something you can't fully see yet.</p>
+    </div>
+  </section>
+
+  <!-- 07 · HOPE vs WISHING -->
   <section class="slide contrast-slide">
     <div class="ambient"></div><div class="stars"></div>
     <div class="slide-inner">
@@ -638,7 +707,45 @@
     </div>
   </section>
 
-  <!-- 05 · MAIN -->
+  <!-- 08 · SCIENCE -->
+  <section class="slide science-slide">
+    <div class="ambient"></div><div class="stars"></div>
+    <div class="slide-inner">
+      <span class="eyebrow">The Science</span>
+      <h2 class="h-big">Hope is a <em style="color:var(--amber);font-style:italic;">muscle.</em></h2>
+
+      <p class="body-text">A psychologist named <em>Charles Snyder</em> studied hope for decades. He found that hopeful people don't just <strong>feel</strong> better.</p>
+      <p class="body-text">They <em>live longer.</em> They heal faster. They perform better in school. They recover from trauma <em>more completely.</em></p>
+      <p class="body-text"><span class="cyan">And hope isn't a personality trait you're born with.</span> It can be trained. It can be borrowed. It can be practiced.</p>
+    </div>
+  </section>
+
+  <!-- 09 · BORROW (Past + Future) -->
+  <section class="slide borrow-slide">
+    <div class="ambient"></div><div class="stars"></div>
+    <div class="slide-inner">
+      <span class="eyebrow" style="display:block;text-align:center;margin:0 auto 24px;">If you're hopeless right now</span>
+      <h2 class="h-big"><em>Borrow.</em></h2>
+      <p class="borrow-lead">Borrow from your <em>past.</em> Borrow from your <em>future.</em> Bring joy into your <em>now.</em></p>
+
+      <div class="borrow-cards">
+        <div class="borrow-card past">
+          <div class="b-label"><span>◄</span> Past</div>
+          <div class="b-title">Find one moment.</div>
+          <p class="b-body">Just one, when good broke through for you. A door that opened. A person who showed up. You survived something you didn't think you could. That memory is <em>evidence.</em></p>
+        </div>
+        <div class="borrow-card future">
+          <div class="b-label">Future <span>►</span></div>
+          <div class="b-title">Name one thing.</div>
+          <p class="b-body">Even something small, that you're leaning toward. You don't have to see the road. You don't have to know how. Just name the good you're <em>trusting toward.</em></p>
+        </div>
+      </div>
+
+      <p class="borrow-close">Joy shows up in your <em style="color:var(--lightning);">now</em> &mdash; not because your circumstances changed. Because your <strong style="color:var(--amber-hot);">posture</strong> did.</p>
+    </div>
+  </section>
+
+  <!-- 10 · MAIN ROUND-ROBIN -->
   <section class="slide prompt-slide">
     <div class="ambient"></div><div class="stars"></div>
     <div class="slide-inner">
@@ -650,7 +757,7 @@
     </div>
   </section>
 
-  <!-- 06 · UNDERCURRENT -->
+  <!-- 11 · UNDERCURRENT · Faith -->
   <section class="slide undercurrent-slide">
     <div class="ambient"></div><div class="stars"></div>
     <div class="slide-inner">
@@ -660,56 +767,27 @@
     </div>
   </section>
 
-  <!-- 07 · ACTIVATION · DEAR FUTURE ME -->
-  <section class="slide dfm-slide">
+  <!-- 12 · DEAR FUTURE ME PROMPT -->
+  <section class="slide write-slide">
     <div class="ambient"></div><div class="stars"></div>
     <div class="slide-inner">
+      <span class="eyebrow">Write it down</span>
+      <h2 class="h-big"><em>Whatever</em><br>you make it.</h2>
+      <p class="sub" style="text-align:center;margin:0 auto 30px;">A note to yourself, one year from now. One hope you're carrying forward.</p>
 
-      <div class="dfm-copy">
-        <span class="eyebrow">Write a note across time</span>
-        <h2 class="h-big" style="margin-bottom:16px;"><em>Whatever</em><br>you make it.</h2>
-        <p class="lead">A short note to yourself, one year from now.<br>One hope you're carrying forward.</p>
-
-        <div class="dfm-link-block">
-          <div class="lbl">Open on your phone or laptop</div>
-          <div class="url">justrebe.com<span class="path">/happy-hour</span></div>
-          <p class="instructions">Type your letter, save it as an image or print it. Keep it somewhere you'll find it exactly one year from tonight.</p>
-        </div>
-
-        <p class="dfm-alt-text">Or grab a piece of paper. Whatever's closest.</p>
+      <div class="write-prompt">
+        Dear future me,<br>here's what I'm believing for&hellip;
       </div>
 
-      <div class="dfm-mini" aria-hidden="true">
-        <div class="dfm-stamp">
-          <div class="icon">⚡</div>
-          <div class="txt">88<br>MPH</div>
-        </div>
-        <div class="dfm-mini-eyebrow">A note across time</div>
-        <h3>Dear <em>Future Me,</em></h3>
-        <p class="mini-sub">One hope I'm carrying forward. Sealed tonight, opened one year from now.</p>
-        <div class="mini-body">
-          <p>Dear future me,<br>here's what I'm believing for…</p>
-        </div>
-        <div class="mini-foot">
-          <div class="brand">re·<em>be</em></div>
-          <div class="tag">Better Me · Better We</div>
-        </div>
+      <div class="write-tools">
+        <span>Paper</span>
+        <span>Zoom chat</span>
+        <span>Notes app</span>
       </div>
-
     </div>
   </section>
 
-  <!-- 08 · UNDERCURRENT (naming the good) -->
-  <section class="slide undercurrent-slide">
-    <div class="ambient"></div><div class="stars"></div>
-    <div class="slide-inner">
-      <span class="quote-mark">❝</span>
-      <h2 class="h-big">You're not writing<br>the future <em>alone</em><br>or by <em>force.</em></h2>
-      <p class="sub" style="max-width:640px;margin:24px auto 0;text-align:center;">You're naming the good you're trusting toward.</p>
-    </div>
-  </section>
-
-  <!-- 09 · CLOSE · THE PHOTOGRAPH -->
+  <!-- 13 · CLOSE · The Photograph -->
   <section class="slide close-slide">
     <div class="ambient"></div><div class="stars"></div>
     <div class="slide-inner">
@@ -724,7 +802,7 @@
     </div>
   </section>
 
-  <!-- 10 · FINAL -->
+  <!-- 14 · FINAL -->
   <section class="slide final-slide">
     <div class="ambient"></div><div class="stars"></div>
     <div class="slide-inner">
