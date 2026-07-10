@@ -356,7 +356,13 @@
     .page { border-radius: 0; box-shadow: none; max-width: 100%; }
     .no-print { display: none !important; }
     /* Remove break-avoidance entirely — let content flow naturally */
-    .sec, .prow, .payment-choice, .auth-check, .field-row { break-inside: auto; }
+    .sec, .field-row { break-inside: auto; }
+    /* Keep atomic content together */
+    .prow, .payment-choice, .auth-check, .foot { break-inside: avoid; page-break-inside: avoid; }
+    /* Section headers must stay with the row that follows */
+    .sec-h { break-after: avoid; page-break-after: avoid; }
+    /* First product/payment row stays with the header */
+    .prow:first-child, .payment-choice:first-child { break-before: avoid; page-break-before: avoid; }
 
     .head { padding: 14px 32px 12px; gap: 20px; border-bottom: 2px solid #000 !important; align-items: center; }
     .head-logo { height: 92px !important; }
