@@ -1,0 +1,5 @@
+# Files present in the repo but NOT deployed to justrebe.com
+# (still fine to preview locally via `python3 -m http.server 8080`)
+
+# Happy Hour tools — internal use only, not public
+happy-hour-*.html
