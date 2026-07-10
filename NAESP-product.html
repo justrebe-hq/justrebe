@@ -64,14 +64,7 @@
   .top-tag { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); padding: 8px 14px; background: rgba(3,78,100,.08); border-radius: 999px; }
   @media (max-width: 600px) { .top-tag { display: none; } }
 
-  /* Safari fix — prevent pills, badges and eyebrows from wrapping/scaling weirdly */
-  .top-tag, .phero-ey, .offers-ey, .cta-ey, .cta-emails,
-  .ocard-badge, .ocard-grade,
-  .price-block .lbl, .price-block .price,
-  .doc-info h4, .pending-tag, .download-tag {
-    -webkit-text-size-adjust: none;
-    text-size-adjust: none;
-  }
+  /* Safari fix — prevent pills, badges and eyebrows from wrapping */
   .top-tag, .phero-ey, .offers-ey, .cta-ey,
   .ocard-badge, .ocard-grade, .price-block .lbl,
   .pending-tag, .download-tag {
@@ -247,8 +240,8 @@
   .doc-info { flex: 1; min-width: 0; display: flex; flex-direction: column; align-self: stretch; }
   .doc-info h4 { font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 6px; line-height: 1.25; letter-spacing: -.005em; }
   .doc-info p { font-size: 13px; color: var(--muted); line-height: 1.45; margin: 0 0 auto; }
-  .pending-tag { align-self: flex-start; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-deep); background: rgba(254,185,9,.18); border: 1px solid rgba(254,185,9,.5); padding: 4px 10px; border-radius: 999px; margin-top: 12px; white-space: nowrap; -webkit-text-size-adjust: none; text-size-adjust: none; }
-  .download-tag { align-self: flex-start; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--teal); padding: 5px 11px; border-radius: 999px; margin-top: 12px; white-space: nowrap; -webkit-text-size-adjust: none; text-size-adjust: none; }
+  .pending-tag { align-self: flex-start; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-deep); background: rgba(254,185,9,.18); border: 1px solid rgba(254,185,9,.5); padding: 4px 10px; border-radius: 999px; margin-top: 12px; white-space: nowrap; }
+  .download-tag { align-self: flex-start; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--teal); padding: 5px 11px; border-radius: 999px; margin-top: 12px; white-space: nowrap; }
   .doc:hover .download-tag { background: var(--teal-deep); }
   sup { font-size: .55em; font-weight: 700; vertical-align: super; line-height: 0; margin-left: 1px; opacity: .82; }
 
