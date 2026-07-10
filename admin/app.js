@@ -2272,13 +2272,13 @@
       emailSendBtn.textContent = 'Sending…';
 
       try {
-        const resp = await fetch('/api/admin/send-email', {
+        const resp = await fetch('/api/admin/send-message', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${session.access_token}`,
           },
-          body: JSON.stringify({ to: currentDetailEmail, from, subject, body }),
+          body: JSON.stringify({ channel: 'email', to: currentDetailEmail, from, subject, body }),
         });
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || data.detail || `HTTP ${resp.status}`);
@@ -2315,13 +2315,14 @@
       const providerLabel = provider === 'twilio' ? 'Twilio' : 'OpenPhone';
 
       try {
-        const resp = await fetch('/api/admin/send-sms', {
+        const resp = await fetch('/api/admin/send-message', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${session.access_token}`,
           },
           body: JSON.stringify({
+            channel: 'sms',
             to: currentDetailPhone,
             customer_email: currentDetailEmail,
             body,
