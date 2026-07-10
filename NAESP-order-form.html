@@ -510,7 +510,6 @@
 </head>
 <body>
 
-<button class="print-btn-float no-print" onclick="window.print()">Print / Save PDF</button>
 
 <div class="page">
   <form id="order-form" novalidate>
@@ -528,9 +527,9 @@
     <!-- Print / Download CTA -->
     <div class="print-cta no-print">
       <div class="print-cta-txt">
-        <strong>Prefer to print?</strong> Download this form as a PDF or print it to submit through your district's paper process.
+        <strong>Prefer to print?</strong> Download the PDF version and submit through your district's paper process.
       </div>
-      <button type="button" class="print-cta-btn" onclick="window.print()">Download printable form &rarr;</button>
+      <a href="/ReBe_Ed_NAESP_Order_Form.pdf" download class="print-cta-btn" target="_blank" rel="noopener">Download printable form &rarr;</a>
     </div>
 
     <!-- Instructions -->
@@ -714,7 +713,7 @@
     <div class="submit-row">
       <button type="submit" class="submit-btn" id="submit-btn">Submit purchase order &rarr;</button>
       <div class="submit-message" id="submit-message" style="display:none;"></div>
-      <p class="print-note no-print">Prefer paper? <a href="#" onclick="window.print();return false;">Print this form</a> and return by email or mail.</p>
+      <p class="print-note no-print">Prefer paper? <a href="/ReBe_Ed_NAESP_Order_Form.pdf" download target="_blank" rel="noopener">Download the PDF version</a> and return by email or mail.</p>
     </div>
 
     <!-- Footer -->
