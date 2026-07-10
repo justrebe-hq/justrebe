@@ -20,20 +20,28 @@
     color: #1A1A1A;
     line-height: 1.5;
     padding: 24px;
+    font-size: 15px;
   }
 
   :root {
     --purple: #7D0AAB;
     --teal: #034E64;
+    --teal-deep: #023d4f;
     --gold: #FEB909;
+    --gold-deep: #e5a708;
     --ink: #1A1A1A;
     --body: #444;
-    --muted: #888;
-    --bone: #E4EDF0;
+    --muted: #7A8590;
+    --bone: #DEE5EA;
+    --field-bg: #FAFBFD;
+    --field-border: #D5DFE5;
+    --field-focus: #034E64;
+    --success: #2C9B41;
+    --error: #B02929;
   }
 
   .page {
-    max-width: 850px;
+    max-width: 900px;
     margin: 0 auto;
     background: #FFFFFF;
     border-radius: 20px;
@@ -41,16 +49,16 @@
     overflow: hidden;
   }
 
-  /* Header */
+  /* ===== Header ===== */
   .head {
-    padding: 32px 44px 28px;
+    padding: 40px 48px 32px;
     border-bottom: 4px solid var(--teal);
-    display: flex; align-items: center; gap: 20px;
+    display: flex; align-items: center; gap: 28px;
   }
-  .head-logo { height: 104px; width: auto; }
+  .head-logo { height: 108px; width: auto; flex-shrink: 0; }
   .head-txt { flex: 1; }
-  .head-title { font-size: 22px; font-weight: 900; color: var(--teal); letter-spacing: -.015em; margin-bottom: 4px; }
-  .head-sub { font-size: 13px; color: var(--muted); letter-spacing: .04em; }
+  .head-title { font-size: 24px; font-weight: 900; color: var(--teal); letter-spacing: -.015em; margin-bottom: 6px; line-height: 1.15; }
+  .head-sub { font-size: 14px; color: var(--muted); letter-spacing: .04em; }
   .head-badge {
     display: inline-block;
     font-size: 11px; font-weight: 800;
@@ -59,374 +67,633 @@
     background: rgba(125,10,171,.08);
     border: 1px solid rgba(125,10,171,.35);
     border-radius: 999px;
-    padding: 3px 9px;
-    margin-top: 8px;
+    padding: 4px 11px;
+    margin-top: 10px;
     white-space: nowrap;
     line-height: 1.35;
   }
-  .sec-h, .field label, .pprice .lbl { white-space: nowrap; }
 
-  /* Instruction band */
+  /* ===== Instructions band ===== */
   .instructions {
-    padding: 20px 44px;
+    padding: 22px 48px;
     background: #FAF3FF;
     border-bottom: 1px solid #EBE3F2;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--body);
-    line-height: 1.6;
+    line-height: 1.65;
   }
   .instructions strong { color: var(--purple); font-weight: 700; }
 
-  /* Sections */
+  /* ===== Sections ===== */
   .sec {
-    padding: 28px 44px;
+    padding: 32px 48px;
     border-bottom: 1px solid #F0F3F6;
   }
   .sec-h {
     font-size: 12px; font-weight: 900;
     letter-spacing: .16em; text-transform: uppercase;
     color: var(--teal);
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     padding-bottom: 8px;
     border-bottom: 2px solid var(--teal);
     display: inline-block;
     line-height: 1.35;
   }
 
-  /* Fields */
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; margin-bottom: 14px; }
-  .field-row.single { grid-template-columns: 1fr; }
-  .field-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+  /* ===== Fields ===== */
+  .field-row { display: grid; gap: 20px 28px; margin-bottom: 18px; }
+  .field-row.two   { grid-template-columns: 1fr 1fr; }
+  .field-row.three { grid-template-columns: 1fr 1fr 1fr; }
+  @media (max-width: 640px) {
+    .field-row.two, .field-row.three { grid-template-columns: 1fr; gap: 18px; }
+  }
+  .field { display: flex; flex-direction: column; }
   .field label {
     display: block;
     font-size: 12px; font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .06em;
     color: var(--muted);
-    margin-bottom: 4px;
-    line-height: 1.35;
+    margin-bottom: 6px;
+    line-height: 1.3;
   }
-  .field .line {
-    border-bottom: 1.5px solid var(--ink);
-    min-height: 22px;
-    padding: 2px 4px;
+  .field label .req { color: var(--purple); margin-left: 2px; }
+  .field input[type="text"],
+  .field input[type="email"],
+  .field input[type="tel"],
+  .field input[type="date"] {
+    width: 100%;
+    height: 44px;
+    font-family: inherit;
+    font-size: 15px; font-weight: 500;
+    color: var(--ink);
+    background: var(--field-bg);
+    border: 1.5px solid var(--field-border);
+    border-radius: 8px;
+    padding: 0 14px;
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
   }
+  .field input:focus {
+    outline: none;
+    border-color: var(--field-focus);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(3,78,100,.10);
+  }
+  .field.err input { border-color: var(--error); background: #FFF6F6; }
+  .field-error { color: var(--error); font-size: 12.5px; font-weight: 600; margin-top: 5px; }
 
-  /* Product selection */
-  .products { display: flex; flex-direction: column; gap: 12px; }
+  /* ===== Product selection ===== */
+  .products { display: flex; flex-direction: column; gap: 14px; }
   .prow {
     display: grid;
-    grid-template-columns: 40px 1fr 130px;
-    gap: 16px;
+    grid-template-columns: 42px 1fr 140px;
+    gap: 20px;
     align-items: flex-start;
-    padding: 14px 16px;
-    border: 1.5px solid #DEE5EA;
-    border-radius: 10px;
+    padding: 18px 22px;
+    border: 1.5px solid var(--field-border);
+    border-radius: 12px;
+    background: #fff;
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+    cursor: pointer;
   }
-  .pcheck {
+  .prow:hover { border-color: var(--teal); background: #FAFCFE; }
+  .prow.selected {
+    border-color: var(--teal);
+    background: #F1F7FA;
+    box-shadow: 0 4px 14px rgba(3,78,100,.10);
+  }
+  .prow input[type="checkbox"] {
+    -webkit-appearance: none; appearance: none;
     width: 24px; height: 24px;
-    border: 2px solid var(--ink);
-    border-radius: 5px;
-    margin-top: 2px;
+    margin-top: 3px;
+    border: 2px solid var(--field-border);
+    border-radius: 6px;
+    cursor: pointer;
+    background: #fff;
+    position: relative;
+    transition: border-color .15s, background .15s;
   }
-  .ptitle { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 4px; letter-spacing: -.005em; }
-  .pdesc { font-size: 12.5px; color: var(--body); line-height: 1.5; }
+  .prow input[type="checkbox"]:checked {
+    border-color: var(--teal);
+    background: var(--teal);
+  }
+  .prow input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 7px;
+    width: 6px; height: 12px;
+    border: solid #fff;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+  .ptitle { font-size: 15.5px; font-weight: 800; color: var(--ink); margin-bottom: 5px; letter-spacing: -.005em; line-height: 1.3; }
+  .pdesc { font-size: 13px; color: var(--body); line-height: 1.55; }
   .pprice {
-    font-size: 13px; font-weight: 800;
-    color: var(--teal);
-    text-align: right;
-    align-self: flex-start;
+    text-align: right; align-self: flex-start;
   }
-  .pprice .lbl { display: block; font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; line-height: 1.3; }
+  .pprice .lbl {
+    display: block; font-size: 11px; font-weight: 700; color: var(--muted);
+    letter-spacing: .06em; text-transform: uppercase; margin-bottom: 3px; line-height: 1.3;
+  }
   .pprice .amt { font-size: 20px; color: var(--ink); font-weight: 900; letter-spacing: -.015em; }
-  .pprice.free .amt { color: #2C9B41; font-style: italic; font-size: 18px; }
+  .pprice.free .amt { color: var(--success); font-style: italic; font-size: 18px; }
+  @media (max-width: 640px) {
+    .prow { grid-template-columns: 32px 1fr; }
+    .pprice { grid-column: 1 / -1; text-align: left; margin-left: 52px; }
+  }
 
-  /* Payment section */
-  .payment-block {
-    display: flex; flex-direction: column; gap: 10px;
-    margin-top: 14px;
-    padding: 16px 20px;
-    background: #F5F9FC;
-    border-radius: 10px;
-  }
+  /* ===== Payment method ===== */
+  .payment-block { display: flex; flex-direction: column; gap: 10px; }
   .payment-choice {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 13.5px;
-    color: var(--ink);
-    line-height: 1.4;
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 18px;
+    background: var(--field-bg);
+    border: 1.5px solid var(--field-border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
   }
-  .pcheck-sm {
-    width: 18px; height: 18px;
-    border: 2px solid var(--ink);
-    border-radius: 4px;
+  .payment-choice:hover { border-color: var(--teal); background: #FAFCFE; }
+  .payment-choice.selected { border-color: var(--teal); background: #F1F7FA; }
+  .payment-choice input[type="radio"] {
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px;
+    margin-top: 2px;
+    border: 2px solid var(--field-border);
+    border-radius: 50%;
+    cursor: pointer;
+    background: #fff;
+    position: relative;
+    transition: border-color .15s;
     flex-shrink: 0;
   }
-
-  /* Totals */
-  .totals { padding: 20px 44px; background: #FAFCFD; border-bottom: 1px solid #F0F3F6; }
-  .total-row {
-    display: flex; justify-content: space-between; align-items: baseline;
-    font-size: 14px; color: var(--body);
-    margin-bottom: 8px;
+  .payment-choice input[type="radio"]:checked { border-color: var(--teal); }
+  .payment-choice input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 10px; height: 10px;
+    background: var(--teal); border-radius: 50%;
   }
-  .total-row.grand {
-    font-size: 20px;
-    font-weight: 900;
-    color: var(--ink);
-    padding-top: 12px;
-    border-top: 2px solid var(--ink);
-    margin-top: 8px;
+  .payment-choice-txt { flex: 1; font-size: 14px; line-height: 1.5; color: var(--ink); }
+  .payment-choice-txt strong { color: var(--teal); font-weight: 700; }
+
+  /* ===== Authorization ===== */
+  .auth-legal {
+    padding: 14px 18px;
+    background: #FAF3FF;
+    border: 1px solid #EBE3F2;
+    border-radius: 10px;
+    font-size: 13px; color: var(--body);
+    line-height: 1.6;
+    margin-bottom: 18px;
   }
-  .total-row .amt { font-weight: 700; color: var(--ink); }
+  .auth-check {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 22px;
+    cursor: pointer;
+  }
+  .auth-check input[type="checkbox"] {
+    -webkit-appearance: none; appearance: none;
+    width: 22px; height: 22px;
+    margin-top: 1px;
+    border: 2px solid var(--field-border);
+    border-radius: 5px;
+    cursor: pointer;
+    background: #fff;
+    position: relative;
+    flex-shrink: 0;
+    transition: border-color .15s, background .15s;
+  }
+  .auth-check input[type="checkbox"]:checked { border-color: var(--teal); background: var(--teal); }
+  .auth-check input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 6px;
+    width: 5px; height: 10px;
+    border: solid #fff;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+  .auth-check-txt { flex: 1; font-size: 14px; line-height: 1.5; color: var(--ink); }
 
-  /* Signature */
-  .sig-row { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
-  .sig-line { border-bottom: 1.5px solid var(--ink); min-height: 40px; margin-top: 8px; }
+  /* ===== Submit / Footer ===== */
+  .submit-row {
+    padding: 30px 48px;
+    background: #FAFCFD;
+    display: flex; flex-direction: column; gap: 14px;
+    align-items: center;
+  }
+  .submit-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 18px 44px;
+    background: var(--teal);
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px; font-weight: 800;
+    letter-spacing: .04em;
+    border: none; border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(3,78,100,.28);
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .submit-btn:hover:not(:disabled) {
+    background: var(--teal-deep); transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(3,78,100,.34);
+  }
+  .submit-btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
 
-  /* Footer */
+  .submit-message {
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 14px; font-weight: 600; line-height: 1.5;
+    max-width: 560px; width: 100%; text-align: center;
+  }
+  .submit-message.success { background: #E9F6EC; border: 1px solid #B4DCC0; color: #1E6E31; }
+  .submit-message.error { background: #FCEDED; border: 1px solid #F0C4C4; color: var(--error); }
+
+  .print-note {
+    font-size: 13px; color: var(--muted); text-align: center;
+    line-height: 1.5; max-width: 560px;
+  }
+  .print-note a { color: var(--teal); font-weight: 600; text-decoration: underline; }
+
+  /* ===== Footer ===== */
   .foot {
-    padding: 20px 44px 28px;
+    padding: 22px 48px 32px;
     text-align: center;
     background: #FAFCFD;
     border-top: 1px solid #EEE;
-    font-size: 11.5px;
+    font-size: 12.5px;
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.7;
   }
   .foot strong { color: var(--teal); font-weight: 800; }
   .foot a { color: var(--purple); font-weight: 700; text-decoration: none; }
 
-  /* Print styles */
+  /* ===== Print utility ===== */
+  .print-btn-float {
+    position: fixed; top: 20px; right: 20px;
+    padding: 12px 22px;
+    background: #fff; color: var(--teal);
+    font-family: inherit; font-size: 13px; font-weight: 800;
+    letter-spacing: .06em; text-transform: uppercase;
+    border: 2px solid var(--teal); border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(3,78,100,.14);
+    transition: background .15s, color .15s;
+  }
+  .print-btn-float:hover { background: var(--teal); color: #fff; }
+
   @media print {
-    body { background: #FFFFFF; padding: 0; }
+    body { background: #FFFFFF; padding: 0; font-size: 12px; }
     .page { border-radius: 0; box-shadow: none; max-width: 100%; }
     .no-print { display: none !important; }
+    .prow { break-inside: avoid; }
   }
-
-  .print-btn {
-    position: fixed; top: 20px; right: 20px;
-    padding: 12px 24px;
-    background: var(--teal); color: #fff;
-    font-size: 13px; font-weight: 800;
-    letter-spacing: .06em; text-transform: uppercase;
-    border: none; border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(3,78,100,.28);
-  }
-  .print-btn:hover { background: #023d4f; }
 
   sup { font-size: .55em; font-weight: 700; vertical-align: super; line-height: 0; margin-left: 1px; opacity: .82; }
 </style>
 </head>
 <body>
 
-<button class="print-btn no-print" onclick="window.print()">Print / Save as PDF</button>
+<button class="print-btn-float no-print" onclick="window.print()">Print / Save PDF</button>
 
 <div class="page">
+  <form id="order-form" novalidate>
 
-  <!-- Header -->
-  <div class="head">
-    <img src="Images/rebe-ed-logo.png" alt="ReBe Ed" class="head-logo">
-    <div class="head-txt">
-      <div class="head-title">Purchase Order Form</div>
-      <div class="head-sub">ReBe Ed &mdash; NAESP 2026 Conference Special</div>
-      <span class="head-badge">Conference-Only Pricing</span>
+    <!-- Header -->
+    <div class="head">
+      <img src="Images/rebe-ed-logo.png" alt="ReBe Ed" class="head-logo">
+      <div class="head-txt">
+        <div class="head-title">Purchase Order Form</div>
+        <div class="head-sub">ReBe Ed &mdash; NAESP 2026 Conference Special</div>
+        <span class="head-badge">Conference-Only Pricing</span>
+      </div>
     </div>
-  </div>
 
-  <!-- Instructions -->
-  <div class="instructions">
-    <strong>How to use this form:</strong> Complete the fields below, select your package(s), sign at the bottom, and return by fax, email, or mail to the addresses on the last page. We'll invoice you or coordinate a purchase order per your district's process.
-  </div>
+    <!-- Instructions -->
+    <div class="instructions">
+      <strong>Fill this out online</strong> and we'll email you a formal quote and invoice within one business day. You can also <a href="#" onclick="window.print();return false;" style="color:var(--purple);font-weight:700;text-decoration:underline;">print this form</a> to submit through your district's paper process.
+    </div>
 
-  <!-- Purchaser info -->
-  <div class="sec">
-    <p class="sec-h">Purchaser Information</p>
-    <div class="field-row">
-      <div class="field">
-        <label>First Name</label>
-        <div class="line"></div>
-      </div>
-      <div class="field">
-        <label>Last Name</label>
-        <div class="line"></div>
-      </div>
-    </div>
-    <div class="field-row">
-      <div class="field">
-        <label>Title / Role</label>
-        <div class="line"></div>
-      </div>
-      <div class="field">
-        <label>Direct Phone</label>
-        <div class="line"></div>
-      </div>
-    </div>
-    <div class="field-row single">
-      <div class="field">
-        <label>Email</label>
-        <div class="line"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- School info -->
-  <div class="sec">
-    <p class="sec-h">School / District Information</p>
-    <div class="field-row single">
-      <div class="field">
-        <label>School Name</label>
-        <div class="line"></div>
-      </div>
-    </div>
-    <div class="field-row">
-      <div class="field">
-        <label>District</label>
-        <div class="line"></div>
-      </div>
-      <div class="field">
-        <label>Grade Levels Served</label>
-        <div class="line"></div>
-      </div>
-    </div>
-    <div class="field-row single">
-      <div class="field">
-        <label>Billing Address</label>
-        <div class="line"></div>
-      </div>
-    </div>
-    <div class="field-row triple">
-      <div class="field">
-        <label>City</label>
-        <div class="line"></div>
-      </div>
-      <div class="field">
-        <label>State</label>
-        <div class="line"></div>
-      </div>
-      <div class="field">
-        <label>ZIP</label>
-        <div class="line"></div>
-      </div>
-    </div>
-    <div class="field-row">
-      <div class="field">
-        <label>Purchase Order # (if known)</label>
-        <div class="line"></div>
-      </div>
-      <div class="field">
-        <label>Approximate # of Classrooms</label>
-        <div class="line"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Product selection -->
-  <div class="sec">
-    <p class="sec-h">Select Package(s)</p>
-    <div class="products">
-
-      <div class="prow">
-        <div class="pcheck" aria-hidden="true"></div>
-        <div>
-          <p class="ptitle">K-2 Health Boosts</p>
-          <p class="pdesc">Daily 7-10 minute Health Boosts across the five EPICS, facilitator guides, family take-home cards, digital + printable assets.</p>
+    <!-- Purchaser info -->
+    <div class="sec">
+      <p class="sec-h">Purchaser Information</p>
+      <div class="field-row two">
+        <div class="field" data-field="first_name">
+          <label for="first_name">First Name <span class="req">*</span></label>
+          <input type="text" id="first_name" name="first_name" autocomplete="given-name" required>
         </div>
-        <div class="pprice">
-          <span class="lbl">Conference rate</span>
-          <span class="amt">$TBD</span>
+        <div class="field" data-field="last_name">
+          <label for="last_name">Last Name <span class="req">*</span></label>
+          <input type="text" id="last_name" name="last_name" autocomplete="family-name" required>
         </div>
       </div>
-
-      <div class="prow">
-        <div class="pcheck" aria-hidden="true"></div>
-        <div>
-          <p class="ptitle">K-2 Health Boosts + Residency</p>
-          <p class="pdesc">Everything in K-2 Health Boosts, plus on-site residency days with a ReBe Ed facilitator, teacher coaching cycles, and principal-level reporting.</p>
+      <div class="field-row two">
+        <div class="field" data-field="title">
+          <label for="title">Title / Role</label>
+          <input type="text" id="title" name="title" autocomplete="organization-title" placeholder="e.g. Principal, Curriculum Director">
         </div>
-        <div class="pprice">
-          <span class="lbl">Conference rate</span>
-          <span class="amt">$TBD</span>
+        <div class="field" data-field="phone">
+          <label for="phone">Direct Phone</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel">
         </div>
       </div>
-
-      <div class="prow">
-        <div class="pcheck" aria-hidden="true"></div>
-        <div>
-          <p class="ptitle">Free 3-5 Pilot Program</p>
-          <p class="pdesc">Full program access at no cost to selected schools, co-design support with pre/post measurement, and featured case-study spotlight (with your permission).</p>
-        </div>
-        <div class="pprice free">
-          <span class="lbl">Limited cohort</span>
-          <span class="amt">Free</span>
+      <div class="field-row">
+        <div class="field" data-field="email">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
         </div>
       </div>
+    </div>
 
-    </div>
-  </div>
-
-  <!-- Totals -->
-  <div class="totals">
-    <div class="total-row">
-      <span>Package(s) subtotal</span>
-      <span class="amt">$_______</span>
-    </div>
-    <div class="total-row">
-      <span>Travel / on-site (if applicable, per residency)</span>
-      <span class="amt">$_______</span>
-    </div>
-    <div class="total-row grand">
-      <span>Total due</span>
-      <span class="amt">$_______</span>
-    </div>
-  </div>
-
-  <!-- Payment method -->
-  <div class="sec">
-    <p class="sec-h">Payment Method</p>
-    <div class="payment-block">
-      <div class="payment-choice">
-        <div class="pcheck-sm" aria-hidden="true"></div>
-        <span><strong>Purchase Order</strong> &mdash; we will invoice you (Net 30). Enter PO # above.</span>
+    <!-- School info -->
+    <div class="sec">
+      <p class="sec-h">School / District Information</p>
+      <div class="field-row">
+        <div class="field" data-field="school_name">
+          <label for="school_name">School Name <span class="req">*</span></label>
+          <input type="text" id="school_name" name="school_name" autocomplete="organization" required>
+        </div>
       </div>
-      <div class="payment-choice">
-        <div class="pcheck-sm" aria-hidden="true"></div>
-        <span><strong>Credit Card</strong> &mdash; we'll email a secure Stripe link to the address above.</span>
+      <div class="field-row two">
+        <div class="field" data-field="district">
+          <label for="district">District</label>
+          <input type="text" id="district" name="district">
+        </div>
+        <div class="field" data-field="grade_levels">
+          <label for="grade_levels">Grade Levels Served</label>
+          <input type="text" id="grade_levels" name="grade_levels" placeholder="e.g. K–5">
+        </div>
       </div>
-      <div class="payment-choice">
-        <div class="pcheck-sm" aria-hidden="true"></div>
-        <span><strong>Check</strong> &mdash; payable to <em>JustReBe LLC</em>. Mail to address on the last page.</span>
+      <div class="field-row">
+        <div class="field" data-field="billing_address">
+          <label for="billing_address">Billing Address</label>
+          <input type="text" id="billing_address" name="billing_address" autocomplete="street-address">
+        </div>
       </div>
-      <div class="payment-choice">
-        <div class="pcheck-sm" aria-hidden="true"></div>
-        <span><strong>ACH / Wire Transfer</strong> &mdash; contact us for bank details.</span>
+      <div class="field-row three">
+        <div class="field" data-field="city">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" autocomplete="address-level2">
+        </div>
+        <div class="field" data-field="state">
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" autocomplete="address-level1" maxlength="20">
+        </div>
+        <div class="field" data-field="zip">
+          <label for="zip">ZIP</label>
+          <input type="text" id="zip" name="zip" autocomplete="postal-code" maxlength="10">
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Signature -->
-  <div class="sec">
-    <p class="sec-h">Authorization</p>
-    <div class="sig-row">
-      <div class="field">
-        <label>Authorized Signature</label>
-        <div class="sig-line"></div>
-      </div>
-      <div class="field">
-        <label>Date</label>
-        <div class="sig-line"></div>
+      <div class="field-row two">
+        <div class="field" data-field="purchase_order_number">
+          <label for="purchase_order_number">Purchase Order # (if known)</label>
+          <input type="text" id="purchase_order_number" name="purchase_order_number">
+        </div>
+        <div class="field" data-field="num_classrooms">
+          <label for="num_classrooms">Approx. # of Classrooms</label>
+          <input type="text" id="num_classrooms" name="num_classrooms">
+        </div>
       </div>
     </div>
-    <p style="font-size:11.5px;color:var(--muted);margin-top:16px;line-height:1.6;">By signing above, I confirm authority to purchase on behalf of the school or district named. ReBe Ed materials are provided under a limited license &mdash; see <em>ReBe Ed Pilot Residency Overview</em> for terms.</p>
-  </div>
 
-  <!-- Return / Contact -->
-  <div class="foot">
-    <p><strong>Return this form to:</strong> hello@justrebe.com &nbsp;&middot;&nbsp; 13118 State Rd 64 E., Suite 362, Bradenton, FL 34212 &nbsp;&middot;&nbsp; <strong>www.justrebe.com</strong></p>
-    <p style="margin-top:8px;">Questions? Valerie Ellery &nbsp;<a href="mailto:v.ellery@justrebe.com">v.ellery@justrebe.com</a>&nbsp; (941) 704-1956 &nbsp;&middot;&nbsp; Abbey Pace &nbsp;<a href="mailto:a.pace@justrebe.com">a.pace@justrebe.com</a>&nbsp; (704) 975-9180</p>
-  </div>
+    <!-- Product selection -->
+    <div class="sec">
+      <p class="sec-h">Select Package(s) <span class="req" style="color:var(--purple);">*</span></p>
+      <div class="products">
 
+        <label class="prow" data-product-row>
+          <input type="checkbox" name="products" value="k2_health_boosts">
+          <div>
+            <p class="ptitle">K-2 Health Boosts</p>
+            <p class="pdesc">Daily 7-10 minute Health Boosts across the five EPICS, facilitator guides, family take-home cards, digital + printable assets.</p>
+          </div>
+          <div class="pprice">
+            <span class="lbl">Conference rate</span>
+            <span class="amt">$TBD</span>
+          </div>
+        </label>
+
+        <label class="prow" data-product-row>
+          <input type="checkbox" name="products" value="k2_residency">
+          <div>
+            <p class="ptitle">K-2 Health Boosts + Residency</p>
+            <p class="pdesc">Everything in K-2 Health Boosts, plus on-site residency days with a ReBe Ed facilitator, teacher coaching cycles, and principal-level reporting.</p>
+          </div>
+          <div class="pprice">
+            <span class="lbl">Conference rate</span>
+            <span class="amt">$TBD</span>
+          </div>
+        </label>
+
+        <label class="prow" data-product-row>
+          <input type="checkbox" name="products" value="35_pilot">
+          <div>
+            <p class="ptitle">Free 3-5 Pilot Program</p>
+            <p class="pdesc">Full program access at no cost to selected schools, co-design support with pre/post measurement, and featured case-study spotlight (with your permission).</p>
+          </div>
+          <div class="pprice free">
+            <span class="lbl">Limited cohort</span>
+            <span class="amt">Free</span>
+          </div>
+        </label>
+
+      </div>
+      <p class="field-error" id="products-error" style="display:none;">Please select at least one package.</p>
+    </div>
+
+    <!-- Payment method -->
+    <div class="sec">
+      <p class="sec-h">Payment Method</p>
+      <div class="payment-block">
+        <label class="payment-choice" data-payment-row>
+          <input type="radio" name="payment_method" value="po">
+          <div class="payment-choice-txt"><strong>Purchase Order</strong> &mdash; we'll invoice you (Net 30). Enter PO # above if known.</div>
+        </label>
+        <label class="payment-choice" data-payment-row>
+          <input type="radio" name="payment_method" value="card">
+          <div class="payment-choice-txt"><strong>Credit Card</strong> &mdash; we'll email you a secure Stripe payment link.</div>
+        </label>
+        <label class="payment-choice" data-payment-row>
+          <input type="radio" name="payment_method" value="check">
+          <div class="payment-choice-txt"><strong>Check</strong> &mdash; payable to <em>JustReBe LLC</em>. Mail to the address in the footer.</div>
+        </label>
+        <label class="payment-choice" data-payment-row>
+          <input type="radio" name="payment_method" value="ach">
+          <div class="payment-choice-txt"><strong>ACH / Wire Transfer</strong> &mdash; we'll email you bank details.</div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Authorization -->
+    <div class="sec">
+      <p class="sec-h">Authorization</p>
+      <div class="auth-legal">
+        By checking the box and typing your name below, you confirm you have authority to purchase on behalf of the school or district named above. ReBe Ed materials are provided under a limited license &mdash; see <em>ReBe Ed Residency Pilot Overview</em> for terms.
+      </div>
+      <div class="auth-check">
+        <input type="checkbox" id="auth" name="auth" required>
+        <label for="auth" class="auth-check-txt">I am authorized to submit this order on behalf of the school or district listed above.</label>
+      </div>
+      <div class="field-row two">
+        <div class="field" data-field="signature_name">
+          <label for="signature_name">Typed Signature <span class="req">*</span></label>
+          <input type="text" id="signature_name" name="signature_name" placeholder="Your full legal name" required>
+        </div>
+        <div class="field" data-field="signed_date">
+          <label for="signed_date">Date <span class="req">*</span></label>
+          <input type="text" id="signed_date" name="signed_date" placeholder="MM/DD/YYYY" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-row">
+      <button type="submit" class="submit-btn" id="submit-btn">Submit purchase order &rarr;</button>
+      <div class="submit-message" id="submit-message" style="display:none;"></div>
+      <p class="print-note no-print">Prefer paper? <a href="#" onclick="window.print();return false;">Print this form</a> and return by email or mail.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="foot">
+      <p><strong>Return this form to:</strong> hello@justrebe.com &nbsp;&middot;&nbsp; 13118 State Rd 64 E., Suite 362, Bradenton, FL 34212 &nbsp;&middot;&nbsp; <strong>www.justrebe.com</strong></p>
+      <p style="margin-top:8px;">Questions? Valerie Ellery <a href="mailto:v.ellery@justrebe.com">v.ellery@justrebe.com</a> &middot; (941) 704-1956 &nbsp;&middot;&nbsp; Abbey Pace <a href="mailto:a.pace@justrebe.com">a.pace@justrebe.com</a> &middot; (704) 975-9180</p>
+    </div>
+
+  </form>
 </div>
+
+<script>
+(function () {
+  var form = document.getElementById('order-form');
+  var submitBtn = document.getElementById('submit-btn');
+  var msgBox = document.getElementById('submit-message');
+
+  // Highlight product / payment rows when selected
+  document.querySelectorAll('[data-product-row], [data-payment-row]').forEach(function (row) {
+    var input = row.querySelector('input');
+    var updateState = function () {
+      if (input.checked) row.classList.add('selected'); else row.classList.remove('selected');
+    };
+    input.addEventListener('change', function () {
+      if (input.type === 'radio') {
+        // clear siblings
+        document.querySelectorAll('[data-payment-row]').forEach(function (r) { r.classList.remove('selected'); });
+      }
+      updateState();
+    });
+  });
+
+  function showFieldError(fieldEl, msg) {
+    fieldEl.classList.add('err');
+    var existing = fieldEl.querySelector('.field-error');
+    if (existing) existing.remove();
+    var e = document.createElement('div');
+    e.className = 'field-error';
+    e.textContent = msg;
+    fieldEl.appendChild(e);
+  }
+  function clearErrors() {
+    document.querySelectorAll('.field').forEach(function (f) {
+      f.classList.remove('err');
+      var e = f.querySelector('.field-error');
+      if (e) e.remove();
+    });
+    document.getElementById('products-error').style.display = 'none';
+    msgBox.style.display = 'none';
+    msgBox.textContent = '';
+    msgBox.className = 'submit-message';
+  }
+  function validate() {
+    clearErrors();
+    var ok = true;
+    ['first_name','last_name','email','school_name','signature_name','signed_date'].forEach(function (name) {
+      var input = form.querySelector('[name="'+name+'"]');
+      var field = form.querySelector('[data-field="'+name+'"]');
+      if (!input.value || !input.value.trim()) {
+        showFieldError(field, 'Required.');
+        ok = false;
+      }
+    });
+    var em = form.email;
+    if (em.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())) {
+      showFieldError(form.querySelector('[data-field="email"]'), 'Please enter a valid email.');
+      ok = false;
+    }
+    var products = form.querySelectorAll('input[name="products"]:checked');
+    if (products.length === 0) {
+      document.getElementById('products-error').style.display = 'block';
+      ok = false;
+    }
+    if (!form.auth.checked) {
+      alert('Please confirm authorization by checking the box.');
+      ok = false;
+    }
+    return ok;
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!validate()) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    var products = Array.from(form.querySelectorAll('input[name="products"]:checked')).map(function (i) { return i.value; });
+    var payment = form.querySelector('input[name="payment_method"]:checked');
+
+    var payload = {
+      form_type: 'naesp_order',
+      first_name: form.first_name.value.trim(),
+      last_name: form.last_name.value.trim(),
+      title: form.title.value.trim(),
+      phone: form.phone.value.trim(),
+      email: form.email.value.trim(),
+      school_name: form.school_name.value.trim(),
+      district: form.district.value.trim(),
+      grade_levels: form.grade_levels.value.trim(),
+      billing_address: form.billing_address.value.trim(),
+      city: form.city.value.trim(),
+      state: form.state.value.trim(),
+      zip: form.zip.value.trim(),
+      purchase_order_number: form.purchase_order_number.value.trim(),
+      num_classrooms: form.num_classrooms.value.trim(),
+      products: products,
+      payment_method: payment ? payment.value : null,
+      signature_name: form.signature_name.value.trim(),
+      signed_date: form.signed_date.value.trim(),
+      source: 'NAESP · order form'
+    };
+
+    fetch('/api/naesp-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error('Save failed: '+r.status);
+        return r.json();
+      })
+      .then(function () {
+        msgBox.className = 'submit-message success';
+        msgBox.textContent = '✓ Thanks — your order has been submitted. You should receive a confirmation email within a minute, and someone from our team will follow up shortly.';
+        msgBox.style.display = 'block';
+        submitBtn.style.display = 'none';
+        window.scrollTo({ top: msgBox.offsetTop - 100, behavior: 'smooth' });
+      })
+      .catch(function (err) {
+        console.error(err);
+        msgBox.className = 'submit-message error';
+        msgBox.textContent = 'We couldn’t save your order. Please try again or email hello@justrebe.com — we’ll get it in manually.';
+        msgBox.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit purchase order →';
+      });
+  });
+})();
+</script>
 
 </body>
 </html>
