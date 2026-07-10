@@ -346,58 +346,59 @@
   .print-btn-float:hover { background: var(--teal); color: #fff; }
 
   @media print {
-    @page { size: letter; margin: 0.35in 0.4in; }
+    @page { size: letter; margin: 0.3in 0.4in; }
     /* Reset the page for a clean paper look */
-    body { background: #FFFFFF; padding: 0; font-size: 9px; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; line-height: 1.3; }
+    body { background: #FFFFFF; padding: 0; font-size: 8.5px; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; line-height: 1.28; letter-spacing: 0; }
     .page { border-radius: 0; box-shadow: none; max-width: 100%; }
     .no-print { display: none !important; }
     /* Remove break-avoidance entirely — let content flow naturally */
     .sec, .prow, .payment-choice, .auth-check, .field-row { break-inside: auto; }
 
-    .head { padding: 8px 22px 8px; gap: 12px; border-bottom: 2px solid #000 !important; }
-    .head-logo { height: 46px !important; }
-    .head-title { font-size: 15px; margin-bottom: 1px; }
-    .head-sub { font-size: 9.5px; }
-    .head-badge { margin-top: 3px; padding: 2px 7px; font-size: 8.5px; letter-spacing: .1em; }
+    .head { padding: 10px 24px 10px; gap: 18px; border-bottom: 2px solid #000 !important; align-items: center; }
+    .head-logo { height: 90px !important; }
+    .head-title { font-size: 17px; margin-bottom: 1px; letter-spacing: -.01em; }
+    .head-sub { font-size: 9px; letter-spacing: 0; }
+    .head-badge { margin-top: 4px; padding: 2px 7px; font-size: 7.5px; letter-spacing: .04em; }
 
-    .instructions { padding: 4px 22px; font-size: 8.5px; line-height: 1.35; }
+    .instructions { padding: 4px 24px; font-size: 8px; line-height: 1.3; letter-spacing: 0; }
 
-    .sec { padding: 6px 22px; border-bottom: 1px solid #DDD; }
-    .sec-h { margin-bottom: 5px; padding-bottom: 3px; font-size: 9px; letter-spacing: .12em; border-bottom-width: 1.5px; }
+    .sec { padding: 4px 24px; border-bottom: 1px solid #E0E0E0; }
+    .sec-h { margin-bottom: 4px; padding-bottom: 2px; font-size: 8.5px; letter-spacing: .04em; border-bottom-width: 1.5px; }
 
-    .field-row { gap: 3px 14px; margin-bottom: 3px; }
-    .field label { font-size: 7.5px !important; margin-bottom: 1px !important; letter-spacing: .04em; }
+    .field-row { gap: 2px 14px; margin-bottom: 2px; }
+    .field label { font-size: 6.5px !important; margin-bottom: 1px !important; letter-spacing: .02em; font-weight: 700 !important; }
     .field input[type="text"],
     .field input[type="email"],
     .field input[type="tel"],
     .field input[type="date"] {
-      height: 18px !important;
-      font-size: 9.5px !important;
+      height: 15px !important;
+      font-size: 9px !important;
       padding: 0 2px !important;
+      line-height: 1 !important;
     }
 
-    .products, .payment-block { gap: 3px; }
-    .prow, .payment-choice { padding: 4px 8px !important; }
-    .prow { grid-template-columns: 18px 1fr 74px; gap: 8px; }
-    .ptitle { font-size: 9.5px; margin-bottom: 1px; }
-    .pdesc { font-size: 8.5px; line-height: 1.3; }
-    .pprice .amt { font-size: 11px; }
-    .pprice.free .amt { font-size: 10px; }
-    .pprice .lbl { font-size: 7.5px; margin-bottom: 1px; }
-    .prow input[type="checkbox"] { width: 14px !important; height: 14px !important; margin-top: 1px !important; }
-    .payment-choice input[type="radio"] { width: 14px !important; height: 14px !important; margin-top: 1px !important; }
-    .payment-choice-txt { font-size: 9px; line-height: 1.3; }
+    .products, .payment-block { gap: 2px; }
+    .prow, .payment-choice { padding: 3px 7px !important; }
+    .prow { grid-template-columns: 16px 1fr 66px; gap: 6px; }
+    .ptitle { font-size: 8.5px; margin-bottom: 0; letter-spacing: -.005em; }
+    .pdesc { font-size: 7.5px; line-height: 1.28; letter-spacing: 0; }
+    .pprice .amt { font-size: 10px; }
+    .pprice.free .amt { font-size: 9px; }
+    .pprice .lbl { font-size: 6.5px; margin-bottom: 0; letter-spacing: .02em; }
+    .prow input[type="checkbox"] { width: 12px !important; height: 12px !important; margin-top: 1px !important; }
+    .payment-choice input[type="radio"] { width: 12px !important; height: 12px !important; margin-top: 1px !important; }
+    .payment-choice-txt { font-size: 8px; line-height: 1.28; letter-spacing: 0; }
 
-    .auth-legal { padding: 5px 8px; font-size: 8px; margin-bottom: 5px; line-height: 1.35; }
-    .auth-check { margin-bottom: 6px; gap: 6px; }
-    .auth-check input[type="checkbox"] { width: 14px !important; height: 14px !important; }
-    .auth-check-txt { font-size: 9px; line-height: 1.3; }
+    .auth-legal { padding: 4px 7px; font-size: 7px; margin-bottom: 4px; line-height: 1.3; letter-spacing: 0; }
+    .auth-check { margin-bottom: 4px; gap: 5px; }
+    .auth-check input[type="checkbox"] { width: 12px !important; height: 12px !important; }
+    .auth-check-txt { font-size: 8px; line-height: 1.28; letter-spacing: 0; }
 
     .submit-row { display: none; }
 
-    .foot { padding: 5px 22px 8px; font-size: 8px; line-height: 1.4; border-top: 1px solid #000 !important; }
+    .foot { padding: 4px 24px 6px; font-size: 7px; line-height: 1.35; border-top: 1px solid #000 !important; letter-spacing: 0; }
     .foot p { margin: 0 !important; }
-    .foot p + p { margin-top: 2px !important; }
+    .foot p + p { margin-top: 1px !important; }
 
     /* Turn field inputs into underlines so it looks like a proper paper form */
     .field input[type="text"],
