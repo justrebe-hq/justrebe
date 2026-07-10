@@ -88,6 +88,23 @@
     pointer-events: none;
   }
   .phero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+  .phero-back {
+    display: inline-block;
+    color: rgba(255,255,255,.75);
+    font-size: 13px; font-weight: 600;
+    letter-spacing: .02em;
+    text-decoration: none;
+    margin-bottom: 22px;
+    padding: 6px 12px 6px 10px;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 999px;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .phero-back:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,.6);
+    background: rgba(255,255,255,.06);
+  }
   .phero-ey {
     display: inline-block;
     color: var(--gold);
@@ -295,7 +312,7 @@
 
 <header class="topbar">
   <div class="topbar-inner">
-    <a href="https://www.justrebe.com" class="brand" aria-label="ReBe Ed — Better Me. Better We.">
+    <a href="/NAESP" class="brand" aria-label="Back to NAESP overview">
       <img src="Images/rebe-ed-logo.png" alt="ReBe Ed — Better Me. Better We." class="brand-img">
     </a>
     <span class="top-tag">NAESP · Conference Specials</span>
@@ -307,6 +324,7 @@
   <!-- Product hero -->
   <section class="phero">
     <div class="phero-inner">
+      <a href="/NAESP" class="phero-back">&larr; Back to NAESP overview</a>
       <span class="phero-ey">For NAESP attendees</span>
       <h1 class="phero-h1">Offering details and <em>pricing</em>.</h1>
       <p class="phero-sub">Conference-only pricing on the ReBe Ed K-2 program &mdash; plus a free 3-5 pilot for the schools ready to lead. Pick what fits your school's stage, budget, and timeline.</p>
