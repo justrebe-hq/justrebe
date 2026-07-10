@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>ReBe Ed — Purchase Order Form (NAESP 2026)</title>
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  img { max-width: 100%; height: auto; display: block; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F5F9FC;
+    color: #1A1A1A;
+    line-height: 1.5;
+    padding: 24px;
+  }
+
+  :root {
+    --purple: #7D0AAB;
+    --teal: #034E64;
+    --gold: #FEB909;
+    --ink: #1A1A1A;
+    --body: #444;
+    --muted: #888;
+    --bone: #E4EDF0;
+  }
+
+  .page {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(3,78,100,.08);
+    overflow: hidden;
+  }
+
+  /* Header */
+  .head {
+    padding: 32px 44px 28px;
+    border-bottom: 4px solid var(--teal);
+    display: flex; align-items: center; gap: 20px;
+  }
+  .head-logo { height: 68px; width: auto; }
+  .head-txt { flex: 1; }
+  .head-title { font-size: 22px; font-weight: 900; color: var(--teal); letter-spacing: -.015em; margin-bottom: 4px; }
+  .head-sub { font-size: 13px; color: var(--muted); letter-spacing: .04em; }
+  .head-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 800;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--purple);
+    background: rgba(125,10,171,.08);
+    border: 1px solid rgba(125,10,171,.35);
+    border-radius: 999px;
+    padding: 4px 10px;
+    margin-top: 8px;
+  }
+
+  /* Instruction band */
+  .instructions {
+    padding: 20px 44px;
+    background: #FAF3FF;
+    border-bottom: 1px solid #EBE3F2;
+    font-size: 13px;
+    color: var(--body);
+    line-height: 1.6;
+  }
+  .instructions strong { color: var(--purple); font-weight: 700; }
+
+  /* Sections */
+  .sec {
+    padding: 28px 44px;
+    border-bottom: 1px solid #F0F3F6;
+  }
+  .sec-h {
+    font-size: 11px; font-weight: 900;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--teal);
+    display: inline-block;
+  }
+
+  /* Fields */
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; margin-bottom: 14px; }
+  .field-row.single { grid-template-columns: 1fr; }
+  .field-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+  .field label {
+    display: block;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .field .line {
+    border-bottom: 1.5px solid var(--ink);
+    min-height: 22px;
+    padding: 2px 4px;
+  }
+
+  /* Product selection */
+  .products { display: flex; flex-direction: column; gap: 12px; }
+  .prow {
+    display: grid;
+    grid-template-columns: 40px 1fr 130px;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border: 1.5px solid #DEE5EA;
+    border-radius: 10px;
+  }
+  .pcheck {
+    width: 24px; height: 24px;
+    border: 2px solid var(--ink);
+    border-radius: 5px;
+    margin-top: 2px;
+  }
+  .ptitle { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 4px; letter-spacing: -.005em; }
+  .pdesc { font-size: 12.5px; color: var(--body); line-height: 1.5; }
+  .pprice {
+    font-size: 13px; font-weight: 800;
+    color: var(--teal);
+    text-align: right;
+    align-self: flex-start;
+  }
+  .pprice .lbl { display: block; font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
+  .pprice .amt { font-size: 20px; color: var(--ink); font-weight: 900; letter-spacing: -.015em; }
+  .pprice.free .amt { color: #2C9B41; font-style: italic; font-size: 18px; }
+
+  /* Payment section */
+  .payment-block {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-top: 14px;
+    padding: 16px 20px;
+    background: #F5F9FC;
+    border-radius: 10px;
+  }
+  .payment-choice {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .pcheck-sm {
+    width: 18px; height: 18px;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  /* Totals */
+  .totals { padding: 20px 44px; background: #FAFCFD; border-bottom: 1px solid #F0F3F6; }
+  .total-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 14px; color: var(--body);
+    margin-bottom: 8px;
+  }
+  .total-row.grand {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--ink);
+    padding-top: 12px;
+    border-top: 2px solid var(--ink);
+    margin-top: 8px;
+  }
+  .total-row .amt { font-weight: 700; color: var(--ink); }
+
+  /* Signature */
+  .sig-row { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
+  .sig-line { border-bottom: 1.5px solid var(--ink); min-height: 40px; margin-top: 8px; }
+
+  /* Footer */
+  .foot {
+    padding: 20px 44px 28px;
+    text-align: center;
+    background: #FAFCFD;
+    border-top: 1px solid #EEE;
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .foot strong { color: var(--teal); font-weight: 800; }
+  .foot a { color: var(--purple); font-weight: 700; text-decoration: none; }
+
+  /* Print styles */
+  @media print {
+    body { background: #FFFFFF; padding: 0; }
+    .page { border-radius: 0; box-shadow: none; max-width: 100%; }
+    .no-print { display: none !important; }
+  }
+
+  .print-btn {
+    position: fixed; top: 20px; right: 20px;
+    padding: 12px 24px;
+    background: var(--teal); color: #fff;
+    font-size: 13px; font-weight: 800;
+    letter-spacing: .06em; text-transform: uppercase;
+    border: none; border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(3,78,100,.28);
+  }
+  .print-btn:hover { background: #023d4f; }
+
+  sup { font-size: .55em; font-weight: 700; vertical-align: super; line-height: 0; margin-left: 1px; opacity: .82; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Print / Save as PDF</button>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="head">
+    <img src="Images/rebe-ed-logo.png" alt="ReBe Ed" class="head-logo">
+    <div class="head-txt">
+      <div class="head-title">Purchase Order Form</div>
+      <div class="head-sub">ReBe Ed &mdash; NAESP 2026 Conference Special</div>
+      <span class="head-badge">Conference-Only Pricing</span>
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    <strong>How to use this form:</strong> Complete the fields below, select your package(s), sign at the bottom, and return by fax, email, or mail to the addresses on the last page. We'll invoice you or coordinate a purchase order per your district's process.
+  </div>
+
+  <!-- Purchaser info -->
+  <div class="sec">
+    <p class="sec-h">Purchaser Information</p>
+    <div class="field-row">
+      <div class="field">
+        <label>First Name</label>
+        <div class="line"></div>
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Title / Role</label>
+        <div class="line"></div>
+      </div>
+      <div class="field">
+        <label>Direct Phone</label>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="field-row single">
+      <div class="field">
+        <label>Email</label>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- School info -->
+  <div class="sec">
+    <p class="sec-h">School / District Information</p>
+    <div class="field-row single">
+      <div class="field">
+        <label>School Name</label>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>District</label>
+        <div class="line"></div>
+      </div>
+      <div class="field">
+        <label>Grade Levels Served</label>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="field-row single">
+      <div class="field">
+        <label>Billing Address</label>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="field-row triple">
+      <div class="field">
+        <label>City</label>
+        <div class="line"></div>
+      </div>
+      <div class="field">
+        <label>State</label>
+        <div class="line"></div>
+      </div>
+      <div class="field">
+        <label>ZIP</label>
+        <div class="line"></div>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Purchase Order # (if known)</label>
+        <div class="line"></div>
+      </div>
+      <div class="field">
+        <label>Approximate # of Classrooms</label>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product selection -->
+  <div class="sec">
+    <p class="sec-h">Select Package(s)</p>
+    <div class="products">
+
+      <div class="prow">
+        <div class="pcheck" aria-hidden="true"></div>
+        <div>
+          <p class="ptitle">K-2 Health Boosts</p>
+          <p class="pdesc">Daily 7-10 minute Health Boosts across the five EPICS, facilitator guides, family take-home cards, digital + printable assets.</p>
+        </div>
+        <div class="pprice">
+          <span class="lbl">Conference rate</span>
+          <span class="amt">$TBD</span>
+        </div>
+      </div>
+
+      <div class="prow">
+        <div class="pcheck" aria-hidden="true"></div>
+        <div>
+          <p class="ptitle">K-2 Health Boosts + Residency</p>
+          <p class="pdesc">Everything in K-2 Health Boosts, plus on-site residency days with a ReBe Ed facilitator, teacher coaching cycles, and principal-level reporting.</p>
+        </div>
+        <div class="pprice">
+          <span class="lbl">Conference rate</span>
+          <span class="amt">$TBD</span>
+        </div>
+      </div>
+
+      <div class="prow">
+        <div class="pcheck" aria-hidden="true"></div>
+        <div>
+          <p class="ptitle">Free 3-5 Pilot Program</p>
+          <p class="pdesc">Full program access at no cost to selected schools, co-design support with pre/post measurement, and featured case-study spotlight (with your permission).</p>
+        </div>
+        <div class="pprice free">
+          <span class="lbl">Limited cohort</span>
+          <span class="amt">Free</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Totals -->
+  <div class="totals">
+    <div class="total-row">
+      <span>Package(s) subtotal</span>
+      <span class="amt">$_______</span>
+    </div>
+    <div class="total-row">
+      <span>Travel / on-site (if applicable, per residency)</span>
+      <span class="amt">$_______</span>
+    </div>
+    <div class="total-row grand">
+      <span>Total due</span>
+      <span class="amt">$_______</span>
+    </div>
+  </div>
+
+  <!-- Payment method -->
+  <div class="sec">
+    <p class="sec-h">Payment Method</p>
+    <div class="payment-block">
+      <div class="payment-choice">
+        <div class="pcheck-sm" aria-hidden="true"></div>
+        <span><strong>Purchase Order</strong> &mdash; we will invoice you (Net 30). Enter PO # above.</span>
+      </div>
+      <div class="payment-choice">
+        <div class="pcheck-sm" aria-hidden="true"></div>
+        <span><strong>Credit Card</strong> &mdash; we'll email a secure Stripe link to the address above.</span>
+      </div>
+      <div class="payment-choice">
+        <div class="pcheck-sm" aria-hidden="true"></div>
+        <span><strong>Check</strong> &mdash; payable to <em>JustReBe LLC</em>. Mail to address on the last page.</span>
+      </div>
+      <div class="payment-choice">
+        <div class="pcheck-sm" aria-hidden="true"></div>
+        <span><strong>ACH / Wire Transfer</strong> &mdash; contact us for bank details.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signature -->
+  <div class="sec">
+    <p class="sec-h">Authorization</p>
+    <div class="sig-row">
+      <div class="field">
+        <label>Authorized Signature</label>
+        <div class="sig-line"></div>
+      </div>
+      <div class="field">
+        <label>Date</label>
+        <div class="sig-line"></div>
+      </div>
+    </div>
+    <p style="font-size:11.5px;color:var(--muted);margin-top:16px;line-height:1.6;">By signing above, I confirm authority to purchase on behalf of the school or district named. ReBe Ed materials are provided under a limited license &mdash; see <em>ReBe Ed Pilot Residency Overview</em> for terms.</p>
+  </div>
+
+  <!-- Return / Contact -->
+  <div class="foot">
+    <p><strong>Return this form to:</strong> hello@justrebe.com &nbsp;&middot;&nbsp; 13118 State Rd 64 E., Suite 362, Bradenton, FL 34212 &nbsp;&middot;&nbsp; <strong>www.justrebe.com</strong></p>
+    <p style="margin-top:8px;">Questions? Valerie Ellery &nbsp;<a href="mailto:v.ellery@justrebe.com">v.ellery@justrebe.com</a>&nbsp; (941) 704-1956 &nbsp;&middot;&nbsp; Abbey Pace &nbsp;<a href="mailto:a.pace@justrebe.com">a.pace@justrebe.com</a>&nbsp; (704) 975-9180</p>
+  </div>
+
+</div>
+
+</body>
+</html>

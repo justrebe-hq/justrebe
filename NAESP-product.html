@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>ReBe Ed for NAESP — Offering details and pricing</title>
+<meta name="description" content="Conference specials for NAESP attendees: K-2 Health Boosts, K-2 Health Boosts + Residency, and a free 3-5 pilot for the schools ready to lead." />
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  img { max-width: 100%; height: auto; display: block; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; padding: 0; width: 100%; max-width: 100%; overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1A1A1A;
+    background: #fff;
+  }
+  a { color: inherit; }
+
+  :root {
+    --purple:#7D0AAB;
+    --purple-deep:#5F0782;
+    --purple-soft:#9B21C6;
+    --teal:#034E64;
+    --teal-deep:#023d4f;
+    --teal-soft:#045d77;
+    --orange:#F06905;
+    --gold:#FEB909;
+    --gold-deep:#e5a708;
+    --green:#638D13;
+    --green-deep:#527610;
+    --ink:#1A1A1A;
+    --body:#444;
+    --muted:#888;
+    --bone:#E8E5E0;
+  }
+
+  /* Topbar */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: #fff;
+    border-bottom: 1px solid #EEE;
+    height: 128px;
+    display: flex; align-items: center;
+    box-shadow: 0 2px 12px rgba(3,78,100,.04);
+  }
+  .topbar-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; }
+  .brand { display: inline-flex; align-items: center; text-decoration: none; }
+  .brand-img { display: block; height: 112px; width: auto; max-width: 320px; }
+  @media (max-width: 600px) {
+    .topbar { height: 88px; }
+    .brand-img { height: 72px; }
+  }
+  .top-tag { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); padding: 8px 14px; background: rgba(3,78,100,.08); border-radius: 999px; }
+  @media (max-width: 600px) { .top-tag { display: none; } }
+
+  /* Product hero (compact) */
+  .phero {
+    background: linear-gradient(135deg, #023d4f 0%, #034E64 55%, #045d77 100%);
+    color: #fff;
+    padding: 72px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .phero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 30%, rgba(254,185,9,.10) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(125,10,171,.14) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .phero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+  .phero-ey {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 12px; font-weight: 800;
+    letter-spacing: .22em; text-transform: uppercase;
+    padding: 6px 14px;
+    background: rgba(254,185,9,.10);
+    border: 1px solid rgba(254,185,9,.35);
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .phero-h1 {
+    font-size: clamp(32px, 4.4vw, 52px);
+    font-weight: 900; letter-spacing: -.025em;
+    line-height: 1.08;
+    margin-bottom: 18px;
+  }
+  .phero-h1 em { font-style: italic; color: var(--gold); font-weight: 800; }
+  .phero-sub {
+    font-size: clamp(16px, 1.7vw, 19px);
+    color: rgba(255,255,255,.85);
+    line-height: 1.6;
+    max-width: 700px; margin: 0 auto;
+  }
+
+  /* Offers */
+  .offers { background: #F5F9FC; padding: 88px 0; }
+  .offers-head { text-align: center; max-width: 760px; margin: 0 auto 48px; padding: 0 48px; }
+  .offers-ey { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
+  .offers-h { font-size: clamp(30px, 3.4vw, 46px); font-weight: 900; color: var(--teal); letter-spacing: -.025em; line-height: 1.12; margin-bottom: 14px; }
+  .offers-sub { font-size: 17px; color: var(--body); line-height: 1.6; }
+  .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+  @media (max-width: 980px) { .offers-grid { grid-template-columns: 1fr; max-width: 600px; } }
+
+  .ocard {
+    background: #fff; border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(3,78,100,.08);
+    display: flex; flex-direction: column;
+    border: 1px solid #eee;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .ocard:hover { transform: translateY(-6px); box-shadow: 0 16px 44px rgba(3,78,100,.14); }
+  .ocard-top {
+    padding: 28px 30px 26px;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-soft) 100%);
+    color: #fff;
+    position: relative;
+    min-height: 220px;
+    display: flex; flex-direction: column;
+  }
+  .ocard[data-color="purple"] .ocard-top { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%); }
+  .ocard[data-color="green"]  .ocard-top { background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%); }
+  .ocard-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold);
+    padding: 5px 11px; border-radius: 999px;
+    align-self: flex-start;
+  }
+  .ocard-badge.free { background: #fff; color: var(--teal); }
+  .ocard-grade {
+    font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.78);
+    margin: 0 0 6px;
+    margin-top: auto;
+  }
+  .ocard-title { font-size: 26px; font-weight: 900; line-height: 1.18; letter-spacing: -.015em; color: #fff; margin: 0; }
+  .ocard-title small {
+    display: block;
+    font-size: 17px; font-weight: 700; opacity: .92;
+    margin-top: 2px; letter-spacing: -.005em;
+  }
+  .ocard-body { padding: 26px 30px 30px; flex: 1; display: flex; flex-direction: column; }
+  .ocard-desc { font-size: 15px; color: var(--body); line-height: 1.65; margin-bottom: 22px; min-height: 90px; }
+  .ocard-desc .placeholder { color: var(--muted); font-style: italic; }
+  .ocard-feats { list-style: none; padding: 0; margin: 0 0 24px; min-height: 108px; }
+  .ocard-feats li { font-size: 14px; color: var(--body); padding: 7px 0; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .ocard-feats li::before { content: '\2192'; color: var(--teal); font-weight: 800; flex-shrink: 0; line-height: 1.5; }
+  .ocard[data-color="green"] .ocard-feats li::before { color: var(--green); }
+  .price-block { padding: 18px 20px; background: #F5F9FC; border-radius: 14px; margin-bottom: 22px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; min-height: 62px; }
+  .price-block .price { font-size: 28px; font-weight: 900; color: var(--ink); letter-spacing: -.02em; line-height: 1; }
+  .price-block .strike { font-size: 15px; color: var(--muted); text-decoration: line-through; }
+  .price-block .lbl { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-left: auto; }
+  .price-block.free .price { color: var(--green); font-style: italic; }
+  .ocard-cta { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
+  .ocard-cta .btn { width: 100%; justify-content: center; padding: 15px 24px; font-size: 14px; }
+  .ocard-preview {
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+    text-align: center;
+    color: var(--teal); font-size: 13px; font-weight: 700;
+    letter-spacing: .02em;
+    text-decoration: none;
+    padding: 8px 4px;
+    border-bottom: 1px dashed rgba(3,78,100,.25);
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .ocard-preview:hover { color: var(--teal-deep); border-bottom-color: var(--teal); }
+  .ocard[data-color="purple"] .ocard-preview { color: var(--purple); border-bottom-color: rgba(125,10,171,.25); }
+  .ocard[data-color="purple"] .ocard-preview:hover { color: var(--purple-deep); border-bottom-color: var(--purple); }
+  .ocard[data-color="green"] .ocard-preview { color: var(--green); border-bottom-color: rgba(99,141,19,.25); }
+  .ocard[data-color="green"] .ocard-preview:hover { color: var(--green-deep); border-bottom-color: var(--green); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 32px; border-radius: 50px;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none;
+    letter-spacing: .02em;
+    transition: all .2s ease;
+    cursor: pointer; border: none;
+    white-space: nowrap;
+  }
+  .btn-gold { background: var(--gold); color: var(--ink); box-shadow: 0 6px 20px rgba(254,185,9,.32); }
+  .btn-gold:hover { background: var(--gold-deep); transform: translateY(-2px); }
+  .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.55); padding: 14px 32px; }
+  .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+  .placeholder-cta { background: #fff !important; color: var(--muted) !important; border: 2px dashed var(--bone) !important; font-style: italic; cursor: not-allowed; box-shadow: none !important; padding: 13px 24px !important; }
+  .placeholder-cta:hover { transform: none !important; background: #fff !important; }
+
+  /* Documents */
+  .docs { background: #fff; padding: 88px 0; }
+  .docs-head { text-align: center; max-width: 720px; margin: 0 auto 40px; padding: 0 48px; }
+  .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+  .doc {
+    background: #fff;
+    border: 1px solid var(--bone);
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex; align-items: flex-start; gap: 16px;
+    text-decoration: none; color: inherit;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .doc:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(3,78,100,.08); }
+  .doc-placeholder { cursor: default; border-style: dashed; background: #FAFAF8; opacity: .92; }
+  .doc-placeholder:hover { transform: none; box-shadow: none; border-color: var(--bone); }
+  .doc-icon {
+    flex-shrink: 0;
+    width: 52px; height: 60px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-soft) 100%);
+    color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(3,78,100,.18);
+    font-weight: 900; font-size: 13px;
+    letter-spacing: .04em; line-height: 1;
+  }
+  .doc-icon .ext { font-size: 9px; opacity: .85; margin-top: 3px; letter-spacing: .08em; font-weight: 600; }
+  .doc-info { flex: 1; min-width: 0; display: flex; flex-direction: column; align-self: stretch; }
+  .doc-info h4 { font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 6px; line-height: 1.25; letter-spacing: -.005em; }
+  .doc-info p { font-size: 13px; color: var(--muted); line-height: 1.45; margin: 0 0 auto; }
+  .pending-tag { align-self: flex-start; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-deep); background: rgba(254,185,9,.18); border: 1px solid rgba(254,185,9,.5); padding: 4px 10px; border-radius: 999px; margin-top: 12px; }
+  .download-tag { align-self: flex-start; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--teal); padding: 5px 11px; border-radius: 999px; margin-top: 12px; }
+  .doc:hover .download-tag { background: var(--teal-deep); }
+  sup { font-size: .55em; font-weight: 700; vertical-align: super; line-height: 0; margin-left: 1px; opacity: .82; }
+
+  /* CTA */
+  .ctasec {
+    background: var(--teal);
+    padding: 80px 0;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .ctasec::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 0%, rgba(254,185,9,.10) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 100%, rgba(125,10,171,.10) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .ctasec-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 0 32px; }
+  .cta-ey { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .cta-h { font-size: clamp(28px, 3.4vw, 44px); font-weight: 900; color: #fff; letter-spacing: -.025em; line-height: 1.12; margin-bottom: 18px; }
+  .cta-sub { font-size: 17px; color: rgba(255,255,255,.78); line-height: 1.65; margin-bottom: 32px; }
+  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .cta-emails { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,.55); letter-spacing: .04em; }
+  .cta-emails a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+
+  /* Footer */
+  footer { background: #fff; padding: 36px 0; border-top: 1px solid #EEE; text-align: center; }
+  footer p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 6px; }
+  footer a { color: var(--teal); font-weight: 700; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* Skip link */
+  .skip-link { position: absolute; left: -9999px; background: var(--teal); color: #fff; padding: 10px 16px; border-radius: 6px; z-index: 999; font-weight: 700; text-decoration: none; }
+  .skip-link:focus { left: 16px; top: 16px; }
+
+  @media (max-width: 768px) {
+    .offers, .docs, .ctasec { padding: 56px 0; }
+    .phero { padding: 56px 20px 48px; }
+    .cta-btns { flex-direction: column; align-items: stretch; }
+    .btn { width: 100%; justify-content: center; }
+  }
+  @media (max-width: 480px) {
+    .topbar-inner { padding: 0 18px; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="https://www.justrebe.com" class="brand" aria-label="ReBe Ed — Better Me. Better We.">
+      <img src="Images/rebe-ed-logo.png" alt="ReBe Ed — Better Me. Better We." class="brand-img">
+    </a>
+    <span class="top-tag">NAESP · Conference Specials</span>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Product hero -->
+  <section class="phero">
+    <div class="phero-inner">
+      <span class="phero-ey">For NAESP attendees</span>
+      <h1 class="phero-h1">Offering details and <em>pricing</em>.</h1>
+      <p class="phero-sub">Conference-only pricing on the ReBe Ed K-2 program &mdash; plus a free 3-5 pilot for the schools ready to lead. Pick what fits your school's stage, budget, and timeline.</p>
+    </div>
+  </section>
+
+  <!-- OFFERS -->
+  <section class="offers" id="offers">
+    <div class="offers-head">
+      <p class="offers-ey">Three ways to bring ReBe Ed to your school</p>
+      <h2 class="offers-h">Choose your path.</h2>
+      <p class="offers-sub">Conference pricing is reserved through this page. We'll do the rest.</p>
+    </div>
+
+    <div class="offers-grid">
+
+      <article class="ocard">
+        <div class="ocard-top">
+          <span class="ocard-badge">NAESP Special</span>
+          <p class="ocard-grade">Grades K – 2</p>
+          <h3 class="ocard-title">K-2 Health Boosts</h3>
+        </div>
+        <div class="ocard-body">
+          <p class="ocard-desc"><span class="placeholder">[2–3 sentence pitch for the core K-2 package: what arrives, how teachers use it, who supports them. Replace this paragraph this week.]</span></p>
+          <ul class="ocard-feats">
+            <li>Daily 7-10 minute Health Boosts that fit any morning meeting</li>
+            <li>Teacher-facing facilitator guide + family take-home cards</li>
+            <li>Digital + printable assets for every classroom</li>
+          </ul>
+          <div class="price-block">
+            <span class="price">$TBD</span>
+            <span class="strike">$TBD</span>
+            <span class="lbl">Conference rate</span>
+          </div>
+          <div class="ocard-cta">
+            <a href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener" class="ocard-preview">See sample lessons &rarr;</a>
+            <a href="#" class="btn placeholder-cta" aria-disabled="true">Order link coming this week</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ocard" data-color="purple">
+        <div class="ocard-top">
+          <span class="ocard-badge">NAESP Special</span>
+          <p class="ocard-grade">Grades K – 2 · Most popular</p>
+          <h3 class="ocard-title">K-2 Health Boosts <small>+ Residency</small></h3>
+        </div>
+        <div class="ocard-body">
+          <p class="ocard-desc"><span class="placeholder">[2–3 sentence pitch for the bundle: Health Boosts plus on-site residency days, coaching, observation cycles — whatever's included. Replace this paragraph this week.]</span></p>
+          <ul class="ocard-feats">
+            <li>Everything in K-2 Health Boosts</li>
+            <li>On-site residency days with a ReBe Ed facilitator</li>
+            <li>Teacher coaching cycles + principal-level reporting</li>
+          </ul>
+          <div class="price-block">
+            <span class="price">$TBD</span>
+            <span class="strike">$TBD</span>
+            <span class="lbl">Conference rate</span>
+          </div>
+          <div class="ocard-cta">
+            <a href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener" class="ocard-preview">See how residency works &rarr;</a>
+            <a href="#" class="btn placeholder-cta" aria-disabled="true">Order link coming this week</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ocard" data-color="green">
+        <div class="ocard-top">
+          <span class="ocard-badge free">Free Pilot</span>
+          <p class="ocard-grade">Grades 3 – 5 · Limited cohort</p>
+          <h3 class="ocard-title">3-5 Pilot Program</h3>
+        </div>
+        <div class="ocard-body">
+          <p class="ocard-desc"><span class="placeholder">[2–3 sentence pitch for the free 3-5 pilot: what classrooms get, how long the pilot runs, what you ask in return (data / case-study consent / etc). Replace this paragraph this week.]</span></p>
+          <ul class="ocard-feats">
+            <li>Full program access at no cost to selected schools</li>
+            <li>Co-design support + pre/post measurement</li>
+            <li>Featured case-study spotlight (with your permission)</li>
+          </ul>
+          <div class="price-block free">
+            <span class="price">Free</span>
+            <span class="lbl">Limited cohort</span>
+          </div>
+          <div class="ocard-cta">
+            <a href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener" class="ocard-preview">See pilot details &rarr;</a>
+            <a href="#" class="btn placeholder-cta" aria-disabled="true">Apply link coming this week</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- DOCUMENTS -->
+  <section class="docs" id="documents">
+    <div class="docs-head">
+      <p class="offers-ey">Take it with you</p>
+      <h2 class="offers-h">Documents &amp; resources</h2>
+      <p class="offers-sub">One-pagers, framework overviews, sample lessons, and the principal-ready evidence binder.</p>
+    </div>
+
+    <div class="docs-grid">
+      <a class="doc" href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener">
+        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
+        <div class="doc-info">
+          <h4>ReBe Ed Overview</h4>
+          <p>One-page summary of the whole platform for principals + district leaders</p>
+          <span class="download-tag">Download PDF &rarr;</span>
+        </div>
+      </a>
+      <a class="doc" href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener">
+        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
+        <div class="doc-info">
+          <h4>Residency Pilot Details</h4>
+          <p>What the 5-month residency pilot looks like, fees, next steps</p>
+          <span class="download-tag">Download PDF &rarr;</span>
+        </div>
+      </a>
+      <a class="doc" href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener">
+        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
+        <div class="doc-info">
+          <h4>EPICS + Literacy LABS<sup>&trade;</sup></h4>
+          <p>Sample lessons + the full EPICS pathway map</p>
+          <span class="download-tag">Download PDF &rarr;</span>
+        </div>
+      </a>
+      <a class="doc doc-placeholder" href="#" aria-disabled="true">
+        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
+        <div class="doc-info">
+          <h4>Lights, Camera, Action</h4>
+          <p>Educator PD one-pager &mdash; the 3-phase framework at a glance</p>
+          <span class="pending-tag">Coming soon</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ctasec" id="contact">
+    <div class="ctasec-inner">
+      <p class="cta-ey">Let's talk</p>
+      <h2 class="cta-h">Ready to bring this to your students?</h2>
+      <p class="cta-sub">Email us with what your school needs most. We'll set up a 20-minute call.</p>
+      <div class="cta-btns">
+        <a class="btn btn-gold" href="mailto:hello@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BK-2%20Health%20Boosts%20%2F%20Residency%20%2F%203-5%20Pilot%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Email us about your school &rarr;</a>
+        <a class="btn btn-outline-white" href="/NAESP.html">Back to overview</a>
+      </div>
+      <p class="cta-emails">Questions? <a href="mailto:hello@justrebe.com">hello@justrebe.com</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>ReBe Ed &mdash; part of the ReBe family. Rebuilding people from the inside out.</p>
+  <p>&copy; 2026 JustReBe LLC &middot; <a href="https://www.justrebe.com">justrebe.com</a></p>
+</footer>
+
+</body>
+</html>

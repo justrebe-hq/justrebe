@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>ReBe Ed for NAESP — See the offering details</title>
+<meta name="description" content="Tell us a bit about your school and we'll show you the ReBe Ed offering details and pricing for NAESP attendees." />
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  img { max-width: 100%; height: auto; display: block; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; padding: 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1A1A1A;
+    background: #F5F9FC;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+  }
+  a { color: inherit; }
+
+  :root {
+    --purple:#7D0AAB;
+    --purple-deep:#5F0782;
+    --teal:#034E64;
+    --teal-deep:#023d4f;
+    --teal-soft:#045d77;
+    --gold:#FEB909;
+    --gold-deep:#e5a708;
+    --ink:#1A1A1A;
+    --body:#444;
+    --muted:#888;
+    --bone:#E4EDF0;
+  }
+
+  /* Topbar */
+  .topbar {
+    background: #fff;
+    border-bottom: 1px solid #EEE;
+    height: 128px;
+    display: flex; align-items: center;
+    box-shadow: 0 2px 12px rgba(3,78,100,.04);
+  }
+  .topbar-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; }
+  .brand { display: inline-flex; align-items: center; text-decoration: none; }
+  .brand-img { display: block; height: 112px; width: auto; max-width: 320px; }
+  @media (max-width: 600px) {
+    .topbar { height: 88px; }
+    .brand-img { height: 72px; }
+  }
+  .top-tag { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); padding: 8px 14px; background: rgba(3,78,100,.08); border-radius: 999px; }
+  @media (max-width: 600px) { .top-tag { display: none; } }
+
+  /* Form wrapper */
+  main { flex: 1; padding: 56px 24px 80px; }
+  .fwrap {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid var(--bone);
+    box-shadow: 0 10px 40px rgba(3,78,100,.06);
+    overflow: hidden;
+  }
+  .fhead {
+    padding: 40px 44px 28px;
+    background: linear-gradient(135deg, #023d4f 0%, #034E64 55%, #045d77 100%);
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .fhead::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 30%, rgba(254,185,9,.10) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(125,10,171,.14) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .fhead-inner { position: relative; z-index: 1; }
+  .fhead-ey {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 11px; font-weight: 800;
+    letter-spacing: .24em; text-transform: uppercase;
+    padding: 6px 12px;
+    background: rgba(254,185,9,.10);
+    border: 1px solid rgba(254,185,9,.35);
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .fhead-h1 {
+    font-size: clamp(24px, 3.4vw, 34px);
+    font-weight: 900; letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .fhead-h1 em { font-style: italic; color: var(--gold); font-weight: 800; }
+  .fhead-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,.85);
+    line-height: 1.6;
+    max-width: 520px; margin: 0 auto;
+  }
+
+  /* Pitch line */
+  .fpitch {
+    background: #FBF8F1;
+    border-bottom: 1px solid #F0EAD9;
+    padding: 22px 44px;
+    text-align: center;
+  }
+  .fpitch p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+    max-width: 580px; margin: 0 auto;
+    font-style: italic;
+  }
+  .fpitch strong { color: var(--teal); font-style: normal; }
+
+  /* Form */
+  form { padding: 36px 44px 40px; }
+  .field { margin-bottom: 22px; }
+  .field label {
+    display: block;
+    font-size: 12px; font-weight: 800;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .field label .req { color: var(--purple); }
+  .field input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 16px; font-weight: 500;
+    color: var(--ink);
+    padding: 14px 16px;
+    background: #FAFBFD;
+    border: 2px solid #E4EDF0;
+    border-radius: 10px;
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .field input:focus {
+    outline: none;
+    border-color: var(--teal);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(3,78,100,.10);
+  }
+  .field.err input { border-color: #d43535; background: #FFF6F6; }
+  .field-error {
+    color: #b02929; font-size: 13px; font-weight: 600;
+    margin-top: 6px;
+  }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; gap: 0; } }
+
+  .submit-wrap { margin-top: 12px; }
+  .btn-submit {
+    width: 100%;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 18px 32px;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px; font-weight: 800;
+    letter-spacing: .04em;
+    border-radius: 50px; border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(254,185,9,.32);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-submit:hover { background: var(--gold-deep); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(254,185,9,.36); }
+  .btn-submit:disabled { opacity: .6; cursor: wait; transform: none; }
+
+  .submit-error {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: #FFF3F3;
+    border: 1px solid #F3C6C6;
+    color: #a01e1e;
+    border-radius: 10px;
+    font-size: 14px; line-height: 1.5;
+  }
+
+  .form-tinytext {
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.55;
+  }
+  .form-tinytext a { color: var(--teal); font-weight: 600; text-decoration: underline; }
+
+  footer { padding: 32px 0; text-align: center; background: #F5F9FC; }
+  footer p { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 4px; }
+  footer a { color: var(--teal); font-weight: 700; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    main { padding: 32px 16px 56px; }
+    .fhead { padding: 32px 24px 24px; }
+    .fpitch { padding: 20px 24px; }
+    form { padding: 28px 24px 32px; }
+    .topbar-inner { padding: 0 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="https://www.justrebe.com" class="brand" aria-label="ReBe Ed — Better Me. Better We.">
+      <img src="Images/rebe-ed-logo.png" alt="ReBe Ed — Better Me. Better We." class="brand-img">
+    </a>
+    <span class="top-tag">NAESP · Conference Specials</span>
+  </div>
+</header>
+
+<main>
+  <div class="fwrap">
+
+    <div class="fhead">
+      <div class="fhead-inner">
+        <span class="fhead-ey">For NAESP attendees</span>
+        <h1 class="fhead-h1">One quick step to see <em>the details.</em></h1>
+        <p class="fhead-sub">Tell us who you are and where you serve. Then we'll take you straight to the offering details and pricing.</p>
+      </div>
+    </div>
+
+    <div class="fpitch">
+      <p>Conference-only pricing on the <strong>ReBe Ed K-2 program</strong> &mdash; plus a free 3-5 pilot for the schools ready to lead. Built for principals who want <strong>resilient students, supported teachers, and transformation you can see.</strong></p>
+    </div>
+
+    <form id="naesp-form" novalidate>
+      <div class="row2">
+        <div class="field" data-field="first_name">
+          <label for="first_name">First name <span class="req">*</span></label>
+          <input type="text" id="first_name" name="first_name" autocomplete="given-name" required>
+        </div>
+        <div class="field" data-field="last_name">
+          <label for="last_name">Last name <span class="req">*</span></label>
+          <input type="text" id="last_name" name="last_name" autocomplete="family-name" required>
+        </div>
+      </div>
+
+      <div class="field" data-field="email">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+
+      <div class="field" data-field="school_organization">
+        <label for="school_organization">School or Organization <span class="req">*</span></label>
+        <input type="text" id="school_organization" name="school_organization" autocomplete="organization" required>
+      </div>
+
+      <div class="submit-wrap">
+        <button type="submit" class="btn-submit" id="submit-btn">
+          <span class="btn-label">See the details &rarr;</span>
+        </button>
+      </div>
+
+      <div class="submit-error" id="submit-error" hidden></div>
+
+      <p class="form-tinytext">We use this to prepare for you. Zero spam &mdash; questions to <a href="mailto:hello@justrebe.com">hello@justrebe.com</a>.</p>
+    </form>
+
+  </div>
+</main>
+
+<footer>
+  <p>ReBe Ed &mdash; part of the ReBe family. Rebuilding people from the inside out.</p>
+  <p>&copy; 2026 JustReBe LLC &middot; <a href="https://www.justrebe.com">justrebe.com</a></p>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('naesp-form');
+  var submitBtn = document.getElementById('submit-btn');
+  var submitError = document.getElementById('submit-error');
+
+  function showFieldError(fieldEl, msg) {
+    fieldEl.classList.add('err');
+    var existing = fieldEl.querySelector('.field-error');
+    if (existing) existing.remove();
+    var e = document.createElement('div');
+    e.className = 'field-error';
+    e.textContent = msg;
+    fieldEl.appendChild(e);
+  }
+  function clearErrors() {
+    Array.prototype.forEach.call(form.querySelectorAll('.field'), function (f) {
+      f.classList.remove('err');
+      var e = f.querySelector('.field-error');
+      if (e) e.remove();
+    });
+    submitError.hidden = true;
+    submitError.textContent = '';
+  }
+  function validate() {
+    clearErrors();
+    var ok = true;
+    ['first_name', 'last_name', 'email', 'school_organization'].forEach(function (name) {
+      var input = form.querySelector('[name="' + name + '"]');
+      var field = form.querySelector('[data-field="' + name + '"]');
+      if (!input.value || !input.value.trim()) {
+        showFieldError(field, 'Required.');
+        ok = false;
+      }
+    });
+    // Email shape check.
+    var emailInput = form.email;
+    if (emailInput.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+      showFieldError(form.querySelector('[data-field="email"]'), 'Please enter a valid email.');
+      ok = false;
+    }
+    return ok;
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!validate()) return;
+
+    submitBtn.disabled = true;
+    submitBtn.querySelector('.btn-label').textContent = 'Sending...';
+
+    var payload = {
+      first_name: form.first_name.value.trim(),
+      last_name: form.last_name.value.trim(),
+      email: form.email.value.trim(),
+      school_organization: form.school_organization.value.trim(),
+      source: 'NAESP · rebe-ed landing'
+    };
+
+    fetch('/api/naesp-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error('Save failed: ' + r.status);
+        return r.json();
+      })
+      .then(function () {
+        // Success — go to the product page
+        window.location.href = '/NAESP-product.html';
+      })
+      .catch(function (err) {
+        // Still take them through to the product page even if the API blipped,
+        // so they don't get stuck. But show the error briefly.
+        console.error(err);
+        submitError.hidden = false;
+        submitError.textContent = "We couldn't save your info, but we'll take you through anyway.";
+        setTimeout(function () {
+          window.location.href = '/NAESP-product.html';
+        }, 1200);
+      });
+  });
+})();
+</script>
+
+</body>
+</html>
