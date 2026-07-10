@@ -335,8 +335,8 @@ ${productLines}
   Payment method: ${paymentLine}
 
 If you have questions in the meantime, just reply to this email or reach out directly:
-  Valerie Ellery  — v.ellery@justrebe.com  (941) 704-1956
-  Abbey Pace      — a.pace@justrebe.com   (704) 975-9180
+  Valerie Ellery  — v.ellery@justrebe.com
+  Abbey Pace      — a.pace@justrebe.com
 
 Thank you for bringing ReBe Ed to your students.
 
