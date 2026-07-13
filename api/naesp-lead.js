@@ -602,17 +602,24 @@ Abbey Pace &mdash; <a href="mailto:a.pace@justrebe.com" style="color:#034E64;fon
           htmlP(`Thank you for bringing ReBe Ed to your students.`, { color: '#1A1A1A' }) +
           htmlP(`Warmly,<br><strong>The ReBe Ed team</strong>`, { size: '14px' }),
       });
-      const orderAutoResponse = fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: fromAddr,
-          to: email,
-          subject: orderAutoResponseSubject,
-          text: orderAutoResponseText,
-          html: orderAutoResponseHtml,
-        }),
-      }).catch((e) => console.error('NAESP order auto-response failed:', e));
+      // CARD path: do NOT email the buyer at submit-time — they were redirected
+      // to Stripe checkout, and we don't yet know if the payment succeeded.
+      // The "Thank you for your payment" email fires from /api/naesp-payment-confirmed
+      // (called by the thank-you page once Stripe confirms the session).
+      // PO/CHECK paths: fire the confirmation now since there's no payment step.
+      const orderAutoResponse = isCard
+        ? Promise.resolve(null)
+        : fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              from: fromAddr,
+              to: email,
+              subject: orderAutoResponseSubject,
+              text: orderAutoResponseText,
+              html: orderAutoResponseHtml,
+            }),
+          }).catch((e) => console.error('NAESP order auto-response failed:', e));
 
       const orderSubmittedAt = new Date().toISOString();
       const orderAdminSubject = `NEW NAESP ORDER — ${first_name} ${last_name} · ${school_name}`;

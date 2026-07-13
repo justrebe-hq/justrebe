@@ -174,6 +174,26 @@
     const badge = document.getElementById('product-badge');
     if (badge) badge.textContent = label;
   })();
+
+  // If we came back from Stripe with paid=success + session_id, ask the
+  // backend to verify with Stripe and fire the buyer's "Payment received"
+  // email. Idempotent — the endpoint no-ops on repeat calls (page refresh).
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const paid = (params.get('paid') || '').toLowerCase();
+    const sessionId = params.get('session_id') || '';
+    if (paid !== 'success' || !sessionId.startsWith('cs_')) return;
+
+    // Fire and forget — no UI change on failure. The celebration section
+    // already shows "Payment received" regardless.
+    fetch('/api/naesp-payment-confirmed', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId }),
+    }).catch(function (err) {
+      console.error('Payment confirmation request failed:', err);
+    });
+  })();
 </script>
 
 </body>
