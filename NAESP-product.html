@@ -64,12 +64,22 @@
   .top-tag { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); padding: 8px 14px; background: rgba(3,78,100,.08); border-radius: 999px; }
   @media (max-width: 600px) { .top-tag { display: none; } }
 
-  /* Safari fix — prevent pills, badges and eyebrows from wrapping */
+  /* Safari fix — prevent SHORT pills and eyebrows from wrapping.
+     Do NOT include card badges / grade labels / price labels here — they
+     have variable-length content per product and must be allowed to wrap. */
   .top-tag, .phero-ey, .offers-ey, .cta-ey,
-  .ocard-badge, .ocard-grade, .price-block .lbl,
   .pending-tag, .download-tag {
     white-space: nowrap;
   }
+
+  /* Card badges, grade labels, and price labels: allow wrapping and break
+     long tokens so text can never overflow the card edge on any viewport. */
+  .ocard-badge, .ocard-grade, .price-block .lbl, .ocard-title, .ocard-title small,
+  .ocard-desc, .ocard-feats li {
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+  .ocard-badge, .ocard-grade { line-height: 1.4; }
 
   /* Product hero (compact) */
   .phero {
@@ -217,10 +227,12 @@
   .ocard-feats li { font-size: 14px; color: var(--body); padding: 7px 0; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
   .ocard-feats li::before { content: '\2192'; color: var(--teal); font-weight: 800; flex-shrink: 0; line-height: 1.5; }
   .ocard[data-color="green"] .ocard-feats li::before { color: var(--green); }
-  .price-block { padding: 18px 20px; background: #F5F9FC; border-radius: 14px; margin-bottom: 22px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; min-height: 62px; }
+  .price-block { padding: 18px 20px; background: #F5F9FC; border-radius: 14px; margin-bottom: 22px; display: flex; align-items: baseline; gap: 10px 12px; flex-wrap: wrap; min-height: 62px; }
   .price-block .price { font-size: 28px; font-weight: 900; color: var(--ink); letter-spacing: -.02em; line-height: 1; }
   .price-block .strike { font-size: 15px; color: var(--muted); text-decoration: line-through; }
-  .price-block .lbl { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-left: auto; }
+  /* Label ALWAYS wraps to its own line inside the price block so long labels
+     (e.g. "per teacher · $200/teacher for 15+") can never overflow the card. */
+  .price-block .lbl { flex: 1 0 100%; margin: 0; font-size: 10px; font-weight: 700; letter-spacing: .10em; text-transform: uppercase; color: var(--muted); line-height: 1.4; }
   .price-block.free .price { color: var(--green); font-style: italic; }
   .ocard-cta { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
   .ocard-cta .btn { width: 100%; justify-content: center; padding: 15px 24px; font-size: 14px; }
@@ -392,7 +404,7 @@
           <div class="ocard-cta">
             <a href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener" class="ocard-preview">See Thrive overview &rarr;</a>
             <a href="/NAESP-order-form.html?add=thrive" class="btn btn-gold">Order Thrive &rarr;</a>
-            <a href="https://buy.stripe.com/dRm7sE0q1a9A3nb5DP2Fa03" target="_blank" rel="noopener" class="ocard-preview" style="font-size:11px;">Quick-buy (single product, no order form) &rarr;</a>
+            <a href="https://buy.stripe.com/dRm7sE0q1a9A3nb5DP2Fa03" target="_blank" rel="noopener" class="ocard-preview">Quick-buy (single product, no order form) &rarr;</a>
           </div>
         </div>
       </article>
@@ -418,7 +430,7 @@
           <div class="ocard-cta">
             <a href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener" class="ocard-preview">See EPICS + Labs overview &rarr;</a>
             <a href="/NAESP-order-form.html?add=flourish" class="btn btn-gold">Order Flourish &rarr;</a>
-            <a href="https://buy.stripe.com/14A14g8Wx4Pge1Pd6h2Fa04" target="_blank" rel="noopener" class="ocard-preview" style="font-size:11px;">Quick-buy 1-14 teachers &middot; use order form for school rate &rarr;</a>
+            <a href="https://buy.stripe.com/14A14g8Wx4Pge1Pd6h2Fa04" target="_blank" rel="noopener" class="ocard-preview">Quick-buy 1-14 teachers &middot; use order form for school rate &rarr;</a>
           </div>
         </div>
       </article>
@@ -444,7 +456,7 @@
           <div class="ocard-cta">
             <a href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener" class="ocard-preview">See Premiere pilot details &rarr;</a>
             <a href="/NAESP-order-form.html?add=premiere" class="btn btn-gold">Order Premiere &rarr;</a>
-            <a href="https://buy.stripe.com/aFafZac8JftUe1P1nz2Fa05" target="_blank" rel="noopener" class="ocard-preview" style="font-size:11px;">Quick-buy (single product, no order form) &rarr;</a>
+            <a href="https://buy.stripe.com/aFafZac8JftUe1P1nz2Fa05" target="_blank" rel="noopener" class="ocard-preview">Quick-buy (single product, no order form) &rarr;</a>
           </div>
         </div>
       </article>
@@ -471,7 +483,7 @@
           <div class="ocard-cta">
             <a href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener" class="ocard-preview">See the complete overview &rarr;</a>
             <a href="/NAESP-order-form.html?add=transform" class="btn btn-gold">Order Transform &rarr;</a>
-            <a href="https://buy.stripe.com/5kQ9AMgoZ4Pg8Hv6HT2Fa06" target="_blank" rel="noopener" class="ocard-preview" style="font-size:11px;">Quick-buy (single product, no order form) &rarr;</a>
+            <a href="https://buy.stripe.com/5kQ9AMgoZ4Pg8Hv6HT2Fa06" target="_blank" rel="noopener" class="ocard-preview">Quick-buy (single product, no order form) &rarr;</a>
           </div>
         </div>
       </article>

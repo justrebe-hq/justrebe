@@ -527,9 +527,24 @@
   @media (max-width: 640px) {
     .print-cta { padding: 14px 24px; }
     .print-cta-txt { font-size: 12.5px; }
+    /* Header logo scales down so it doesn't dominate the mobile viewport */
+    .head { padding: 24px 20px 20px; gap: 16px; flex-wrap: wrap; }
+    .head-logo { height: 84px; }
+    .head-title { font-size: 20px; }
+    .head-sub { font-size: 13px; }
+    .head-badge { margin-top: 6px; font-size: 10px; }
+  }
+  @media (max-width: 420px) {
+    .head { flex-direction: column; align-items: flex-start; text-align: left; }
+    .head-logo { height: 72px; }
   }
 
   sup { font-size: .55em; font-weight: 700; vertical-align: super; line-height: 0; margin-left: 1px; opacity: .82; }
+
+  /* Inline auth-check error (replaces native alert) */
+  .auth-check.err { border: 1.5px solid var(--error); background: #FFF6F6; padding: 12px 14px; border-radius: 10px; }
+  #auth-error { display: none; color: var(--error); font-size: 13px; font-weight: 600; margin-top: 8px; }
+  #auth-error.visible { display: block; }
 </style>
 </head>
 <body>
@@ -760,10 +775,11 @@
       <div class="auth-legal">
         By checking the box and typing your name below, you confirm you have authority to purchase on behalf of the school or district named above. ReBe Ed materials are provided under a limited license &mdash; see <em>ReBe Ed Residency Pilot Overview</em> for terms.
       </div>
-      <div class="auth-check">
-        <input type="checkbox" id="auth" name="auth" required>
+      <div class="auth-check" id="auth-check-wrap">
+        <input type="checkbox" id="auth" name="auth" required aria-describedby="auth-error">
         <label for="auth" class="auth-check-txt">I am authorized to submit this order on behalf of the school or district listed above.</label>
       </div>
+      <p id="auth-error" role="alert">Please check the authorization box to confirm you can submit this order.</p>
       <div class="field-row two">
         <div class="field" data-field="signature_name">
           <label for="signature_name">Typed Signature <span class="req">*</span></label>
@@ -968,8 +984,19 @@
       ok = false;
     }
     if (!form.auth.checked) {
-      alert('Please confirm authorization by checking the box.');
+      var authWrap = document.getElementById('auth-check-wrap');
+      var authErr = document.getElementById('auth-error');
+      if (authWrap) authWrap.classList.add('err');
+      if (authErr) {
+        authErr.classList.add('visible');
+        authErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       ok = false;
+    } else {
+      var authWrap2 = document.getElementById('auth-check-wrap');
+      var authErr2 = document.getElementById('auth-error');
+      if (authWrap2) authWrap2.classList.remove('err');
+      if (authErr2) authErr2.classList.remove('visible');
     }
     return ok;
   }
