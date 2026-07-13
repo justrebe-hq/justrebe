@@ -416,6 +416,14 @@
   .ptb-label { font-size: 13px; font-weight: 900; letter-spacing: .12em; color: #000; margin-right: 6px; vertical-align: bottom; }
   .ptb-line { display: inline-block; border-bottom: 1.5px solid #000; height: 18px; width: 220px; vertical-align: bottom; }
 
+  /* Print-only QR block above the footer — screen: hidden via .print-only; print: shown as flex row */
+  .print-qr-block { margin: 18px 40px 0; padding: 14px 18px; border: 1.5px solid var(--teal); border-radius: 8px; background: rgba(3,78,100,.04); align-items: center; gap: 16px; }
+  .print-qr-img { width: 96px; height: 96px; flex-shrink: 0; image-rendering: pixelated; }
+  .print-qr-copy { flex: 1; }
+  .print-qr-title { font-size: 13px; font-weight: 900; color: var(--teal); letter-spacing: .01em; margin-bottom: 3px; }
+  .print-qr-sub { font-size: 11px; color: #333; line-height: 1.4; margin: 0 0 4px; }
+  .print-qr-url { font-size: 11px; font-weight: 800; color: var(--teal); letter-spacing: .02em; margin: 0; }
+
   /* ===== Print utility ===== */
   .print-btn-float {
     position: fixed; top: 20px; right: 20px;
@@ -495,6 +503,11 @@
     .foot p { margin: 0 !important; }
     .foot p + p { margin-top: 2px !important; }
     .print-only { display: block !important; }
+    .print-qr-block { display: flex !important; margin: 10px 32px 6px !important; padding: 10px 12px !important; page-break-inside: avoid; break-inside: avoid; }
+    .print-qr-block .print-qr-img { width: 72px !important; height: 72px !important; }
+    .print-qr-block .print-qr-title { font-size: 12px !important; }
+    .print-qr-block .print-qr-sub { font-size: 9.5px !important; }
+    .print-qr-block .print-qr-url { font-size: 10px !important; }
     .foot-return { font-size: 10.5px !important; font-weight: 600 !important; letter-spacing: .01em; margin-top: 3px !important; line-height: 1.45; }
 
     /* Turn field inputs into underlines so it looks like a proper paper form */
@@ -886,10 +899,20 @@
       <p class="print-note no-print">Prefer paper? <a href="/ReBe_Offerings_OrderForm.pdf" download target="_blank" rel="noopener">Download the PDF version</a> and return by email or mail.</p>
     </div>
 
+    <!-- Print-only QR code — links back to the online order form -->
+    <div class="print-only print-qr-block">
+      <img src="Images/qr-naesp-order-form.png" alt="QR code to online order form" class="print-qr-img">
+      <div class="print-qr-copy">
+        <p class="print-qr-title">Prefer to fill this out online?</p>
+        <p class="print-qr-sub">Scan to jump straight to the online order form &mdash; same fields, submits electronically.</p>
+        <p class="print-qr-url">www.justrebe.com/NAESP-order-form</p>
+      </div>
+    </div>
+
     <!-- Footer -->
     <div class="foot">
       <p class="print-only foot-return"><strong>Return this form to:</strong> v.ellery@justrebe.com &nbsp;&middot;&nbsp; 13118 State Rd 64 E., Suite 362, Bradenton, FL 34212 &nbsp;&middot;&nbsp; <strong>www.justrebe.com</strong></p>
-      <p class="print-only" style="margin-top:6px; font-weight:600;"><strong>See full offerings:</strong> www.justrebe.com/NAESP-product &nbsp;&middot;&nbsp; <strong>Download this PDF:</strong> www.justrebe.com/ReBe_Offerings_OrderForm.pdf</p>
+      <p class="print-only" style="margin-top:6px; font-weight:600;"><strong>See full offerings:</strong> www.justrebe.com/NAESP-product</p>
       <p style="margin-top:8px;">Questions? Valerie Ellery <a href="mailto:v.ellery@justrebe.com">v.ellery@justrebe.com</a> &nbsp;&middot;&nbsp; Abbey Pace <a href="mailto:a.pace@justrebe.com">a.pace@justrebe.com</a></p>
     </div>
 
