@@ -46,7 +46,7 @@
   }
 
   /* Safari fix — prevent short pills from wrapping */
-  .top-tag, .phero-ey, .sec-ey, .stage-tag, .trust-tag, .back-link {
+  .top-tag, .pagehead-ey, .sec-ey, .stage-tag, .trust-tag, .back-link {
     white-space: nowrap;
   }
 
@@ -93,90 +93,36 @@
   .btn-green:hover { background: var(--green-deep); transform: translateY(-2px); }
 
   /* ===== Hero ===== */
-  .phero {
-    position: relative;
-    min-height: 62vh;
-    display: flex; align-items: center;
-    overflow: hidden;
-    background: var(--teal);
-  }
-  .phero-bg {
-    position: absolute; inset: 0;
-    background-image: url('Images/teacherstudent.jpg');
-    background-size: cover; background-position: center 30%;
-    filter: brightness(.5);
-  }
-  .phero-grad {
-    position: absolute; inset: 0;
-    background: linear-gradient(120deg, rgba(3,78,100,.85) 0%, rgba(3,78,100,.55) 55%, rgba(125,10,171,.28) 100%);
-  }
-  .phero-inner {
-    position: relative; z-index: 2;
-    max-width: 1400px; margin: 0 auto;
-    padding: 88px clamp(24px, 5vw, 64px);
-    width: 100%;
-  }
-  .phero-ey {
-    display: inline-block;
-    font-size: 12px; font-weight: 700;
-    letter-spacing: .16em; text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(254,185,9,.12);
-    padding: 8px 14px; border-radius: 999px;
-    border: 1px solid rgba(254,185,9,.35);
-    margin-bottom: 22px;
-  }
-  .phero-h1 {
-    font-size: clamp(36px, 5vw, 66px);
-    font-weight: 900; letter-spacing: -.03em; line-height: 1.06;
-    color: #fff;
-    max-width: min(820px, 90%);
-    margin-bottom: 20px;
-  }
-  .phero-h1 em { font-style: italic; color: var(--gold); font-weight: 800; }
-  .phero-sub {
-    font-size: clamp(16px, 1.7vw, 20px);
-    color: rgba(255,255,255,.88);
-    line-height: 1.65;
-    max-width: min(720px, 90%);
-    margin-bottom: 30px;
-  }
-  .phero-sub strong { color: #fff; font-weight: 700; }
-  .phero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-
-  /* ===== Framework banner (Lights · Camera · Action) ===== */
-  .fw {
-    padding: 74px 24px 66px;
-    background: linear-gradient(180deg, #FDFCFF 0%, #F5F0FA 100%);
+  /* ===== Simple page header (no image) ===== */
+  .pagehead {
+    padding: 64px 24px 40px;
+    background: #fff;
     text-align: center;
-    position: relative;
+    border-bottom: 1px solid #F0F3F6;
   }
-  .fw::before {
-    content: '';
-    position: absolute; top: 0; left: 50%;
-    width: 140px; height: 3px;
-    background: linear-gradient(90deg, var(--green), var(--teal), var(--purple));
-    transform: translateX(-50%); border-radius: 0 0 4px 4px;
+  .pagehead-inner { max-width: 820px; margin: 0 auto; }
+  .pagehead-ey {
+    display: inline-block;
+    font-size: 12px; font-weight: 800;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--purple);
+    background: rgba(125,10,171,.08);
+    padding: 6px 14px; border-radius: 999px;
+    margin-bottom: 18px;
   }
-  .fw-inner { max-width: 1000px; margin: 0 auto; }
-  .fw-ey { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
-  .fw-h { font-size: clamp(26px, 3.2vw, 38px); font-weight: 900; color: var(--ink); letter-spacing: -.02em; line-height: 1.18; margin-bottom: 22px; }
-  .fw-h em { color: var(--purple); font-style: italic; }
-  .fw-lca {
-    display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center;
-    gap: 10px 18px;
-    font-size: clamp(16px, 1.8vw, 20px);
-    font-weight: 900; letter-spacing: -.005em;
-    color: var(--ink);
-    margin: 8px 0 18px;
+  .pagehead-h {
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 900; letter-spacing: -.025em; line-height: 1.1;
+    color: var(--teal);
+    margin-bottom: 14px;
   }
-  .fw-lca .lca-word { display: inline-flex; align-items: center; gap: 6px; }
-  .fw-lca .lca-word.g { color: var(--green); }
-  .fw-lca .lca-word.t { color: var(--teal); }
-  .fw-lca .lca-word.p { color: var(--purple); }
-  .fw-lca .arrow { color: var(--muted); font-weight: 900; }
-  .fw-note { font-size: 15px; color: var(--body); line-height: 1.6; max-width: 720px; margin: 0 auto; font-style: italic; }
-  .fw-note strong { color: var(--ink); font-style: normal; font-weight: 700; }
+  .pagehead-h em { color: var(--purple); font-style: italic; font-weight: 800; }
+  .pagehead-sub {
+    font-size: clamp(15px, 1.5vw, 18px);
+    color: var(--body);
+    line-height: 1.55;
+    max-width: 620px; margin: 0 auto;
+  }
 
   /* ===== Section header block ===== */
   .sec { padding: 96px 24px; }
@@ -422,8 +368,7 @@
 
   @media (max-width: 640px) {
     .sec { padding: 64px 20px; }
-    .phero { min-height: 52vh; }
-    .fw { padding: 56px 20px; }
+    .pagehead { padding: 48px 20px 32px; }
     .orderpath, .docs, .contact { padding: 60px 20px; }
     .stage { padding: 26px 20px 22px; }
     .subof { padding: 26px 22px 22px; }
@@ -446,34 +391,12 @@
 
 <main id="main">
 
-  <!-- ===== HERO ===== -->
-  <section class="phero">
-    <div class="phero-bg" aria-hidden="true"></div>
-    <div class="phero-grad" aria-hidden="true"></div>
-    <div class="phero-inner">
-      <span class="phero-ey">NAESP · Conference Offerings</span>
-      <h1 class="phero-h1">Educators are the most powerful resource in your building. <em>This is their studio.</em></h1>
-      <p class="phero-sub">A three-stage professional development experience that meets educators where they are &mdash; and walks with them toward wholeness, resilience, and the rewrite they deserve. Then a companion path for the students they serve.</p>
-      <div class="phero-btns">
-        <a class="btn btn-gold" href="/NAESP-order-form.html">See pricing &amp; order &rarr;</a>
-        <a class="btn btn-outline-white" href="#educators">Explore the offerings</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FRAMEWORK BANNER ===== -->
-  <section class="fw">
-    <div class="fw-inner">
-      <span class="fw-ey">The re&middot;be framework</span>
-      <h2 class="fw-h">Every educator is the hero of their own story. <em>We help them see it, understand it, and rewrite it.</em></h2>
-      <p class="fw-lca">
-        <span class="lca-word g">Lights</span>
-        <span class="arrow">&rarr;</span>
-        <span class="lca-word t">Camera</span>
-        <span class="arrow">&rarr;</span>
-        <span class="lca-word p">Action</span>
-      </p>
-      <p class="fw-note"><strong>Lights</strong> is the starting point. <strong>Camera</strong> and <strong>Action</strong> are invitations &mdash; not requirements. Each stage stands on its own and deepens the one before it.</p>
+  <!-- ===== SIMPLE PAGE HEADER ===== -->
+  <section class="pagehead">
+    <div class="pagehead-inner">
+      <span class="pagehead-ey">NAESP · Conference Offerings</span>
+      <h1 class="pagehead-h">Our offerings <em>for your school</em>.</h1>
+      <p class="pagehead-sub">Educator wellness, student wellness, or both &mdash; pick what fits your school.</p>
     </div>
   </section>
 
