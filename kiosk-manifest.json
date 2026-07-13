@@ -1,0 +1,25 @@
+{
+  "name": "ReBe Genre Kiosk",
+  "short_name": "ReBe Genre",
+  "description": "What genre were you born into? Interactive booth experience by ReBe.",
+  "start_url": "/rebe-genre-kiosk",
+  "scope": "/rebe-genre-kiosk",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#08222e",
+  "theme_color": "#0a2c3a",
+  "icons": [
+    {
+      "src": "/kiosk-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/kiosk-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
