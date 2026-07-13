@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <meta name="robots" content="noindex,nofollow">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>ReBe Ed for NAESP — Offering details and pricing</title>
-<meta name="description" content="Conference specials for NAESP attendees: K-2 Health Boosts, K-2 Health Boosts + Residency, and a free 3-5 pilot for the schools ready to lead." />
+<title>ReBe Ed for NAESP — Offerings</title>
+<meta name="description" content="ReBe Ed offerings for NAESP attendees — the Lights · Camera · Action framework for educator wellness, plus student wellness through EPICS Health Boosts and the Literacy Residency Pilot." />
 <link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +45,12 @@
     --bone:#E8E5E0;
   }
 
-  /* Topbar */
+  /* Safari fix — prevent short pills from wrapping */
+  .top-tag, .phero-ey, .sec-ey, .stage-tag, .trust-tag, .back-link {
+    white-space: nowrap;
+  }
+
+  /* ===== Topbar ===== */
   .topbar {
     position: sticky; top: 0; z-index: 50;
     background: #fff;
@@ -57,298 +62,372 @@
   .topbar-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; }
   .brand { display: inline-flex; align-items: center; text-decoration: none; }
   .brand-img { display: block; height: 112px; width: auto; max-width: 320px; }
+  .top-tag { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); padding: 8px 14px; background: rgba(3,78,100,.08); border-radius: 999px; }
   @media (max-width: 600px) {
     .topbar { height: 88px; }
     .brand-img { height: 72px; }
-  }
-  .top-tag { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); padding: 8px 14px; background: rgba(3,78,100,.08); border-radius: 999px; }
-  @media (max-width: 600px) { .top-tag { display: none; } }
-
-  /* Safari fix — prevent SHORT pills and eyebrows from wrapping.
-     Do NOT include card badges / grade labels / price labels here — they
-     have variable-length content per product and must be allowed to wrap. */
-  .top-tag, .phero-ey, .offers-ey, .cta-ey,
-  .pending-tag, .download-tag {
-    white-space: nowrap;
+    .top-tag { display: none; }
+    .topbar-inner { padding: 0 20px; }
   }
 
-  /* Card badges, grade labels, and price labels: allow wrapping and break
-     long tokens so text can never overflow the card edge on any viewport. */
-  .ocard-badge, .ocard-grade, .price-block .lbl, .ocard-title, .ocard-title small,
-  .ocard-desc, .ocard-feats li {
-    word-wrap: break-word;
-    overflow-wrap: anywhere;
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 32px; border-radius: 50px;
+    font-size: 15px; font-weight: 800;
+    text-decoration: none; letter-spacing: .02em;
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+    cursor: pointer; border: none; white-space: nowrap;
   }
-  .ocard-badge, .ocard-grade { line-height: 1.4; }
+  .btn-gold { background: var(--gold); color: var(--ink); box-shadow: 0 8px 24px rgba(254,185,9,.32); }
+  .btn-gold:hover { background: var(--gold-deep); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(254,185,9,.40); }
+  .btn-teal { background: var(--teal); color: #fff; box-shadow: 0 6px 20px rgba(3,78,100,.28); }
+  .btn-teal:hover { background: var(--teal-deep); transform: translateY(-2px); }
+  .btn-outline-teal { background: transparent; color: var(--teal); border: 2px solid var(--teal); padding: 14px 30px; }
+  .btn-outline-teal:hover { background: var(--teal); color: #fff; }
+  .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.55); padding: 14px 32px; }
+  .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+  .btn-purple { background: var(--purple); color: #fff; box-shadow: 0 6px 20px rgba(125,10,171,.28); }
+  .btn-purple:hover { background: var(--purple-deep); transform: translateY(-2px); }
+  .btn-green { background: var(--green); color: #fff; box-shadow: 0 6px 20px rgba(99,141,19,.28); }
+  .btn-green:hover { background: var(--green-deep); transform: translateY(-2px); }
 
-  /* Product hero (compact) */
+  /* ===== Hero ===== */
   .phero {
-    background: linear-gradient(135deg, #023d4f 0%, #034E64 55%, #045d77 100%);
-    color: #fff;
-    padding: 72px 24px 64px;
-    text-align: center;
     position: relative;
+    min-height: 62vh;
+    display: flex; align-items: center;
     overflow: hidden;
-  }
-  .phero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 20% 30%, rgba(254,185,9,.10) 0%, transparent 55%),
-                radial-gradient(ellipse at 80% 70%, rgba(125,10,171,.14) 0%, transparent 55%);
-    pointer-events: none;
-  }
-  .phero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
-  .back-strip {
-    background: #F5F9FC;
-    padding: 32px 24px;
-    text-align: center;
-  }
-  .back-link {
-    display: inline-block;
-    color: var(--teal);
-    font-size: 13px; font-weight: 700;
-    letter-spacing: .04em;
-    text-decoration: none;
-    padding: 10px 18px;
-    border: 1.5px solid var(--teal);
-    border-radius: 999px;
-    background: #fff;
-    transition: color .15s ease, background .15s ease, transform .15s ease;
-  }
-  .back-link:hover {
     background: var(--teal);
-    color: #fff;
-    transform: translateY(-1px);
+  }
+  .phero-bg {
+    position: absolute; inset: 0;
+    background-image: url('Images/teacherstudent.jpg');
+    background-size: cover; background-position: center 30%;
+    filter: brightness(.5);
+  }
+  .phero-grad {
+    position: absolute; inset: 0;
+    background: linear-gradient(120deg, rgba(3,78,100,.85) 0%, rgba(3,78,100,.55) 55%, rgba(125,10,171,.28) 100%);
+  }
+  .phero-inner {
+    position: relative; z-index: 2;
+    max-width: 1400px; margin: 0 auto;
+    padding: 88px clamp(24px, 5vw, 64px);
+    width: 100%;
   }
   .phero-ey {
     display: inline-block;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
     color: var(--gold);
-    font-size: 12px; font-weight: 800;
-    letter-spacing: .22em; text-transform: uppercase;
-    padding: 6px 14px;
-    background: rgba(254,185,9,.10);
+    background: rgba(254,185,9,.12);
+    padding: 8px 14px; border-radius: 999px;
     border: 1px solid rgba(254,185,9,.35);
-    border-radius: 999px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
   .phero-h1 {
-    font-size: clamp(32px, 4.4vw, 52px);
-    font-weight: 900; letter-spacing: -.025em;
-    line-height: 1.08;
-    margin-bottom: 18px;
+    font-size: clamp(36px, 5vw, 66px);
+    font-weight: 900; letter-spacing: -.03em; line-height: 1.06;
+    color: #fff;
+    max-width: min(820px, 90%);
+    margin-bottom: 20px;
   }
   .phero-h1 em { font-style: italic; color: var(--gold); font-weight: 800; }
   .phero-sub {
-    font-size: clamp(16px, 1.7vw, 19px);
-    color: rgba(255,255,255,.85);
-    line-height: 1.6;
-    max-width: 700px; margin: 0 auto;
+    font-size: clamp(16px, 1.7vw, 20px);
+    color: rgba(255,255,255,.88);
+    line-height: 1.65;
+    max-width: min(720px, 90%);
+    margin-bottom: 30px;
   }
+  .phero-sub strong { color: #fff; font-weight: 700; }
+  .phero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
-  /* Offers */
-  .offers { background: #F5F9FC; padding: 88px 0; }
-  .offers-head { text-align: center; max-width: 760px; margin: 0 auto 48px; padding: 0 48px; }
-  .offers-ey { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
-  .offers-h { font-size: clamp(30px, 3.4vw, 46px); font-weight: 900; color: var(--teal); letter-spacing: -.025em; line-height: 1.12; margin-bottom: 14px; }
-  .offers-sub { font-size: 17px; color: var(--body); line-height: 1.6; }
-  .offers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 1100px; margin: 0 auto; padding: 0 48px; }
-  @media (max-width: 980px) { .offers-grid { grid-template-columns: 1fr; max-width: 600px; } }
-
-  /* Gold "Featured" variant for Transform card */
-  .ocard[data-color="gold"] { border: 2px solid var(--gold); box-shadow: 0 10px 32px rgba(254,185,9,.20); position: relative; }
-  .ocard[data-color="gold"] .ocard-top { background: linear-gradient(135deg, #1A1A1A 0%, #2c2c2c 100%); }
-  .ocard[data-color="gold"] .ocard-badge { background: var(--gold); color: var(--ink); }
-  .ocard[data-color="gold"] .ocard-feats li::before { color: var(--gold-deep); }
-  .ocard[data-color="gold"] .ocard-preview { color: var(--gold-deep); border-bottom-color: rgba(229,167,8,.35); }
-  .ocard[data-color="gold"] .ocard-preview:hover { color: var(--ink); border-bottom-color: var(--gold-deep); }
-
-  /* Funding sources note */
-  .funding-note { max-width: 1100px; margin: 32px auto 0; padding: 16px 24px; background: rgba(99,141,19,.08); border: 1px solid rgba(99,141,19,.24); border-radius: 12px; text-align: center; font-size: 13px; color: var(--green-deep); font-weight: 700; letter-spacing: .02em; }
-  .funding-note strong { color: var(--green-deep); }
-  @media (max-width: 1160px) { .funding-note { margin: 32px 48px 0; } }
-
-  /* Order form path callout */
-  .order-path { background: linear-gradient(135deg, #F5F9FC 0%, #EDF3F8 100%); padding: 64px 24px; text-align: center; border-top: 1px solid #E4EBF1; }
-  .order-path-inner { max-width: 780px; margin: 0 auto; }
-  .order-path-ey { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--purple); padding: 5px 14px; background: rgba(125,10,171,.08); border: 1px solid rgba(125,10,171,.28); border-radius: 999px; margin-bottom: 18px; }
-  .order-path-h { font-size: clamp(24px, 3vw, 34px); font-weight: 900; color: var(--teal); letter-spacing: -.02em; line-height: 1.15; margin-bottom: 14px; }
-  .order-path-sub { font-size: 16px; color: var(--body); line-height: 1.65; margin-bottom: 32px; }
-  .order-path-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .order-path-btns .btn { min-width: 240px; }
-  .btn-teal { background: var(--teal); color: #fff; box-shadow: 0 6px 20px rgba(3,78,100,.22); }
-  .btn-teal:hover { background: var(--teal-deep); transform: translateY(-2px); }
-  .btn-outline-teal { background: #fff; color: var(--teal); border: 2px solid var(--teal); padding: 14px 30px; }
-  .btn-outline-teal:hover { background: var(--teal); color: #fff; transform: translateY(-2px); }
-
-  .ocard {
-    background: #fff; border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 6px 24px rgba(3,78,100,.08);
-    display: flex; flex-direction: column;
-    border: 1px solid #eee;
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-  .ocard:hover { transform: translateY(-6px); box-shadow: 0 16px 44px rgba(3,78,100,.14); }
-  .ocard-top {
-    padding: 28px 30px 26px;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-soft) 100%);
-    color: #fff;
-    position: relative;
-    min-height: 220px;
-    display: flex; flex-direction: column;
-  }
-  .ocard[data-color="purple"] .ocard-top { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%); }
-  .ocard[data-color="green"]  .ocard-top { background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%); }
-  .ocard-badge {
-    display: inline-block;
-    font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--ink); background: var(--gold);
-    padding: 3px 10px; border-radius: 999px;
-    align-self: flex-start;
-    line-height: 1.35;
-  }
-  .ocard-badge.free { background: #fff; color: var(--teal); }
-  .ocard-grade {
-    font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-    color: rgba(255,255,255,.78);
-    margin: 0 0 6px;
-    margin-top: auto;
-  }
-  .ocard-title { font-size: 26px; font-weight: 900; line-height: 1.18; letter-spacing: -.015em; color: #fff; margin: 0; }
-  .ocard-title small {
-    display: block;
-    font-size: 17px; font-weight: 700; opacity: .92;
-    margin-top: 2px; letter-spacing: -.005em;
-  }
-  .ocard-body { padding: 26px 30px 30px; flex: 1; display: flex; flex-direction: column; }
-  .ocard-desc { font-size: 15px; color: var(--body); line-height: 1.65; margin-bottom: 22px; min-height: 90px; }
-  .ocard-desc .placeholder { color: var(--muted); font-style: italic; }
-  .ocard-feats { list-style: none; padding: 0; margin: 0 0 24px; min-height: 108px; }
-  .ocard-feats li { font-size: 14px; color: var(--body); padding: 7px 0; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
-  .ocard-feats li::before { content: '\2192'; color: var(--teal); font-weight: 800; flex-shrink: 0; line-height: 1.5; }
-  .ocard[data-color="green"] .ocard-feats li::before { color: var(--green); }
-  .price-block { padding: 18px 20px; background: #F5F9FC; border-radius: 14px; margin-bottom: 22px; display: flex; align-items: baseline; gap: 10px 12px; flex-wrap: wrap; min-height: 62px; }
-  .price-block .price { font-size: 30px; font-weight: 900; color: var(--teal); letter-spacing: -.02em; line-height: 1; }
-  .price-block .strike { font-size: 15px; color: var(--muted); text-decoration: line-through; }
-  /* "Conference Pricing" callout — plain gold text on its own row above the prices */
-  .price-block .conf-pill { order: -2; flex: 1 0 100%; margin: 0; display: block; background: transparent; color: var(--gold-deep); font-size: 12px; font-weight: 800; letter-spacing: .02em; padding: 0; line-height: 1.3; }
-  /* Small green savings tag under the price (Transform) */
-  .price-block .save-tag { flex: 1 0 100%; order: 1; margin: -4px 0 0; color: var(--green); font-size: 12px; font-weight: 700; letter-spacing: .01em; line-height: 1.4; }
-  /* Label ALWAYS wraps to its own line so long labels can never overflow the card. */
-  .price-block .lbl { flex: 1 0 100%; order: 2; margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--muted); line-height: 1.4; }
-  .price-block.free .price { color: var(--green); font-style: italic; }
-  .ocard-cta { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
-  .ocard-cta .btn { width: 100%; justify-content: center; padding: 15px 24px; font-size: 14px; }
-  .ocard-preview {
-    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+  /* ===== Framework banner (Lights · Camera · Action) ===== */
+  .fw {
+    padding: 74px 24px 66px;
+    background: linear-gradient(180deg, #FDFCFF 0%, #F5F0FA 100%);
     text-align: center;
-    color: var(--teal); font-size: 13px; font-weight: 700;
-    letter-spacing: .02em;
+    position: relative;
+  }
+  .fw::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    width: 140px; height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--teal), var(--purple));
+    transform: translateX(-50%); border-radius: 0 0 4px 4px;
+  }
+  .fw-inner { max-width: 1000px; margin: 0 auto; }
+  .fw-ey { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+  .fw-h { font-size: clamp(26px, 3.2vw, 38px); font-weight: 900; color: var(--ink); letter-spacing: -.02em; line-height: 1.18; margin-bottom: 22px; }
+  .fw-h em { color: var(--purple); font-style: italic; }
+  .fw-lca {
+    display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 10px 18px;
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 900; letter-spacing: -.005em;
+    color: var(--ink);
+    margin: 8px 0 18px;
+  }
+  .fw-lca .lca-word { display: inline-flex; align-items: center; gap: 6px; }
+  .fw-lca .lca-word.g { color: var(--green); }
+  .fw-lca .lca-word.t { color: var(--teal); }
+  .fw-lca .lca-word.p { color: var(--purple); }
+  .fw-lca .arrow { color: var(--muted); font-weight: 900; }
+  .fw-note { font-size: 15px; color: var(--body); line-height: 1.6; max-width: 720px; margin: 0 auto; font-style: italic; }
+  .fw-note strong { color: var(--ink); font-style: normal; font-weight: 700; }
+
+  /* ===== Section header block ===== */
+  .sec { padding: 96px 24px; }
+  .sec.alt { background: #F5F9FC; }
+  .sec.dark { background: linear-gradient(160deg, var(--teal) 0%, var(--purple-deep) 100%); color: #fff; }
+  .sec-inner { max-width: 1200px; margin: 0 auto; }
+  .sec-head {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+    margin-bottom: 56px;
+  }
+  .sec.alt-media .sec-head .sec-copy { order: 2; }
+  .sec.alt-media .sec-head .sec-photo { order: 1; }
+  .sec-ey { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
+  .sec.dark .sec-ey { color: var(--gold); }
+  .sec-h { font-size: clamp(30px, 3.6vw, 46px); font-weight: 900; color: var(--teal); letter-spacing: -.025em; line-height: 1.12; margin-bottom: 16px; }
+  .sec.dark .sec-h { color: #fff; }
+  .sec-h em { color: var(--purple); font-style: italic; font-weight: 800; }
+  .sec.dark .sec-h em { color: var(--gold); }
+  .sec-sub { font-size: clamp(17px, 1.85vw, 20px); color: var(--purple); font-style: italic; font-weight: 500; line-height: 1.4; margin-bottom: 20px; }
+  .sec.dark .sec-sub { color: var(--gold); }
+  .sec-body p { font-size: 16px; color: var(--body); line-height: 1.7; margin-bottom: 12px; }
+  .sec.dark .sec-body p { color: rgba(255,255,255,.88); }
+  .sec-body p strong { color: var(--ink); font-weight: 700; }
+  .sec.dark .sec-body p strong { color: #fff; }
+  .sec-photo {
+    aspect-ratio: 4/3;
+    border-radius: 20px; overflow: hidden;
+    background-size: cover; background-position: center;
+    box-shadow: 0 14px 42px rgba(3,78,100,.14);
+  }
+  .sec-photo.students { background-image: url('Images/Education.jpg'); }
+  .sec-photo.educators { background-image: url('Images/rebe-ed-educator.jpg'); background-position: center 40%; }
+  .sec-photo.complete { background-image: url('Images/teacherstudent.jpg'); background-position: center 25%; }
+  @media (max-width: 900px) {
+    .sec-head { grid-template-columns: 1fr; gap: 32px; }
+    .sec.alt-media .sec-head .sec-copy { order: 1; }
+    .sec.alt-media .sec-head .sec-photo { order: 2; }
+  }
+
+  /* ===== Stage cards (Lights / Camera / Action) ===== */
+  .stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 36px; }
+  @media (max-width: 900px) { .stages { grid-template-columns: 1fr; max-width: 620px; margin-left: auto; margin-right: auto; } }
+  .stage {
+    background: #fff;
+    border-radius: 18px;
+    padding: 30px 26px 28px;
+    box-shadow: 0 10px 32px rgba(3,78,100,.07);
+    border-top: 5px solid var(--teal);
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .stage[data-stage="lights"] { border-top-color: var(--green); }
+  .stage[data-stage="camera"] { border-top-color: var(--teal); }
+  .stage[data-stage="action"] { border-top-color: var(--purple); }
+  .stage-num {
+    position: absolute; top: -18px; left: 24px;
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 900; font-size: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  }
+  .stage[data-stage="lights"] .stage-num { background: var(--green); }
+  .stage[data-stage="camera"] .stage-num { background: var(--teal); }
+  .stage[data-stage="action"] .stage-num { background: var(--purple); }
+  .stage-tag {
+    align-self: flex-start;
+    font-size: 10.5px; font-weight: 800;
+    letter-spacing: .12em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .stage[data-stage="lights"] .stage-tag { color: var(--green-deep); background: rgba(99,141,19,.10); }
+  .stage[data-stage="camera"] .stage-tag { color: var(--teal); background: rgba(3,78,100,.08); }
+  .stage[data-stage="action"] .stage-tag { color: var(--purple); background: rgba(125,10,171,.10); }
+  .stage-h { font-size: 22px; font-weight: 900; letter-spacing: -.015em; color: var(--ink); margin-bottom: 6px; }
+  .stage[data-stage="lights"] .stage-h { color: var(--green-deep); }
+  .stage[data-stage="camera"] .stage-h { color: var(--teal); }
+  .stage[data-stage="action"] .stage-h { color: var(--purple-deep); }
+  .stage-sub { font-size: 13.5px; color: var(--muted); font-style: italic; margin-bottom: 14px; line-height: 1.4; }
+  .stage-feats { list-style: none; padding: 0; margin: 0; }
+  .stage-feats li { font-size: 14px; color: var(--body); padding: 5px 0; line-height: 1.55; display: flex; gap: 8px; align-items: flex-start; }
+  .stage-feats li::before { content: '→'; color: var(--muted); font-weight: 800; flex-shrink: 0; line-height: 1.55; }
+  .stage[data-stage="lights"] .stage-feats li::before { color: var(--green); }
+  .stage[data-stage="camera"] .stage-feats li::before { color: var(--teal); }
+  .stage[data-stage="action"] .stage-feats li::before { color: var(--purple); }
+  .stage-feats li strong { color: var(--ink); font-weight: 700; }
+
+  /* ===== Sub-offering cards inside Flourish section ===== */
+  .subofs { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-bottom: 34px; }
+  @media (max-width: 860px) { .subofs { grid-template-columns: 1fr; } }
+  .subof {
+    background: #fff;
+    border-radius: 20px;
+    padding: 34px 30px 30px;
+    border: 1px solid #E4EDF0;
+    box-shadow: 0 10px 32px rgba(3,78,100,.06);
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .subof::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--green);
+  }
+  .subof[data-color="purple"]::before { background: var(--purple); }
+  .subof-ey {
+    display: inline-block;
+    font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--green-deep);
+    background: rgba(99,141,19,.09);
+    padding: 5px 12px; border-radius: 999px;
+    margin-bottom: 14px;
+    align-self: flex-start;
+  }
+  .subof[data-color="purple"] .subof-ey { color: var(--purple); background: rgba(125,10,171,.08); }
+  .subof-h { font-size: 24px; font-weight: 900; letter-spacing: -.02em; color: var(--ink); margin-bottom: 6px; line-height: 1.15; }
+  .subof-h small { display: block; font-size: 15px; font-weight: 700; color: var(--muted); letter-spacing: 0; margin-top: 4px; }
+  .subof-desc { font-size: 15px; color: var(--body); line-height: 1.65; margin: 12px 0 16px; }
+  .subof-desc strong { color: var(--green-deep); font-weight: 800; }
+  .subof[data-color="purple"] .subof-desc strong { color: var(--purple); }
+  .subof-feats { list-style: none; padding: 0; margin: 0 0 22px; }
+  .subof-feats li { font-size: 14px; color: var(--body); padding: 5px 0; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .subof-feats li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; line-height: 1.55; }
+  .subof[data-color="purple"] .subof-feats li::before { color: var(--purple); }
+  .subof-feats li strong { color: var(--ink); font-weight: 700; }
+  .subof-cta { margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; }
+  .subof-cta .preview {
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--teal); font-size: 13px; font-weight: 700; letter-spacing: .02em;
     text-decoration: none;
     padding: 8px 4px;
     border-bottom: 1px dashed rgba(3,78,100,.25);
     transition: color .15s ease, border-color .15s ease;
   }
-  .ocard-preview:hover { color: var(--teal-deep); border-bottom-color: var(--teal); }
-  .ocard[data-color="purple"] .ocard-preview { color: var(--purple); border-bottom-color: rgba(125,10,171,.25); }
-  .ocard[data-color="purple"] .ocard-preview:hover { color: var(--purple-deep); border-bottom-color: var(--purple); }
-  .ocard[data-color="green"] .ocard-preview { color: var(--green); border-bottom-color: rgba(99,141,19,.25); }
-  .ocard[data-color="green"] .ocard-preview:hover { color: var(--green-deep); border-bottom-color: var(--green); }
+  .subof-cta .preview:hover { color: var(--teal-deep); border-bottom-color: var(--teal); }
+  .subof-cta .btn { padding: 12px 22px; font-size: 14px; }
 
-  /* Buttons */
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 16px 32px; border-radius: 50px;
-    font-size: 15px; font-weight: 700;
-    text-decoration: none;
-    letter-spacing: .02em;
-    transition: all .2s ease;
-    cursor: pointer; border: none;
-    white-space: nowrap;
+  /* ===== Transform highlight ===== */
+  .transform-card {
+    max-width: 900px; margin: 40px auto 0;
+    background: rgba(255,255,255,.10);
+    border: 2px solid var(--gold);
+    border-radius: 22px;
+    padding: 38px 40px;
+    backdrop-filter: blur(4px);
   }
-  .btn-gold { background: var(--gold); color: var(--ink); box-shadow: 0 6px 20px rgba(254,185,9,.32); }
-  .btn-gold:hover { background: var(--gold-deep); transform: translateY(-2px); }
-  .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.55); padding: 14px 32px; }
-  .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,.08); }
-  .placeholder-cta { background: #fff !important; color: var(--muted) !important; border: 2px dashed var(--bone) !important; font-style: italic; cursor: not-allowed; box-shadow: none !important; padding: 13px 24px !important; }
-  .placeholder-cta:hover { transform: none !important; background: #fff !important; }
+  .transform-card ul { list-style: none; padding: 0; margin: 18px 0 26px; display: grid; gap: 12px; }
+  .transform-card ul li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; color: rgba(255,255,255,.92); line-height: 1.55; }
+  .transform-card ul li::before { content: '★'; color: var(--gold); font-weight: 900; flex-shrink: 0; font-size: 15px; line-height: 1.6; }
+  .transform-card ul li strong { color: #fff; font-weight: 800; }
+  .transform-card .tc-badge {
+    display: inline-block;
+    font-size: 11px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink); background: var(--gold);
+    padding: 6px 14px; border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .transform-card .tc-h { font-size: clamp(26px, 3.2vw, 36px); font-weight: 900; letter-spacing: -.02em; color: #fff; line-height: 1.12; margin-bottom: 8px; }
+  .transform-card .tc-sub { font-size: 15px; color: var(--gold); font-style: italic; font-weight: 600; margin-bottom: 4px; }
+  .transform-card .tc-cta { display: flex; gap: 14px; flex-wrap: wrap; }
 
-  /* Documents */
-  .docs { background: #fff; padding: 88px 0; }
-  .docs-head { text-align: center; max-width: 720px; margin: 0 auto 40px; padding: 0 48px; }
-  .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; max-width: 1400px; margin: 0 auto; padding: 0 48px; }
-  .doc {
+  /* ===== Order path ===== */
+  .orderpath {
+    padding: 88px 24px;
+    background: linear-gradient(135deg, #F5F9FC 0%, #EDF3F8 100%);
+    text-align: center;
+    border-top: 1px solid #E4EBF1;
+  }
+  .orderpath-inner { max-width: 820px; margin: 0 auto; }
+  .orderpath-ey { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--purple); background: rgba(125,10,171,.08); border: 1px solid rgba(125,10,171,.24); padding: 5px 14px; border-radius: 999px; margin-bottom: 18px; }
+  .orderpath-h { font-size: clamp(28px, 3.4vw, 40px); font-weight: 900; color: var(--teal); letter-spacing: -.02em; line-height: 1.15; margin-bottom: 14px; }
+  .orderpath-h em { color: var(--purple); font-style: italic; }
+  .orderpath-sub { font-size: 17px; color: var(--body); line-height: 1.6; margin-bottom: 32px; }
+  .orderpath-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .orderpath-note { margin-top: 24px; font-size: 13px; color: var(--muted); }
+
+  /* ===== Trust bar ===== */
+  .trust {
     background: #fff;
-    border: 1px solid var(--bone);
-    border-radius: 16px;
-    padding: 22px 24px;
-    display: flex; align-items: flex-start; gap: 16px;
-    text-decoration: none; color: inherit;
-    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    padding: 44px 24px;
+    text-align: center;
+    border-top: 1px solid #EEE;
   }
-  .doc:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(3,78,100,.08); }
-  .doc-placeholder { cursor: default; border-style: dashed; background: #FAFAF8; opacity: .92; }
-  .doc-placeholder:hover { transform: none; box-shadow: none; border-color: var(--bone); }
+  .trust-inner { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 10px 12px; max-width: 1100px; }
+  .trust-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px;
+    background: rgba(99,141,19,.09);
+    border: 1px solid rgba(99,141,19,.22);
+    color: var(--green-deep);
+    font-size: 13px; font-weight: 700; letter-spacing: .02em;
+    border-radius: 999px;
+  }
+  .trust-tag::before { content: '✓'; color: var(--green); font-weight: 900; }
+
+  /* ===== Docs ===== */
+  .docs { padding: 88px 24px; background: #F5F9FC; }
+  .docs-inner { max-width: 1200px; margin: 0 auto; }
+  .docs-head { text-align: center; max-width: 760px; margin: 0 auto 40px; }
+  .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .doc {
+    display: flex; gap: 14px; align-items: center;
+    padding: 20px 22px;
+    background: #fff;
+    border: 1px solid #E4EDF0;
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .doc:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(3,78,100,.10); border-color: var(--teal); }
   .doc-icon {
     flex-shrink: 0;
-    width: 52px; height: 60px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-soft) 100%);
-    color: #fff;
+    width: 44px; height: 54px;
+    background: var(--teal); color: #fff;
     border-radius: 6px;
-    box-shadow: 0 4px 10px rgba(3,78,100,.18);
-    font-weight: 900; font-size: 13px;
-    letter-spacing: .04em; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 900; letter-spacing: .04em;
   }
-  .doc-icon .ext { font-size: 9px; opacity: .85; margin-top: 3px; letter-spacing: .08em; font-weight: 600; }
-  .doc-info { flex: 1; min-width: 0; display: flex; flex-direction: column; align-self: stretch; }
-  .doc-info h4 { font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 6px; line-height: 1.25; letter-spacing: -.005em; }
-  .doc-info p { font-size: 13px; color: var(--muted); line-height: 1.45; margin: 0 0 auto; }
-  .pending-tag { align-self: flex-start; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-deep); background: rgba(254,185,9,.18); border: 1px solid rgba(254,185,9,.5); padding: 3px 9px; border-radius: 999px; margin-top: 12px; white-space: nowrap; line-height: 1.3; }
-  .download-tag { display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal); margin-top: 10px; white-space: nowrap; border-bottom: 1.5px solid var(--teal); padding-bottom: 2px; line-height: 1.2; }
-  .doc:hover .download-tag { color: var(--teal-deep); border-bottom-color: var(--teal-deep); }
-  sup { font-size: .55em; font-weight: 700; vertical-align: super; line-height: 0; margin-left: 1px; opacity: .82; }
+  .doc-info h4 { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 3px; line-height: 1.25; }
+  .doc-info p { font-size: 12.5px; color: var(--body); line-height: 1.45; margin-bottom: 4px; }
+  .doc-info .download-tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--teal); }
+  .doc.doc-placeholder { opacity: .55; cursor: default; pointer-events: none; }
+  .doc.doc-placeholder .pending-tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 
-  /* CTA */
-  .ctasec {
-    background: var(--teal);
-    padding: 80px 0;
-    text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .ctasec::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 30% 0%, rgba(254,185,9,.10) 0%, transparent 55%),
-                radial-gradient(ellipse at 70% 100%, rgba(125,10,171,.10) 0%, transparent 55%);
-    pointer-events: none;
-  }
-  .ctasec-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 0 32px; }
-  .cta-ey { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
-  .cta-h { font-size: clamp(28px, 3.4vw, 44px); font-weight: 900; color: #fff; letter-spacing: -.025em; line-height: 1.12; margin-bottom: 18px; }
-  .cta-sub { font-size: 17px; color: rgba(255,255,255,.78); line-height: 1.65; margin-bottom: 32px; }
-  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .cta-emails { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,.55); letter-spacing: .04em; }
-  .cta-emails a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  /* ===== Contact / footer ===== */
+  .contact { padding: 74px 24px; background: linear-gradient(135deg, var(--teal) 0%, var(--purple-deep) 100%); color: #fff; text-align: center; }
+  .contact h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 900; letter-spacing: -.015em; margin-bottom: 14px; color: #fff; }
+  .contact h2 em { color: var(--gold); font-style: italic; }
+  .contact p { font-size: 16px; color: rgba(255,255,255,.86); line-height: 1.55; max-width: 620px; margin: 0 auto 24px; }
+  .contact-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .contact-mail { margin-top: 20px; font-size: 14px; color: rgba(255,255,255,.72); }
+  .contact-mail a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(254,185,9,.4); text-underline-offset: 3px; }
 
-  /* Footer */
-  footer { background: #fff; padding: 36px 0; border-top: 1px solid #EEE; text-align: center; }
-  footer p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 6px; }
-  footer a { color: var(--teal); font-weight: 700; text-decoration: none; }
+  footer { background: #fff; padding: 26px 24px; text-align: center; border-top: 1px solid #EEE; font-size: 13px; color: var(--muted); }
+  footer p + p { margin-top: 4px; }
+  footer a { color: var(--teal); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
-  /* Skip link */
   .skip-link { position: absolute; left: -9999px; background: var(--teal); color: #fff; padding: 10px 16px; border-radius: 6px; z-index: 999; font-weight: 700; text-decoration: none; }
   .skip-link:focus { left: 16px; top: 16px; }
 
-  @media (max-width: 768px) {
-    .offers, .docs, .ctasec { padding: 56px 0; }
-    .phero { padding: 56px 20px 48px; }
-    .cta-btns { flex-direction: column; align-items: stretch; }
-    .btn { width: 100%; justify-content: center; }
-  }
-  @media (max-width: 480px) {
-    .topbar-inner { padding: 0 18px; }
+  @media (max-width: 640px) {
+    .sec { padding: 64px 20px; }
+    .phero { min-height: 52vh; }
+    .fw { padding: 56px 20px; }
+    .orderpath, .docs, .contact { padding: 60px 20px; }
+    .stage { padding: 26px 20px 22px; }
+    .subof { padding: 26px 22px 22px; }
+    .transform-card { padding: 28px 22px; }
   }
 </style>
 </head>
@@ -361,227 +440,274 @@
     <a href="/NAESP" class="brand" aria-label="Back to NAESP overview">
       <img src="Images/rebe-ed-logo.png" alt="ReBe Ed — Better Me. Better We." class="brand-img">
     </a>
-    <span class="top-tag">NAESP · Conference Specials</span>
+    <span class="top-tag">NAESP · Offerings</span>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- Product hero -->
+  <!-- ===== HERO ===== -->
   <section class="phero">
+    <div class="phero-bg" aria-hidden="true"></div>
+    <div class="phero-grad" aria-hidden="true"></div>
     <div class="phero-inner">
-      <span class="phero-ey">For NAESP attendees</span>
-      <h1 class="phero-h1">Offering details and <em>pricing</em>.</h1>
-      <p class="phero-sub">Conference-only pricing on the ReBe Ed K-2 program &mdash; plus a free 3-5 pilot for the schools ready to lead. Pick what fits your school's stage, budget, and timeline.</p>
+      <span class="phero-ey">NAESP · Conference Offerings</span>
+      <h1 class="phero-h1">Educators are the most powerful resource in your building. <em>This is their studio.</em></h1>
+      <p class="phero-sub">A three-stage professional development experience that meets educators where they are &mdash; and walks with them toward wholeness, resilience, and the rewrite they deserve. Then a companion path for the students they serve.</p>
+      <div class="phero-btns">
+        <a class="btn btn-gold" href="/NAESP-order-form.html">See pricing &amp; order &rarr;</a>
+        <a class="btn btn-outline-white" href="#educators">Explore the offerings</a>
+      </div>
     </div>
   </section>
 
-  <!-- OFFERS -->
-  <section class="offers" id="offers">
-    <div class="offers-head">
-      <p class="offers-ey">Three ways to bring ReBe Ed to your school</p>
-      <h2 class="offers-h">Choose your path.</h2>
-      <p class="offers-sub">Conference pricing is reserved through this page. We'll do the rest.</p>
+  <!-- ===== FRAMEWORK BANNER ===== -->
+  <section class="fw">
+    <div class="fw-inner">
+      <span class="fw-ey">The re&middot;be framework</span>
+      <h2 class="fw-h">Every educator is the hero of their own story. <em>We help them see it, understand it, and rewrite it.</em></h2>
+      <p class="fw-lca">
+        <span class="lca-word g">Lights</span>
+        <span class="arrow">&rarr;</span>
+        <span class="lca-word t">Camera</span>
+        <span class="arrow">&rarr;</span>
+        <span class="lca-word p">Action</span>
+      </p>
+      <p class="fw-note"><strong>Lights</strong> is the starting point. <strong>Camera</strong> and <strong>Action</strong> are invitations &mdash; not requirements. Each stage stands on its own and deepens the one before it.</p>
     </div>
+  </section>
 
-    <div class="offers-grid">
-
-      <!-- Thrive · Educator Wellness (Lights + Camera package) -->
-      <article class="ocard">
-        <div class="ocard-top">
-          <span class="ocard-badge">NAESP Conference Special</span>
-          <p class="ocard-grade">Thrive &middot; Educator Wellness</p>
-          <h3 class="ocard-title">Lights + Camera <small>package</small></h3>
+  <!-- ===== EDUCATOR WELLNESS (Thrive) ===== -->
+  <section class="sec" id="educators">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <div class="sec-copy">
+          <span class="sec-ey">Educator Wellness &middot; Thrive</span>
+          <h2 class="sec-h">The <em>Lights + Camera</em> package.</h2>
+          <p class="sec-sub">Give your educators the tools to be well themselves &mdash; so they can show up whole for their students.</p>
+          <div class="sec-body">
+            <p>A three-stage experience that opens the conversation without threatening it. Educators start with awareness, deepen at their own pace, and come into community only when they're ready.</p>
+            <p><strong>Lights</strong> is the entry. Camera is the self-directed library. Action is the live community &mdash; and it's an optional add-on when your team is ready.</p>
+          </div>
         </div>
-        <div class="ocard-body">
-          <p class="ocard-desc">3-hour Inservice (*if in person, travel cost added) + full-year EPICS video library and community webinars. Give your educators the tools to be well themselves so they can show up whole for their students.</p>
-          <ul class="ocard-feats">
-            <li>3-hour Lights Inservice (in-person or virtual) &mdash; ACEs, EPICS pathways, genre portraits</li>
-            <li>Full-year EPICS video library &mdash; 5 self-discovery journeys (Receive, Reveal, Reflect, Release, Relaunch)</li>
-            <li>Year-round educator community access</li>
+        <div class="sec-photo educators" role="img" aria-label="Educators in professional development"></div>
+      </div>
+
+      <div class="stages">
+        <article class="stage" data-stage="lights">
+          <span class="stage-num">1</span>
+          <span class="stage-tag">Entry point</span>
+          <h3 class="stage-h">Lights &mdash; Awareness</h3>
+          <p class="stage-sub">A 3-hour PD experience &mdash; in person or online &mdash; that opens the conversation without threatening it.</p>
+          <ul class="stage-feats">
+            <li><strong>In-person Inservice</strong> &middot; 3 hours &middot; whole faculty &middot; mixed educators + admin (*travel added if in person)</li>
+            <li>Or <strong>Online delivery</strong> &middot; same 3-hour experience, live facilitated</li>
+            <li>ACEs overview &middot; EPICS pathways &middot; genre portraits &middot; Health Boost demo &middot; Science of Reading foundations &middot; Literacy LABS preview</li>
+            <li>No sharing required &mdash; every activity is private and personal</li>
           </ul>
-          <div class="price-block">
-            <span class="conf-pill">Conference Pricing</span>
-            <span class="strike">$6,000</span>
-            <span class="price">$4,000</span>
-          </div>
-          <div class="ocard-cta">
-            <a href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener" class="ocard-preview">See Thrive overview &rarr;</a>
-            <a href="/NAESP-order-form.html?add=thrive" class="btn btn-gold">Order Thrive &rarr;</a>
-          </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- Flourish · K-2 Health Boosts per grade (+ FREE 3-5 pilot) -->
-      <article class="ocard" data-color="green">
-        <div class="ocard-top">
-          <span class="ocard-badge">NAESP Special</span>
-          <p class="ocard-grade">Flourish &middot; Student Wellness</p>
-          <h3 class="ocard-title">K-2 Health Boosts <small>FREE 3-5 Pilot Included</small></h3>
+        <article class="stage" data-stage="camera">
+          <span class="stage-num">2</span>
+          <span class="stage-tag">Self-directed</span>
+          <h3 class="stage-h">Camera &mdash; Clearinghouse</h3>
+          <p class="stage-sub">A private, on-demand digital library where educators go deeper on their own terms &mdash; cameras off, no live participation required.</p>
+          <ul class="stage-feats">
+            <li><strong>EPICS video library</strong> &middot; 25 concepts &middot; 3-minute videos &middot; always accessible</li>
+            <li><strong>Resource links</strong> for every concept &mdash; curated readings, tools, next steps</li>
+            <li><strong>Webinar on-ramps</strong> &mdash; optional live participation, easy entry</li>
+            <li>Five self-discovery journeys: Receive &middot; Reveal &middot; Reflect &middot; Release &middot; Relaunch</li>
+          </ul>
+        </article>
+
+        <article class="stage" data-stage="action">
+          <span class="stage-num">3</span>
+          <span class="stage-tag">Community + 1:1</span>
+          <h3 class="stage-h">Action &mdash; The rewrite</h3>
+          <p class="stage-sub">Where the story actually changes. Educators move from private self-discovery into live human community &mdash; supported, seen, and no longer carrying it alone.</p>
+          <ul class="stage-feats">
+            <li><strong>ReBe ReFresh Live groups</strong> &middot; 5-week small-group experience &middot; online &middot; live</li>
+            <li><strong>EPICS topical community groups</strong> &middot; ongoing groups by health domain (Emotional, Physical, Intellectual, Cultural, Social/Spiritual)</li>
+            <li><strong>Up to 20 private 1:1 Confidant sessions</strong> &mdash; administrator option, personal support for educators who need it</li>
+            <li><em>Optional add-on. Add to Thrive or Transform.</em></li>
+          </ul>
+        </article>
+      </div>
+
+      <div style="text-align:center;">
+        <a class="btn btn-teal" href="/NAESP-order-form.html?add=thrive">See Thrive pricing &amp; order &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STUDENT WELLNESS (Flourish) ===== -->
+  <section class="sec alt alt-media" id="students">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <div class="sec-copy">
+          <span class="sec-ey">Student Wellness &middot; Flourish</span>
+          <h2 class="sec-h">Whole-health wellness <em>where the learning already lives.</em></h2>
+          <p class="sec-sub">EPICS Health Boosts and the Literacy Residency Pilot &mdash; built for elementary classrooms and aligned to the Science of Reading.</p>
+          <div class="sec-body">
+            <p>Two ways to bring student wellness into your building: start with the K-2 Health Boosts (with a free 3-5 pilot invitation), or step up to the full Literacy Residency Pilot with LAB webinars and an on-site Inservice.</p>
+            <p>Both are grounded in the same EPICS framework you meet in Thrive &mdash; so what educators experience for themselves, they can carry into every classroom.</p>
+          </div>
         </div>
-        <div class="ocard-body">
-          <p class="ocard-desc">25 EPICS Health Boosts per grade for K-2 students. Every buyer also gets <strong style="color:var(--green-deep);">FREE access to the 3-5 pilot</strong> &mdash; your feedback shapes the final 3-5 product.</p>
-          <ul class="ocard-feats">
+        <div class="sec-photo students" role="img" aria-label="Elementary students in a classroom"></div>
+      </div>
+
+      <div class="subofs">
+        <article class="subof">
+          <span class="subof-ey">K-2 Health Boosts &middot; FREE 3-5 Pilot</span>
+          <h3 class="subof-h">K-2 Health Boosts <small>free access to the 3-5 pilot included</small></h3>
+          <p class="subof-desc">25 EPICS Health Boosts per grade for K-2 students. Every buyer also gets <strong>free access to the 3-5 pilot</strong> &mdash; your feedback shapes the final 3-5 product.</p>
+          <ul class="subof-feats">
             <li>25 EPICS Health Boosts per grade &middot; K-2</li>
-            <li><strong style="color:var(--green-deep);">FREE 3-5 pilot access</strong> included with every purchase</li>
+            <li><strong>FREE 3-5 pilot access</strong> with every purchase</li>
             <li>All 5 EPICS pathways &middot; LMS compatible</li>
             <li>1-year license</li>
           </ul>
-          <div class="price-block">
-            <span class="price">$250</span>
-            <span class="lbl">per educator &middot; 1-year license</span>
+          <div class="subof-cta">
+            <a href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener" class="preview">See EPICS + Labs overview &rarr;</a>
+            <a href="/NAESP-order-form.html?add=flourish" class="btn btn-green">Order K-2 &rarr;</a>
           </div>
-          <div class="ocard-cta">
-            <a href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener" class="ocard-preview">See EPICS + Labs overview &rarr;</a>
-            <a href="/NAESP-order-form.html?add=flourish" class="btn btn-gold">Order Flourish &rarr;</a>
-          </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- Premiere · Literacy Residency Pilot -->
-      <article class="ocard" data-color="purple">
-        <div class="ocard-top">
-          <span class="ocard-badge">NAESP Conference Special</span>
-          <p class="ocard-grade">Flourish &middot; Literacy Pilot</p>
-          <h3 class="ocard-title">Literacy Residency <small>Pilot</small></h3>
-        </div>
-        <div class="ocard-body">
-          <p class="ocard-desc">The complete student bundle. 25 EPICS Health Boosts per grade, a 3-hour Literacy Inservice, and 5 monthly Literacy LAB webinars.</p>
-          <ul class="ocard-feats">
+        <article class="subof" data-color="purple">
+          <span class="subof-ey">Literacy Residency Pilot</span>
+          <h3 class="subof-h">Literacy Residency Pilot <small>the complete student bundle</small></h3>
+          <p class="subof-desc">25 EPICS Health Boosts per grade (K-2 + 3-5), a 3-hour Literacy Inservice, and 5 monthly Literacy LAB webinars &mdash; one new LAB each month.</p>
+          <ul class="subof-feats">
             <li>25 EPICS Health Boosts per grade (K-2 + 3-5)</li>
             <li>3-hour Literacy Inservice (*if in person, travel cost added)</li>
-            <li>5 monthly Literacy LAB webinars (Word Work, Word Power, Content Power, Financial &amp; Digital Literacy)</li>
+            <li>5 monthly Literacy LAB webinars: Word Work, Word Power, Content Power, Financial &amp; Digital Literacy</li>
           </ul>
-          <div class="price-block">
-            <span class="conf-pill">Conference Pricing</span>
-            <span class="strike">$10,000</span>
-            <span class="price">$8,000</span>
-            <span class="lbl">per school</span>
+          <div class="subof-cta">
+            <a href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener" class="preview">See Literacy Residency details &rarr;</a>
+            <a href="/NAESP-order-form.html?add=premiere" class="btn btn-purple">Order Literacy Residency &rarr;</a>
           </div>
-          <div class="ocard-cta">
-            <a href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener" class="ocard-preview">See Literacy Residency details &rarr;</a>
-            <a href="/NAESP-order-form.html?add=premiere" class="btn btn-gold">Order Literacy Residency &rarr;</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Transform · Complete Package (featured) -->
-      <article class="ocard" data-color="gold">
-        <div class="ocard-top">
-          <span class="ocard-badge">&#9733; Conference Special &middot; Save $5,000</span>
-          <p class="ocard-grade">Transform &middot; Complete Package</p>
-          <h3 class="ocard-title">Educator + Student <small>Wellness</small></h3>
-        </div>
-        <div class="ocard-body">
-          <p class="ocard-desc">The complete re&middot;be Ed system: <strong style="color:var(--purple);">Thrive</strong> (educator wellness) + <strong style="color:var(--purple);">Flourish</strong> (student wellness). Lights + Camera + full EPICS library, plus 25 EPICS Health Boosts per grade and the Literacy Residency Pilot. Everything your school needs &mdash; educators and students moving together.</p>
-          <ul class="ocard-feats">
-            <li><strong style="color:var(--purple);">Thrive</strong> &mdash; Lights + Camera + full EPICS library (educator wellness)</li>
-            <li><strong style="color:var(--purple);">Flourish</strong> &mdash; 25 EPICS Health Boosts per grade + Literacy Residency Pilot + 5 monthly Literacy LAB webinars (student wellness)</li>
-          </ul>
-          <div class="price-block">
-            <span class="conf-pill">Conference Pricing</span>
-            <span class="strike">$16,000</span>
-            <span class="price">$11,000</span>
-            <span class="save-tag">Save $5,000</span>
-            <span class="lbl">per school</span>
-          </div>
-          <div class="ocard-cta">
-            <a href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener" class="ocard-preview">See the complete overview &rarr;</a>
-            <a href="/NAESP-order-form.html?add=transform" class="btn btn-gold">Order Transform &rarr;</a>
-          </div>
-        </div>
-      </article>
-
+        </article>
+      </div>
     </div>
-
-    <!-- Funding sources note -->
-    <p class="funding-note">&#10003; Title IV-A &nbsp;&middot;&nbsp; &#10003; ESSER III &nbsp;&middot;&nbsp; &#10003; Mental health grants &nbsp;&middot;&nbsp; &#10003; Title I (qualifying rate) &nbsp;&middot;&nbsp; &#10003; Purchase order accepted (net 30)</p>
-
-    <!-- Action add-on note -->
-    <p class="funding-note" style="background:rgba(125,10,171,.06);border-color:rgba(125,10,171,.22);color:var(--purple-deep)"><strong>Optional add-on under Thrive: Action &mdash; ReBe ReFresh Live groups</strong> &nbsp;&middot;&nbsp; +$300 per educator &nbsp;&middot;&nbsp; 5-week live cohort &nbsp;&middot;&nbsp; check the box on the order form or email <a href="mailto:hello@justrebe.com?subject=Adding%20Action%20%2F%20ReBe%20ReFresh%20Live%20to%20our%20order" style="color:var(--purple-deep);text-decoration:underline">hello@justrebe.com</a></p>
   </section>
 
-  <!-- ORDER FORM PATH -->
-  <section class="order-path" id="order-form-path">
-    <div class="order-path-inner">
-      <span class="order-path-ey">Need a purchase order or net-30 terms?</span>
-      <h2 class="order-path-h">Two other ways to place your order.</h2>
-      <p class="order-path-sub">If your district requires a PO, formal invoice, or net-30 payment terms, use one of the two options below instead of the credit-card checkout above. We'll follow up with a formal invoice within 24 hours.</p>
-      <div class="order-path-btns">
+  <!-- ===== TRANSFORM ===== -->
+  <section class="sec dark" id="transform">
+    <div class="sec-inner">
+      <div class="sec-head" style="grid-template-columns: 1fr; text-align: center; margin-bottom: 24px;">
+        <div class="sec-copy" style="max-width: 780px; margin: 0 auto;">
+          <span class="sec-ey">Transform &middot; The complete re&middot;be Ed system</span>
+          <h2 class="sec-h">Educators <em>and</em> students, moving together.</h2>
+          <p class="sec-sub">The featured conference bundle &mdash; Thrive + Flourish, side by side.</p>
+          <div class="sec-body">
+            <p>Give your school both halves of the story at once. Educators get the full Lights + Camera experience with the EPICS library. Students get the 25 EPICS Health Boosts per grade and the Literacy Residency Pilot &mdash; the same framework, in every classroom.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="transform-card">
+        <span class="tc-badge">&#9733; Conference Special</span>
+        <h3 class="tc-h">Transform &mdash; Complete Package</h3>
+        <p class="tc-sub">Thrive (educator wellness) + Flourish (student wellness)</p>
+        <ul>
+          <li><strong>Thrive</strong> &mdash; Lights + Camera + full EPICS video library <em>(educator wellness)</em></li>
+          <li><strong>Flourish</strong> &mdash; 25 EPICS Health Boosts per grade (K-2 + 3-5) + Literacy Residency Pilot + 5 monthly Literacy LAB webinars <em>(student wellness)</em></li>
+          <li>Optional add-on: <strong>Action</strong> (ReBe ReFresh Live groups) &mdash; add to Transform any time</li>
+        </ul>
+        <div class="tc-cta">
+          <a class="btn btn-gold" href="/NAESP-order-form.html?add=transform">See Transform pricing &amp; order &rarr;</a>
+          <a class="btn btn-outline-white" href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener">Download the overview PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST BAR ===== -->
+  <section class="trust">
+    <div class="trust-inner">
+      <span class="trust-tag">Title IV-A</span>
+      <span class="trust-tag">ESSER III</span>
+      <span class="trust-tag">Mental-health grants</span>
+      <span class="trust-tag">Title I (ask about qualifying rate)</span>
+      <span class="trust-tag">Purchase order accepted (net 30)</span>
+    </div>
+  </section>
+
+  <!-- ===== ORDER PATH ===== -->
+  <section class="orderpath" id="order-form-path">
+    <div class="orderpath-inner">
+      <span class="orderpath-ey">Ready to order?</span>
+      <h2 class="orderpath-h">Fill it out online &mdash; or <em>print the PDF</em>.</h2>
+      <p class="orderpath-sub">Conference pricing is reserved through the order form. You'll see the full price list, select what you need, and choose how you'd like to pay (credit card, purchase order, or check).</p>
+      <div class="orderpath-btns">
         <a class="btn btn-teal" href="/NAESP-order-form.html">Fill out order form online &rarr;</a>
         <a class="btn btn-outline-teal" href="/ReBe_Offerings_OrderForm.pdf" target="_blank" rel="noopener">Download printable PDF &darr;</a>
       </div>
+      <p class="orderpath-note">Questions? Email <a href="mailto:hello@justrebe.com" style="color:var(--teal); text-decoration: underline;">hello@justrebe.com</a></p>
     </div>
   </section>
 
-  <!-- Post-offers back nav -->
-  <div class="back-strip">
-    <a href="/NAESP" class="back-link">&larr; Back to NAESP overview</a>
-  </div>
-
-  <!-- DOCUMENTS -->
+  <!-- ===== DOCS ===== -->
   <section class="docs" id="documents">
-    <div class="docs-head">
-      <p class="offers-ey">Take it with you</p>
-      <h2 class="offers-h">Documents &amp; resources</h2>
-      <p class="offers-sub">One-pagers, framework overviews, sample lessons, and the principal-ready evidence binder.</p>
-    </div>
-
-    <div class="docs-grid">
-      <a class="doc" href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener">
-        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
-        <div class="doc-info">
-          <h4>ReBe Ed Overview</h4>
-          <p>One-page summary of the whole platform for principals + district leaders</p>
-          <span class="download-tag">Download PDF &rarr;</span>
-        </div>
-      </a>
-      <a class="doc" href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener">
-        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
-        <div class="doc-info">
-          <h4>Residency Pilot Details</h4>
-          <p>What the 5-month residency pilot looks like, fees, next steps</p>
-          <span class="download-tag">Download PDF &rarr;</span>
-        </div>
-      </a>
-      <a class="doc" href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener">
-        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
-        <div class="doc-info">
-          <h4>EPICS + Literacy LABS<sup>&trade;</sup></h4>
-          <p>Sample lessons + the full EPICS pathway map</p>
-          <span class="download-tag">Download PDF &rarr;</span>
-        </div>
-      </a>
-      <a class="doc doc-placeholder" href="#" aria-disabled="true">
-        <div class="doc-icon">PDF<span class="ext">PDF</span></div>
-        <div class="doc-info">
-          <h4>Lights, Camera, Action</h4>
-          <p>Educator PD one-pager &mdash; the 3-phase framework at a glance</p>
-          <span class="pending-tag">Coming soon</span>
-        </div>
-      </a>
+    <div class="docs-inner">
+      <div class="docs-head">
+        <span class="sec-ey">Take it with you</span>
+        <h2 class="orderpath-h">Documents &amp; resources</h2>
+        <p class="orderpath-sub">One-pagers, framework overviews, sample lessons.</p>
+      </div>
+      <div class="docs-grid">
+        <a class="doc" href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-info">
+            <h4>ReBe Ed Overview</h4>
+            <p>One-page summary of the whole platform for principals + district leaders</p>
+            <span class="download-tag">Download PDF &rarr;</span>
+          </div>
+        </a>
+        <a class="doc" href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-info">
+            <h4>Literacy Residency Pilot</h4>
+            <p>What the pilot looks like &mdash; scope, timeline, next steps</p>
+            <span class="download-tag">Download PDF &rarr;</span>
+          </div>
+        </a>
+        <a class="doc" href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-info">
+            <h4>EPICS + Literacy LABS<sup>&trade;</sup></h4>
+            <p>Sample lessons + the full EPICS pathway map</p>
+            <span class="download-tag">Download PDF &rarr;</span>
+          </div>
+        </a>
+        <a class="doc" href="/ReBe_Offerings_OrderForm.pdf" target="_blank" rel="noopener">
+          <div class="doc-icon">PDF</div>
+          <div class="doc-info">
+            <h4>Order Form (printable)</h4>
+            <p>The full pricing sheet &mdash; print, fill, mail or scan back</p>
+            <span class="download-tag">Download PDF &rarr;</span>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="ctasec" id="contact">
-    <div class="ctasec-inner">
-      <p class="cta-ey">Let's talk</p>
-      <h2 class="cta-h">Ready to bring this to your students?</h2>
-      <p class="cta-sub">Email us with what your school needs most. We'll set up a 20-minute call.</p>
-      <div class="cta-btns">
-        <a class="btn btn-gold" href="mailto:hello@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BK-2%20Health%20Boosts%20%2F%20Residency%20%2F%203-5%20Pilot%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Email us about your school &rarr;</a>
-        <a class="btn btn-outline-white" href="https://www.justrebe.com/education" target="_blank" rel="noopener">Learn more at justrebe.com/education &rarr;</a>
-      </div>
-      <p class="cta-emails">Questions? <a href="mailto:hello@justrebe.com">hello@justrebe.com</a></p>
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <h2>Let's talk. <em>Bring re&middot;be Ed to your school.</em></h2>
+    <p>Tell us what your school needs most. We'll set up a 20-minute call and walk through the fit &mdash; no pressure, just clarity.</p>
+    <div class="contact-btns">
+      <a class="btn btn-gold" href="mailto:hello@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BThrive%20%2F%20K-2%20Health%20Boosts%20%2F%20Literacy%20Residency%20%2F%20Transform%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Email us about your school &rarr;</a>
+      <a class="btn btn-outline-white" href="/NAESP-order-form.html">Go to the order form &rarr;</a>
     </div>
+    <p class="contact-mail">Questions? <a href="mailto:hello@justrebe.com">hello@justrebe.com</a></p>
   </section>
 
 </main>
 
 <footer>
   <p>ReBe Ed &mdash; part of the ReBe family. Rebuilding people from the inside out.</p>
-  <p>&copy; 2026 JustReBe LLC &middot; <a href="https://www.justrebe.com">justrebe.com</a></p>
+  <p>&copy; 2026 Just ReBe, LLC &middot; <a href="https://www.justrebe.com">justrebe.com</a> &middot; Better Me. Better We.</p>
 </footer>
 
 </body>
