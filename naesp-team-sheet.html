@@ -5,12 +5,12 @@
 <title>ReBe Ed — NAESP 2026 Product Sheet</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  @page { size: letter portrait; margin: 0.45in 0.5in; }
+  @page { size: letter portrait; margin: 0.4in 0.5in; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
     color: #1A1A1A;
-    line-height: 1.42;
-    font-size: 10.5px;
+    line-height: 1.4;
+    font-size: 10px;
   }
 
   :root {
@@ -20,7 +20,6 @@
     --teal-deep: #023d4f;
     --gold: #FEB909;
     --gold-deep: #e5a708;
-    --orange: #F06905;
     --green: #638D13;
     --green-deep: #527610;
     --muted: #6b7278;
@@ -30,136 +29,106 @@
   /* Header */
   .head {
     text-align: center;
-    padding-bottom: 12px;
-    margin-bottom: 16px;
-    border-bottom: 3px solid var(--teal);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid var(--teal);
   }
   .head-eyebrow {
-    font-size: 9px; font-weight: 800; letter-spacing: .28em; text-transform: uppercase;
-    color: var(--purple);
-    margin-bottom: 5px;
+    font-size: 8.5px; font-weight: 800; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 3px;
   }
   .head-title {
-    font-size: 20px; font-weight: 900; color: var(--teal-deep);
+    font-size: 17px; font-weight: 900; color: var(--teal-deep);
     letter-spacing: -.02em;
   }
   .head-sub {
-    font-size: 10.5px; font-weight: 700; letter-spacing: .04em;
-    color: var(--muted);
-    margin-top: 3px;
+    font-size: 9.5px; font-weight: 700; letter-spacing: .04em;
+    color: var(--muted); margin-top: 2px;
   }
 
   /* Group headers */
   .group-h {
     display: flex; align-items: baseline; justify-content: space-between;
-    padding: 6px 12px 5px;
-    margin: 14px 0 10px;
+    padding: 4px 10px 3px;
+    margin: 10px 0 6px;
     border-bottom: 1.5px solid var(--purple);
   }
   .group-h.gold { border-bottom-color: var(--gold-deep); }
   .group-name {
-    font-size: 13px; font-weight: 900;
+    font-size: 12px; font-weight: 900;
     color: var(--purple);
     letter-spacing: .04em; text-transform: uppercase;
   }
   .group-h.gold .group-name { color: var(--gold-deep); }
   .group-tag {
-    font-size: 9.5px; font-weight: 700; font-style: italic;
+    font-size: 9px; font-weight: 700; font-style: italic;
     color: var(--muted);
-    letter-spacing: 0; text-transform: none;
   }
 
   /* Product cards */
-  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .row.single { grid-template-columns: 1fr; }
+  .row.thrive { grid-template-columns: 1.7fr 1fr; }
   .prod {
     border: 1.5px solid var(--field);
-    border-radius: 8px;
-    padding: 12px 14px;
+    border-radius: 7px;
+    padding: 9px 12px;
     background: #fff;
     page-break-inside: avoid;
   }
   .prod.transform { border: 2.5px solid var(--gold); background: #FFFBEC; }
-  .prod.addon { border: 1.5px dashed rgba(125,10,171,.35); background: rgba(125,10,171,.04); }
+  .prod.addon { border: 1.5px dashed rgba(125,10,171,.4); background: rgba(125,10,171,.04); }
 
   .prod-header {
     display: flex; align-items: baseline; justify-content: space-between;
-    gap: 10px; margin-bottom: 6px;
+    gap: 8px; margin-bottom: 3px;
   }
   .prod-title {
-    font-size: 13.5px; font-weight: 900; color: var(--teal-deep);
+    font-size: 12.5px; font-weight: 900; color: var(--teal-deep);
     letter-spacing: -.01em; line-height: 1.2;
   }
-  .prod.transform .prod-title { color: var(--teal-deep); }
-  .prod.addon .prod-title { color: var(--purple-deep); font-size: 12.5px; }
+  .prod.addon .prod-title { color: var(--purple-deep); font-size: 11.5px; }
   .prod-tag {
     display: inline-block; flex-shrink: 0;
-    font-size: 8px; font-weight: 800;
+    font-size: 7.5px; font-weight: 800;
     letter-spacing: .14em; text-transform: uppercase;
     color: var(--muted);
     background: #F5F9FC;
-    padding: 3px 8px; border-radius: 999px;
+    padding: 2px 7px; border-radius: 999px;
     white-space: nowrap;
   }
   .prod.addon .prod-tag { color: var(--purple); background: rgba(125,10,171,.10); }
   .prod.transform .prod-tag { color: var(--teal-deep); background: var(--gold); }
-  .prod-sub {
-    font-size: 10px; color: var(--muted);
-    font-style: italic;
-    margin-bottom: 8px;
-  }
+
   .prod-price {
-    display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
-    margin-bottom: 8px;
+    display: flex; align-items: baseline; gap: 5px; flex-wrap: wrap;
+    margin: 5px 0 7px;
   }
   .prod-price .amt {
-    font-size: 20px; font-weight: 900; color: var(--teal);
+    font-size: 18px; font-weight: 900; color: var(--teal);
     letter-spacing: -.025em; line-height: 1;
   }
-  .prod.addon .prod-price .amt { font-size: 18px; }
+  .prod.addon .prod-price .amt { font-size: 16px; }
   .prod-price .unit {
-    font-size: 10px; font-weight: 700; color: var(--muted);
-    letter-spacing: .02em;
+    font-size: 9px; font-weight: 700; color: var(--muted);
   }
   .prod-price .strike {
-    font-size: 11px; color: var(--muted);
+    font-size: 10px; color: var(--muted);
     text-decoration: line-through;
   }
   .prod-price .save {
-    font-size: 10px; font-weight: 800; color: var(--green-deep);
+    font-size: 9px; font-weight: 800; color: var(--green-deep);
     background: rgba(99,141,19,.10);
-    padding: 2px 7px; border-radius: 999px;
+    padding: 1px 6px; border-radius: 999px;
   }
-
-  .prod-block {
-    margin: 8px 0 0;
-    padding: 7px 10px;
-    background: #F8FAFC;
-    border-left: 3px solid var(--teal);
-    border-radius: 4px;
-  }
-  .prod.transform .prod-block { border-left-color: var(--gold-deep); background: rgba(254,185,9,.08); }
-  .prod.addon .prod-block { border-left-color: var(--purple); background: rgba(125,10,171,.05); }
-  .prod-block-h {
-    font-size: 9.5px; font-weight: 900;
-    letter-spacing: .1em; text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 3px;
-  }
-  .prod.transform .prod-block-h { color: var(--gold-deep); }
-  .prod.addon .prod-block-h { color: var(--purple); }
-  .prod-block-body { font-size: 10.5px; color: #333; line-height: 1.5; }
-  .prod-block-body strong { color: var(--teal-deep); font-weight: 700; }
-  .prod.transform .prod-block-body strong { color: var(--teal-deep); }
-  .prod.addon .prod-block-body strong { color: var(--purple-deep); }
 
   .prod-feats {
-    list-style: none; padding: 0; margin: 6px 0 0;
-    font-size: 10px; color: #333;
+    list-style: none; padding: 0; margin: 4px 0 0;
+    font-size: 9.5px; color: #333;
   }
   .prod-feats li {
-    padding: 2px 0 2px 12px;
-    line-height: 1.45;
+    padding: 1.5px 0 1.5px 11px;
+    line-height: 1.4;
     position: relative;
   }
   .prod-feats li::before {
@@ -167,7 +136,7 @@
     position: absolute; left: 0;
     color: var(--teal);
     font-weight: 800;
-    font-size: 10px;
+    font-size: 9.5px;
   }
   .prod.transform .prod-feats li::before { color: var(--gold-deep); }
   .prod.addon .prod-feats li::before { color: var(--purple); }
@@ -175,11 +144,11 @@
 
   /* Footer */
   .foot {
-    margin-top: 16px;
-    padding-top: 10px;
+    margin-top: 12px;
+    padding-top: 8px;
     border-top: 1px solid var(--field);
     text-align: center;
-    font-size: 9.5px;
+    font-size: 9px;
     color: var(--muted);
     letter-spacing: .04em;
   }
@@ -194,61 +163,48 @@
   <div class="head-sub">Conference-only pricing reserved through NAESP</div>
 </div>
 
-<!-- ==================== GROUP 1: THRIVE ==================== -->
+<!-- THRIVE -->
 <div class="group-h">
   <span class="group-name">Thrive</span>
   <span class="group-tag">Educator Wellness</span>
 </div>
 
-<div class="row single">
+<div class="row thrive">
   <div class="prod">
     <div class="prod-header">
       <div class="prod-title">Lights + Camera Package</div>
       <span class="prod-tag">Whole-school PD</span>
     </div>
-    <div class="prod-sub">Educator wellness &mdash; give your team the tools to be well themselves.</div>
     <div class="prod-price">
       <span class="amt">$4,000</span>
       <span class="unit">per school</span>
       <span class="strike">$6,000</span>
     </div>
-
-    <div class="prod-block">
-      <div class="prod-block-h">Lights &mdash; Awareness (Entry point)</div>
-      <div class="prod-block-body">
-        3-hour Inservice &mdash; in-person or online, whole faculty, mixed educators + admin. ACEs overview &middot; EPICS pathways &middot; genre portraits &middot; student Health Boost demo &middot; Science of Reading Foundations &middot; Literacy LABS preview. <strong>No sharing required</strong> &mdash; every activity is private. <em>(*if in-person, travel cost added)</em>
-      </div>
-    </div>
-
-    <div class="prod-block">
-      <div class="prod-block-h">Camera &mdash; Self-directed clearinghouse</div>
-      <div class="prod-block-body">
-        Full-year <strong>EPICS video library</strong> (25 concepts &middot; 3-minute videos &middot; always accessible). Curated resource links, webinar on-ramps, and <strong>5 self-discovery journeys</strong>: Receive &middot; Reveal &middot; Reflect &middot; Release &middot; Relaunch. Year-round educator community access.
-      </div>
-    </div>
+    <ul class="prod-feats">
+      <li><strong>Lights</strong> &mdash; 3-hour Inservice (in-person or online)</li>
+      <li><strong>Camera</strong> &mdash; full-year EPICS video library (25 concepts)</li>
+      <li>5 self-discovery journeys &middot; year-round community access</li>
+      <li>ACEs overview &middot; EPICS pathways &middot; genre portraits</li>
+    </ul>
   </div>
-</div>
 
-<!-- Action add-on -->
-<div class="row single" style="margin-top: 10px;">
   <div class="prod addon">
     <div class="prod-header">
-      <div class="prod-title">Action &mdash; ReBe ReFresh Live</div>
-      <span class="prod-tag">Optional add-on</span>
+      <div class="prod-title">Action &mdash; ReFresh Live</div>
+      <span class="prod-tag">Add-on</span>
     </div>
-    <div class="prod-sub">Where the story actually changes &mdash; educators move into live community.</div>
     <div class="prod-price">
       <span class="amt">+$300</span>
       <span class="unit">per educator</span>
     </div>
     <ul class="prod-feats">
-      <li><strong>ReBe ReFresh Live groups</strong> &mdash; 5-week small-group experience, online, live, facilitated</li>
-      <li><strong>Confidant / expert-led group sessions</strong> on EPICS topics &mdash; ongoing groups by health domain (Emotional, Physical, Intellectual, Cultural, Social/Spiritual)</li>
+      <li>5-week live cohort &middot; online &middot; facilitated</li>
+      <li>Confidant / expert-led EPICS groups</li>
     </ul>
   </div>
 </div>
 
-<!-- ==================== GROUP 2: FLOURISH ==================== -->
+<!-- FLOURISH -->
 <div class="group-h">
   <span class="group-name">Flourish</span>
   <span class="group-tag">Student Wellness</span>
@@ -258,27 +214,24 @@
   <div class="prod">
     <div class="prod-header">
       <div class="prod-title">K-2 Health Boosts</div>
-      <span class="prod-tag">FREE 3-5 Pilot included</span>
+      <span class="prod-tag">FREE 3-5 Pilot</span>
     </div>
-    <div class="prod-sub">Whole-health wellness for K-2 students, buyer feedback shapes the 3-5 product.</div>
     <div class="prod-price">
       <span class="amt">$250</span>
-      <span class="unit">per educator &middot; 1-year license</span>
+      <span class="unit">per educator &middot; 1-year</span>
     </div>
     <ul class="prod-feats">
       <li><strong>25 EPICS Health Boosts per grade</strong> &middot; K-2</li>
-      <li><strong>FREE access to the 3-5 pilot</strong> with every purchase</li>
-      <li>7-10 min lessons &middot; all 5 EPICS pathways</li>
-      <li>LMS compatible &middot; 1-year license</li>
+      <li><strong>FREE 3-5 pilot access</strong> with every purchase</li>
+      <li>7-10 min lessons &middot; LMS compatible</li>
     </ul>
   </div>
 
   <div class="prod">
     <div class="prod-header">
       <div class="prod-title">Literacy Residency Pilot</div>
-      <span class="prod-tag">Complete student bundle</span>
+      <span class="prod-tag">Complete bundle</span>
     </div>
-    <div class="prod-sub">Everything students get, plus a full Literacy layer for the school.</div>
     <div class="prod-price">
       <span class="amt">$8,000</span>
       <span class="unit">per school</span>
@@ -286,13 +239,13 @@
     </div>
     <ul class="prod-feats">
       <li>25 EPICS Health Boosts per grade <strong>(K-2 + 3-5)</strong></li>
-      <li>3-hour Literacy Inservice <em>(*travel added if in person)</em></li>
-      <li>5 monthly Literacy LAB webinars: <strong>Word Work &middot; Word Power &middot; Content Power &middot; Financial &middot; Digital Literacy</strong></li>
+      <li>3-hour Literacy Inservice</li>
+      <li>5 monthly LAB webinars (Word Work, Word Power, Content Power, Financial + Digital Literacy)</li>
     </ul>
   </div>
 </div>
 
-<!-- ==================== GROUP 3: TRANSFORM ==================== -->
+<!-- TRANSFORM -->
 <div class="group-h gold">
   <span class="group-name">&#9733; Transform</span>
   <span class="group-tag">Complete Package &middot; Conference Special</span>
@@ -304,26 +257,16 @@
       <div class="prod-title">Educator + Student Wellness</div>
       <span class="prod-tag">Save $5,000</span>
     </div>
-    <div class="prod-sub">The complete re&middot;be Ed system &mdash; Thrive + Flourish, side by side.</div>
     <div class="prod-price">
       <span class="amt">$11,000</span>
       <span class="unit">per school</span>
       <span class="strike">$16,000</span>
       <span class="save">Save $5,000</span>
     </div>
-
-    <div class="prod-block">
-      <div class="prod-block-h">Includes Thrive (educator wellness)</div>
-      <div class="prod-block-body">Lights + Camera package &mdash; 3-hour Inservice + full-year EPICS video library + community access.</div>
-    </div>
-
-    <div class="prod-block">
-      <div class="prod-block-h">Includes Flourish (student wellness)</div>
-      <div class="prod-block-body">25 EPICS Health Boosts per grade (K-2 + 3-5) + <strong>Literacy Residency Pilot</strong> + 5 monthly Literacy LAB webinars.</div>
-    </div>
-
-    <ul class="prod-feats" style="margin-top:8px;">
-      <li>Optional add-on: <strong>Action</strong> (ReBe ReFresh Live) &mdash; +$300/educator</li>
+    <ul class="prod-feats">
+      <li><strong>Thrive</strong> &mdash; Lights + Camera + full EPICS library</li>
+      <li><strong>Flourish</strong> &mdash; K-2 + 3-5 Health Boosts + Literacy Residency Pilot + 5 LAB webinars</li>
+      <li>Optional add-on: Action (+$300/educator)</li>
     </ul>
   </div>
 </div>
