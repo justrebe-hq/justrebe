@@ -230,8 +230,10 @@
   .price-block { padding: 18px 20px; background: #F5F9FC; border-radius: 14px; margin-bottom: 22px; display: flex; align-items: baseline; gap: 10px 12px; flex-wrap: wrap; min-height: 62px; }
   .price-block .price { font-size: 30px; font-weight: 900; color: var(--teal); letter-spacing: -.02em; line-height: 1; }
   .price-block .strike { font-size: 15px; color: var(--muted); text-decoration: line-through; }
-  /* Conference-price highlight pill */
-  .price-block .conf-pill { flex: 1 0 100%; margin: 0 0 4px; display: inline-block; align-self: flex-start; background: linear-gradient(135deg, #FEB909 0%, #F5A800 100%); color: #23170a; font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; box-shadow: 0 2px 6px rgba(254,185,9,.35); line-height: 1.4; width: fit-content; }
+  /* Small "Conference Pricing" flag, kept on its own row above the prices */
+  .price-block .conf-pill { order: -2; align-self: flex-start; margin: 0; display: inline-block; background: #FEB909; color: #23170a; font-size: 8px; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; line-height: 1.4; white-space: nowrap; vertical-align: middle; }
+  /* When a pill is present, insert a zero-height flex-break after it so strike/price wrap to the next row without stretching the pill */
+  .price-block:has(.conf-pill)::after { content: ''; order: -1; flex-basis: 100%; height: 0; margin: 0; padding: 0; }
   /* Label ALWAYS wraps to its own line so long labels can never overflow the card. */
   .price-block .lbl { flex: 1 0 100%; margin: 0; font-size: 10px; font-weight: 700; letter-spacing: .10em; text-transform: uppercase; color: var(--muted); line-height: 1.4; }
   .price-block.free .price { color: var(--green); font-style: italic; }
@@ -399,7 +401,7 @@
             <li>Year-round educator community access</li>
           </ul>
           <div class="price-block">
-            <span class="conf-pill">Conference Price</span>
+            <span class="conf-pill">Conference Pricing</span>
             <span class="strike">$6,000</span>
             <span class="price">$4,000</span>
           </div>
@@ -451,7 +453,7 @@
             <li>5 monthly Literacy LAB webinars (Word Work, Word Power, Content Power, Financial &amp; Digital Literacy)</li>
           </ul>
           <div class="price-block">
-            <span class="conf-pill">Conference Price</span>
+            <span class="conf-pill">Conference Pricing</span>
             <span class="strike">$10,000</span>
             <span class="price">$8,000</span>
             <span class="lbl">per school</span>
@@ -477,7 +479,7 @@
             <li><strong>Student wellness</strong> &mdash; Premiere (K-2 + 3-5 Health Boosts + Literacy Inservice + 5 monthly Literacy LAB webinars)</li>
           </ul>
           <div class="price-block">
-            <span class="conf-pill">Conference &middot; save $5,000</span>
+            <span class="conf-pill">Conference Pricing &middot; save $5,000</span>
             <span class="strike">$16,000</span>
             <span class="price">$11,000</span>
             <span class="lbl">per school</span>
