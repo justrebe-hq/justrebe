@@ -756,8 +756,8 @@
         <label class="prow" data-product-row>
           <input type="checkbox" name="products" value="premiere">
           <div>
-            <p class="ptitle">Premiere &mdash; Literacy Residency Pilot</p>
-            <p class="pdesc">K-2 + 3-5 Health Boosts + 3-hour Literacy Inservice + 5 monthly Literacy LAB webinars.</p>
+            <p class="ptitle">Literacy Residency Pilot</p>
+            <p class="pdesc">25 EPICS Health Boosts per grade (K-2 + 3-5) + 3-hour Literacy Inservice (*if in person, travel cost added) + 5 monthly Literacy LAB webinars.</p>
           </div>
           <div class="pprice">
             <span class="conf-pill">Conference Pricing</span>
@@ -774,7 +774,7 @@
           <input type="checkbox" name="products" value="transform">
           <div>
             <p class="ptitle">Educator + Student Wellness <span style="color:var(--gold-deep,#e5a708);">&#9733; Conference Special</span></p>
-            <p class="pdesc">Thrive (educator wellness: Lights + Camera + full EPICS library) + Premiere (student wellness: K-2 + 3-5 Health Boosts + Literacy Inservice + 5 monthly Literacy LAB webinars). Everything your school needs.</p>
+            <p class="pdesc"><strong style="color:var(--purple);">Thrive</strong> (educator wellness: Lights + Camera + full EPICS library) + <strong style="color:var(--purple);">Flourish</strong> (student wellness: 25 EPICS Health Boosts per grade + Literacy Residency Pilot + 5 monthly Literacy LAB webinars). Everything your school needs.</p>
           </div>
           <div class="pprice">
             <span class="conf-pill">Conference Pricing</span>
@@ -874,10 +874,35 @@
   var PRICES = {
     thrive:    { amount: 4000,  label: 'Thrive — Lights + Camera package',        fixedQty: true  },
     flourish:  { amount: 250,   label: 'Flourish — K-2 Health Boosts per grade (+ free 3-5 pilot)',  qtyInput: 'qty_flourish', unitLabel: 'educators' },
-    premiere:  { amount: 8000,  label: 'Premiere — Literacy Residency Pilot',     fixedQty: true  },
+    premiere:  { amount: 8000,  label: 'Literacy Residency Pilot',                fixedQty: true  },
     transform: { amount: 11000, label: 'Transform — Educator + Student Wellness ★', fixedQty: true },
     action:    { amount: 300,   label: '*Action — ReBe ReFresh Live (add-on)',    qtyInput: 'qty_action',   unitLabel: 'educators' },
   };
+
+  // Transform is the all-in-one bundle — checking it uncheck's the individual
+  // components (thrive/flourish/premiere), and vice versa. Action add-on stays.
+  var EXCLUSIVE_WITH_TRANSFORM = ['thrive', 'flourish', 'premiere'];
+  function enforceTransformExclusivity(changedValue) {
+    var transformCb = form.querySelector('input[name="products"][value="transform"]');
+    if (!transformCb) return;
+    if (changedValue === 'transform' && transformCb.checked) {
+      EXCLUSIVE_WITH_TRANSFORM.forEach(function (v) {
+        var cb = form.querySelector('input[name="products"][value="' + v + '"]');
+        if (cb && cb.checked) {
+          cb.checked = false;
+          var row = cb.closest('[data-product-row]');
+          if (row) row.classList.remove('selected');
+        }
+      });
+    } else if (EXCLUSIVE_WITH_TRANSFORM.indexOf(changedValue) !== -1) {
+      var cb = form.querySelector('input[name="products"][value="' + changedValue + '"]');
+      if (cb && cb.checked && transformCb.checked) {
+        transformCb.checked = false;
+        var row = transformCb.closest('[data-product-row]');
+        if (row) row.classList.remove('selected');
+      }
+    }
+  }
 
   // Highlight product / payment rows when selected
   document.querySelectorAll('[data-product-row], [data-payment-row]').forEach(function (row) {
@@ -888,6 +913,9 @@
     input.addEventListener('change', function () {
       if (input.type === 'radio') {
         document.querySelectorAll('[data-payment-row]').forEach(function (r) { r.classList.remove('selected'); });
+      }
+      if (input.name === 'products') {
+        enforceTransformExclusivity(input.value);
       }
       updateState();
       recalcTotal();
