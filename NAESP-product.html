@@ -124,6 +124,36 @@
     max-width: 620px; margin: 0 auto;
   }
 
+  /* ===== EPICS explainer callout ===== */
+  .epics-note {
+    padding: 26px 24px;
+    background: linear-gradient(180deg, #FDFCFF 0%, #F5F0FA 100%);
+    border-bottom: 1px solid #EBE3F2;
+  }
+  .epics-note-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+  .epics-note-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--purple);
+    background: rgba(125,10,171,.08);
+    padding: 4px 12px; border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .epics-note-body { font-size: 15px; color: var(--body); line-height: 1.6; max-width: 900px; margin: 0 auto; }
+  .epics-note-body strong { color: var(--purple); font-weight: 800; }
+  .epics-word {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin: 3px 8px 3px 0;
+    padding: 3px 9px;
+    background: #fff;
+    border: 1px solid #E4EDF0;
+    border-radius: 999px;
+    font-size: 13px; font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .epics-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+
   /* ===== Section header block ===== */
   .sec { padding: 96px 24px; }
   .sec.alt { background: #F5F9FC; }
@@ -203,8 +233,8 @@
   .stage[data-stage="action"] .stage-h { color: var(--purple-deep); }
   .stage-sub { font-size: 13.5px; color: var(--muted); font-style: italic; margin-bottom: 14px; line-height: 1.4; }
   .stage-feats { list-style: none; padding: 0; margin: 0; }
-  .stage-feats li { font-size: 14px; color: var(--body); padding: 5px 0; line-height: 1.55; display: flex; gap: 8px; align-items: flex-start; }
-  .stage-feats li::before { content: '→'; color: var(--muted); font-weight: 800; flex-shrink: 0; line-height: 1.55; }
+  .stage-feats li { font-size: 14px; color: var(--body); padding: 5px 0 5px 20px; line-height: 1.55; position: relative; }
+  .stage-feats li::before { content: '→'; color: var(--muted); font-weight: 800; line-height: 1.55; position: absolute; left: 0; top: 5px; }
   .stage[data-stage="lights"] .stage-feats li::before { color: var(--green); }
   .stage[data-stage="camera"] .stage-feats li::before { color: var(--teal); }
   .stage[data-stage="action"] .stage-feats li::before { color: var(--purple); }
@@ -245,8 +275,8 @@
   .subof-desc strong { color: var(--green-deep); font-weight: 800; }
   .subof[data-color="purple"] .subof-desc strong { color: var(--purple); }
   .subof-feats { list-style: none; padding: 0; margin: 0 0 22px; }
-  .subof-feats li { font-size: 14px; color: var(--body); padding: 5px 0; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
-  .subof-feats li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; line-height: 1.55; }
+  .subof-feats li { font-size: 14px; color: var(--body); padding: 5px 0 5px 22px; line-height: 1.55; position: relative; }
+  .subof-feats li::before { content: '✓'; color: var(--green); font-weight: 800; line-height: 1.55; position: absolute; left: 0; top: 5px; }
   .subof[data-color="purple"] .subof-feats li::before { color: var(--purple); }
   .subof-feats li strong { color: var(--ink); font-weight: 700; }
   .subof-cta { margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; }
@@ -271,8 +301,8 @@
     backdrop-filter: blur(4px);
   }
   .transform-card ul { list-style: none; padding: 0; margin: 18px 0 26px; display: grid; gap: 12px; }
-  .transform-card ul li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; color: rgba(255,255,255,.92); line-height: 1.55; }
-  .transform-card ul li::before { content: '★'; color: var(--gold); font-weight: 900; flex-shrink: 0; font-size: 15px; line-height: 1.6; }
+  .transform-card ul li { padding-left: 24px; font-size: 16px; color: rgba(255,255,255,.92); line-height: 1.55; position: relative; }
+  .transform-card ul li::before { content: '★'; color: var(--gold); font-weight: 900; font-size: 15px; line-height: 1.6; position: absolute; left: 0; top: 0; }
   .transform-card ul li strong { color: #fff; font-weight: 800; }
   .transform-card .tc-badge {
     display: inline-block;
@@ -400,6 +430,20 @@
     </div>
   </section>
 
+  <!-- ===== EPICS explainer callout ===== -->
+  <section class="epics-note">
+    <div class="epics-note-inner">
+      <span class="epics-note-tag">What is EPICS?</span>
+      <p class="epics-note-body"><strong>EPICS</strong> is the re&middot;be framework for whole-health wellness &mdash; five pathways every educator and student can grow in:
+        <span class="epics-word"><span class="epics-dot" style="background:#B02929;"></span>Emotional</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--green);"></span>Physical</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--teal);"></span>Intellectual</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--orange);"></span>Cultural</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--purple);"></span>Social / Spiritual</span>
+      </p>
+    </div>
+  </section>
+
   <!-- ===== EDUCATOR WELLNESS (Thrive) ===== -->
   <section class="sec" id="educators">
     <div class="sec-inner">
@@ -410,7 +454,7 @@
           <p class="sec-sub">Give your educators the tools to be well themselves &mdash; so they can show up whole for their students.</p>
           <div class="sec-body">
             <p>A three-stage experience that opens the conversation without threatening it. Educators start with awareness, deepen at their own pace, and come into community only when they're ready.</p>
-            <p><strong>Lights</strong> is the entry. Camera is the self-directed library. Action is the live community &mdash; and it's an optional add-on when your team is ready.</p>
+            <p><strong>Lights</strong> is the entry. <strong>Camera</strong> is the self-directed library. <strong>Action</strong> is the live community &mdash; and it's an <strong>optional add-on</strong> when your team is ready.</p>
           </div>
         </div>
         <div class="sec-photo educators" role="img" aria-label="Educators in professional development"></div>
@@ -445,15 +489,14 @@
 
         <article class="stage" data-stage="action">
           <span class="stage-num">3</span>
-          <span class="stage-tag">Community + 1:1</span>
-          <h3 class="stage-h">Action &mdash; The rewrite</h3>
+          <span class="stage-tag">Community &middot; Optional add-on</span>
+          <h3 class="stage-h">Action &mdash; The refresh</h3>
           <p class="stage-sub">Where the story actually changes. Educators move from private self-discovery into live human community &mdash; supported, seen, and no longer carrying it alone.</p>
           <ul class="stage-feats">
-            <li><strong>ReBe ReFresh Live groups</strong> &middot; 5-week small-group experience &middot; online &middot; live</li>
-            <li><strong>EPICS topical community groups</strong> &middot; ongoing groups by health domain (Emotional, Physical, Intellectual, Cultural, Social/Spiritual)</li>
-            <li><strong>Up to 20 private 1:1 Confidant sessions</strong> &mdash; administrator option, personal support for educators who need it</li>
-            <li><em>Optional add-on. Add to Thrive or Transform.</em></li>
+            <li><strong>ReBe ReFresh Live groups</strong> &mdash; 5-week small-group experience &middot; online &middot; live</li>
+            <li><strong>Confidant / expert-led group sessions</strong> on EPICS topics &mdash; ongoing groups by health domain (Emotional, Physical, Intellectual, Cultural, Social/Spiritual)</li>
           </ul>
+          <p style="margin-top:14px; font-size:12.5px; color:var(--muted); font-style:italic;">Add to Thrive or Transform any time.</p>
         </article>
       </div>
 
