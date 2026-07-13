@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ReBe Ed — NAESP 2026 Team Reference</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @page { size: letter portrait; margin: 0.4in 0.5in; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    color: #1A1A1A;
+    line-height: 1.4;
+    font-size: 10.5px;
+  }
+
+  :root {
+    --purple: #7D0AAB;
+    --teal: #034E64;
+    --teal-deep: #023d4f;
+    --gold: #FEB909;
+    --gold-deep: #e5a708;
+    --orange: #F06905;
+    --green: #638D13;
+    --green-deep: #527610;
+    --muted: #6b7278;
+    --field: #DDE4EA;
+    --field-bg: #F5F9FC;
+  }
+
+  /* ===== Header ===== */
+  .head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--teal-deep);
+    color: #fff;
+    border-radius: 6px;
+    margin-bottom: 14px;
+  }
+  .head-title { font-size: 15px; font-weight: 900; letter-spacing: -.01em; }
+  .head-sub { font-size: 10px; opacity: .88; margin-top: 2px; letter-spacing: .04em; text-transform: uppercase; }
+  .head-badge {
+    font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--teal-deep); background: var(--gold);
+    padding: 4px 10px; border-radius: 999px;
+  }
+  .doc-tag { font-size: 8.5px; color: rgba(255,255,255,.72); letter-spacing: .1em; text-transform: uppercase; margin-top: 3px; }
+
+  /* ===== Section headers ===== */
+  h2 {
+    font-size: 11.5px; font-weight: 900; color: var(--teal);
+    letter-spacing: .14em; text-transform: uppercase;
+    padding-bottom: 4px; margin: 14px 0 8px;
+    border-bottom: 2px solid var(--teal);
+  }
+
+  /* ===== Product cards ===== */
+  .products { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .prod {
+    border: 1.5px solid var(--field);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #fff;
+    page-break-inside: avoid;
+  }
+  .prod.transform { border: 2px solid var(--gold); background: #FFFBEC; }
+  .prod-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 3px; }
+  .prod-cat { font-size: 8.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--purple); }
+  .prod.transform .prod-cat { color: var(--gold-deep); }
+  .prod-title { font-size: 12.5px; font-weight: 900; color: var(--ink, #1A1A1A); letter-spacing: -.005em; margin-bottom: 2px; }
+  .prod-sub { font-size: 9.5px; font-weight: 700; color: var(--muted); margin-bottom: 6px; font-style: italic; }
+  .prod-price { display: inline-block; font-size: 15px; font-weight: 900; color: var(--teal); letter-spacing: -.02em; }
+  .prod-price small { font-size: 9px; font-weight: 700; color: var(--muted); letter-spacing: .02em; margin-left: 4px; }
+  .prod-strike { font-size: 10px; color: var(--muted); text-decoration: line-through; margin-left: 6px; }
+  .prod-save { font-size: 9px; font-weight: 800; color: var(--green-deep); margin-left: 4px; }
+  .prod-feats { list-style: none; padding: 0; margin: 8px 0 0; font-size: 9.5px; color: #333; }
+  .prod-feats li { padding: 2px 0 2px 10px; line-height: 1.4; position: relative; }
+  .prod-feats li::before {
+    content: '·'; position: absolute; left: 0; top: 0; color: var(--teal); font-weight: 900; font-size: 14px; line-height: 1;
+  }
+  .prod.transform .prod-feats li::before { color: var(--gold-deep); }
+  .prod-feats li strong { color: var(--ink, #1A1A1A); font-weight: 700; }
+
+  /* ===== Payment methods ===== */
+  .pay-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .pay-card {
+    border: 1.5px solid var(--field);
+    border-radius: 8px;
+    padding: 9px 11px;
+    background: var(--field-bg);
+  }
+  .pay-head { font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin-bottom: 3px; }
+  .pay-body { font-size: 9.5px; color: #333; line-height: 1.4; }
+  .pay-body strong { color: var(--ink, #1A1A1A); }
+
+  /* ===== URLs + QR ===== */
+  .qr-strip {
+    display: grid; grid-template-columns: 88px 1fr; gap: 12px;
+    padding: 10px 12px;
+    background: #FFFBEC;
+    border: 1.5px solid var(--gold);
+    border-radius: 8px;
+    align-items: center;
+  }
+  .qr-img { width: 88px; height: 88px; image-rendering: pixelated; }
+  .qr-copy .qr-title { font-size: 11px; font-weight: 900; color: var(--teal-deep); letter-spacing: -.005em; margin-bottom: 3px; }
+  .qr-copy .qr-urls { font-size: 9.5px; line-height: 1.55; color: #333; }
+  .qr-copy .qr-urls strong { color: var(--purple); font-weight: 800; font-size: 10px; }
+  .qr-copy .qr-note { font-size: 9px; color: var(--muted); font-style: italic; margin-top: 4px; }
+
+  /* ===== Talking points table ===== */
+  .qa {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+  .qa-card {
+    border: 1px solid var(--field);
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: #fff;
+    page-break-inside: avoid;
+  }
+  .qa-q { font-size: 10px; font-weight: 900; color: var(--purple); margin-bottom: 3px; letter-spacing: .01em; }
+  .qa-a { font-size: 9.5px; color: #333; line-height: 1.45; }
+  .qa-a strong { color: var(--ink, #1A1A1A); font-weight: 700; }
+
+  /* ===== Team contacts ===== */
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .team-card {
+    border: 1px solid var(--field);
+    border-radius: 6px;
+    padding: 8px 11px;
+    background: var(--field-bg);
+  }
+  .team-name { font-size: 11px; font-weight: 900; color: var(--teal-deep); letter-spacing: -.005em; }
+  .team-role { font-size: 9px; font-weight: 700; color: var(--purple); letter-spacing: .06em; text-transform: uppercase; margin: 2px 0 3px; }
+  .team-contact { font-size: 9.5px; color: #333; line-height: 1.5; }
+  .team-contact a { color: var(--teal); text-decoration: none; font-weight: 700; }
+
+  /* ===== Footer ===== */
+  .foot {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: var(--teal-deep);
+    color: rgba(255,255,255,.78);
+    border-radius: 6px;
+    font-size: 9px;
+    text-align: center;
+    letter-spacing: .04em;
+  }
+  .foot strong { color: var(--gold); font-weight: 800; }
+
+  /* Small utility */
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: start; }
+  .mini { font-size: 9px; color: var(--muted); }
+  .mini strong { color: #333; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <div class="head-title">ReBe Ed &mdash; NAESP 2026 Team Reference</div>
+    <div class="head-sub">Booth #519 &middot; Conference-only pricing</div>
+    <div class="doc-tag">Internal use only &middot; do not share with attendees</div>
+  </div>
+  <div class="head-badge">Team Sheet</div>
+</div>
+
+<!-- ==================== PRODUCTS ==================== -->
+<h2>The Offerings</h2>
+
+<div class="products">
+
+  <div class="prod">
+    <div class="prod-head">
+      <span class="prod-cat">Thrive &middot; Educator Wellness</span>
+    </div>
+    <div class="prod-title">Lights + Camera Package</div>
+    <div class="prod-sub">Whole-school PD (educators + admin)</div>
+    <div>
+      <span class="prod-price">$4,000<small>per school</small></span>
+      <span class="prod-strike">$6,000</span>
+    </div>
+    <ul class="prod-feats">
+      <li><strong>Lights</strong> &mdash; 3-hour Inservice (in-person or virtual; *travel added if in person)</li>
+      <li><strong>Camera</strong> &mdash; Full-year EPICS video library (25 concepts &middot; 3-minute videos)</li>
+      <li>5 self-discovery journeys: Receive &middot; Reveal &middot; Reflect &middot; Release &middot; Relaunch</li>
+      <li>Year-round educator community access</li>
+    </ul>
+  </div>
+
+  <div class="prod">
+    <div class="prod-head">
+      <span class="prod-cat">Flourish &middot; Student Wellness</span>
+    </div>
+    <div class="prod-title">K-2 Health Boosts</div>
+    <div class="prod-sub">+ FREE 3-5 Pilot included</div>
+    <div>
+      <span class="prod-price">$250<small>per educator &middot; 1-year license</small></span>
+    </div>
+    <ul class="prod-feats">
+      <li>25 EPICS Health Boosts per grade &middot; K-2</li>
+      <li><strong>FREE access to 3-5 pilot</strong> with every purchase</li>
+      <li>All 5 EPICS pathways &middot; LMS compatible</li>
+      <li>7-10 min lessons, buyer feedback shapes final 3-5 product</li>
+    </ul>
+  </div>
+
+  <div class="prod">
+    <div class="prod-head">
+      <span class="prod-cat">Flourish &middot; Student Wellness</span>
+    </div>
+    <div class="prod-title">Literacy Residency Pilot</div>
+    <div class="prod-sub">Complete student bundle</div>
+    <div>
+      <span class="prod-price">$8,000<small>per school</small></span>
+      <span class="prod-strike">$10,000</span>
+    </div>
+    <ul class="prod-feats">
+      <li>25 EPICS Health Boosts per grade (K-2 <em>+</em> 3-5)</li>
+      <li>3-hour Literacy Inservice (*travel added if in person)</li>
+      <li>5 monthly Literacy LAB webinars: Word Work, Word Power, Content Power, Financial &amp; Digital Literacy</li>
+    </ul>
+  </div>
+
+  <div class="prod transform">
+    <div class="prod-head">
+      <span class="prod-cat">&#9733; Transform &middot; Complete Package</span>
+    </div>
+    <div class="prod-title">Educator + Student Wellness</div>
+    <div class="prod-sub">Thrive + Flourish, bundled</div>
+    <div>
+      <span class="prod-price">$11,000<small>per school</small></span>
+      <span class="prod-strike">$16,000</span>
+      <span class="prod-save">Save $5,000</span>
+    </div>
+    <ul class="prod-feats">
+      <li><strong>Thrive</strong> &mdash; Lights + Camera + full EPICS library (educators)</li>
+      <li><strong>Flourish</strong> &mdash; 25 EPICS Health Boosts per grade + Literacy Residency Pilot (students)</li>
+      <li>Optional add-on: Action (+$300/educator)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Action add-on strip -->
+<div style="margin-top: 8px; padding: 8px 12px; background: rgba(125,10,171,.08); border: 1px solid rgba(125,10,171,.24); border-radius: 6px; font-size: 10px; color: #333; line-height: 1.5;">
+  <strong style="color: var(--purple); letter-spacing: .04em;">Optional add-on: Action &mdash; ReBe ReFresh Live groups.</strong>
+  &nbsp; +$300 per educator &middot; 5-week live cohort &middot; online &middot; small group &middot; facilitated. Add to Thrive or Transform any time.
+</div>
+
+<!-- ==================== HOW TO ORDER ==================== -->
+<h2>How to Order &middot; Payment Methods</h2>
+
+<div class="pay-grid">
+  <div class="pay-card">
+    <div class="pay-head">Credit Card</div>
+    <div class="pay-body">Secure Stripe checkout. Buyer clicks link in confirmation email &rarr; pays &rarr; receipt sent automatically.</div>
+  </div>
+  <div class="pay-card">
+    <div class="pay-head">Purchase Order</div>
+    <div class="pay-body"><strong>Net 30 invoice</strong> sent within 1 business day. School processes PO &rarr; we invoice &rarr; onboarding begins.</div>
+  </div>
+  <div class="pay-card">
+    <div class="pay-head">Check</div>
+    <div class="pay-body">Payable to <strong>JustReBe LLC</strong>. Mail to: <strong>13118 State Rd 64 E., Suite 362, Bradenton, FL 34212</strong>.</div>
+  </div>
+</div>
+
+<!-- ==================== URLS + QR ==================== -->
+<h2>URLs to Share &middot; QR Code</h2>
+
+<div class="qr-strip">
+  <img src="Images/qr-naesp-order-form.png" alt="QR to online order form" class="qr-img">
+  <div class="qr-copy">
+    <div class="qr-title">Scan or type &mdash; three paths to send principals</div>
+    <div class="qr-urls">
+      <strong>Offerings</strong> www.justrebe.com/NAESP-product<br>
+      <strong>Order online</strong> www.justrebe.com/NAESP-order-form &nbsp;(same as QR)<br>
+      <strong>Lead form</strong> www.justrebe.com/NAESP-form &nbsp;(if not ready to order)
+    </div>
+    <div class="qr-note">Every submission auto-tags the lead in Kit and emails the team. Confirmations go out from hello@justrebe.com.</div>
+  </div>
+</div>
+
+<!-- ==================== TALKING POINTS / Q&A ==================== -->
+<h2>Quick Answers &middot; Common Objections</h2>
+
+<div class="qa">
+  <div class="qa-card">
+    <div class="qa-q">"How is this different from other PD?"</div>
+    <div class="qa-a">ReBe Ed is <strong>whole-health</strong> &mdash; not just literacy or SEL. The <strong>EPICS framework</strong> (Emotional, Physical, Intellectual, Cultural, Social/Spiritual) covers every pathway a student and educator needs. Aligned to the <strong>Science of Reading</strong>.</div>
+  </div>
+  <div class="qa-card">
+    <div class="qa-q">"What does 'EPICS' stand for?"</div>
+    <div class="qa-a"><strong>E</strong>motional &middot; <strong>P</strong>hysical &middot; <strong>I</strong>ntellectual &middot; <strong>C</strong>ultural &middot; <strong>S</strong>ocial/Spiritual. The five pathways of whole-health wellness that every ReBe Ed offering is built on.</div>
+  </div>
+  <div class="qa-card">
+    <div class="qa-q">"Do you have funding sources?"</div>
+    <div class="qa-a"><strong>Title IV-A</strong>, <strong>ESSER III</strong>, <strong>mental-health grants</strong>, <strong>Title I</strong> (ask about qualifying rate). We accept purchase orders with Net 30 terms.</div>
+  </div>
+  <div class="qa-card">
+    <div class="qa-q">"How long does onboarding take?"</div>
+    <div class="qa-a">A member of our team will follow up soon to walk them through next steps. <em>Don't quote a specific timeline &mdash; we haven't finalized it yet.</em></div>
+  </div>
+  <div class="qa-card">
+    <div class="qa-q">"Can we start with just one part?"</div>
+    <div class="qa-a">Yes. Start with <strong>Thrive</strong> if leading with educator wellness, <strong>K-2 Health Boosts</strong> if student-first. Transform is the whole system &mdash; recommend to schools ready for both.</div>
+  </div>
+  <div class="qa-card">
+    <div class="qa-q">"What's the 3-5 pilot?"</div>
+    <div class="qa-a">Every buyer of K-2 Health Boosts gets <strong>free access to the 3-5 pilot</strong>. Their feedback shapes the final 3-5 product.</div>
+  </div>
+</div>
+
+<!-- ==================== TEAM CONTACTS ==================== -->
+<h2>Team Contacts</h2>
+
+<div class="team-grid">
+  <div class="team-card">
+    <div class="team-name">Valerie Ellery</div>
+    <div class="team-role">Founder &middot; Literacy Lead</div>
+    <div class="team-contact"><a href="mailto:v.ellery@justrebe.com">v.ellery@justrebe.com</a></div>
+  </div>
+  <div class="team-card">
+    <div class="team-name">Abbey Pace</div>
+    <div class="team-role">Team</div>
+    <div class="team-contact"><a href="mailto:a.pace@justrebe.com">a.pace@justrebe.com</a></div>
+  </div>
+  <div class="team-card">
+    <div class="team-name">ReBe Ed Team</div>
+    <div class="team-role">General</div>
+    <div class="team-contact"><a href="mailto:hello@justrebe.com">hello@justrebe.com</a></div>
+  </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="foot">
+  <strong>ReBe Ed &middot; Better Me. Better We.</strong> &nbsp;&middot;&nbsp;
+  Every order and lead auto-emails Valerie + Abbey + hello@ within seconds &middot; JustReBe LLC &middot; www.justrebe.com
+</div>
+
+</body>
+</html>
