@@ -498,6 +498,11 @@ async function handleOrder(body, req, res) {
       const productLines = products.map((p) => `  • ${PRODUCT_LABEL[p] || p}`).join('\n');
       const paymentLine = PAYMENT_LABEL[row.payment_method] || row.payment_method || '(not selected)';
       const isCard = row.payment_method === 'card';
+
+      // Order total — buyers on the PO/check paths need this to draft the PO
+      // or write the check. Same math the card path uses for Stripe line items.
+      const { total: orderTotal } = buildStripeLineItems(products, body.quantities || {});
+      const orderTotalFormatted = '$' + orderTotal.toLocaleString('en-US');
       const paymentLinkBlock = (isCard && checkout_url)
         ? `\n\n  Your secure payment link:\n  ${checkout_url}\n`
         : (isCard ? `\n\n  We hit a temporary issue generating your payment link — a member of our team will email one to you within a few hours.\n` : '');
@@ -520,6 +525,7 @@ Here's a summary of what you submitted:
   Package(s):
 ${productLines}
 
+  TOTAL DUE:      ${orderTotalFormatted}
   Payment method: ${paymentLine}
 
 If you have questions in the meantime, just reply to this email or reach out directly:
@@ -555,6 +561,7 @@ www.justrebe.com/education`;
           ]) +
           htmlP(`<strong>Package(s):</strong>`, { margin: '10px 0 4px' }) +
           orderProductListHtml +
+          `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:16px 0 8px;"><tr><td style="padding:14px 20px;background:#FFFBEC;border:2px solid #FEB909;border-radius:10px;text-align:right;"><span style="font:800 11px/1.4 Inter,-apple-system,'Segoe UI',Arial,sans-serif;color:#7A5B00;letter-spacing:0.16em;text-transform:uppercase;">Total due</span><br><span style="font:900 28px/1 Inter,-apple-system,'Segoe UI',Arial,sans-serif;color:#023d4f;letter-spacing:-0.02em;">${esc(orderTotalFormatted)}</span></td></tr></table>` +
           htmlDivider() +
           htmlP(`Questions? Reply to this email or reach out directly:<br>
 Valerie Ellery &mdash; <a href="mailto:v.ellery@justrebe.com" style="color:#034E64;font-weight:700;">v.ellery@justrebe.com</a><br>
@@ -596,6 +603,9 @@ SCHOOL
 
 PACKAGE(S) ORDERED
 ${productLines}
+
+TOTAL DUE
+  ${orderTotalFormatted}
 
 PAYMENT METHOD
   ${paymentLine}${isCard && checkout_url ? '\n  Payment link: ' + checkout_url : ''}${isCard && !checkout_url ? '\n  ⚠ Payment link generation FAILED — please create one manually in Stripe and email the buyer.' : ''}
@@ -644,6 +654,7 @@ Auto-response has already been sent to ${email}.
           ]) +
           htmlP(`<strong>Package(s) ordered</strong>`, { margin: '6px 0 4px', color: '#7D0AAB' }) +
           orderProductListHtml +
+          `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:12px 0 14px;"><tr><td style="padding:12px 18px;background:#FFFBEC;border:2px solid #FEB909;border-radius:8px;text-align:right;"><span style="font:800 10px/1.4 Inter,-apple-system,'Segoe UI',Arial,sans-serif;color:#7A5B00;letter-spacing:0.16em;text-transform:uppercase;">Total due</span><br><span style="font:900 22px/1 Inter,-apple-system,'Segoe UI',Arial,sans-serif;color:#023d4f;letter-spacing:-0.02em;">${esc(orderTotalFormatted)}</span></td></tr></table>` +
           htmlP(`<strong>Payment method:</strong> ${esc(paymentLine)}`, { margin: '10px 0 14px' }) +
           htmlP(`<strong>Signature</strong>`, { margin: '6px 0 4px', color: '#7D0AAB' }) +
           htmlDetailRows([
