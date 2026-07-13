@@ -383,14 +383,19 @@
   .doc.doc-placeholder { opacity: .55; cursor: default; pointer-events: none; }
   .doc.doc-placeholder .pending-tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 
-  /* ===== Contact / footer ===== */
-  .contact { padding: 74px 24px; background: linear-gradient(135deg, var(--teal) 0%, var(--purple-deep) 100%); color: #fff; text-align: center; }
-  .contact h2 { font-size: clamp(24px, 3vw, 34px); font-weight: 900; letter-spacing: -.015em; margin-bottom: 14px; color: #fff; }
-  .contact h2 em { color: var(--gold); font-style: italic; }
-  .contact p { font-size: 16px; color: rgba(255,255,255,.86); line-height: 1.55; max-width: 620px; margin: 0 auto 24px; }
-  .contact-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
-  .contact-mail { margin-top: 20px; font-size: 14px; color: rgba(255,255,255,.72); }
-  .contact-mail a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(254,185,9,.4); text-underline-offset: 3px; }
+  /* ===== Let's Talk (light, secondary) ===== */
+  .contact { padding: 46px 24px 40px; background: linear-gradient(180deg, #F5F9FC 0%, #EDF3F8 100%); color: var(--ink); text-align: center; border-top: 1px solid #E4EBF1; }
+  .contact-ey { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); padding: 5px 14px; background: rgba(3,78,100,.08); border-radius: 999px; margin-bottom: 12px; }
+  .contact h2 { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; color: var(--teal-deep); letter-spacing: -.015em; margin-bottom: 10px; line-height: 1.2; }
+  .contact h2 em { color: var(--purple); font-style: italic; }
+  .contact p { font-size: 14px; color: var(--body); line-height: 1.55; max-width: 560px; margin: 0 auto 18px; }
+  .contact-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .contact-btns .btn { padding: 12px 26px; font-size: 14px; font-weight: 800; }
+  .contact-btns .btn-ghost-dark { background: transparent; color: var(--teal-deep); border: 2px solid var(--teal-deep); }
+  .contact-btns .btn-ghost-dark:hover { background: var(--teal-deep); color: #fff; }
+  .contact-mail { margin-top: 14px; font-size: 12px; color: var(--muted); }
+  .contact-mail a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); font-weight: 700; }
+  .contact-mail a:hover { border-bottom-style: solid; }
 
   footer { background: var(--teal-deep); padding: 40px 24px; text-align: center; font-size: 13px; color: rgba(255,255,255,.78); }
   footer p + p { margin-top: 4px; }
@@ -651,13 +656,13 @@
     </div>
   </section>
 
-  <!-- ===== CONTACT ===== -->
+  <!-- ===== LET'S TALK (secondary) ===== -->
   <section class="contact" id="contact">
-    <h2>Let's talk. <em>Bring re&middot;be Ed to your school.</em></h2>
+    <span class="contact-ey">Let's Talk</span>
+    <h2>Ready to bring this to <em>your students</em>?</h2>
     <p>Tell us what your school needs most. We'll set up a 20-minute call and walk through the fit &mdash; no pressure, just clarity.</p>
     <div class="contact-btns">
-      <a class="btn btn-gold" href="mailto:hello@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BThrive%20%2F%20K-2%20Health%20Boosts%20%2F%20Literacy%20Residency%20%2F%20Transform%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Email us about your school &rarr;</a>
-      <a class="btn btn-outline-white" href="/NAESP-order-form.html">Go to the order form &rarr;</a>
+      <a class="btn btn-ghost-dark" href="mailto:hello@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BThrive%20%2F%20K-2%20Health%20Boosts%20%2F%20Literacy%20Residency%20%2F%20Transform%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Email us about your school</a>
     </div>
     <p class="contact-mail">Questions? <a href="mailto:hello@justrebe.com">hello@justrebe.com</a></p>
   </section>
