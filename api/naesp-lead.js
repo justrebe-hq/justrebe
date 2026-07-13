@@ -46,20 +46,20 @@ async function readJson(req) {
 // PRODUCT_LABEL maps checkbox values -> human-readable labels used in the
 // order confirmation and admin notification emails.
 const PRODUCT_LABEL = {
-  thrive:    'Thrive — Lights + Camera package ($4,000 conference · reg $6,000/school)',
-  flourish:  'Flourish — K-2 Health Boosts per grade + 3-5 free pilot ($250/teacher · 1-year license)',
+  thrive:    'Thrive — Lights + Camera package ($4,000 conference · reg $6,000)',
+  flourish:  'Flourish — K-2 Health Boosts per grade + FREE 3-5 pilot included ($250/educator · 1-year license)',
   premiere:  'Premiere — Literacy Residency Pilot ($8,000 conference · reg $10,000/school)',
-  transform: 'Transform — Complete Package ★ ($11,000 conference · reg $16,000 · save $5,000)',
+  transform: 'Transform — Educator + Student Wellness ★ ($11,000 conference · reg $16,000 · save $5,000)',
   action:    '*Action — ReBe ReFresh Live add-on (+$300/educator)',
 };
 
 // Conference prices for Stripe line items. MUST MATCH the frontend PRICES
 // map in NAESP-order-form.html or the total won't reconcile at checkout.
 const PRODUCT_PRICES = {
-  thrive:    { amount: 4000,  label: 'Thrive — Lights + Camera package (per school)' },
-  flourish:  { amount: 250,   label: 'Flourish — K-2 Health Boosts per grade (+ free 3-5 pilot, 1-year license)', qtyKey: 'qty_flourish', unitLabel: 'teachers' },
+  thrive:    { amount: 4000,  label: 'Thrive — Lights + Camera package' },
+  flourish:  { amount: 250,   label: 'Flourish — K-2 Health Boosts per grade (+ FREE 3-5 pilot, 1-year license)', qtyKey: 'qty_flourish', unitLabel: 'educators' },
   premiere:  { amount: 8000,  label: 'Premiere — Literacy Residency Pilot (per school)' },
-  transform: { amount: 11000, label: 'Transform — Complete Package ★ (per school — Thrive + Premiere)' },
+  transform: { amount: 11000, label: 'Transform — Educator + Student Wellness ★ (per school)' },
   action:    { amount: 300,   label: '*Action — ReBe ReFresh Live (add-on)', qtyKey: 'qty_action', unitLabel: 'educators' },
 };
 
@@ -529,11 +529,13 @@ Auto-response has already been sent to ${email}.
       }).catch((e) => console.error('NAESP order admin email failed:', e));
     }
 
-    // Card no longer auto-redirects — the payment link is emailed. Frontend
-    // shows the same success message for all payment methods.
+    // Card path returns checkout_url so the frontend can send the buyer
+    // straight to the secure payment link. The link is ALSO included in the
+    // confirmation email above as a backup (in case they close the tab).
     return res.status(200).json({
       ok: true,
       id: inserted && inserted.id,
+      checkout_url: checkout_url,
     });
   } catch (err) {
     console.error('naesp-order failed:', err);

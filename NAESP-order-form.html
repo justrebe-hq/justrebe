@@ -146,7 +146,7 @@
   .products { display: flex; flex-direction: column; gap: 14px; }
   .prow {
     display: grid;
-    grid-template-columns: 42px 1fr 140px;
+    grid-template-columns: 42px 1fr 175px;
     gap: 20px;
     align-items: flex-start;
     padding: 18px 22px;
@@ -191,12 +191,24 @@
   .pprice {
     text-align: right; align-self: flex-start;
   }
+  /* Highlighted "Conference" pill above the strike-through regular price */
+  .pprice .conf-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, #FEB909 0%, #F5A800 100%);
+    color: #23170a;
+    font-size: 9.5px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 6px rgba(254,185,9,.35);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
   .pprice .lbl {
     display: block; font-size: 11px; font-weight: 700; color: var(--muted);
-    letter-spacing: .06em; text-transform: uppercase; margin-bottom: 3px; line-height: 1.3;
+    letter-spacing: .06em; text-transform: uppercase; margin-top: 5px; line-height: 1.35;
   }
-  .pprice .amt { font-size: 20px; color: var(--ink); font-weight: 900; letter-spacing: -.015em; }
-  .pprice.free .amt { color: var(--success); font-style: italic; font-size: 18px; }
+  .pprice .amt { display: block; font-size: 24px; color: var(--teal); font-weight: 900; letter-spacing: -.02em; line-height: 1.1; }
+  .pprice.free .amt { color: var(--success); font-style: italic; font-size: 20px; }
   @media (max-width: 640px) {
     .prow { grid-template-columns: 32px 1fr; }
     .pprice { grid-column: 1 / -1; text-align: left; margin-left: 52px; }
@@ -670,10 +682,10 @@
           <input type="checkbox" name="products" value="thrive">
           <div>
             <p class="ptitle">Lights + Camera package</p>
-            <p class="pdesc">3-hour Inservice (*if in person, travel cost added) + full-year EPICS video library and community webinars. Per school.</p>
+            <p class="pdesc">3-hour Inservice (*if in person, travel cost added) + full-year EPICS video library and community webinars.</p>
           </div>
           <div class="pprice">
-            <span class="lbl">conference &middot; per school</span>
+            <span class="conf-pill">Conference</span>
             <span class="strike">$6,000</span>
             <span class="amt">$4,000</span>
           </div>
@@ -690,8 +702,8 @@
             </div>
           </div>
           <div class="pprice">
-            <span class="lbl">per educator</span>
             <span class="amt">+$300</span>
+            <span class="lbl">per educator</span>
           </div>
         </label>
 
@@ -701,16 +713,16 @@
         <label class="prow" data-product-row>
           <input type="checkbox" name="products" value="flourish">
           <div>
-            <p class="ptitle">K-2 Health Boosts per grade <span style="font-weight:600;color:var(--green);">(+ free 3-5 pilot)</span></p>
-            <p class="pdesc">25 EPICS Health Boosts &middot; BB-guided &middot; K-2 &middot; 1-year license.</p>
+            <p class="ptitle">K-2 Health Boosts per grade <span style="font-weight:700;color:var(--green);">&middot; FREE 3-5 Pilot included</span></p>
+            <p class="pdesc">25 EPICS Health Boosts <strong>per grade</strong> &middot; BB-guided &middot; K-2 &middot; every buyer also gets <strong style="color:var(--green);">free access to the 3-5 pilot</strong> &middot; 1-year license.</p>
             <div class="qty-row" data-qty-for="flourish">
-              <label for="qty_flourish">Number of teachers:</label>
+              <label for="qty_flourish">Number of educators:</label>
               <input type="number" id="qty_flourish" name="qty_flourish" min="1" max="500" value="1" step="1">
             </div>
           </div>
           <div class="pprice">
-            <span class="lbl">per teacher &middot; 1-year license</span>
             <span class="amt">$250</span>
+            <span class="lbl">per educator &middot; 1-year license</span>
           </div>
         </label>
 
@@ -718,12 +730,13 @@
           <input type="checkbox" name="products" value="premiere">
           <div>
             <p class="ptitle">Premiere &mdash; Literacy Residency Pilot</p>
-            <p class="pdesc">K-2 + 3-5 Health Boosts + 3-hour Literacy Inservice + 5 monthly Literacy LAB webinars. Per school.</p>
+            <p class="pdesc">K-2 + 3-5 Health Boosts + 3-hour Literacy Inservice + 5 monthly Literacy LAB webinars.</p>
           </div>
           <div class="pprice">
-            <span class="lbl">conference &middot; per school</span>
+            <span class="conf-pill">Conference</span>
             <span class="strike">$10,000</span>
             <span class="amt">$8,000</span>
+            <span class="lbl">per school</span>
           </div>
         </label>
 
@@ -733,13 +746,14 @@
         <label class="prow" data-product-row>
           <input type="checkbox" name="products" value="transform">
           <div>
-            <p class="ptitle">Everything &mdash; Thrive + Premiere <span style="color:var(--gold-deep,#e5a708);">&#9733; Conference Special</span></p>
-            <p class="pdesc">Thrive (Lights + Camera + full EPICS library) + Premiere (K-2 + 3-5 Health Boosts + Literacy Inservice + 5 monthly Literacy LAB webinars). Everything your school needs.</p>
+            <p class="ptitle">Educator + Student Wellness <span style="color:var(--gold-deep,#e5a708);">&#9733; Conference Special</span></p>
+            <p class="pdesc">Thrive (educator wellness: Lights + Camera + full EPICS library) + Premiere (student wellness: K-2 + 3-5 Health Boosts + Literacy Inservice + 5 monthly Literacy LAB webinars). Everything your school needs.</p>
           </div>
           <div class="pprice">
-            <span class="lbl">save $5,000 &middot; per school</span>
+            <span class="conf-pill">Conference &middot; save $5,000</span>
             <span class="strike">$16,000</span>
             <span class="amt">$11,000</span>
+            <span class="lbl">per school</span>
           </div>
         </label>
 
@@ -767,7 +781,11 @@
         </label>
         <label class="payment-choice" data-payment-row>
           <input type="radio" name="payment_method" value="card">
-          <div class="payment-choice-txt"><strong>Credit Card</strong> &mdash; secure payment checkout &middot; payment link will be emailed to you.</div>
+          <div class="payment-choice-txt">
+            <strong>Credit Card</strong>
+            <span class="no-print">&mdash; you&rsquo;ll be sent to a secure payment link to complete payment now.</span>
+            <span class="print-only">&mdash; payment link will be emailed to you upon receipt of this form.</span>
+          </div>
         </label>
         <label class="payment-choice" data-payment-row>
           <input type="radio" name="payment_method" value="check">
@@ -827,9 +845,9 @@
   // Price map (CONFERENCE prices) — must match api/naesp-lead.js PRODUCT_PRICES
   var PRICES = {
     thrive:    { amount: 4000,  label: 'Thrive — Lights + Camera package',        fixedQty: true  },
-    flourish:  { amount: 250,   label: 'Flourish — K-2 Health Boosts per grade',  qtyInput: 'qty_flourish', unitLabel: 'teachers' },
+    flourish:  { amount: 250,   label: 'Flourish — K-2 Health Boosts per grade (+ free 3-5 pilot)',  qtyInput: 'qty_flourish', unitLabel: 'educators' },
     premiere:  { amount: 8000,  label: 'Premiere — Literacy Residency Pilot',     fixedQty: true  },
-    transform: { amount: 11000, label: 'Transform — Complete Package ★',          fixedQty: true  },
+    transform: { amount: 11000, label: 'Transform — Educator + Student Wellness ★', fixedQty: true },
     action:    { amount: 300,   label: '*Action — ReBe ReFresh Live (add-on)',    qtyInput: 'qty_action',   unitLabel: 'educators' },
   };
 
@@ -911,7 +929,7 @@
     var payment = form.querySelector('input[name="payment_method"]:checked');
     var labels = {
       po:    'Submit purchase order &rarr;',
-      card:  'Submit order &amp; get payment link &rarr;',
+      card:  'Continue to payment link &rarr;',
       check: 'Submit order &rarr;',
     };
     submitBtn.innerHTML = (payment && labels[payment.value]) || 'Submit order &rarr;';
@@ -1052,14 +1070,19 @@
         if (!r.ok) return r.json().then(function(j){ throw new Error(j && j.error || ('Save failed: '+r.status)); });
         return r.json();
       })
-      .then(function () {
-        // Every payment method now shows the same inline success message.
-        // - Card: buyer receives payment link via email (Stripe session generated server-side, URL emailed).
-        // - PO / Check: standard invoice-then-pay follow-up.
+      .then(function (data) {
         var payMethod = payment && payment.value;
+        // Card path: API returns a Stripe Checkout URL — send them straight
+        // to the payment link now. Also emailed as a backup in case they
+        // close the tab.
+        if (payMethod === 'card' && data && data.checkout_url) {
+          submitBtn.innerHTML = 'Sending you to payment link…';
+          window.location.href = data.checkout_url;
+          return;
+        }
         var msg = '✓ Thanks — your order has been submitted. Check your email for a confirmation within a minute';
         if (payMethod === 'card') {
-          msg += ' with your secure payment link.';
+          msg += '. We hit a small hiccup generating your live payment link — no worries, we\'ll email one to you within a few hours.';
         } else if (payMethod === 'check') {
           msg += '. Mailing details for your check payment are in the confirmation email.';
         } else {
