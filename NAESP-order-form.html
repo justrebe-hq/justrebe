@@ -191,21 +191,32 @@
   .pprice {
     text-align: right; align-self: flex-start;
   }
-  /* Small "Conference Pricing" flag above the strike-through regular price */
+  /* Tiny "Conference Pricing" flag above the strike-through regular price */
   .pprice .conf-pill {
     display: inline-block;
     background: #FEB909;
     color: #23170a;
-    font-size: 8px;
+    font-size: 7px;
     font-weight: 800;
-    letter-spacing: .03em;
+    letter-spacing: 0;
     text-transform: uppercase;
-    padding: 2px 6px;
+    padding: 1.5px 5px;
     border-radius: 3px;
-    margin-bottom: 5px;
-    line-height: 1.4;
+    margin-bottom: 4px;
+    line-height: 1.5;
     white-space: nowrap;
     vertical-align: middle;
+  }
+  /* Small green savings note under the price (Transform) */
+  .pprice .save-tag {
+    display: block;
+    color: var(--success);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    margin-top: 2px;
+    line-height: 1.4;
   }
   .pprice .lbl {
     display: block; font-size: 11px; font-weight: 700; color: var(--muted);
@@ -754,9 +765,10 @@
             <p class="pdesc">Thrive (educator wellness: Lights + Camera + full EPICS library) + Premiere (student wellness: K-2 + 3-5 Health Boosts + Literacy Inservice + 5 monthly Literacy LAB webinars). Everything your school needs.</p>
           </div>
           <div class="pprice">
-            <span class="conf-pill">Conference Pricing &middot; save $5,000</span>
+            <span class="conf-pill">Conference Pricing</span>
             <span class="strike">$16,000</span>
             <span class="amt">$11,000</span>
+            <span class="save-tag">Save $5,000</span>
             <span class="lbl">per school</span>
           </div>
         </label>
