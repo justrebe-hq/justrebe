@@ -97,64 +97,20 @@
   }
   .confirm-sub strong { color: var(--ink); font-weight: 700; }
 
-  /* Form section */
-  .form-sec { background: #FAF9F7; padding: 64px 24px; }
-  .form-wrap { max-width: 720px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 48px 44px; box-shadow: 0 8px 32px rgba(3,78,100,.08); border: 1px solid #EEE; }
-  @media (max-width: 640px) { .form-wrap { padding: 32px 24px; } .form-sec { padding: 40px 16px; } }
-  .form-ey { font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--purple); margin-bottom: 12px; }
-  .form-h { font-size: clamp(24px, 2.8vw, 32px); font-weight: 900; color: var(--teal); letter-spacing: -.02em; line-height: 1.18; margin-bottom: 12px; }
-  .form-lede { font-size: 15px; color: var(--body); line-height: 1.6; margin-bottom: 32px; }
-
-  form .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
-  @media (max-width: 640px) { form .field-row { grid-template-columns: 1fr; gap: 18px; } }
-  form .field { display: flex; flex-direction: column; margin-bottom: 18px; }
-  form label { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
-  form label .req { color: var(--purple); margin-left: 3px; }
-  form input, form select, form textarea {
-    font: inherit; font-size: 15px; color: var(--ink);
-    padding: 12px 14px; border: 1.5px solid #D8D5D0; border-radius: 10px;
-    background: #FAFAF7; width: 100%;
-    transition: border-color .15s, background .15s, box-shadow .15s;
-  }
-  form input:focus, form select:focus, form textarea:focus {
-    outline: none; border-color: var(--teal); background: #fff;
-    box-shadow: 0 0 0 3px rgba(3,78,100,.10);
-  }
-  form textarea { min-height: 90px; resize: vertical; font-family: inherit; }
-  form .help { display: block; font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 400; letter-spacing: 0; text-transform: none; }
-
-  .submit-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    width: 100%;
-    padding: 18px 24px;
-    background: var(--gold); color: var(--ink);
-    border: none; border-radius: 999px;
-    font-size: 15px; font-weight: 800; letter-spacing: .04em;
-    cursor: pointer;
-    transition: all .15s ease;
-    box-shadow: 0 6px 20px rgba(254,185,9,.32);
-    margin-top: 12px;
-  }
-  .submit-btn:hover:not(:disabled) { background: var(--gold-deep); transform: translateY(-2px); box-shadow: 0 10px 26px rgba(254,185,9,.40); }
-  .submit-btn:disabled { opacity: .55; cursor: wait; }
-  .form-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 16px; line-height: 1.5; }
-  .form-error { display: none; background: #FCE9E9; color: #A02020; border: 1px solid #F5C5C5; border-radius: 10px; padding: 12px 14px; font-size: 14px; margin-bottom: 20px; }
-
-  /* Success state */
-  .success-state {
-    display: none;
-    text-align: center;
-    padding: 24px 16px 12px;
-  }
-  .success-state .check-circle { margin-bottom: 18px; }
-  .success-state h2 { font-size: 26px; font-weight: 900; color: var(--teal); margin-bottom: 12px; letter-spacing: -.015em; }
-  .success-state p { font-size: 15px; color: var(--body); line-height: 1.65; margin-bottom: 12px; max-width: 480px; margin-left: auto; margin-right: auto; }
-
-  /* CTA */
-  .cta-sec { background: #fff; padding: 48px 24px; text-align: center; border-top: 1px solid #EEE; }
-  .cta-sec p { font-size: 14px; color: var(--body); line-height: 1.6; margin-bottom: 16px; }
-  .cta-sec a { color: var(--teal); font-weight: 700; text-decoration: none; border-bottom: 1px dotted var(--teal); }
-  .cta-sec a:hover { border-bottom-style: solid; }
+  /* Next steps section (post-payment) */
+  .nextsteps-sec { background: #fff; padding: 64px 24px; }
+  .nextsteps-wrap { max-width: 720px; margin: 0 auto; background: #fff; border: 1px solid #EEE; border-radius: 20px; padding: 44px 40px; box-shadow: 0 8px 32px rgba(3,78,100,.06); }
+  @media (max-width: 640px) { .nextsteps-wrap { padding: 32px 24px; } .nextsteps-sec { padding: 40px 16px; } }
+  .ns-ey { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--purple); margin-bottom: 12px; }
+  .ns-h { font-size: clamp(24px, 2.8vw, 32px); font-weight: 900; color: var(--teal); letter-spacing: -.02em; line-height: 1.18; margin-bottom: 22px; }
+  .ns-h em { color: var(--purple); font-style: italic; font-weight: 800; }
+  .ns-list { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 14px; }
+  .ns-list li { position: relative; padding-left: 28px; font-size: 15px; color: var(--body); line-height: 1.55; }
+  .ns-list li::before { content: '✓'; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: #fff; font-size: 12px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+  .ns-list li strong { color: var(--ink); font-weight: 700; }
+  .ns-note { padding-top: 22px; border-top: 1px solid #EEE; font-size: 13px; color: var(--muted); line-height: 1.55; text-align: center; }
+  .ns-note a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); font-weight: 700; }
+  .ns-note a:hover { border-bottom-style: solid; }
 
   /* Footer */
   footer { background: var(--teal-deep); padding: 40px 24px; text-align: center; }
@@ -182,112 +138,22 @@
       <div class="check-circle" aria-hidden="true">&#10003;</div>
       <span class="confirm-product" id="product-badge">Your ReBe Ed order</span>
       <h1>Payment received &mdash; thank you!</h1>
-      <p class="confirm-sub">A receipt has been emailed to you. To get your school set up quickly, please share a few details below.</p>
+      <p class="confirm-sub">A receipt has been emailed to you. Your school details are on file &mdash; we've got everything we need.</p>
     </div>
   </section>
 
-  <!-- School info form -->
-  <section class="form-sec">
-    <div class="form-wrap">
-
-      <div id="form-view">
-        <p class="form-ey">Step 2 of 2 &middot; School details</p>
-        <h2 class="form-h">Tell us about your school.</h2>
-        <p class="form-lede">One quick form so we can get you set up. Takes about 90 seconds &mdash; we'll follow up within one business day with next steps.</p>
-
-        <div class="form-error" id="form-error"></div>
-
-        <form id="post-purchase-form" novalidate>
-          <input type="hidden" name="form_type" value="naesp_post_purchase">
-          <input type="hidden" name="stripe_product" id="stripe-product-input" value="">
-          <input type="hidden" name="source" value="NAESP post-purchase form">
-
-          <div class="field-row">
-            <div class="field">
-              <label for="first_name">First name<span class="req">*</span></label>
-              <input type="text" id="first_name" name="first_name" required autocomplete="given-name">
-            </div>
-            <div class="field">
-              <label for="last_name">Last name<span class="req">*</span></label>
-              <input type="text" id="last_name" name="last_name" required autocomplete="family-name">
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="title">Role / title<span class="req">*</span></label>
-              <input type="text" id="title" name="title" placeholder="e.g. Principal, Superintendent" required>
-            </div>
-            <div class="field">
-              <label for="phone">Phone<span class="req">*</span></label>
-              <input type="tel" id="phone" name="phone" required autocomplete="tel">
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="email">Email<span class="req">*</span></label>
-            <input type="email" id="email" name="email" required autocomplete="email">
-            <span class="help">Use the same email you used for the payment so we can match your order.</span>
-          </div>
-
-          <div class="field">
-            <label for="school_name">School name<span class="req">*</span></label>
-            <input type="text" id="school_name" name="school_name" required>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="district">District</label>
-              <input type="text" id="district" name="district">
-            </div>
-            <div class="field">
-              <label for="state">State<span class="req">*</span></label>
-              <input type="text" id="state" name="state" required autocomplete="address-level1" maxlength="60">
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="grade_levels">Grade band(s) served<span class="req">*</span></label>
-              <input type="text" id="grade_levels" name="grade_levels" placeholder="e.g. K-2, 3-5, K-5" required>
-            </div>
-            <div class="field">
-              <label for="num_classrooms">Number of classrooms / educators<span class="req">*</span></label>
-              <input type="text" id="num_classrooms" name="num_classrooms" placeholder="e.g. 12 classrooms, 15 educators" required>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="start_date">Preferred start date<span class="req">*</span></label>
-            <input type="text" id="start_date" name="start_date" placeholder="e.g. Aug 15, 2026 or 'start of school year'" required>
-          </div>
-
-          <div class="field">
-            <label for="notes">Anything else we should know?</label>
-            <textarea id="notes" name="notes" placeholder="Special requests, timing constraints, questions, additional context..."></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn" id="submit-btn">Complete setup &rarr;</button>
-          <p class="form-note">By submitting, you'll get an automatic confirmation email and someone from our team will reach out within one business day.</p>
-        </form>
-      </div>
-
-      <!-- Success state (hidden until form submits) -->
-      <div class="success-state" id="success-view">
-        <div class="check-circle" aria-hidden="true">&#10003;</div>
-        <h2>You're all set!</h2>
-        <p>We've received your school details and sent you a confirmation email.</p>
-        <p>Someone from our team will reach out within one business day to schedule your onboarding call and confirm your start date.</p>
-        <p>In the meantime, feel free to explore <a href="https://www.justrebe.com/education.html" target="_blank" rel="noopener" style="color:var(--teal);border-bottom:1px dotted var(--teal);text-decoration:none">more about ReBe Ed</a> or reply to the confirmation email with any questions.</p>
-      </div>
-
+  <!-- Next steps -->
+  <section class="nextsteps-sec">
+    <div class="nextsteps-wrap">
+      <p class="ns-ey">What happens next</p>
+      <h2 class="ns-h">We'll reach out within <em>one business day</em>.</h2>
+      <ul class="ns-list">
+        <li><strong>Onboarding call</strong> &mdash; Someone from our team schedules a 20-minute call to confirm your start date and walk through what's included.</li>
+        <li><strong>Access + materials</strong> &mdash; You'll receive login details and any relevant materials before your start date.</li>
+        <li><strong>Ongoing support</strong> &mdash; Reply to any of our emails any time. We're here.</li>
+      </ul>
+      <p class="ns-note">Questions before we reach out? Email <a href="mailto:hello@justrebe.com?subject=NAESP%20purchase%20follow-up">hello@justrebe.com</a> &mdash; we typically reply within a few hours.</p>
     </div>
-  </section>
-
-  <!-- Contact fallback -->
-  <section class="cta-sec">
-    <p>Questions or need to reach us right away?<br>
-    Email <a href="mailto:hello@justrebe.com?subject=NAESP%20purchase%20follow-up">hello@justrebe.com</a> &middot; we typically reply within a few hours.</p>
   </section>
 
 </main>
@@ -298,11 +164,7 @@
 </footer>
 
 <script>
-  // Read ?paid=<product> from URL and adapt the page.
-  // paid=success (from unified order-form flow) → school info was collected pre-payment;
-  //   show a simple confirmation and hide the school-info form.
-  // paid=<product> (from legacy Stripe Payment Links) → school info wasn't collected;
-  //   show the full form to capture it now.
+  // Set the product badge from ?paid=<product> (thrive/flourish/premiere/transform/success)
   (function () {
     const PRODUCT_LABELS = {
       thrive:    'Thrive — Lights + Camera package',
@@ -316,81 +178,7 @@
     const label = PRODUCT_LABELS[paid] || 'Your ReBe Ed order';
     const badge = document.getElementById('product-badge');
     if (badge) badge.textContent = label;
-    const hidden = document.getElementById('stripe-product-input');
-    if (hidden) hidden.value = paid || 'unknown';
-
-    // From the unified order-form flow (school info already captured) — skip the form.
-    if (paid === 'success') {
-      const formView = document.getElementById('form-view');
-      const successView = document.getElementById('success-view');
-      const sub = document.querySelector('.confirm-sub');
-      if (formView) formView.style.display = 'none';
-      if (successView) {
-        successView.style.display = 'block';
-        const h = successView.querySelector('h2');
-        if (h) h.textContent = "You're all set!";
-        const ps = successView.querySelectorAll('p');
-        if (ps[0]) ps[0].textContent = "Your payment came through and your school details are on file. A confirmation receipt has been emailed to you by Stripe.";
-      }
-      if (sub) sub.textContent = "Your payment came through and your school details are on file. Someone from our team will reach out within one business day.";
-    }
   })();
-
-  // Form submission
-  const form = document.getElementById('post-purchase-form');
-  const errBox = document.getElementById('form-error');
-  const submitBtn = document.getElementById('submit-btn');
-  const formView = document.getElementById('form-view');
-  const successView = document.getElementById('success-view');
-
-  function showError(msg) {
-    errBox.textContent = msg;
-    errBox.style.display = 'block';
-    errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  function clearError() { errBox.style.display = 'none'; errBox.textContent = ''; }
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    clearError();
-
-    // Basic HTML5 validation first
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    const data = Object.fromEntries(new FormData(form).entries());
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
-
-    try {
-      const res = await fetch('/api/naesp-lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (!res.ok) {
-        let msg = 'Something went wrong. Please try again or email hello@justrebe.com.';
-        try {
-          const err = await res.json();
-          if (err && err.error) msg = err.error;
-        } catch (_) {}
-        throw new Error(msg);
-      }
-
-      // Show success state
-      formView.style.display = 'none';
-      successView.style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Complete setup →';
-      showError(String(err && err.message || err));
-    }
-  });
 </script>
 
 </body>
