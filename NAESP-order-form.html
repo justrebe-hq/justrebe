@@ -162,6 +162,23 @@
     background: #F1F7FA;
     box-shadow: 0 4px 14px rgba(3,78,100,.10);
   }
+  /* Highlight the Transform row — it's the featured bundle */
+  .prow:has(input[value="transform"]) {
+    border: 2px solid var(--gold);
+    background: linear-gradient(135deg, #FFFBEC 0%, #FFF6D8 100%);
+    box-shadow: 0 6px 18px rgba(254,185,9,.18);
+  }
+  .prow:has(input[value="transform"]):hover {
+    border-color: var(--gold-deep);
+    background: linear-gradient(135deg, #FFF9E4 0%, #FFF2C7 100%);
+  }
+  .prow:has(input[value="transform"]).selected {
+    border-color: var(--gold-deep);
+    background: linear-gradient(135deg, #FFF6D8 0%, #FFEEB9 100%);
+    box-shadow: 0 8px 22px rgba(254,185,9,.28);
+  }
+  .prow:has(input[value="transform"]) input[type="checkbox"] { border-color: var(--gold-deep); }
+  .prow:has(input[value="transform"]) input[type="checkbox"]:checked { background: var(--gold-deep); border-color: var(--gold-deep); }
   .prow input[type="checkbox"] {
     -webkit-appearance: none; appearance: none;
     width: 24px; height: 24px;
@@ -191,36 +208,31 @@
   .pprice {
     text-align: right; align-self: flex-start;
   }
-  /* Tiny "Conference Pricing" flag above the strike-through regular price */
+  /* "Conference Pricing" callout — plain gold text, no pill */
   .pprice .conf-pill {
-    display: inline-block;
-    background: #FEB909;
-    color: #23170a;
-    font-size: 7px;
+    display: block;
+    background: transparent;
+    color: var(--gold-deep);
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    padding: 1.5px 5px;
-    border-radius: 3px;
-    margin-bottom: 4px;
-    line-height: 1.5;
-    white-space: nowrap;
-    vertical-align: middle;
+    letter-spacing: .02em;
+    padding: 0;
+    margin-bottom: 3px;
+    line-height: 1.3;
   }
   /* Small green savings note under the price (Transform) */
   .pprice .save-tag {
     display: block;
     color: var(--success);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .02em;
-    text-transform: uppercase;
-    margin-top: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .01em;
+    margin-top: 3px;
     line-height: 1.4;
   }
   .pprice .lbl {
-    display: block; font-size: 11px; font-weight: 700; color: var(--muted);
-    letter-spacing: .06em; text-transform: uppercase; margin-top: 5px; line-height: 1.35;
+    display: block; font-size: 12px; font-weight: 600; color: var(--muted);
+    letter-spacing: 0; margin-top: 5px; line-height: 1.35;
   }
   .pprice .amt { display: block; font-size: 24px; color: var(--teal); font-weight: 900; letter-spacing: -.02em; line-height: 1.1; }
   .pprice.free .amt { color: var(--success); font-style: italic; font-size: 20px; }
