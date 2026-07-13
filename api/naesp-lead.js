@@ -50,7 +50,7 @@ const PRODUCT_LABEL = {
   flourish:  'Flourish — K-2 Health Boosts per grade + FREE 3-5 pilot included ($250/educator · 1-year license)',
   premiere:  'Literacy Residency Pilot ($8,000 conference · reg $10,000/school)',
   transform: 'Transform — Educator + Student Wellness ★ ($11,000 conference · reg $16,000 · save $5,000)',
-  action:    '*Action — ReBe ReFresh Live add-on (+$300/educator)',
+  action:    'Action — ReBe ReFresh Live add-on (+$300/educator)',
 };
 
 // Conference prices for Stripe line items. MUST MATCH the frontend PRICES
@@ -60,7 +60,7 @@ const PRODUCT_PRICES = {
   flourish:  { amount: 250,   label: 'Flourish — K-2 Health Boosts per grade (+ FREE 3-5 pilot, 1-year license)', qtyKey: 'qty_flourish', unitLabel: 'educators' },
   premiere:  { amount: 8000,  label: 'Literacy Residency Pilot (per school)' },
   transform: { amount: 11000, label: 'Transform — Educator + Student Wellness ★ (per school)' },
-  action:    { amount: 300,   label: '*Action — ReBe ReFresh Live (add-on)', qtyKey: 'qty_action', unitLabel: 'educators' },
+  action:    { amount: 300,   label: 'Action — ReBe ReFresh Live (add-on)', qtyKey: 'qty_action', unitLabel: 'educators' },
 };
 
 // Build Stripe line-items from selected products + optional quantities.
