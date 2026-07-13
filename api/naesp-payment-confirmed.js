@@ -119,23 +119,33 @@ module.exports = async function handler(req, res) {
   }
 
   // 3. Idempotency check — has this session already been confirmed via email?
+  //    Prefer looking up by stripe_session_id (unique + always present); fall
+  //    back to naesp_order_id (only present if the initial Supabase insert
+  //    succeeded). Either match means we've already emailed this buyer.
   const base = supabaseBaseUrl();
   const key = supabaseKey();
   let alreadySent = false;
-  if (base && key && naespOrderId) {
-    try {
-      const r = await fetch(`${base}/rest/v1/naesp_orders?id=eq.${encodeURIComponent(naespOrderId)}&select=payment_confirmed_email_sent_at`, {
-        headers: { apikey: key, Authorization: `Bearer ${key}` },
-      });
-      if (r.ok) {
-        const rows = await r.json();
-        if (rows[0] && rows[0].payment_confirmed_email_sent_at) {
-          alreadySent = true;
+  if (base && key) {
+    const tryLookup = async (queryString) => {
+      try {
+        const r = await fetch(`${base}/rest/v1/naesp_orders?${queryString}&select=payment_confirmed_email_sent_at`, {
+          headers: { apikey: key, Authorization: `Bearer ${key}` },
+        });
+        if (r.ok) {
+          const rows = await r.json();
+          if (rows[0] && rows[0].payment_confirmed_email_sent_at) return true;
         }
+      } catch (err) {
+        // Column may not exist yet — treat as "not sent" and continue.
+        console.warn('Idempotency lookup failed (column may not exist):', err.message);
       }
-    } catch (err) {
-      // Column may not exist yet — treat as "not sent" and continue.
-      console.warn('Idempotency lookup failed (column may not exist):', err.message);
+      return false;
+    };
+    // Session-id lookup is the strong guarantee.
+    alreadySent = await tryLookup(`stripe_session_id=eq.${encodeURIComponent(session_id)}`);
+    if (!alreadySent && naespOrderId) {
+      // Fallback for orders written before stripe_session_id was captured.
+      alreadySent = await tryLookup(`id=eq.${encodeURIComponent(naespOrderId)}`);
     }
   }
 
@@ -252,10 +262,20 @@ Buyer received a "Payment received" email with the amount and product list.
 
   await Promise.allSettled([sendEmail, sendTeam]);
 
-  // 5. Best-effort mark the order as paid + confirmation sent
-  if (base && key && naespOrderId) {
+  // 5. Best-effort mark the order as paid + confirmation sent.
+  //    Prefer patching by naesp_order_id; fall back to stripe_session_id so
+  //    idempotency still holds if Supabase had a hiccup during the initial insert.
+  if (base && key) {
+    const patchBody = JSON.stringify({
+      payment_status: 'paid',
+      payment_confirmed_email_sent_at: new Date().toISOString(),
+      stripe_session_id: session_id,
+    });
+    const patchUrl = naespOrderId
+      ? `${base}/rest/v1/naesp_orders?id=eq.${encodeURIComponent(naespOrderId)}`
+      : `${base}/rest/v1/naesp_orders?stripe_session_id=eq.${encodeURIComponent(session_id)}`;
     try {
-      await fetch(`${base}/rest/v1/naesp_orders?id=eq.${encodeURIComponent(naespOrderId)}`, {
+      await fetch(patchUrl, {
         method: 'PATCH',
         headers: {
           apikey: key,
@@ -263,11 +283,7 @@ Buyer received a "Payment received" email with the amount and product list.
           'Content-Type': 'application/json',
           Prefer: 'return=minimal',
         },
-        body: JSON.stringify({
-          payment_status: 'paid',
-          payment_confirmed_email_sent_at: new Date().toISOString(),
-          stripe_session_id: session_id,
-        }),
+        body: patchBody,
       });
     } catch (err) {
       // Column may not exist — non-blocking

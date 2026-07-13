@@ -458,10 +458,20 @@ async function handleOrder(body, req, res) {
     // silently disappears when the DB write is the failing hop.
     let inserted = null;
     let supabaseError = null;
+    // Env-check gracefully — if env vars are missing, log and continue with
+    // email/Kit path (matches the payment-confirmed endpoint's behavior).
+    let base = null;
+    let key = null;
     try {
-      const url = supabaseBaseUrl();
-      const key = supabaseKey();
-      const r = await fetch(`${url}/rest/v1/naesp_orders`, {
+      base = supabaseBaseUrl();
+      key = supabaseKey();
+    } catch (envErr) {
+      console.error('Supabase env vars missing:', envErr.message);
+      supabaseError = envErr.message;
+    }
+    try {
+      if (!base || !key) throw new Error(supabaseError || 'Supabase env vars unavailable');
+      const r = await fetch(`${base}/rest/v1/naesp_orders`, {
         method: 'POST',
         headers: {
           apikey: key,
@@ -498,6 +508,7 @@ async function handleOrder(body, req, res) {
     // Card path — build Stripe Checkout Session FIRST so we can include the
     // payment link in the buyer's confirmation email below.
     let checkout_url = null;
+    let stripeSessionId = null;
     if (row.payment_method === 'card') {
       try {
         const { items } = buildStripeLineItems(products, body.quantities || {});
@@ -514,10 +525,31 @@ async function handleOrder(body, req, res) {
           naesp_order_id: inserted && inserted.id,
         });
         checkout_url = session && session.url;
+        stripeSessionId = session && session.id;
         if (!checkout_url) throw new Error('Payment session missing url');
       } catch (e) {
         console.error('NAESP payment session creation failed:', e);
         // Fall through — emails still fire; buyer gets a manual follow-up.
+      }
+    }
+
+    // Best-effort: stamp the Stripe session id on the order row so the
+    // payment-confirmed endpoint can find it back later, even if we don't
+    // have a naesp_order_id in Stripe metadata.
+    if (base && key && inserted && inserted.id && stripeSessionId) {
+      try {
+        await fetch(`${base}/rest/v1/naesp_orders?id=eq.${encodeURIComponent(inserted.id)}`, {
+          method: 'PATCH',
+          headers: {
+            apikey: key,
+            Authorization: `Bearer ${key}`,
+            'Content-Type': 'application/json',
+            Prefer: 'return=minimal',
+          },
+          body: JSON.stringify({ stripe_session_id: stripeSessionId }),
+        });
+      } catch (err) {
+        console.warn('Failed to stamp stripe_session_id (column may not exist):', err.message);
       }
     }
 
