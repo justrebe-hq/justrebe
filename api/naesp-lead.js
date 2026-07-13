@@ -242,14 +242,14 @@ module.exports = async function handler(req, res) {
     }
 
     // Resend: instant auto-response to the lead + admin notification.
-    // Both fire-and-forget so the API returns fast.
+    // Fire both emails and AWAIT them — Vercel Node freezes after the
+    // response is sent, so any unawaited fetch may be terminated mid-flight.
     if (process.env.RESEND_API_KEY) {
       const fromAddr = process.env.NOTIFY_FROM || 'ReBe Ed <hello@justrebe.com>';
       const adminAddr = process.env.NOTIFY_ADMIN || 'hello@justrebe.com';
       const resendKey = process.env.RESEND_API_KEY;
 
-      // Lead auto-response (temporary — replaced by Kit sequence when live)
-      fetch('https://api.resend.com/emails', {
+      const leadAutoResponse = fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -278,8 +278,7 @@ www.justrebe.com/education`,
         }),
       }).catch((e) => console.error('NAESP lead auto-response failed:', e));
 
-      // Admin notification
-      fetch('https://api.resend.com/emails', {
+      const adminNotify = fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -302,6 +301,8 @@ ReBe Ed — Lead + NAESP · 2026. An auto-response has already been sent.
 — ReBe Ed / NAESP form`,
         }),
       }).catch((e) => console.error('NAESP admin email failed:', e));
+
+      await Promise.allSettled([leadAutoResponse, adminNotify]);
     }
 
     return res.status(200).json({ ok: true, id: inserted && inserted.id });
@@ -326,7 +327,13 @@ async function handleOrder(body, req, res) {
   const school_name = (body.school_name || '').toString().trim();
   const signature_name = (body.signature_name || '').toString().trim();
   const signed_date = (body.signed_date || '').toString().trim();
-  const products = Array.isArray(body.products) ? body.products.filter(Boolean) : [];
+  let products = Array.isArray(body.products) ? body.products.filter(Boolean) : [];
+  // Backend guard for Transform exclusivity — mirrors the frontend UX so a
+  // stale tab or JS-disabled browser can't submit Transform + Thrive/Flourish/Premiere
+  // and get charged for the overlap.
+  if (products.includes('transform')) {
+    products = products.filter((p) => !['thrive', 'flourish', 'premiere'].includes(p));
+  }
 
   if (!first_name || !last_name || !email || !school_name || !signature_name || !signed_date) {
     return res.status(400).json({
@@ -440,7 +447,7 @@ async function handleOrder(body, req, res) {
         : (isCard ? `\n\n  We hit a temporary issue generating your payment link — a member of our team will email one to you within a few hours.\n` : '');
 
       // Purchaser auto-response (message body varies by payment method)
-      fetch('https://api.resend.com/emails', {
+      const orderAutoResponse = fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -479,7 +486,7 @@ www.justrebe.com/education`,
       }).catch((e) => console.error('NAESP order auto-response failed:', e));
 
       // Admin / team notification — to v.ellery, cc a.pace + hello
-      fetch('https://api.resend.com/emails', {
+      const orderAdminNotify = fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -527,6 +534,8 @@ Auto-response has already been sent to ${email}.
 — ReBe Ed / NAESP order form`,
         }),
       }).catch((e) => console.error('NAESP order admin email failed:', e));
+
+      await Promise.allSettled([orderAutoResponse, orderAdminNotify]);
     }
 
     // Card path returns checkout_url so the frontend can send the buyer
@@ -659,7 +668,7 @@ async function handlePostPurchase(body, req, res) {
   Email:          ${email}${notes ? '\n  Notes:          ' + notes : ''}`;
 
     // Buyer confirmation
-    fetch('https://api.resend.com/emails', {
+    const postBuyerEmail = fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -692,7 +701,7 @@ JustReBe, LLC
     // Admin notification
     const notifyTo = ['v.ellery@justrebe.com'];
     const notifyCc = ['a.pace@justrebe.com', 'hello@justrebe.com'];
-    fetch('https://api.resend.com/emails', {
+    const postAdminEmail = fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -711,6 +720,8 @@ Submitted from: ${ip || 'unknown IP'}
 `,
       }),
     }).catch((e) => console.error('Resend admin email error:', e));
+
+    await Promise.allSettled([postBuyerEmail, postAdminEmail]);
   } else {
     console.error('RESEND_API_KEY missing — post-purchase emails not sent');
   }

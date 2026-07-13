@@ -22,7 +22,7 @@
     text-rendering: optimizeLegibility;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #1A1A1A;
-    background: #FAF9F7;
+    background: #fff;
   }
   a { color: inherit; }
 
@@ -42,13 +42,13 @@
     --bone:#E8E5E0;
   }
 
-  /* Topbar */
-  .topbar { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid #EEE; height: 96px; display: flex; align-items: center; box-shadow: 0 2px 12px rgba(3,78,100,.04); }
-  .topbar-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; }
+  /* Topbar — matches NAESP.html + NAESP-product.html */
+  .topbar { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid #EEE; height: 128px; display: flex; align-items: center; box-shadow: 0 2px 12px rgba(3,78,100,.04); }
+  .topbar-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; }
   .brand { display: inline-flex; align-items: center; text-decoration: none; }
-  .brand-img { display: block; height: 78px; width: auto; max-width: 260px; }
-  @media (max-width: 600px) { .topbar { height: 76px; } .brand-img { height: 60px; } }
-  .top-tag { font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); padding: 7px 13px; background: rgba(3,78,100,.08); border-radius: 999px; white-space: nowrap; }
+  .brand-img { display: block; height: 112px; width: auto; max-width: 320px; }
+  @media (max-width: 600px) { .topbar { height: 88px; } .brand-img { height: 72px; } .topbar-inner { padding: 0 20px; } }
+  .top-tag { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); padding: 8px 14px; background: rgba(3,78,100,.08); border-radius: 999px; white-space: nowrap; }
   @media (max-width: 600px) { .top-tag { display: none; } }
 
   /* Confirmation section — matches the product page pagehead style */
@@ -284,7 +284,7 @@
         <h2>You're all set!</h2>
         <p>We've received your school details and sent you a confirmation email.</p>
         <p>Someone from our team will reach out within one business day to schedule your onboarding call and confirm your start date.</p>
-        <p>In the meantime, feel free to explore <a href="/education" style="color:var(--teal);border-bottom:1px dotted var(--teal);text-decoration:none">more about ReBe Ed</a> or reply to the confirmation email with any questions.</p>
+        <p>In the meantime, feel free to explore <a href="https://www.justrebe.com/education.html" target="_blank" rel="noopener" style="color:var(--teal);border-bottom:1px dotted var(--teal);text-decoration:none">more about ReBe Ed</a> or reply to the confirmation email with any questions.</p>
       </div>
 
     </div>
