@@ -237,6 +237,36 @@
   }
   .off-cta:hover { background: var(--teal-deep); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(3,78,100,.34); }
 
+  /* ===== EPICS explainer callout ===== */
+  .epics-explainer {
+    padding: 44px 24px;
+    background: linear-gradient(180deg, #FDFCFF 0%, #F5F0FA 100%);
+    border-top: 1px solid #EBE3F2; border-bottom: 1px solid #EBE3F2;
+  }
+  .epics-explainer-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+  .epics-explainer-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--purple);
+    background: rgba(125,10,171,.08);
+    padding: 5px 14px; border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .epics-explainer-body { font-size: 16px; color: var(--body); line-height: 1.65; max-width: 900px; margin: 0 auto; }
+  .epics-explainer-body strong { color: var(--purple); font-weight: 800; }
+  .epics-word {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin: 4px 8px 4px 0;
+    padding: 4px 10px;
+    background: #fff;
+    border: 1px solid #E4EDF0;
+    border-radius: 999px;
+    font-size: 13.5px; font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .epics-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+
   /* ===== "What is ReBe Ed?" duo (Students + Educators) ===== */
   .whatis { padding: 88px 24px; background: #F5F9FC; }
   .whatis.whatis-alt { background: #fff; }
@@ -756,6 +786,20 @@
       <h2 class="off-h" id="offerings-heading">We're <em>re&middot;be</em>.</h2>
       <p class="off-body">We help your <strong>educators rewrite their own story first</strong> &mdash; healthier, steadier, more resilient educators, because a better me is how you build a better we. Then, your students get the same: <strong>25 EPICS Health Boosts</strong> and our <strong>Literacy LABS<sup>&trade;</sup></strong>, where reading scores climb through whole health.</p>
       <a href="/NAESP-form.html" class="off-cta">See how it would work in your building &rarr;</a>
+    </div>
+  </section>
+
+  <!-- EPICS EXPLAINER -->
+  <section class="epics-explainer">
+    <div class="epics-explainer-inner">
+      <span class="epics-explainer-tag">What is EPICS?</span>
+      <p class="epics-explainer-body"><strong>EPICS</strong> is the re&middot;be framework for whole-health wellness &mdash; five pathways every educator and student can grow in:
+        <span class="epics-word"><span class="epics-dot" style="background:#B02929;"></span>Emotional</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--green);"></span>Physical</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--teal);"></span>Intellectual</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--orange);"></span>Cultural</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--purple);"></span>Social / Spiritual</span>
+      </p>
     </div>
   </section>
 

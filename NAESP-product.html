@@ -291,19 +291,25 @@
   .subof-cta .preview:hover { color: var(--teal-deep); border-bottom-color: var(--teal); }
   .subof-cta .btn { padding: 12px 22px; font-size: 14px; }
 
-  /* ===== Transform highlight ===== */
+  /* ===== Transform section — LIGHT, gold-highlighted ===== */
+  .transform-sec { background: linear-gradient(180deg, #FFFBEC 0%, #FFF6D8 100%); position: relative; }
+  .transform-sec::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-deep), var(--gold));
+  }
   .transform-card {
     max-width: 900px; margin: 40px auto 0;
-    background: rgba(255,255,255,.10);
+    background: #fff;
     border: 2px solid var(--gold);
     border-radius: 22px;
     padding: 38px 40px;
-    backdrop-filter: blur(4px);
+    box-shadow: 0 14px 42px rgba(254,185,9,.25);
   }
-  .transform-card ul { list-style: none; padding: 0; margin: 18px 0 26px; display: grid; gap: 12px; }
-  .transform-card ul li { padding-left: 24px; font-size: 16px; color: rgba(255,255,255,.92); line-height: 1.55; position: relative; }
-  .transform-card ul li::before { content: '★'; color: var(--gold); font-weight: 900; font-size: 15px; line-height: 1.6; position: absolute; left: 0; top: 0; }
-  .transform-card ul li strong { color: #fff; font-weight: 800; }
+  .transform-card ul { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 12px; }
+  .transform-card ul li { padding-left: 24px; font-size: 16px; color: var(--body); line-height: 1.55; position: relative; }
+  .transform-card ul li::before { content: '★'; color: var(--gold-deep); font-weight: 900; font-size: 15px; line-height: 1.6; position: absolute; left: 0; top: 0; }
+  .transform-card ul li strong { color: var(--ink); font-weight: 800; }
+  .transform-card ul li em { color: var(--muted); font-style: italic; }
   .transform-card .tc-badge {
     display: inline-block;
     font-size: 11px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase;
@@ -311,9 +317,8 @@
     padding: 6px 14px; border-radius: 999px;
     margin-bottom: 14px;
   }
-  .transform-card .tc-h { font-size: clamp(26px, 3.2vw, 36px); font-weight: 900; letter-spacing: -.02em; color: #fff; line-height: 1.12; margin-bottom: 8px; }
-  .transform-card .tc-sub { font-size: 15px; color: var(--gold); font-style: italic; font-weight: 600; margin-bottom: 4px; }
-  .transform-card .tc-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .transform-card .tc-h { font-size: clamp(26px, 3.2vw, 36px); font-weight: 900; letter-spacing: -.02em; color: var(--teal); line-height: 1.12; margin-bottom: 8px; }
+  .transform-card .tc-sub { font-size: 15px; color: var(--gold-deep); font-style: italic; font-weight: 700; margin-bottom: 4px; }
 
   /* ===== Order path ===== */
   .orderpath {
@@ -355,8 +360,8 @@
   .docs-head { text-align: center; max-width: 760px; margin: 0 auto 40px; }
   .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
   .doc {
-    display: flex; gap: 14px; align-items: center;
-    padding: 20px 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 22px 22px 20px;
     background: #fff;
     border: 1px solid #E4EDF0;
     border-radius: 14px;
@@ -373,9 +378,10 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 11px; font-weight: 900; letter-spacing: .04em;
   }
-  .doc-info h4 { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 3px; line-height: 1.25; }
-  .doc-info p { font-size: 12.5px; color: var(--body); line-height: 1.45; margin-bottom: 4px; }
-  .doc-info .download-tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--teal); }
+  .doc-info { display: flex; flex-direction: column; height: 100%; min-width: 0; }
+  .doc-info h4 { font-size: 15px; font-weight: 800; color: var(--ink); margin: 0 0 6px; line-height: 1.25; min-height: 2.5em; }
+  .doc-info p { font-size: 12.5px; color: var(--body); line-height: 1.45; margin: 0 0 10px; flex: 1; }
+  .doc-info .download-tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--teal); margin-top: auto; }
   .doc.doc-placeholder { opacity: .55; cursor: default; pointer-events: none; }
   .doc.doc-placeholder .pending-tag { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 
@@ -499,9 +505,6 @@
         </article>
       </div>
 
-      <div style="text-align:center;">
-        <a class="btn btn-teal" href="/NAESP-order-form.html?add=thrive">See Thrive pricing &amp; order &rarr;</a>
-      </div>
     </div>
   </section>
 
@@ -534,7 +537,6 @@
           </ul>
           <div class="subof-cta">
             <a href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener" class="preview">See EPICS + Labs overview &rarr;</a>
-            <a href="/NAESP-order-form.html?add=flourish" class="btn btn-green">Order K-2 &rarr;</a>
           </div>
         </article>
 
@@ -549,15 +551,14 @@
           </ul>
           <div class="subof-cta">
             <a href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener" class="preview">See Literacy Residency details &rarr;</a>
-            <a href="/NAESP-order-form.html?add=premiere" class="btn btn-purple">Order Literacy Residency &rarr;</a>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ===== TRANSFORM ===== -->
-  <section class="sec dark" id="transform">
+  <!-- ===== TRANSFORM (light, highlighted) ===== -->
+  <section class="sec transform-sec" id="transform">
     <div class="sec-inner">
       <div class="sec-head" style="grid-template-columns: 1fr; text-align: center; margin-bottom: 24px;">
         <div class="sec-copy" style="max-width: 780px; margin: 0 auto;">
@@ -577,12 +578,8 @@
         <ul>
           <li><strong>Thrive</strong> &mdash; Lights + Camera + full EPICS video library <em>(educator wellness)</em></li>
           <li><strong>Flourish</strong> &mdash; 25 EPICS Health Boosts per grade (K-2 + 3-5) + Literacy Residency Pilot + 5 monthly Literacy LAB webinars <em>(student wellness)</em></li>
-          <li>Optional add-on: <strong>Action</strong> (ReBe ReFresh Live groups) &mdash; add to Transform any time</li>
+          <li>Optional add-on: <strong>Action</strong> (ReBe ReFresh Live groups)</li>
         </ul>
-        <div class="tc-cta">
-          <a class="btn btn-gold" href="/NAESP-order-form.html?add=transform">See Transform pricing &amp; order &rarr;</a>
-          <a class="btn btn-outline-white" href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener">Download the overview PDF</a>
-        </div>
       </div>
     </div>
   </section>
@@ -602,13 +599,26 @@
   <section class="orderpath" id="order-form-path">
     <div class="orderpath-inner">
       <span class="orderpath-ey">Ready to order?</span>
-      <h2 class="orderpath-h">Fill it out online &mdash; or <em>print the PDF</em>.</h2>
+      <h2 class="orderpath-h">See pricing &amp; <em>order</em>.</h2>
       <p class="orderpath-sub">Conference pricing is reserved through the order form. You'll see the full price list, select what you need, and choose how you'd like to pay (credit card, purchase order, or check).</p>
       <div class="orderpath-btns">
-        <a class="btn btn-teal" href="/NAESP-order-form.html">Fill out order form online &rarr;</a>
-        <a class="btn btn-outline-teal" href="/ReBe_Offerings_OrderForm.pdf" target="_blank" rel="noopener">Download printable PDF &darr;</a>
+        <a class="btn btn-gold" href="/NAESP-order-form.html">See pricing &amp; order &rarr;</a>
       </div>
       <p class="orderpath-note">Questions? Email <a href="mailto:hello@justrebe.com" style="color:var(--teal); text-decoration: underline;">hello@justrebe.com</a></p>
+    </div>
+  </section>
+
+  <!-- ===== EPICS explainer (repeated under products) ===== -->
+  <section class="epics-note" style="padding: 32px 24px;">
+    <div class="epics-note-inner">
+      <span class="epics-note-tag">What is EPICS?</span>
+      <p class="epics-note-body"><strong>EPICS</strong> is the re&middot;be framework for whole-health wellness &mdash; five pathways every educator and student can grow in:
+        <span class="epics-word"><span class="epics-dot" style="background:#B02929;"></span>Emotional</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--green);"></span>Physical</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--teal);"></span>Intellectual</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--orange);"></span>Cultural</span>
+        <span class="epics-word"><span class="epics-dot" style="background:var(--purple);"></span>Social / Spiritual</span>
+      </p>
     </div>
   </section>
 
@@ -617,7 +627,7 @@
     <div class="docs-inner">
       <div class="docs-head">
         <span class="sec-ey">Take it with you</span>
-        <h2 class="orderpath-h">Documents &amp; resources</h2>
+        <h2 class="orderpath-h">Documents &amp; Resources</h2>
         <p class="orderpath-sub">One-pagers, framework overviews, sample lessons.</p>
       </div>
       <div class="docs-grid">
