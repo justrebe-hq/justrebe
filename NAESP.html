@@ -607,22 +607,52 @@
 
   /* ===== CTA section (REVAMPED - final invitation card) ===== */
   .ctasec {
-    background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 50%, var(--teal-soft) 100%);
+    background: linear-gradient(135deg, #FFFBEC 0%, #FFF3D2 50%, #FFE9AC 100%);
     padding: 110px 24px 96px;
     text-align: center;
     position: relative;
     overflow: hidden;
-    color: #fff;
+    color: var(--ink);
+    border-top: 4px solid var(--orange);
   }
   .ctasec::before {
     content: '';
     position: absolute; top: 0; left: 50%;
-    width: 120px; height: 3px;
-    background: linear-gradient(90deg, var(--teal-soft), var(--purple));
+    width: 120px; height: 4px;
+    background: linear-gradient(90deg, var(--orange), var(--gold), var(--orange));
     transform: translateX(-50%);
     border-radius: 0 0 4px 4px;
   }
-  .ctasec-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
+  .ctasec-inner { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+
+  /* CTA layout with QR alongside */
+  .cta-body { display: grid; grid-template-columns: 1fr 220px; gap: 44px; align-items: center; margin-top: 8px; }
+  .cta-body .cta-copy { text-align: left; }
+  .cta-body .cta-copy .cta-h,
+  .cta-body .cta-copy .cta-sub,
+  .cta-body .cta-copy .cta-highlight,
+  .cta-body .cta-copy .cta-btns { text-align: left; }
+  .cta-body .cta-btns { justify-content: flex-start; }
+  .cta-qr {
+    background: #fff;
+    border: 3px solid var(--orange);
+    border-radius: 20px;
+    padding: 16px 16px 12px;
+    box-shadow: 0 12px 32px rgba(240,105,5,.20);
+  }
+  .cta-qr img { display: block; width: 100%; height: auto; image-rendering: pixelated; margin: 0 auto 8px; }
+  .cta-qr-cap { font-size: 12px; font-weight: 800; color: var(--ink); text-transform: uppercase; letter-spacing: .1em; text-align: center; }
+  .cta-qr-cap small { display: block; font-size: 10.5px; font-weight: 600; color: var(--muted); letter-spacing: 0; text-transform: none; margin-top: 4px; }
+  @media (max-width: 780px) {
+    .cta-body { grid-template-columns: 1fr; text-align: center; }
+    .cta-body .cta-copy { text-align: center; }
+    .cta-body .cta-copy .cta-h,
+    .cta-body .cta-copy .cta-sub,
+    .cta-body .cta-copy .cta-highlight,
+    .cta-body .cta-copy .cta-btns { text-align: center; }
+    .cta-body .cta-btns { justify-content: center; }
+    .cta-qr { max-width: 220px; margin: 0 auto; }
+  }
   .cta-logo-wrap {
     display: inline-block;
     background: #FFFFFF;
@@ -645,27 +675,32 @@
     display: inline-block;
     font-size: 12px; font-weight: 900;
     letter-spacing: .28em; text-transform: uppercase;
-    color: var(--gold);
+    color: var(--orange);
     padding: 8px 18px;
-    background: rgba(254,185,9,.08);
-    border: 1.5px solid var(--gold);
+    background: rgba(240,105,5,.10);
+    border: 1.5px solid var(--orange);
     border-radius: 999px;
     margin-bottom: 26px;
   }
-  .cta-h { font-size: clamp(30px, 3.6vw, 46px); font-weight: 900; color: #fff; letter-spacing: -.025em; line-height: 1.12; margin-bottom: 22px; }
-  .cta-sub { font-size: 17px; color: rgba(255,255,255,.85); line-height: 1.65; margin-bottom: 12px; }
+  .cta-h { font-size: clamp(30px, 3.6vw, 46px); font-weight: 900; color: var(--teal-deep); letter-spacing: -.025em; line-height: 1.12; margin-bottom: 22px; }
+  .cta-sub { font-size: 17px; color: var(--body); line-height: 1.65; margin-bottom: 12px; }
   .cta-highlight {
     font-size: clamp(18px, 2vw, 22px);
-    font-weight: 800; color: #fff;
-    margin-bottom: 42px;
+    font-weight: 800; color: var(--teal-deep);
+    margin-bottom: 32px;
     letter-spacing: -.005em;
   }
-  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
+  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+  .cta-btns .btn { padding: 20px 40px; font-size: 17px; font-weight: 900; }
+  .cta-btns .btn-orange { box-shadow: 0 10px 30px rgba(240,105,5,.42); }
+  .cta-btns .btn-orange:hover { box-shadow: 0 14px 36px rgba(240,105,5,.52); }
+  .cta-btns .btn-ghost-dark { background: transparent; color: var(--teal-deep); border: 2px solid var(--teal-deep); padding: 18px 36px; font-weight: 800; }
+  .cta-btns .btn-ghost-dark:hover { background: var(--teal-deep); color: #fff; }
   .cta-emails {
-    padding-top: 30px;
-    border-top: 1px solid rgba(255,255,255,.14);
+    padding-top: 26px;
+    border-top: 1px solid rgba(3,78,100,.15);
     font-size: 14px;
-    color: rgba(255,255,255,.68);
+    color: var(--body);
     letter-spacing: .04em;
   }
   .cta-emails a {
@@ -738,10 +773,6 @@
       <span class="hero-tag">Welcome, NAESP Principals</span>
       <h1 class="hero-h1">Wellbeing belongs in <em>every</em> elementary classroom.</h1>
       <p class="hero-sub">ReBe Ed is a comprehensive, whole-health support system that strengthens educational experiences through <strong>root-level resources, targeted training, and strategic partnerships.</strong> We revitalize educators and students, igniting wholeness &mdash; <em>true wellbeing, productivity and social connection.</em></p>
-      <div class="hero-btns">
-        <a href="/NAESP-form.html" class="btn btn-gold">Offering Details and Pricing &rarr;</a>
-        <a href="#contact" class="btn btn-outline-white">Talk with us</a>
-      </div>
     </div>
   </section>
 
@@ -812,7 +843,7 @@
         <p class="whatis-sub">An ACE-aware wellness platform built for your students.</p>
         <div class="whatis-body">
           <p>Built around <strong>EPICS</strong> &mdash; Emotional, Physical, Intellectual, Cultural, and Social health &mdash; ReBe Ed revitalizes the wellbeing, social connection, and productivity of educators, students, and the broader school community.</p>
-          <p>Through <strong>7&ndash;10 minute Health Boosts</strong> and science-of-reading-based <strong>Literacy LABS<sup>&trade;</sup></strong> (guided by BB the Bee), schools get practical tools for healthier, more connected communities.</p>
+          <p>Through <strong>7&ndash;10 minute Health Boosts</strong> and Science-of-Reading-based <strong>Literacy LABS<sup>&trade;</sup></strong> (guided by BB the Bee), schools get practical tools for healthier, more connected communities.</p>
           <p>The result: students who can name what they feel, classrooms that move from reactive to responsive, and classrooms that are <strong>transforming lives.</strong></p>
         </div>
       </div>
@@ -873,13 +904,21 @@
   <!-- CTA -->
   <section class="ctasec" id="contact">
     <div class="ctasec-inner">
-      <span class="cta-ey">Let's talk</span>
-      <h2 class="cta-h">Ready to bring this to your students?</h2>
-      <p class="cta-sub">Email us with what you saw at NAESP and what your school needs most.</p>
-      <p class="cta-highlight">We'll set up a 20-minute call.</p>
-      <div class="cta-btns">
-        <a class="btn btn-gold" href="mailto:hello@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BK-2%20Health%20Boosts%20%2F%20Residency%20%2F%203-5%20Pilot%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Email us about your school &rarr;</a>
-        <a class="btn btn-outline-white" href="https://www.justrebe.com/education" target="_blank" rel="noopener">Learn more at justrebe.com/education &rarr;</a>
+      <div class="cta-body">
+        <div class="cta-copy">
+          <span class="cta-ey">Let's talk</span>
+          <h2 class="cta-h">Ready to bring this to your students?</h2>
+          <p class="cta-sub">Email us with what you saw at NAESP and what your school needs most.</p>
+          <p class="cta-highlight">We'll set up a 20-minute call.</p>
+          <div class="cta-btns">
+            <a class="btn btn-orange" href="/NAESP-product.html">See offering details &amp; pricing &rarr;</a>
+            <a class="btn btn-ghost-dark" href="mailto:hello@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BThrive%20%2F%20K-2%20Health%20Boosts%20%2F%20Literacy%20Residency%20%2F%20Transform%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Talk with us</a>
+          </div>
+        </div>
+        <div class="cta-qr" aria-label="QR code to the offerings page">
+          <img src="Images/qr-naesp-product.png" alt="QR code linking to justrebe.com/NAESP-product">
+          <p class="cta-qr-cap">Scan for offerings<small>justrebe.com/NAESP-product</small></p>
+        </div>
       </div>
       <p class="cta-emails">Questions? <a href="mailto:hello@justrebe.com">hello@justrebe.com</a></p>
     </div>
