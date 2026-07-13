@@ -245,7 +245,7 @@ module.exports = async function handler(req, res) {
     // Fire both emails and AWAIT them — Vercel Node freezes after the
     // response is sent, so any unawaited fetch may be terminated mid-flight.
     if (process.env.RESEND_API_KEY) {
-      const fromAddr = process.env.NOTIFY_FROM || 'ReBe Ed <hello@justrebe.com>';
+      const fromAddr = 'ReBe Ed <hello@justrebe.com>';
       const adminAddr = process.env.NOTIFY_ADMIN || 'hello@justrebe.com';
       const resendKey = process.env.RESEND_API_KEY;
 
@@ -436,7 +436,7 @@ async function handleOrder(body, req, res) {
 
     // Resend: auto-response + admin notification
     if (process.env.RESEND_API_KEY) {
-      const fromAddr = process.env.NOTIFY_FROM || 'ReBe Ed <hello@justrebe.com>';
+      const fromAddr = 'ReBe Ed <hello@justrebe.com>';
       const resendKey = process.env.RESEND_API_KEY;
 
       const productLines = products.map((p) => `  • ${PRODUCT_LABEL[p] || p}`).join('\n');
@@ -653,7 +653,7 @@ async function handlePostPurchase(body, req, res) {
 
   // 3) Emails via Resend (auto-response + admin notification)
   if (process.env.RESEND_API_KEY) {
-    const fromAddr = process.env.NOTIFY_FROM || 'ReBe Ed <hello@justrebe.com>';
+    const fromAddr = 'ReBe Ed <hello@justrebe.com>';
     const resendKey = process.env.RESEND_API_KEY;
 
     const detailBlock =
