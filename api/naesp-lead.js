@@ -146,10 +146,14 @@ async function createNaespCheckoutSession(order) {
 const CHECK_MAILING_ADDRESS = '13118 State Rd 64 E., Suite 362, Bradenton, FL 34212';
 
 // Customize the buyer's confirmation email based on their payment method.
-// Card gets a payment link injected separately (see handleOrder).
-function paymentMethodBlurb(method) {
+// For card, the copy depends on whether we successfully generated a checkout link.
+function paymentMethodBlurb(method, cardLinkStatus) {
   switch (method) {
-    case 'card':  return "Your secure payment link is included below. Click it to complete payment on our secure payment page — you'll receive a receipt automatically once payment completes, and our team follows up within one business day with onboarding details.";
+    case 'card':
+      if (cardLinkStatus === 'missing') {
+        return "We hit a temporary issue generating your secure payment link. A member of our team will email one to you within a few hours — no action needed on your end right now.";
+      }
+      return "Your secure payment link is included below. Click it to complete payment on our secure payment page — you'll receive a receipt automatically once payment completes, and our team follows up within one business day with onboarding details.";
     case 'po':    return "We'll send you a formal invoice within one business day with Net 30 terms. Once your PO is processed, we'll schedule your onboarding call.";
     case 'check': return "Please make your check payable to JustReBe LLC and mail to:\n\n  " + CHECK_MAILING_ADDRESS + "\n\nWe'll begin onboarding as soon as we receive payment.";
     default:      return "We'll follow up shortly to confirm your preferred payment method and next steps.";
@@ -220,26 +224,36 @@ module.exports = async function handler(req, res) {
   };
 
   try {
-    const url = supabaseBaseUrl();
-    const key = supabaseKey();
-    const r = await fetch(`${url}/rest/v1/naesp_leads`, {
-      method: 'POST',
-      headers: {
-        apikey: key,
-        Authorization: `Bearer ${key}`,
-        'Content-Type': 'application/json',
-        Prefer: 'return=representation',
-      },
-      body: JSON.stringify(row),
-    });
-
-    if (!r.ok) {
-      const detail = await r.text();
-      console.error(`Supabase naesp_leads insert ${r.status}:`, detail);
-      return res.status(500).json({ error: 'Save failed', detail });
+    // Supabase insert is best-effort. If it fails we still fire the Kit tag +
+    // emails so a booth lead never silently disappears when the DB is the
+    // failing hop. Admin email will surface the failure.
+    let inserted = null;
+    let supabaseError = null;
+    try {
+      const url = supabaseBaseUrl();
+      const key = supabaseKey();
+      const r = await fetch(`${url}/rest/v1/naesp_leads`, {
+        method: 'POST',
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+          'Content-Type': 'application/json',
+          Prefer: 'return=representation',
+        },
+        body: JSON.stringify(row),
+      });
+      if (!r.ok) {
+        const detail = await r.text();
+        console.error(`Supabase naesp_leads insert ${r.status}:`, detail);
+        supabaseError = detail || `HTTP ${r.status}`;
+      } else {
+        const rows = await r.json();
+        inserted = (rows && rows[0]) || null;
+      }
+    } catch (dbErr) {
+      console.error('Supabase naesp_leads insert threw:', dbErr);
+      supabaseError = String(dbErr && dbErr.message || dbErr);
     }
-    const rows = await r.json();
-    const inserted = (rows && rows[0]) || null;
 
     // Kit: subscribe them with the NAESP lead tag set. Failures logged and
     // swallowed so a Kit outage doesn't kill the lead capture flow.
@@ -340,10 +354,15 @@ ReBe Ed — Lead + NAESP · 2026. An auto-response has already been sent.
             ['IP', ip || '(unknown)'],
             ['Submitted', adminSubmittedAt],
           ]) +
-          htmlCallout(
-            `Kit-tagged as <strong>ReBe Ed &mdash; Lead</strong> + <strong>NAESP &middot; 2026</strong>. An auto-response has already been sent.`,
-            { accent: '#7D0AAB' }
-          ),
+          (supabaseError
+            ? htmlCallout(
+                `&#9888; <strong>SUPABASE INSERT FAILED</strong> &mdash; hand-key this lead into <code>naesp_leads</code>.<br>Detail: <code>${esc(supabaseError)}</code>`,
+                { bg: '#FCEDED', border: '#F0C4C4', accent: '#B02929' }
+              )
+            : htmlCallout(
+                `Kit-tagged as <strong>ReBe Ed &mdash; Lead</strong> + <strong>NAESP &middot; 2026</strong>. An auto-response has already been sent.`,
+                { accent: '#7D0AAB' }
+              )),
       });
       const adminNotify = fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -361,7 +380,7 @@ ReBe Ed — Lead + NAESP · 2026. An auto-response has already been sent.
       await Promise.allSettled([leadAutoResponse, adminNotify]);
     }
 
-    return res.status(200).json({ ok: true, id: inserted && inserted.id });
+    return res.status(200).json({ ok: true, id: inserted && inserted.id, db_error: supabaseError || null });
   } catch (err) {
     console.error('naesp-lead failed:', err);
     return res.status(500).json({ error: 'Save failed', detail: String(err && err.message || err) });
@@ -433,25 +452,36 @@ async function handleOrder(body, req, res) {
   };
 
   try {
-    const url = supabaseBaseUrl();
-    const key = supabaseKey();
-    const r = await fetch(`${url}/rest/v1/naesp_orders`, {
-      method: 'POST',
-      headers: {
-        apikey: key,
-        Authorization: `Bearer ${key}`,
-        'Content-Type': 'application/json',
-        Prefer: 'return=representation',
-      },
-      body: JSON.stringify(row),
-    });
-    if (!r.ok) {
-      const detail = await r.text();
-      console.error(`Supabase naesp_orders insert ${r.status}:`, detail);
-      return res.status(500).json({ error: 'Save failed', detail });
+    // Supabase insert is best-effort. If it fails we still fire the team
+    // notification email (flagged) + Kit tag so a real live-booth order never
+    // silently disappears when the DB write is the failing hop.
+    let inserted = null;
+    let supabaseError = null;
+    try {
+      const url = supabaseBaseUrl();
+      const key = supabaseKey();
+      const r = await fetch(`${url}/rest/v1/naesp_orders`, {
+        method: 'POST',
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+          'Content-Type': 'application/json',
+          Prefer: 'return=representation',
+        },
+        body: JSON.stringify(row),
+      });
+      if (!r.ok) {
+        const detail = await r.text();
+        console.error(`Supabase naesp_orders insert ${r.status}:`, detail);
+        supabaseError = detail || `HTTP ${r.status}`;
+      } else {
+        const rows = await r.json();
+        inserted = (rows && rows[0]) || null;
+      }
+    } catch (dbErr) {
+      console.error('Supabase naesp_orders insert threw:', dbErr);
+      supabaseError = String(dbErr && dbErr.message || dbErr);
     }
-    const rows = await r.json();
-    const inserted = (rows && rows[0]) || null;
 
     // Kit: order-submitted tag
     try {
@@ -503,9 +533,12 @@ async function handleOrder(body, req, res) {
       // or write the check. Same math the card path uses for Stripe line items.
       const { total: orderTotal } = buildStripeLineItems(products, body.quantities || {});
       const orderTotalFormatted = '$' + orderTotal.toLocaleString('en-US');
+      // paymentMethodBlurb handles the "we hit a temporary issue" fallback
+      // when card + no url. Only inject the actual link block when we have one.
+      const cardLinkStatus = isCard ? (checkout_url ? 'ok' : 'missing') : 'ok';
       const paymentLinkBlock = (isCard && checkout_url)
         ? `\n\n  Your secure payment link:\n  ${checkout_url}\n`
-        : (isCard ? `\n\n  We hit a temporary issue generating your payment link — a member of our team will email one to you within a few hours.\n` : '');
+        : '';
 
       const orderProductListHtml = htmlList(products.map((pid) => esc(PRODUCT_LABEL[pid] || pid)));
       const orderAutoResponseSubject = isCard
@@ -516,7 +549,7 @@ async function handleOrder(body, req, res) {
 
 Thank you for submitting your ReBe Ed order. We've received it.
 
-${paymentMethodBlurb(row.payment_method)}${paymentLinkBlock}
+${paymentMethodBlurb(row.payment_method, cardLinkStatus)}${paymentLinkBlock}
 
 Here's a summary of what you submitted:
 
@@ -538,15 +571,17 @@ Warmly,
 The ReBe Ed team
 hello@justrebe.com
 www.justrebe.com/education`;
-      const paymentBlurbHtml = esc(paymentMethodBlurb(row.payment_method)).replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
-      const cardPaymentBlock = isCard && checkout_url
-        ? htmlP(`Ready to complete payment now? Click the button below to be taken to our secure Stripe checkout.`) +
+      const paymentBlurbHtml = esc(paymentMethodBlurb(row.payment_method, cardLinkStatus)).replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+      // Button only when we actually have a link. The blurb above already
+      // conveys the "we'll email one to you" message when the link is missing.
+      const cardPaymentBlock = (isCard && checkout_url)
+        ? htmlP(`Ready to complete payment now? Click the button below to open our secure Stripe checkout.`) +
           htmlButton('Complete payment', checkout_url)
-        : (isCard
-          ? htmlCallout(`We hit a temporary issue generating your payment link &mdash; a member of our team will email one to you within a few hours.`, { bg: '#FFF7EA', border: '#FCE1B3', accent: '#e5a708' })
-          : '');
+        : '';
       const orderAutoResponseHtml = renderEmail({
-        preheader: isCard ? `Order received — your secure payment link is inside.` : `Order received — thank you for choosing ReBe Ed.`,
+        preheader: (isCard && checkout_url)
+          ? `Order received — your secure payment link is inside.`
+          : (isCard ? `Order received — we'll email your payment link shortly.` : `Order received — thank you for choosing ReBe Ed.`),
         body:
           htmlEyebrow('Order received') +
           htmlH(`Thank you, ${esc(first_name)}.`) +
@@ -618,7 +653,7 @@ SUBMISSION META
   IP:            ${ip || '(unknown)'}
   Submitted:     ${orderSubmittedAt}
 
-Row saved to Supabase (naesp_orders).
+${supabaseError ? '⚠ SUPABASE INSERT FAILED — hand-key this order into naesp_orders.\n  Detail: ' + supabaseError + '\n' : 'Row saved to Supabase (naesp_orders).'}
 Kit tagged as: ReBe Ed — Lead + NAESP · 2026 + NAESP · Order Submitted.
 Auto-response has already been sent to ${email}.
 
@@ -666,10 +701,15 @@ Auto-response has already been sent to ${email}.
             ['IP', ip || '(unknown)'],
             ['Submitted', orderSubmittedAt],
           ]) +
-          htmlCallout(
-            `Row saved to Supabase (<code>naesp_orders</code>). Kit tagged: <strong>ReBe Ed &mdash; Lead</strong>, <strong>NAESP &middot; 2026</strong>, <strong>NAESP &middot; Order Submitted</strong>. Auto-response has already been sent to ${esc(email)}.`,
-            { bg: '#F5F9FC', border: '#DBE4EC', accent: '#034E64' }
-          ),
+          (supabaseError
+            ? htmlCallout(
+                `&#9888; <strong>SUPABASE INSERT FAILED</strong> &mdash; hand-key this order into <code>naesp_orders</code>.<br>Detail: <code>${esc(supabaseError)}</code>`,
+                { bg: '#FCEDED', border: '#F0C4C4', accent: '#B02929' }
+              )
+            : htmlCallout(
+                `Row saved to Supabase (<code>naesp_orders</code>). Kit tagged: <strong>ReBe Ed &mdash; Lead</strong>, <strong>NAESP &middot; 2026</strong>, <strong>NAESP &middot; Order Submitted</strong>. Auto-response has already been sent to ${esc(email)}.`,
+                { bg: '#F5F9FC', border: '#DBE4EC', accent: '#034E64' }
+              )),
       });
       const orderAdminNotify = fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -695,6 +735,7 @@ Auto-response has already been sent to ${email}.
       ok: true,
       id: inserted && inserted.id,
       checkout_url: checkout_url,
+      db_error: supabaseError || null,
     });
   } catch (err) {
     console.error('naesp-order failed:', err);
