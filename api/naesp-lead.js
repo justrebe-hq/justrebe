@@ -146,14 +146,15 @@ async function createNaespCheckoutSession(order) {
 const CHECK_MAILING_ADDRESS = '13118 State Rd 64 E., Suite 362, Bradenton, FL 34212';
 
 // Customize the buyer's confirmation email based on their payment method.
-// For card, the copy depends on whether we successfully generated a checkout link.
+// Online card path: buyer was redirected to Stripe checkout — no link needed
+// in the email (they either finished there, or reply for a new link).
 function paymentMethodBlurb(method, cardLinkStatus) {
   switch (method) {
     case 'card':
       if (cardLinkStatus === 'missing') {
         return "We hit a temporary issue generating your secure payment link. A member of our team will email one to you within a few hours — no action needed on your end right now.";
       }
-      return "Your secure payment link is included below. Click it to complete payment on our secure payment page — you'll receive a receipt automatically once payment completes, and our team follows up within one business day with onboarding details.";
+      return "You should have been taken to our secure Stripe checkout page to complete payment. If you closed the tab before finishing, or the redirect didn't work, just reply to this email and we'll send you a fresh payment link right away.";
     case 'po':    return "We'll send you a formal invoice within one business day with Net 30 terms. Once your PO is processed, we'll schedule your onboarding call.";
     case 'check': return "Please make your check payable to JustReBe LLC and mail to:\n\n  " + CHECK_MAILING_ADDRESS + "\n\nWe'll begin onboarding as soon as we receive payment.";
     default:      return "We'll follow up shortly to confirm your preferred payment method and next steps.";
@@ -533,17 +534,16 @@ async function handleOrder(body, req, res) {
       // or write the check. Same math the card path uses for Stripe line items.
       const { total: orderTotal } = buildStripeLineItems(products, body.quantities || {});
       const orderTotalFormatted = '$' + orderTotal.toLocaleString('en-US');
-      // paymentMethodBlurb handles the "we hit a temporary issue" fallback
-      // when card + no url. Only inject the actual link block when we have one.
+      // paymentMethodBlurb handles both the success and failure cases for card.
+      // We do NOT include the checkout URL in the buyer's confirmation email —
+      // the online form already redirected them to Stripe. The team notification
+      // still shows the link so someone can resend it manually if the buyer
+      // replies asking for a new one.
       const cardLinkStatus = isCard ? (checkout_url ? 'ok' : 'missing') : 'ok';
-      const paymentLinkBlock = (isCard && checkout_url)
-        ? `\n\n  Your secure payment link:\n  ${checkout_url}\n`
-        : '';
+      const paymentLinkBlock = '';
 
       const orderProductListHtml = htmlList(products.map((pid) => esc(PRODUCT_LABEL[pid] || pid)));
-      const orderAutoResponseSubject = isCard
-        ? `Your ReBe Ed order — payment link inside, ${first_name}`
-        : `Thank you for your ReBe Ed order, ${first_name}`;
+      const orderAutoResponseSubject = `Thank you for your ReBe Ed order, ${first_name}`;
       const orderAutoResponseText =
 `Hi ${first_name},
 
@@ -572,15 +572,13 @@ The ReBe Ed team
 hello@justrebe.com
 www.justrebe.com/education`;
       const paymentBlurbHtml = esc(paymentMethodBlurb(row.payment_method, cardLinkStatus)).replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
-      // Button only when we actually have a link. The blurb above already
-      // conveys the "we'll email one to you" message when the link is missing.
-      const cardPaymentBlock = (isCard && checkout_url)
-        ? htmlP(`Ready to complete payment now? Click the button below to open our secure Stripe checkout.`) +
-          htmlButton('Complete payment', checkout_url)
-        : '';
+      // No button in the buyer's confirmation email. The blurb above tells them
+      // to reply if the Stripe redirect didn't stick. Duplicating the link here
+      // is confusing — most buyers already paid on the redirected checkout page.
+      const cardPaymentBlock = '';
       const orderAutoResponseHtml = renderEmail({
         preheader: (isCard && checkout_url)
-          ? `Order received — your secure payment link is inside.`
+          ? `Order received — thank you for choosing ReBe Ed.`
           : (isCard ? `Order received — we'll email your payment link shortly.` : `Order received — thank you for choosing ReBe Ed.`),
         body:
           htmlEyebrow('Order received') +
