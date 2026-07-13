@@ -1,12 +1,12 @@
-// ReBe Genre Kiosk - Service Worker
-// Caches the kiosk page and icons on first visit so it works fully offline.
+// ReBe Genre Kiosk - Service Worker (v2, hardened for iOS)
 //
-// Scope is intentionally limited to /rebe-genre-kiosk to avoid interfering
-// with the rest of justrebe.com. Any request outside that path falls through
-// to normal network behavior.
+// Strategy: cache-first with aggressive precaching, URL-variant fallbacks
+// (so /rebe-genre-kiosk and /rebe-genre-kiosk.html both work), and a
+// last-ditch cache fallback if the network fails and the exact URL isn't
+// cached.
 
-const CACHE_NAME = 'rebe-kiosk-v1';
-const KIOSK_ASSETS = [
+const CACHE_NAME = 'rebe-kiosk-v2';
+const KIOSK_URLS = [
   '/rebe-genre-kiosk',
   '/rebe-genre-kiosk.html',
   '/kiosk-manifest.json',
@@ -15,35 +15,50 @@ const KIOSK_ASSETS = [
   '/kiosk-icon-512.png',
 ];
 
-// Install: pre-cache the kiosk HTML + icons so first-load-then-offline works.
+// Install: fetch and cache each asset individually. If any single asset
+// fails, keep going — better to have a partial cache than no cache.
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      // Try to cache every asset; if any single one fails (e.g. redirect
-      // resolves to different URL), keep going — the browser will retry
-      // via the fetch handler on the next request.
-      return Promise.allSettled(
-        KIOSK_ASSETS.map((url) => cache.add(new Request(url, { cache: 'reload' })))
-      );
-    }).then(() => self.skipWaiting())
-  );
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    for (const url of KIOSK_URLS) {
+      try {
+        const response = await fetch(url, { cache: 'reload' });
+        if (response && response.ok) {
+          await cache.put(url, response.clone());
+          // Also mirror the HTML under both URL variants so cache lookups
+          // succeed whether the browser asks for /rebe-genre-kiosk or
+          // /rebe-genre-kiosk.html — Vercel serves the same file at both.
+          if (url === '/rebe-genre-kiosk') {
+            await cache.put('/rebe-genre-kiosk.html', response.clone());
+          } else if (url === '/rebe-genre-kiosk.html') {
+            await cache.put('/rebe-genre-kiosk', response.clone());
+          }
+        }
+      } catch (err) {
+        console.warn('[kiosk-sw] precache miss:', url, err);
+      }
+    }
+    // Activate this SW immediately, don't wait for old SWs to release control
+    await self.skipWaiting();
+  })());
 });
 
-// Activate: clean up any old caches from previous versions.
+// Activate: clean up any old caches from previous versions and take
+// control of open pages immediately.
 self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((names) =>
-      Promise.all(names.filter((n) => n !== CACHE_NAME).map((n) => caches.delete(n)))
-    ).then(() => self.clients.claim())
-  );
+  event.waitUntil((async () => {
+    const names = await caches.keys();
+    await Promise.all(names.filter((n) => n !== CACHE_NAME).map((n) => caches.delete(n)));
+    await self.clients.claim();
+  })());
 });
 
-// Fetch: for kiosk paths, serve from cache first (fast + offline).
-// For everything else, do nothing — let the browser handle normally.
+// Fetch: only intercept kiosk-related requests. Everything else passes
+// through to normal network behavior.
 self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url);
   if (event.request.method !== 'GET') return;
 
+  const url = new URL(event.request.url);
   const path = url.pathname;
   const isKioskAsset =
     path === '/rebe-genre-kiosk' ||
@@ -53,26 +68,44 @@ self.addEventListener('fetch', (event) => {
 
   if (!isKioskAsset) return;
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) {
-        // Serve from cache immediately, then refresh cache in background
-        // so the next visit gets any updates.
-        fetch(event.request).then((fresh) => {
-          if (fresh && fresh.ok) {
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, fresh));
-          }
-        }).catch(() => { /* offline — ignore */ });
-        return cached;
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
+
+    // 1) Try direct cache match for the exact URL requested
+    let cached = await cache.match(event.request, { ignoreVary: true });
+
+    if (cached) {
+      // Return cached immediately, refresh in background for next visit
+      fetch(event.request).then((fresh) => {
+        if (fresh && fresh.ok) cache.put(event.request, fresh.clone());
+      }).catch(() => { /* offline — that's fine, we already served cache */ });
+      return cached;
+    }
+
+    // 2) Try URL variant (with/without .html) for the kiosk HTML
+    if (path === '/rebe-genre-kiosk') {
+      cached = await cache.match('/rebe-genre-kiosk.html');
+      if (cached) return cached;
+    } else if (path === '/rebe-genre-kiosk.html') {
+      cached = await cache.match('/rebe-genre-kiosk');
+      if (cached) return cached;
+    }
+
+    // 3) Nothing cached yet — go to network and cache the response
+    try {
+      const response = await fetch(event.request);
+      if (response && response.ok) {
+        cache.put(event.request, response.clone());
       }
-      // Not cached — fetch from network and cache for next time.
-      return fetch(event.request).then((response) => {
-        if (response && response.ok) {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-        }
-        return response;
-      });
-    })
-  );
+      return response;
+    } catch (err) {
+      // Truly offline with no cache — last resort: serve whatever variant
+      // of the kiosk HTML we have (better than showing an error)
+      const fallback =
+        (await cache.match('/rebe-genre-kiosk')) ||
+        (await cache.match('/rebe-genre-kiosk.html'));
+      if (fallback) return fallback;
+      throw err;
+    }
+  })());
 });
