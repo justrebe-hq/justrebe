@@ -403,6 +403,19 @@
   .foot a { color: var(--purple); font-weight: 700; text-decoration: none; }
   .print-only { display: none; }
 
+  /* ===== Print-only qty/subtotal fill-in (for hand-written orders) ===== */
+  .print-qty-fill { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #999; font-size: 11px; color: #000; font-weight: 700; letter-spacing: .02em; line-height: 1.6; }
+  .pqf-label { margin-right: 4px; }
+  .pqf-op { margin: 0 6px; font-weight: 700; }
+  .pqf-line { display: inline-block; border-bottom: 1px solid #000; height: 12px; vertical-align: bottom; }
+  .pqf-line-sm { width: 42px; }
+  .pqf-line-md { width: 90px; }
+
+  /* Print-only write-in TOTAL block at the bottom of packages section */
+  .print-total-block { margin-top: 14px; padding: 12px 16px; border: 1.5px solid #000; border-radius: 6px; text-align: right; }
+  .ptb-label { font-size: 13px; font-weight: 900; letter-spacing: .12em; color: #000; margin-right: 6px; vertical-align: bottom; }
+  .ptb-line { display: inline-block; border-bottom: 1.5px solid #000; height: 18px; width: 220px; vertical-align: bottom; }
+
   /* ===== Print utility ===== */
   .print-btn-float {
     position: fixed; top: 20px; right: 20px;
@@ -728,6 +741,13 @@
               <label for="qty_action">Number of educators:</label>
               <input type="number" id="qty_action" name="qty_action" min="1" max="100" value="1" step="1">
             </div>
+            <div class="print-only print-qty-fill">
+              <span class="pqf-label">Qty:</span>
+              <span class="pqf-line pqf-line-sm"></span>
+              <span class="pqf-op">&times; $300 =</span>
+              <span class="pqf-label">Subtotal $</span>
+              <span class="pqf-line pqf-line-md"></span>
+            </div>
           </div>
           <div class="pprice">
             <span class="amt">+$300</span>
@@ -746,6 +766,13 @@
             <div class="qty-row" data-qty-for="flourish">
               <label for="qty_flourish">Number of educators:</label>
               <input type="number" id="qty_flourish" name="qty_flourish" min="1" max="500" value="1" step="1">
+            </div>
+            <div class="print-only print-qty-fill">
+              <span class="pqf-label">Qty:</span>
+              <span class="pqf-line pqf-line-sm"></span>
+              <span class="pqf-op">&times; $250 =</span>
+              <span class="pqf-label">Subtotal $</span>
+              <span class="pqf-line pqf-line-md"></span>
             </div>
           </div>
           <div class="pprice">
@@ -789,7 +816,7 @@
       </div>
       <p class="field-error" id="products-error" style="display:none;">Please select at least one package.</p>
 
-      <!-- Live-updating order total -->
+      <!-- Live-updating order total (online only) -->
       <div class="order-total" id="order-total" aria-live="polite">
         <div class="ot-lines" id="ot-lines"></div>
         <div class="ot-total">
@@ -797,6 +824,12 @@
           <span class="ot-total-amt" id="ot-total-amt">$0</span>
         </div>
         <p class="ot-note">Prices in USD. Final total shown at checkout.</p>
+      </div>
+
+      <!-- Print-only write-in total -->
+      <div class="print-only print-total-block">
+        <span class="ptb-label">TOTAL&nbsp;&nbsp;$</span>
+        <span class="ptb-line"></span>
       </div>
     </div>
 
