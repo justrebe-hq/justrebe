@@ -141,8 +141,34 @@
   .offers-ey { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
   .offers-h { font-size: clamp(30px, 3.4vw, 46px); font-weight: 900; color: var(--teal); letter-spacing: -.025em; line-height: 1.12; margin-bottom: 14px; }
   .offers-sub { font-size: 17px; color: var(--body); line-height: 1.6; }
-  .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+  .offers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 1100px; margin: 0 auto; padding: 0 48px; }
   @media (max-width: 980px) { .offers-grid { grid-template-columns: 1fr; max-width: 600px; } }
+
+  /* Gold "Featured" variant for Transform card */
+  .ocard[data-color="gold"] { border: 2px solid var(--gold); box-shadow: 0 10px 32px rgba(254,185,9,.20); position: relative; }
+  .ocard[data-color="gold"] .ocard-top { background: linear-gradient(135deg, #1A1A1A 0%, #2c2c2c 100%); }
+  .ocard[data-color="gold"] .ocard-badge { background: var(--gold); color: var(--ink); }
+  .ocard[data-color="gold"] .ocard-feats li::before { color: var(--gold-deep); }
+  .ocard[data-color="gold"] .ocard-preview { color: var(--gold-deep); border-bottom-color: rgba(229,167,8,.35); }
+  .ocard[data-color="gold"] .ocard-preview:hover { color: var(--ink); border-bottom-color: var(--gold-deep); }
+
+  /* Funding sources note */
+  .funding-note { max-width: 1100px; margin: 32px auto 0; padding: 16px 24px; background: rgba(99,141,19,.08); border: 1px solid rgba(99,141,19,.24); border-radius: 12px; text-align: center; font-size: 13px; color: var(--green-deep); font-weight: 700; letter-spacing: .02em; }
+  .funding-note strong { color: var(--green-deep); }
+  @media (max-width: 1160px) { .funding-note { margin: 32px 48px 0; } }
+
+  /* Order form path callout */
+  .order-path { background: linear-gradient(135deg, #F5F9FC 0%, #EDF3F8 100%); padding: 64px 24px; text-align: center; border-top: 1px solid #E4EBF1; }
+  .order-path-inner { max-width: 780px; margin: 0 auto; }
+  .order-path-ey { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--purple); padding: 5px 14px; background: rgba(125,10,171,.08); border: 1px solid rgba(125,10,171,.28); border-radius: 999px; margin-bottom: 18px; }
+  .order-path-h { font-size: clamp(24px, 3vw, 34px); font-weight: 900; color: var(--teal); letter-spacing: -.02em; line-height: 1.15; margin-bottom: 14px; }
+  .order-path-sub { font-size: 16px; color: var(--body); line-height: 1.65; margin-bottom: 32px; }
+  .order-path-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .order-path-btns .btn { min-width: 240px; }
+  .btn-teal { background: var(--teal); color: #fff; box-shadow: 0 6px 20px rgba(3,78,100,.22); }
+  .btn-teal:hover { background: var(--teal-deep); transform: translateY(-2px); }
+  .btn-outline-teal { background: #fff; color: var(--teal); border: 2px solid var(--teal); padding: 14px 30px; }
+  .btn-outline-teal:hover { background: var(--teal); color: #fff; transform: translateY(-2px); }
 
   .ocard {
     background: #fff; border-radius: 20px;
@@ -345,81 +371,130 @@
 
     <div class="offers-grid">
 
+      <!-- Thrive · Educator Wellness -->
       <article class="ocard">
         <div class="ocard-top">
           <span class="ocard-badge">NAESP Special</span>
-          <p class="ocard-grade">Grades K – 2</p>
-          <h3 class="ocard-title">K-2 Health Boosts</h3>
+          <p class="ocard-grade">Educator Wellness · K – 12</p>
+          <h3 class="ocard-title">Thrive <small>Lights + Camera package</small></h3>
         </div>
         <div class="ocard-body">
-          <p class="ocard-desc"><span class="placeholder">[2–3 sentence pitch for the core K-2 package: what arrives, how teachers use it, who supports them. Replace this paragraph this week.]</span></p>
+          <p class="ocard-desc">Awareness Inservice + full-year EPICS video library + community webinars. Give your educators the tools to be well themselves so they can show up whole for their students.</p>
           <ul class="ocard-feats">
-            <li>Daily 7-10 minute Health Boosts that fit any morning meeting</li>
-            <li>Teacher-facing facilitator guide + family take-home cards</li>
-            <li>Digital + printable assets for every classroom</li>
+            <li>3-hour Lights Inservice (in-person or virtual) &mdash; ACEs, EPICS pathways, genre portraits</li>
+            <li>Full-year EPICS video library &mdash; 5 self-discovery journeys (Receive, Reveal, Reflect, Release, Relaunch)</li>
+            <li>Year-round educator community access</li>
           </ul>
           <div class="price-block">
-            <span class="price">$TBD</span>
-            <span class="strike">$TBD</span>
-            <span class="lbl">Conference rate</span>
+            <span class="price">$5,000</span>
+            <span class="lbl">per school · up to 15 educators</span>
           </div>
           <div class="ocard-cta">
-            <a href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener" class="ocard-preview">See EPICS + LABS overview &rarr;</a>
-            <a href="https://drive.google.com/file/d/1MUwD5Lo6FoC37xHhiErKFFFbfwptyVSW/view" target="_blank" rel="noopener" class="ocard-preview">Sample BB lesson: Resilience (K) &rarr;</a>
-            <a href="#" class="btn placeholder-cta" aria-disabled="true">Order link coming this week</a>
+            <a href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener" class="ocard-preview">See Thrive overview &rarr;</a>
+            <a href="/NAESP-order-form.html?add=thrive" class="btn btn-gold">Order Thrive &rarr;</a>
+            <a href="https://buy.stripe.com/dRm7sE0q1a9A3nb5DP2Fa03" target="_blank" rel="noopener" class="ocard-preview" style="font-size:11px;">Quick-buy (single product, no order form) &rarr;</a>
           </div>
         </div>
       </article>
 
+      <!-- Flourish · K-2 Health Boosts (+ 3-5 pilot) -->
+      <article class="ocard" data-color="green">
+        <div class="ocard-top">
+          <span class="ocard-badge">NAESP Special</span>
+          <p class="ocard-grade">Grades K – 2 · with 3 – 5 free pilot</p>
+          <h3 class="ocard-title">Flourish <small>K-2 Health Boosts + 3-5 free pilot</small></h3>
+        </div>
+        <div class="ocard-body">
+          <p class="ocard-desc">Complete whole-health wellness for K-2 students. 25 EPICS Health Boosts, BB-guided, 7-10 minutes each. Buyers also get free 3-5 pilot access &mdash; your feedback shapes the final product.</p>
+          <ul class="ocard-feats">
+            <li>All 25 EPICS Health Boosts · K-2</li>
+            <li>3-5 grade band free pilot (your feedback shapes the final product)</li>
+            <li>BB-guided · 7-10 min each · all 5 EPICS pathways · LMS compatible</li>
+          </ul>
+          <div class="price-block">
+            <span class="price">$250</span>
+            <span class="lbl">per teacher · $200/teacher for 15+</span>
+          </div>
+          <div class="ocard-cta">
+            <a href="/ReBe_Ed_Epics_Labs.pdf" target="_blank" rel="noopener" class="ocard-preview">See EPICS + Labs overview &rarr;</a>
+            <a href="/NAESP-order-form.html?add=flourish" class="btn btn-gold">Order Flourish &rarr;</a>
+            <a href="https://buy.stripe.com/14A14g8Wx4Pge1Pd6h2Fa04" target="_blank" rel="noopener" class="ocard-preview" style="font-size:11px;">Quick-buy 1-14 teachers &middot; use order form for school rate &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Premiere · Literacy Residency Pilot -->
       <article class="ocard" data-color="purple">
         <div class="ocard-top">
           <span class="ocard-badge">NAESP Special</span>
-          <p class="ocard-grade">Grades K – 2 · Most popular</p>
-          <h3 class="ocard-title">K-2 Health Boosts <small>+ Residency</small></h3>
+          <p class="ocard-grade">K – 2 + 3 – 5 · Founding School</p>
+          <h3 class="ocard-title">Premiere <small>Literacy Residency Pilot</small></h3>
         </div>
         <div class="ocard-body">
-          <p class="ocard-desc"><span class="placeholder">[2–3 sentence pitch for the bundle: Health Boosts plus on-site residency days, coaching, observation cycles — whatever's included. Replace this paragraph this week.]</span></p>
+          <p class="ocard-desc">The complete student bundle. K-2 + 3-5 Health Boosts, 3-hour Literacy Inservice, and 5 monthly LAB pilot sessions &mdash; one new LAB each month. Founding schools get first right of purchase when LABS launch.</p>
           <ul class="ocard-feats">
-            <li>Everything in K-2 Health Boosts</li>
-            <li>On-site residency days with a ReBe Ed facilitator</li>
-            <li>Teacher coaching cycles + principal-level reporting</li>
+            <li>All 25 Health Boosts · K-2 + 3-5</li>
+            <li>3-hour Literacy Inservice</li>
+            <li>5 monthly LAB sessions (Word Work, Word Power, Content Power, Financial &amp; Digital Literacy)</li>
           </ul>
           <div class="price-block">
-            <span class="price">$TBD</span>
-            <span class="strike">$TBD</span>
-            <span class="lbl">Conference rate</span>
+            <span class="price">$5,000</span>
+            <span class="lbl">per school · up to 15 classrooms</span>
           </div>
           <div class="ocard-cta">
-            <a href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener" class="ocard-preview">See how residency works &rarr;</a>
-            <a href="#" class="btn placeholder-cta" aria-disabled="true">Order link coming this week</a>
+            <a href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener" class="ocard-preview">See Premiere pilot details &rarr;</a>
+            <a href="/NAESP-order-form.html?add=premiere" class="btn btn-gold">Order Premiere &rarr;</a>
+            <a href="https://buy.stripe.com/aFafZac8JftUe1P1nz2Fa05" target="_blank" rel="noopener" class="ocard-preview" style="font-size:11px;">Quick-buy (single product, no order form) &rarr;</a>
           </div>
         </div>
       </article>
 
-      <article class="ocard" data-color="green">
+      <!-- Transform · Complete Package (featured) -->
+      <article class="ocard" data-color="gold">
         <div class="ocard-top">
-          <span class="ocard-badge free">Free Pilot</span>
-          <p class="ocard-grade">Grades 3 – 5 · Limited cohort</p>
-          <h3 class="ocard-title">3-5 Pilot Program</h3>
+          <span class="ocard-badge">&#9733; Conference Special &middot; Save $3,000</span>
+          <p class="ocard-grade">Complete System · First 10 schools</p>
+          <h3 class="ocard-title">Transform <small>Thrive + Premiere = everything</small></h3>
         </div>
         <div class="ocard-body">
-          <p class="ocard-desc"><span class="placeholder">[2–3 sentence pitch for the free 3-5 pilot: what classrooms get, how long the pilot runs, what you ask in return (data / case-study consent / etc). Replace this paragraph this week.]</span></p>
+          <p class="ocard-desc">The complete re&middot;be Ed system. Educator wellness (Thrive) + student wellness and literacy pilot (Premiere). Everything your school needs &mdash; educators and students moving together.</p>
           <ul class="ocard-feats">
-            <li>Full program access at no cost to selected schools</li>
-            <li>Co-design support + pre/post measurement</li>
-            <li>Featured case-study spotlight (with your permission)</li>
+            <li>Thrive (Lights + Camera) &mdash; up to 15 educators</li>
+            <li>Premiere (K-2 + 3-5 Health Boosts + Literacy Inservice + 5 LAB sessions) &mdash; up to 15 classrooms</li>
+            <li>First right of purchase when LABS launch</li>
           </ul>
-          <div class="price-block free">
-            <span class="price">Free</span>
-            <span class="lbl">Limited cohort</span>
+          <div class="price-block">
+            <span class="price">$10,500</span>
+            <span class="strike">$13,500</span>
+            <span class="lbl">save $3,000 · first 10 schools</span>
           </div>
           <div class="ocard-cta">
-            <a href="/ReBe_Ed_Residency_Pilot.pdf" target="_blank" rel="noopener" class="ocard-preview">See pilot details &rarr;</a>
-            <a href="#" class="btn placeholder-cta" aria-disabled="true">Apply link coming this week</a>
+            <a href="/ReBe_Ed_Overview.pdf" target="_blank" rel="noopener" class="ocard-preview">See the complete overview &rarr;</a>
+            <a href="/NAESP-order-form.html?add=transform" class="btn btn-gold">Order Transform &rarr;</a>
+            <a href="https://buy.stripe.com/5kQ9AMgoZ4Pg8Hv6HT2Fa06" target="_blank" rel="noopener" class="ocard-preview" style="font-size:11px;">Quick-buy (single product, no order form) &rarr;</a>
           </div>
         </div>
       </article>
 
+    </div>
+
+    <!-- Funding sources note -->
+    <p class="funding-note">&#10003; Title IV-A &nbsp;&middot;&nbsp; &#10003; ESSER III &nbsp;&middot;&nbsp; &#10003; Mental health grants &nbsp;&middot;&nbsp; &#10003; Title I (qualifying rate) &nbsp;&middot;&nbsp; &#10003; Purchase order accepted (net 30)</p>
+
+    <!-- Action add-on note -->
+    <p class="funding-note" style="background:rgba(125,10,171,.06);border-color:rgba(125,10,171,.22);color:var(--purple-deep)"><strong>Optional add-on: Action &mdash; ReBe ReFresh Live groups</strong> &nbsp;&middot;&nbsp; +$300 per educator &nbsp;&middot;&nbsp; 5-week live cohort &nbsp;&middot;&nbsp; add to Thrive or Transform &mdash; email <a href="mailto:hello@justrebe.com?subject=Adding%20Action%20%2F%20ReBe%20ReFresh%20Live%20to%20our%20order" style="color:var(--purple-deep);text-decoration:underline">hello@justrebe.com</a></p>
+  </section>
+
+  <!-- ORDER FORM PATH -->
+  <section class="order-path" id="order-form-path">
+    <div class="order-path-inner">
+      <span class="order-path-ey">Need a purchase order or net-30 terms?</span>
+      <h2 class="order-path-h">Two other ways to place your order.</h2>
+      <p class="order-path-sub">If your district requires a PO, formal invoice, or net-30 payment terms, use one of the two options below instead of the credit-card checkout above. We'll follow up with a formal invoice within 24 hours.</p>
+      <div class="order-path-btns">
+        <a class="btn btn-teal" href="/NAESP-order-form.html">Fill out order form online &rarr;</a>
+        <a class="btn btn-outline-teal" href="/ReBe_Offerings_OrderForm.pdf" target="_blank" rel="noopener">Download printable PDF &darr;</a>
+      </div>
     </div>
   </section>
 

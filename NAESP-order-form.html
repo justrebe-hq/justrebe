@@ -202,6 +202,30 @@
     .pprice { grid-column: 1 / -1; text-align: left; margin-left: 52px; }
   }
 
+  /* Quantity input inside a product row (hidden until product is selected) */
+  .qty-row { display: none; margin-top: 12px; padding: 10px 14px; background: rgba(3,78,100,.05); border-radius: 8px; border: 1px solid rgba(3,78,100,.14); align-items: center; gap: 10px; flex-wrap: wrap; }
+  .prow.selected .qty-row { display: flex; }
+  .qty-row label { font-size: 13px; font-weight: 700; color: var(--teal); letter-spacing: 0; text-transform: none; margin: 0; }
+  .qty-row input[type="number"] { width: 90px; padding: 6px 10px; font-size: 14px; font-weight: 700; color: var(--ink); border: 1.5px solid var(--field-border); border-radius: 6px; background: #fff; font-family: inherit; }
+  .qty-row input[type="number"]:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(3,78,100,.10); }
+  .qty-row .qty-hint { font-size: 12px; color: var(--muted); font-style: italic; }
+  @media (max-width: 640px) { .qty-row { margin-left: 0; } }
+
+  /* ===== Order total block ===== */
+  .order-total { display: none; margin-top: 22px; padding: 22px 26px; background: linear-gradient(135deg, #F5F9FC 0%, #EDF3F8 100%); border: 2px solid var(--teal); border-radius: 14px; }
+  .order-total.visible { display: block; }
+  .order-total .ot-lines { margin-bottom: 14px; }
+  .order-total .ot-line { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; font-size: 14px; color: var(--body); font-variant-numeric: tabular-nums; }
+  .order-total .ot-line + .ot-line { border-top: 1px dashed rgba(3,78,100,.18); }
+  .order-total .ot-line-name { font-weight: 600; color: var(--ink); }
+  .order-total .ot-line-name .ot-qty { font-weight: 400; color: var(--muted); margin-left: 6px; }
+  .order-total .ot-line-amt { font-weight: 700; color: var(--ink); }
+  .order-total .ot-savings { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; font-size: 13px; color: var(--success); font-style: italic; border-top: 1px dashed rgba(3,78,100,.18); }
+  .order-total .ot-total { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0 0; border-top: 2px solid var(--teal); }
+  .order-total .ot-total-lbl { font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); }
+  .order-total .ot-total-amt { font-size: 30px; font-weight: 900; color: var(--ink); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .order-total .ot-note { margin-top: 10px; font-size: 12px; color: var(--muted); font-style: italic; }
+
   /* ===== Payment method ===== */
   .payment-block { display: flex; flex-direction: column; gap: 10px; }
   .payment-choice {
@@ -625,43 +649,86 @@
       <div class="products">
 
         <label class="prow" data-product-row>
-          <input type="checkbox" name="products" value="k2_health_boosts">
+          <input type="checkbox" name="products" value="thrive">
           <div>
-            <p class="ptitle">K-2 Health Boosts</p>
-            <p class="pdesc">Daily 7-10 minute Health Boosts across the five EPICS, facilitator guides, family take-home cards, digital + printable assets.</p>
+            <p class="ptitle">Thrive &mdash; Educator Wellness</p>
+            <p class="pdesc">Lights + Camera package &middot; 3-hour Inservice + full-year EPICS video library + community webinars &middot; up to 15 educators.</p>
           </div>
           <div class="pprice">
-            <span class="lbl">Conference rate</span>
-            <span class="amt">$TBD</span>
+            <span class="lbl">per school</span>
+            <span class="amt">$5,000</span>
           </div>
         </label>
 
         <label class="prow" data-product-row>
-          <input type="checkbox" name="products" value="k2_residency">
+          <input type="checkbox" name="products" value="flourish">
           <div>
-            <p class="ptitle">K-2 Health Boosts + Residency</p>
-            <p class="pdesc">Everything in K-2 Health Boosts, plus on-site residency days with a ReBe Ed facilitator, teacher coaching cycles, and principal-level reporting.</p>
+            <p class="ptitle">Flourish &mdash; K-2 Health Boosts <span style="font-weight:600;color:var(--green);">(+ free 3-5 pilot)</span></p>
+            <p class="pdesc">25 EPICS Health Boosts &middot; BB-guided &middot; 7-10 min each &middot; K-2 &middot; buyers also get free 3-5 pilot access.</p>
+            <div class="qty-row" data-qty-for="flourish">
+              <label for="qty_flourish">Number of teachers:</label>
+              <input type="number" id="qty_flourish" name="qty_flourish" min="1" max="500" value="1" step="1">
+              <span class="qty-hint">15+ teachers? Discounted school rate ($200/teacher) auto-applies.</span>
+            </div>
           </div>
           <div class="pprice">
-            <span class="lbl">Conference rate</span>
-            <span class="amt">$TBD</span>
+            <span class="lbl">per teacher &middot; $200/teacher for 15+</span>
+            <span class="amt">$250</span>
           </div>
         </label>
 
         <label class="prow" data-product-row>
-          <input type="checkbox" name="products" value="35_pilot">
+          <input type="checkbox" name="products" value="premiere">
           <div>
-            <p class="ptitle">Free 3-5 Pilot Program</p>
-            <p class="pdesc">Full program access at no cost to selected schools, co-design support with pre/post measurement, and featured case-study spotlight (with your permission).</p>
+            <p class="ptitle">Premiere &mdash; Literacy Residency Pilot</p>
+            <p class="pdesc">K-2 + 3-5 Health Boosts + 3-hr Literacy Inservice + 5 monthly LAB pilot sessions &middot; up to 15 classrooms &middot; first right of purchase when LABS launch.</p>
           </div>
-          <div class="pprice free">
-            <span class="lbl">Limited cohort</span>
-            <span class="amt">Free</span>
+          <div class="pprice">
+            <span class="lbl">per school</span>
+            <span class="amt">$5,000</span>
+          </div>
+        </label>
+
+        <label class="prow" data-product-row>
+          <input type="checkbox" name="products" value="transform">
+          <div>
+            <p class="ptitle">Transform &mdash; Complete Package <span style="color:var(--gold-deep,#e5a708);">&#9733; Conference Special</span></p>
+            <p class="pdesc">Thrive + Premiere &middot; everything your school needs &middot; up to 15 educators + up to 15 classrooms &middot; first 10 schools only.</p>
+          </div>
+          <div class="pprice">
+            <span class="lbl">save $3,000 &middot; was $13,500</span>
+            <span class="amt">$10,500</span>
+          </div>
+        </label>
+
+        <label class="prow" data-product-row>
+          <input type="checkbox" name="products" value="action">
+          <div>
+            <p class="ptitle">*Action &mdash; ReBe ReFresh Live <span style="font-weight:600;color:var(--purple);">(optional add-on)</span></p>
+            <p class="pdesc">5-week live cohort &middot; online &middot; small group &middot; facilitated &middot; add to Thrive or Transform.</p>
+            <div class="qty-row" data-qty-for="action">
+              <label for="qty_action">Number of educators:</label>
+              <input type="number" id="qty_action" name="qty_action" min="1" max="100" value="1" step="1">
+            </div>
+          </div>
+          <div class="pprice">
+            <span class="lbl">per educator</span>
+            <span class="amt">+$300</span>
           </div>
         </label>
 
       </div>
       <p class="field-error" id="products-error" style="display:none;">Please select at least one package.</p>
+
+      <!-- Live-updating order total -->
+      <div class="order-total" id="order-total" aria-live="polite">
+        <div class="ot-lines" id="ot-lines"></div>
+        <div class="ot-total">
+          <span class="ot-total-lbl">Order total</span>
+          <span class="ot-total-amt" id="ot-total-amt">$0</span>
+        </div>
+        <p class="ot-note">Prices in USD. Final total shown at checkout.</p>
+      </div>
     </div>
 
     <!-- Payment method -->
@@ -674,7 +741,7 @@
         </label>
         <label class="payment-choice" data-payment-row>
           <input type="radio" name="payment_method" value="card">
-          <div class="payment-choice-txt"><strong>Credit Card</strong> &mdash; we'll email you a secure Stripe payment link.</div>
+          <div class="payment-choice-txt"><strong>Credit Card</strong> &mdash; secure Stripe checkout &middot; pay in one click, no invoice needed.</div>
         </label>
         <label class="payment-choice" data-payment-row>
           <input type="radio" name="payment_method" value="check">
@@ -730,6 +797,18 @@
   var form = document.getElementById('order-form');
   var submitBtn = document.getElementById('submit-btn');
   var msgBox = document.getElementById('submit-message');
+  var orderTotalBox = document.getElementById('order-total');
+  var otLines = document.getElementById('ot-lines');
+  var otAmt = document.getElementById('ot-total-amt');
+
+  // Price map — must match api/naesp-lead.js PRODUCT_PRICES
+  var PRICES = {
+    thrive:    { amount: 5000,  label: 'Thrive — Educator Wellness',            fixedQty: true  },
+    flourish:  { amount: 250,   label: 'Flourish — K-2 Health Boosts',          qtyInput: 'qty_flourish', unitLabel: 'teachers', schoolRateAt: 15, schoolRatePerUnit: 200 },
+    premiere:  { amount: 5000,  label: 'Premiere — Literacy Residency Pilot',   fixedQty: true  },
+    transform: { amount: 10500, label: 'Transform — Complete Package ★',        fixedQty: true  },
+    action:    { amount: 300,   label: '*Action — ReBe ReFresh Live (add-on)',  qtyInput: 'qty_action',   unitLabel: 'educators' },
+  };
 
   // Highlight product / payment rows when selected
   document.querySelectorAll('[data-product-row], [data-payment-row]').forEach(function (row) {
@@ -739,12 +818,113 @@
     };
     input.addEventListener('change', function () {
       if (input.type === 'radio') {
-        // clear siblings
         document.querySelectorAll('[data-payment-row]').forEach(function (r) { r.classList.remove('selected'); });
       }
       updateState();
+      recalcTotal();
+      updateSubmitLabel();
     });
   });
+
+  // Recalculate total any time a qty input changes
+  document.querySelectorAll('input[type="number"][id^="qty_"]').forEach(function (el) {
+    el.addEventListener('input', recalcTotal);
+    el.addEventListener('change', recalcTotal);
+  });
+
+  function formatUSD(n) {
+    return '$' + n.toLocaleString('en-US');
+  }
+
+  function computeOrder() {
+    var selected = Array.from(form.querySelectorAll('input[name="products"]:checked')).map(function (i) { return i.value; });
+    var lines = [];
+    var total = 0;
+    selected.forEach(function (pid) {
+      var p = PRICES[pid];
+      if (!p) return;
+      var qty = 1;
+      if (p.qtyInput) {
+        var el = document.getElementById(p.qtyInput);
+        qty = Math.max(1, parseInt(el && el.value, 10) || 1);
+      }
+      var subtotal;
+      var qtyText = '';
+      // Discounted per-unit rate at threshold (Flourish: $200/teacher at 15+)
+      if (p.schoolRateAt && qty >= p.schoolRateAt && p.schoolRatePerUnit) {
+        subtotal = p.schoolRatePerUnit * qty;
+        qtyText = ' × ' + qty + ' ' + (p.unitLabel || 'seats') + ' (school rate $' + p.schoolRatePerUnit + '/' + (p.unitLabel || 'seat').replace(/s$/, '') + ')';
+      } else if (p.qtyInput) {
+        subtotal = p.amount * qty;
+        qtyText = ' × ' + qty + ' ' + (p.unitLabel || 'seats');
+      } else {
+        subtotal = p.amount;
+      }
+      total += subtotal;
+      lines.push({ name: p.label, qtyText: qtyText, amount: subtotal });
+    });
+    return { lines: lines, total: total, hasItems: selected.length > 0 };
+  }
+
+  function recalcTotal() {
+    var order = computeOrder();
+    if (!order.hasItems) {
+      orderTotalBox.classList.remove('visible');
+      return;
+    }
+    orderTotalBox.classList.add('visible');
+    otLines.innerHTML = order.lines.map(function (l) {
+      return '<div class="ot-line"><span class="ot-line-name">' + escapeHtml(l.name) +
+             (l.qtyText ? '<span class="ot-qty">' + escapeHtml(l.qtyText) + '</span>' : '') +
+             '</span><span class="ot-line-amt">' + formatUSD(l.amount) + '</span></div>';
+    }).join('');
+    otAmt.textContent = formatUSD(order.total);
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c];
+    });
+  }
+
+  // Update submit button text based on payment method
+  function updateSubmitLabel() {
+    var payment = form.querySelector('input[name="payment_method"]:checked');
+    var labels = {
+      po:    'Submit purchase order &rarr;',
+      card:  'Continue to Payment &rarr;',
+      check: 'Submit order &amp; get mailing info &rarr;',
+      ach:   'Submit order &amp; get bank details &rarr;',
+    };
+    submitBtn.innerHTML = (payment && labels[payment.value]) || 'Submit order &rarr;';
+  }
+  updateSubmitLabel();
+
+  // Pre-select a product when landed from ?add=<product> (from NAESP-product.html
+  // "Order X" buttons). Also default payment_method to card since these are
+  // quick-order flows.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var add = (params.get('add') || '').toLowerCase();
+    var cancelled = params.get('cancelled');
+    if (add) {
+      var cb = form.querySelector('input[name="products"][value="' + add + '"]');
+      if (cb) {
+        cb.checked = true;
+        cb.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      var cardRadio = form.querySelector('input[name="payment_method"][value="card"]');
+      if (cardRadio) {
+        cardRadio.checked = true;
+        cardRadio.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    }
+    if (cancelled) {
+      msgBox.className = 'submit-message error';
+      msgBox.textContent = 'Payment was cancelled. Your order details are still filled in below — pick a payment method and try again when ready.';
+      msgBox.style.display = 'block';
+    }
+  })();
 
   function showFieldError(fieldEl, msg) {
     fieldEl.classList.add('err');
@@ -803,6 +983,11 @@
 
     var products = Array.from(form.querySelectorAll('input[name="products"]:checked')).map(function (i) { return i.value; });
     var payment = form.querySelector('input[name="payment_method"]:checked');
+    var order = computeOrder();
+    var quantities = {
+      qty_flourish: parseInt((form.qty_flourish && form.qty_flourish.value) || 1, 10),
+      qty_action:   parseInt((form.qty_action   && form.qty_action.value)   || 1, 10),
+    };
 
     var payload = {
       form_type: 'naesp_order',
@@ -821,6 +1006,8 @@
       purchase_order_number: form.purchase_order_number.value.trim(),
       num_classrooms: form.num_classrooms.value.trim(),
       products: products,
+      quantities: quantities,
+      order_total_usd: order.total,
       payment_method: payment ? payment.value : null,
       signature_name: form.signature_name.value.trim(),
       signed_date: form.signed_date.value.trim(),
@@ -833,10 +1020,17 @@
       body: JSON.stringify(payload)
     })
       .then(function (r) {
-        if (!r.ok) throw new Error('Save failed: '+r.status);
+        if (!r.ok) return r.json().then(function(j){ throw new Error(j && j.error || ('Save failed: '+r.status)); });
         return r.json();
       })
-      .then(function () {
+      .then(function (data) {
+        // Card path: API returned a Stripe Checkout Session URL — redirect immediately.
+        if (data && data.checkout_url) {
+          submitBtn.textContent = 'Redirecting to Stripe…';
+          window.location.href = data.checkout_url;
+          return;
+        }
+        // PO / check / ACH path: show success inline.
         msgBox.className = 'submit-message success';
         msgBox.textContent = '✓ Thanks — your order has been submitted. You should receive a confirmation email within a minute, and someone from our team will follow up shortly.';
         msgBox.style.display = 'block';
