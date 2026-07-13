@@ -46,25 +46,24 @@ async function readJson(req) {
 // PRODUCT_LABEL maps checkbox values -> human-readable labels used in the
 // order confirmation and admin notification emails.
 const PRODUCT_LABEL = {
-  thrive:    'Thrive — Educator Wellness ($5,000/school)',
-  flourish:  'Flourish — K-2 Health Boosts + 3-5 free pilot ($250/teacher · $3,000/school rate)',
-  premiere:  'Premiere — Literacy Residency Pilot ($5,000/school)',
-  transform: 'Transform — Complete Package ★ ($10,500/school, save $3,000)',
+  thrive:    'Thrive — Lights + Camera package ($4,000 conference · reg $6,000/school)',
+  flourish:  'Flourish — K-2 Health Boosts per grade + 3-5 free pilot ($250/teacher · 1-year license)',
+  premiere:  'Premiere — Literacy Residency Pilot ($8,000 conference · reg $10,000/school)',
+  transform: 'Transform — Complete Package ★ ($11,000 conference · reg $16,000 · save $5,000)',
   action:    '*Action — ReBe ReFresh Live add-on (+$300/educator)',
 };
 
-// Prices used to build Stripe line items server-side. MUST MATCH the frontend
-// PRICES map in NAESP-order-form.html or totals will disagree.
+// Conference prices for Stripe line items. MUST MATCH the frontend PRICES
+// map in NAESP-order-form.html or the total won't reconcile at checkout.
 const PRODUCT_PRICES = {
-  thrive:    { amount: 5000,  label: 'Thrive — Educator Wellness (up to 15 educators)' },
-  flourish:  { amount: 250,   label: 'Flourish — K-2 Health Boosts (+ free 3-5 pilot)',   qtyKey: 'qty_flourish', unitLabel: 'teachers', schoolRateAt: 15, schoolRatePerUnit: 200 },
-  premiere:  { amount: 5000,  label: 'Premiere — Literacy Residency Pilot (up to 15 classrooms)' },
-  transform: { amount: 10500, label: 'Transform — Complete Package ★ (up to 15 educators + 15 classrooms)' },
-  action:    { amount: 300,   label: '*Action — ReBe ReFresh Live (add-on)',              qtyKey: 'qty_action',   unitLabel: 'educators' },
+  thrive:    { amount: 4000,  label: 'Thrive — Lights + Camera package (per school)' },
+  flourish:  { amount: 250,   label: 'Flourish — K-2 Health Boosts per grade (+ free 3-5 pilot, 1-year license)', qtyKey: 'qty_flourish', unitLabel: 'teachers' },
+  premiere:  { amount: 8000,  label: 'Premiere — Literacy Residency Pilot (per school)' },
+  transform: { amount: 11000, label: 'Transform — Complete Package ★ (per school — Thrive + Premiere)' },
+  action:    { amount: 300,   label: '*Action — ReBe ReFresh Live (add-on)', qtyKey: 'qty_action', unitLabel: 'educators' },
 };
 
 // Build Stripe line-items from selected products + optional quantities.
-// Flourish honors the 15+ school rate override.
 function buildStripeLineItems(products, quantities) {
   const items = [];
   let total = 0;
@@ -73,20 +72,13 @@ function buildStripeLineItems(products, quantities) {
     const p = PRODUCT_PRICES[pid];
     if (!p) continue;
     let qty = 1;
-    let unitAmount = p.amount;
     let name = p.label;
     if (p.qtyKey) {
       qty = Math.max(1, parseInt(safeQ[p.qtyKey], 10) || 1);
-      if (p.schoolRateAt && qty >= p.schoolRateAt && p.schoolRatePerUnit) {
-        // Discounted per-unit rate when quantity crosses the threshold.
-        unitAmount = p.schoolRatePerUnit;
-        name = p.label + ' — school rate ($' + p.schoolRatePerUnit + '/' + (p.unitLabel || 'seat').replace(/s$/, '') + ')';
-      } else {
-        name = p.label + ' — per ' + (p.unitLabel || 'seat').replace(/s$/, '');
-      }
+      name = p.label + ' — per ' + (p.unitLabel || 'seat').replace(/s$/, '');
     }
-    items.push({ name, unit_amount: unitAmount * 100, quantity: qty });
-    total += unitAmount * qty;
+    items.push({ name, unit_amount: p.amount * 100, quantity: qty });
+    total += p.amount * qty;
   }
   return { items, total };
 }
@@ -138,21 +130,23 @@ async function createNaespCheckoutSession(order) {
   return await r.json();
 }
 
+// Mailing address for check payments — used in the buyer confirmation email.
+const CHECK_MAILING_ADDRESS = '13118 State Rd 64 E., Suite 362, Bradenton, FL 34212';
+
 // Customize the buyer's confirmation email based on their payment method.
+// Card gets a payment link injected separately (see handleOrder).
 function paymentMethodBlurb(method) {
   switch (method) {
-    case 'card':  return "You'll be redirected to Stripe to complete your payment securely. Once payment completes, Stripe emails you a receipt automatically and a member of our team follows up within one business day with onboarding details.";
+    case 'card':  return "Your secure payment link is included below. Click it to complete payment on our secure payment page — you'll receive a receipt automatically once payment completes, and our team follows up within one business day with onboarding details.";
     case 'po':    return "We'll send you a formal invoice within one business day with Net 30 terms. Once your PO is processed, we'll schedule your onboarding call.";
-    case 'check': return "Please make your check payable to JustReBe LLC and mail to the address in the footer. We'll begin onboarding as soon as we receive payment.";
-    case 'ach':   return "We'll email you our ACH / wire transfer details within one business day. Onboarding begins once payment clears.";
+    case 'check': return "Please make your check payable to JustReBe LLC and mail to:\n\n  " + CHECK_MAILING_ADDRESS + "\n\nWe'll begin onboarding as soon as we receive payment.";
     default:      return "We'll follow up shortly to confirm your preferred payment method and next steps.";
   }
 }
 const PAYMENT_LABEL = {
   po:    'Purchase Order (Net 30 invoice)',
-  card:  'Credit Card (Stripe link)',
-  check: 'Check (payable to JustReBe LLC)',
-  ach:   'ACH / Wire Transfer',
+  card:  'Credit Card (secure payment link will be emailed)',
+  check: 'Check (payable to JustReBe LLC · mail to ' + CHECK_MAILING_ADDRESS + ')',
 };
 
 module.exports = async function handler(req, res) {
@@ -407,6 +401,32 @@ async function handleOrder(body, req, res) {
       console.error('Kit subscribe (NAESP order):', e);
     }
 
+    // Card path — build Stripe Checkout Session FIRST so we can include the
+    // payment link in the buyer's confirmation email below.
+    let checkout_url = null;
+    if (row.payment_method === 'card') {
+      try {
+        const { items } = buildStripeLineItems(products, body.quantities || {});
+        if (!items.length) throw new Error('No valid products to charge');
+        const session = await createNaespCheckoutSession({
+          email,
+          first_name,
+          last_name,
+          phone: row.phone,
+          school_name,
+          district: row.district,
+          products,
+          line_items: items,
+          naesp_order_id: inserted && inserted.id,
+        });
+        checkout_url = session && session.url;
+        if (!checkout_url) throw new Error('Payment session missing url');
+      } catch (e) {
+        console.error('NAESP payment session creation failed:', e);
+        // Fall through — emails still fire; buyer gets a manual follow-up.
+      }
+    }
+
     // Resend: auto-response + admin notification
     if (process.env.RESEND_API_KEY) {
       const fromAddr = process.env.NOTIFY_FROM || 'ReBe Ed <hello@justrebe.com>';
@@ -414,9 +434,12 @@ async function handleOrder(body, req, res) {
 
       const productLines = products.map((p) => `  • ${PRODUCT_LABEL[p] || p}`).join('\n');
       const paymentLine = PAYMENT_LABEL[row.payment_method] || row.payment_method || '(not selected)';
+      const isCard = row.payment_method === 'card';
+      const paymentLinkBlock = (isCard && checkout_url)
+        ? `\n\n  Your secure payment link:\n  ${checkout_url}\n`
+        : (isCard ? `\n\n  We hit a temporary issue generating your payment link — a member of our team will email one to you within a few hours.\n` : '');
 
       // Purchaser auto-response (message body varies by payment method)
-      const isCard = row.payment_method === 'card';
       fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
@@ -424,16 +447,14 @@ async function handleOrder(body, req, res) {
           from: fromAddr,
           to: email,
           subject: isCard
-            ? `Your ReBe Ed order — completing payment, ${first_name}`
+            ? `Your ReBe Ed order — payment link inside, ${first_name}`
             : `Thank you for your ReBe Ed order, ${first_name}`,
           text:
 `Hi ${first_name},
 
-${isCard
-  ? "Thank you for your ReBe Ed order. You've been redirected to Stripe to complete payment. Once payment completes, Stripe emails you a receipt automatically and a member of our team follows up within one business day with onboarding details."
-  : "Thank you for submitting your ReBe Ed order. We've received it."}
+Thank you for submitting your ReBe Ed order. We've received it.
 
-${paymentMethodBlurb(row.payment_method)}
+${paymentMethodBlurb(row.payment_method)}${paymentLinkBlock}
 
 Here's a summary of what you submitted:
 
@@ -468,7 +489,7 @@ www.justrebe.com/education`,
           reply_to: email,
           subject: `NEW NAESP ORDER — ${first_name} ${last_name} · ${school_name}`,
           text:
-`A new NAESP purchase order was just submitted.
+`A new NAESP order was just submitted.
 
 PURCHASER
   Name:          ${first_name} ${last_name}
@@ -489,7 +510,7 @@ PACKAGE(S) ORDERED
 ${productLines}
 
 PAYMENT METHOD
-  ${paymentLine}
+  ${paymentLine}${isCard && checkout_url ? '\n  Payment link: ' + checkout_url : ''}${isCard && !checkout_url ? '\n  ⚠ Payment link generation FAILED — please create one manually in Stripe and email the buyer.' : ''}
 
 SIGNATURE
   Typed name:    ${signature_name}
@@ -508,43 +529,11 @@ Auto-response has already been sent to ${email}.
       }).catch((e) => console.error('NAESP order admin email failed:', e));
     }
 
-    // Card path — build line items and create a Stripe Checkout Session.
-    // The frontend redirects the user to the returned URL.
-    let checkout_url = null;
-    if (row.payment_method === 'card') {
-      try {
-        const { items } = buildStripeLineItems(products, body.quantities || {});
-        if (!items.length) throw new Error('No valid products to charge');
-        const session = await createNaespCheckoutSession({
-          email,
-          first_name,
-          last_name,
-          phone: row.phone,
-          school_name,
-          district: row.district,
-          products,
-          line_items: items,
-          naesp_order_id: inserted && inserted.id,
-        });
-        checkout_url = session && session.url;
-        if (!checkout_url) throw new Error('Stripe session missing url');
-      } catch (e) {
-        console.error('NAESP Stripe session creation failed:', e);
-        // Order is already saved + emails sent; just return without a URL and
-        // let the frontend show a graceful "we'll follow up" message.
-        return res.status(200).json({
-          ok: true,
-          id: inserted && inserted.id,
-          checkout_url: null,
-          checkout_error: "We couldn't open Stripe checkout right now — your order was received and we'll email you a payment link within one business day.",
-        });
-      }
-    }
-
+    // Card no longer auto-redirects — the payment link is emailed. Frontend
+    // shows the same success message for all payment methods.
     return res.status(200).json({
       ok: true,
       id: inserted && inserted.id,
-      checkout_url: checkout_url,
     });
   } catch (err) {
     console.error('naesp-order failed:', err);
