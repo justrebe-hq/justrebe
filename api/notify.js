@@ -806,13 +806,43 @@ refresh@justrebe.com`
     const r = body.record || {};
     if (!r.email) return res.status(400).json({ error: 'Missing record.email' });
     try {
-      const which = body.kind === 'survey_post' ? 'POST' : 'PRE';
-      // The questions are now free-text — answers land in the *_comment
-      // columns. Format each as a labeled block in the email body.
+      const isPost = body.kind === 'survey_post';
+      const which = isPost ? 'POST' : 'PRE';
+      // Yes/No answers land in the *_comment columns. The pre and post surveys
+      // ask differently worded versions of the same three questions — print
+      // whichever set was actually answered so the email isn't misleading.
+      const QUESTIONS = isPost ? [
+        ['PERSPECTIVE',          'Have you reframed any aspects of your perspective on your life?',                         r.perspective_comment],
+        ['COMMUNITY CONNECTION', 'Do you feel more comfortable and connected in your community of friends and co-workers?', r.connection_comment],
+        ['HOPE',                 'Do you feel more hopeful?',                                                              r.hope_comment],
+      ] : [
+        ['PERSPECTIVE',          'Do you see a need to reframe any aspects of your perspective on your life?',                               r.perspective_comment],
+        ['COMMUNITY CONNECTION', 'Are you feeling a bit uncomfortable or somewhat disconnected in your community of friends and co-workers?', r.connection_comment],
+        ['HOPE',                 'Would you like to feel more hopeful?',                                                                      r.hope_comment],
+      ];
+      const rule = '──────────────────────────────────────────────';
       const ans = (txt) => (txt && String(txt).trim()) ? String(txt).trim() : '(no answer)';
+      const answerBlocks = QUESTIONS
+        .map(([label, q, a], i) => `${rule}\n${i + 1}) ${label}\n${q}\n\n${ans(a)}\n`)
+        .join('\n');
+
+      // Testimonial is post-survey only, and optional. Lead with whether it's
+      // cleared for public use so quotes never get published by mistake.
+      const testimonial = String(r.testimonial || '').trim();
+      const shareable = r.testimonial_permission === 'yes';
+      let testimonialBlock = '';
+      if (testimonial) {
+        testimonialBlock = `\n${rule}\nTESTIMONIAL — ${shareable
+          ? '✅ OK TO SHARE PUBLICLY (first name + last initial)'
+          : '🔒 PRIVATE — DO NOT SHARE'}\n\n${testimonial}\n`;
+      } else if (isPost) {
+        testimonialBlock = `\n${rule}\nTESTIMONIAL\n\n(none written)\n`;
+      }
+
       const adminMsg = {
         to: ADMIN_EMAIL,
-        subject: `Survey · ${which} · ${r.full_name || r.email} · ${r.cohort_id || 'cohort-1'}`,
+        subject: `Survey · ${which} · ${r.full_name || r.email} · ${r.cohort_id || 'cohort-1'}` +
+                 (testimonial && shareable ? ' · ★ testimonial' : ''),
         text:
 `${r.full_name || '(no name)'} submitted the ${which} survey for ${r.cohort_id || 'cohort-1'}.
 
@@ -820,25 +850,8 @@ CONTACT
   Name:  ${r.full_name || '(no name)'}
   Email: ${r.email}
 
-──────────────────────────────────────────────
-1) PERSPECTIVE
-Do you see a need to reframe any aspects of your perspective on your life?
-
-${ans(r.perspective_comment)}
-
-──────────────────────────────────────────────
-2) COMMUNITY CONNECTION
-Are you feeling a bit uncomfortable or somewhat disconnected in your community of friends and co-workers?
-
-${ans(r.connection_comment)}
-
-──────────────────────────────────────────────
-3) HOPE
-Would you like to feel more hopeful?
-
-${ans(r.hope_comment)}
-
-──────────────────────────────────────────────
+${answerBlocks}${testimonialBlock}
+${rule}
 — Saved to cohort_surveys table. This email is a backup copy.`,
       };
       await sendEmail(adminMsg);
