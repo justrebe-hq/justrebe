@@ -22,6 +22,7 @@
 const crypto = require('crypto');
 const { kitSubscribe } = require('./_kit.js');
 const { createOpenPhoneContact } = require('./_openphone.js');
+const { sendEventConfirmation } = require('./_eventmail.js');
 
 // Tell Vercel to give us the raw body, not a parsed JSON object.
 module.exports.config = {
@@ -266,6 +267,7 @@ module.exports = async function handler(req, res) {
     kind === 'cohort'  ? 'refresh_signups' :
     kind === 'private' ? 'confidant_requests' :
     kind === 'studio'  ? 'studio_members' :
+    kind === 'event'   ? 'event_tickets' :
     null;
 
   if (!table) {
@@ -330,6 +332,19 @@ module.exports = async function handler(req, res) {
           paid_amount_cents: session.amount_total ?? null,
           paid_at: new Date().toISOString(),
         };
+      } else if (table === 'event_tickets') {
+        // Fallback only — the event page pre-creates the row and passes
+        // signup_id, so this runs solely if that insert didn't happen.
+        row = {
+          full_name: customerName || 'Stripe Customer',
+          email: customerEmail,
+          phone: customerPhone || '',
+          event_slug: metadata.event_slug || 'night-to-shift',
+          status: 'paid',
+          stripe_session_id: session.id,
+          paid_amount_cents: session.amount_total ?? null,
+          paid_at: new Date().toISOString(),
+        };
       } else {
         // Defensive — should never hit this for 1:1 since we always pre-create
         row = {
@@ -343,6 +358,21 @@ module.exports = async function handler(req, res) {
         };
       }
       rows = await supabaseInsert({ table, row });
+    }
+
+    // Event ticket → send the buyer their branded confirmation email
+    // (details + add-to-calendar + invite-a-friend). Awaited so Vercel
+    // doesn't tear the function down mid-send; a failure is logged, not
+    // fatal (the ticket is already saved + Stripe sends its own receipt).
+    if (customerEmail && kind === 'event') {
+      try {
+        await sendEventConfirmation({
+          to: customerEmail,
+          firstName: (customerName || '').trim().split(/\s+/)[0] || '',
+        });
+      } catch (e) {
+        console.error('Event confirmation email (stripe-webhook):', e);
+      }
     }
 
     // Tag the customer in Kit with the full set so Kit segmentation works:

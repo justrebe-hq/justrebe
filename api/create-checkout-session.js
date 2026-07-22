@@ -65,8 +65,8 @@ module.exports = async function handler(req, res) {
   const uiMode = ui_mode === 'embedded' ? 'embedded' : 'hosted';
 
   // Basic validation
-  if (!kind || !['cohort', 'private'].includes(kind)) {
-    return res.status(400).json({ error: "Invalid 'kind' — must be 'cohort' or 'private'" });
+  if (!kind || !['cohort', 'private', 'event'].includes(kind)) {
+    return res.status(400).json({ error: "Invalid 'kind' — must be 'cohort', 'private', or 'event'" });
   }
   if (!amount_cents || typeof amount_cents !== 'number' || amount_cents < 50) {
     return res.status(400).json({ error: "Invalid 'amount_cents' (must be a number >= 50 cents)" });
