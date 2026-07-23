@@ -356,7 +356,7 @@
       })
       .then(function () {
         // Success — go to the product page
-        window.location.href = '/NAESP-product.html';
+        window.location.href = '/NAESP-offerings.html';
       })
       .catch(function (err) {
         // Still take them through to the product page even if the API blipped,
@@ -365,7 +365,7 @@
         submitError.hidden = false;
         submitError.textContent = "We couldn't save your info, but we'll take you through anyway.";
         setTimeout(function () {
-          window.location.href = '/NAESP-product.html';
+          window.location.href = '/NAESP-offerings.html';
         }, 1200);
       });
   });

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>ReBe Ed — Offerings (NAESP 2026)</title>
+<link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  img { max-width: 100%; height: auto; display: block; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #F5F9FC; color: #1A1A1A; line-height: 1.5; padding: 24px; font-size: 15px; }
+
+  :root {
+    --purple: #7D0AAB; --teal: #034E64; --teal-deep: #023d4f;
+    --gold: #FEB909; --gold-deep: #e5a708; --green: #2C9B41;
+    --ink: #1A1A1A; --body: #444; --muted: #7A8590;
+    --field-border: #D5DFE5;
+  }
+
+  .page { max-width: 900px; margin: 0 auto; background: #FFFFFF; border-radius: 20px; box-shadow: 0 12px 40px rgba(3,78,100,.08); overflow: hidden; }
+
+  /* Header */
+  .head { padding: 40px 48px 32px; border-bottom: 4px solid var(--teal); display: flex; align-items: center; gap: 28px; }
+  .head-logo { height: 150px; width: auto; flex-shrink: 0; }
+  .head-txt { flex: 1; }
+  .head-title { font-size: 26px; font-weight: 900; color: var(--teal); letter-spacing: -.015em; margin-bottom: 6px; line-height: 1.15; }
+  .head-sub { font-size: 14px; color: var(--muted); letter-spacing: .04em; }
+  .head-badge { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--purple); background: rgba(125,10,171,.08); border: 1px solid rgba(125,10,171,.35); border-radius: 999px; padding: 4px 11px; margin-top: 10px; white-space: nowrap; line-height: 1.35; }
+
+  /* Intro band */
+  .intro { padding: 22px 48px; background: #FAF3FF; border-bottom: 1px solid #EBE3F2; font-size: 14.5px; color: var(--body); line-height: 1.65; }
+  .intro strong { color: var(--purple); font-weight: 700; }
+
+  /* Sections */
+  .sec { padding: 32px 48px; border-bottom: 1px solid #F0F3F6; }
+  .sec-h { font-size: 12px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); margin-bottom: 22px; padding-bottom: 8px; border-bottom: 2px solid var(--teal); display: inline-block; line-height: 1.35; }
+
+  /* Product groups + rows */
+  .pgroup-h { font-size: 21px; font-weight: 900; letter-spacing: -.01em; color: var(--teal-deep); margin: 30px 0 14px; padding: 9px 0 11px 15px; border-left: 5px solid var(--gold); border-bottom: 2px solid #EDF2F5; }
+  .pgroup-h:first-child { margin-top: 0; }
+  .pgroup-h em { font-style: normal; color: var(--purple); font-weight: 700; letter-spacing: 0; text-transform: none; margin-left: 8px; font-size: 14px; }
+
+  .products { display: flex; flex-direction: column; gap: 14px; }
+  .prow { display: grid; grid-template-columns: 40px 1fr; gap: 6px 18px; align-items: start; padding: 20px 22px; background: #FBFCFE; border: 1.5px solid #E4EBF1; border-radius: 14px; }
+  .prow.feature { border-color: var(--gold); background: #FFFCF2; }
+  .picon { font-size: 24px; line-height: 1.2; grid-row: 1 / span 2; }
+  .ptitle { font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 5px; letter-spacing: -.005em; line-height: 1.3; }
+  .ptitle .tag { font-weight: 700; font-size: 12px; letter-spacing: .02em; }
+  .ptitle .tag.green { color: var(--green); }
+  .ptitle .tag.purple { color: var(--purple); }
+  .ptitle .tag.gold { color: var(--gold-deep); }
+  .pdesc { font-size: 13.5px; color: var(--body); line-height: 1.6; }
+  .pdesc strong { color: var(--purple); }
+
+  /* CTA / contact */
+  .cta { padding: 44px 48px 40px; background: linear-gradient(180deg, #F5F9FC 0%, #EDF3F8 100%); text-align: center; }
+  .cta-ey { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); padding: 5px 14px; background: rgba(3,78,100,.08); border-radius: 999px; margin-bottom: 14px; }
+  .cta h2 { font-size: clamp(21px, 2.4vw, 28px); font-weight: 900; color: var(--teal-deep); letter-spacing: -.015em; margin-bottom: 10px; line-height: 1.2; }
+  .cta h2 em { color: var(--purple); font-style: italic; }
+  .cta p { font-size: 14.5px; color: var(--body); line-height: 1.6; max-width: 560px; margin: 0 auto 22px; }
+  .cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-block; text-decoration: none; padding: 14px 30px; border-radius: 999px; font-size: 14.5px; font-weight: 800; letter-spacing: .01em; transition: transform .15s, box-shadow .15s; }
+  .btn-gold { background: var(--gold); color: #241800; box-shadow: 0 10px 26px rgba(254,185,9,.35); }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(254,185,9,.45); }
+  .btn-ghost { background: transparent; color: var(--teal-deep); border: 2px solid var(--teal-deep); }
+  .btn-ghost:hover { background: var(--teal-deep); color: #fff; }
+  .cta-mail { margin-top: 34px; font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .cta-mail a { color: var(--teal); font-weight: 700; text-decoration: none; }
+  .cta-mail a:hover { text-decoration: underline; }
+
+  /* Footer */
+  .foot { padding: 22px 48px 30px; text-align: center; font-size: 12px; color: var(--muted); line-height: 1.7; }
+  .foot strong { color: var(--body); }
+  .foot a { color: var(--teal); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    body { padding: 12px; }
+    .head { padding: 24px 20px 20px; gap: 16px; flex-wrap: wrap; }
+    .head-logo { height: 84px; }
+    .head-title { font-size: 20px; }
+    .intro, .sec, .cta, .foot { padding-left: 22px; padding-right: 22px; }
+    .prow { grid-template-columns: 30px 1fr; padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="head">
+    <a href="/NAESP" aria-label="Back to NAESP overview" style="text-decoration:none;flex-shrink:0;"><img src="Images/rebe-ed-logo.png" alt="ReBe Ed" class="head-logo"></a>
+    <div class="head-txt">
+      <div class="head-title">Our Offerings</div>
+      <div class="head-sub">ReBe Ed &mdash; NAESP 2026</div>
+      <span class="head-badge">Whole-School Wellness</span>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro">
+    Whole-educator and whole-child wellness, built on the <strong>EPICS</strong> framework (Emotional, Physical, Intellectual, Cultural, Spiritual). Below is what ReBe Ed offers &mdash; take a look, and let&rsquo;s find the right fit for your school on a quick call.
+  </div>
+
+  <!-- Offerings -->
+  <div class="sec">
+    <p class="sec-h">What We Offer</p>
+    <div class="products">
+
+      <!-- Thrive -->
+      <p class="pgroup-h">Thrive <em>&middot; Educator Wellness</em></p>
+
+      <div class="prow">
+        <span class="picon">🎬</span>
+        <p class="ptitle">Lights + Camera Package</p>
+        <p class="pdesc">A 3-hour inservice plus a full-year <strong>EPICS</strong> video library and community for your educators.</p>
+      </div>
+
+      <div class="prow">
+        <span class="picon">⚡</span>
+        <p class="ptitle">Action &mdash; ReBe ReFresh Live <span class="tag purple">(optional add-on)</span></p>
+        <p class="pdesc">A 5-week live cohort &mdash; online, small group, and facilitated. Adds to Thrive or Transform.</p>
+      </div>
+
+      <!-- Flourish -->
+      <p class="pgroup-h">Flourish <em>&middot; Student Wellness</em></p>
+
+      <div class="prow">
+        <span class="picon">🌱</span>
+        <p class="ptitle">K&ndash;2 Health Boosts <span class="tag green">&middot; FREE 3&ndash;5 Pilot included</span></p>
+        <p class="pdesc">25 EPICS Health Boosts per grade for K&ndash;2, with <strong style="color:var(--green);">free access to the 3&ndash;5 Health Boosts</strong> for your 3&ndash;5 educators. One-year license.</p>
+      </div>
+
+      <div class="prow">
+        <span class="picon">📚</span>
+        <p class="ptitle">Literacy Residency Pilot</p>
+        <p class="pdesc">25 EPICS Health Boosts per grade (K&ndash;2 and 3&ndash;5), a 3-hour Literacy Inservice, and 5 monthly Literacy LAB webinars.</p>
+      </div>
+
+      <!-- Transform -->
+      <p class="pgroup-h">Transform <em>&middot; Complete Package</em></p>
+
+      <div class="prow feature">
+        <span class="picon">⭐</span>
+        <p class="ptitle">Educator + Student Wellness <span class="tag gold">&#9733; Best Value</span></p>
+        <p class="pdesc"><strong>Thrive</strong> (educator wellness: Lights + Camera + the full EPICS library) plus <strong>Flourish</strong> (student wellness: 25 EPICS Health Boosts per grade + the Literacy Residency Pilot + 5 monthly Literacy LAB webinars). Everything your school needs, together.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <span class="cta-ey">Let&rsquo;s Talk</span>
+    <h2>Ready to see what fits <em>your school?</em></h2>
+    <p>Tell us a little about your school and we&rsquo;ll walk you through the options, answer questions, and help you choose the right package &mdash; no pressure.</p>
+    <div class="cta-btns">
+      <a class="btn btn-gold" href="mailto:v.ellery@justrebe.com?subject=ReBe%20Ed%20%E2%80%94%20Let%27s%20talk%20about%20our%20school&amp;body=Hi%20Valerie%2C%0A%0AWe%27d%20love%20to%20learn%20more%20about%20ReBe%20Ed%20for%20our%20school.%0A%0ASchool%3A%20%0ARole%3A%20%0ABest%20way%20to%20reach%20me%3A%20%0A%0AThanks%21">Book a call &rarr;</a>
+      <a class="btn btn-ghost" href="mailto:v.ellery@justrebe.com">Email us your questions</a>
+    </div>
+    <p class="cta-mail">
+      Valerie Ellery &middot; <a href="mailto:v.ellery@justrebe.com">v.ellery@justrebe.com</a><br>
+      Abbey Pace &middot; <a href="mailto:a.pace@justrebe.com">a.pace@justrebe.com</a>
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="foot">
+    <strong>ReBe Ed</strong> &nbsp;&middot;&nbsp; <a href="https://www.justrebe.com">www.justrebe.com</a><br>
+    13118 State Rd 64 E., Suite 362, Bradenton, FL 34212
+  </div>
+
+</div>
+
+</body>
+</html>
