@@ -121,8 +121,10 @@
     font-size: clamp(15px, 1.5vw, 18px);
     color: var(--body);
     line-height: 1.55;
-    max-width: 620px; margin: 0 auto;
+    max-width: none; margin: 0 auto;
+    white-space: nowrap;
   }
+  @media (max-width: 720px) { .pagehead-sub { white-space: normal; max-width: 620px; } }
 
   /* ===== EPICS explainer callout ===== */
   .epics-note {
