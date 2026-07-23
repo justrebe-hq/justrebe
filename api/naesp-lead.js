@@ -273,7 +273,9 @@ module.exports = async function handler(req, res) {
     // response is sent, so any unawaited fetch may be terminated mid-flight.
     if (process.env.RESEND_API_KEY) {
       const fromAddr = 'ReBe Ed <hello@justrebe.com>';
-      const adminAddr = process.env.NOTIFY_ADMIN || 'hello@justrebe.com';
+      // Team notification for NAESP lead/offerings-gate submissions goes to the
+      // education@ Google group (Valerie + Abbey), per Osil.
+      const adminAddr = 'education@justrebe.com';
       const resendKey = process.env.RESEND_API_KEY;
 
       const leadAutoResponseSubject = `Thanks for stopping by, ${first_name} — here's what's next`;
