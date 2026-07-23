@@ -171,9 +171,12 @@
      big, with a gold highlighter marker behind each name. */
   .sec-ey .tier { display: block; width: fit-content; font-size: clamp(36px, 5vw, 52px); font-weight: 900; letter-spacing: -.03em; text-transform: none; color: var(--teal); line-height: 1.12; margin-bottom: 10px; padding: 0 6px; background: linear-gradient(transparent 58%, rgba(254,185,9,.45) 58%); }
   .sec.dark .sec-ey .tier { color: #fff; background: linear-gradient(transparent 58%, rgba(254,185,9,.55) 58%); }
+  /* Transform section is centered — center its tier name over the eyebrow. */
+  .transform-sec .sec-ey { display: block; }
+  .transform-sec .sec-ey .tier { margin-left: auto; margin-right: auto; }
   .sec-h { font-size: clamp(30px, 3.6vw, 46px); font-weight: 900; color: var(--teal); letter-spacing: -.025em; line-height: 1.12; margin-bottom: 16px; }
   .sec.dark .sec-h { color: #fff; }
-  .sec-h em { color: var(--purple); font-style: italic; font-weight: 800; }
+  .sec-h em { color: var(--purple); font-style: italic; font-weight: 800; padding: 0 .12em; }
   .sec.dark .sec-h em { color: var(--gold); }
   .sec-sub { font-size: clamp(17px, 1.85vw, 20px); color: var(--purple); font-style: italic; font-weight: 500; line-height: 1.4; margin-bottom: 20px; }
   .sec.dark .sec-sub { color: var(--gold); }
@@ -344,10 +347,11 @@
     text-align: center;
     border-top: 1px solid #EEE;
   }
-  .trust-inner { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 10px 12px; max-width: 1100px; }
+  .trust-inner { display: flex; flex-wrap: nowrap; justify-content: center; gap: 8px; max-width: 1280px; margin: 0 auto; }
+  @media (max-width: 900px) { .trust-inner { flex-wrap: wrap; } }
   .trust-tag {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 14px;
+    display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+    padding: 7px 12px;
     background: rgba(99,141,19,.09);
     border: 1px solid rgba(99,141,19,.22);
     color: var(--green-deep);
@@ -599,19 +603,6 @@
     </div>
   </section>
 
-  <!-- ===== ORDER PATH ===== -->
-  <section class="orderpath" id="order-form-path">
-    <div class="orderpath-inner">
-      <span class="orderpath-ey">Explore what fits</span>
-      <h2 class="orderpath-h">See our <em>offerings</em>.</h2>
-      <p class="orderpath-sub">Take a closer look at the packages, then let's find the right fit for your school on a quick call &mdash; no pressure.</p>
-      <div class="orderpath-btns">
-        <a class="btn btn-gold" href="/NAESP-offerings">See our offerings &rarr;</a>
-      </div>
-      <p class="orderpath-note">Questions? Email <a href="mailto:hello@justrebe.com" style="color:var(--teal); text-decoration: underline;">hello@justrebe.com</a></p>
-    </div>
-  </section>
-
   <!-- ===== DOCS ===== -->
   <section class="docs" id="documents">
     <div class="docs-inner">
@@ -637,14 +628,6 @@
             <span class="download-tag">Download PDF &rarr;</span>
           </div>
         </a>
-        <a class="doc" href="/ReBe_Offerings_OrderForm.pdf" target="_blank" rel="noopener">
-          <div class="doc-icon">PDF</div>
-          <div class="doc-info">
-            <h4>Order Form (printable)</h4>
-            <p>The full pricing sheet &mdash; print, fill, mail or scan back</p>
-            <span class="download-tag">Download PDF &rarr;</span>
-          </div>
-        </a>
       </div>
     </div>
   </section>
@@ -655,9 +638,9 @@
     <h2>Ready to bring this to <em>your students</em>?</h2>
     <p>Tell us what your school needs most. We'll set up a 20-minute call and walk through the fit &mdash; no pressure, just clarity.</p>
     <div class="contact-btns">
-      <a class="btn btn-ghost-dark" href="mailto:hello@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BThrive%20%2F%20K-2%20Health%20Boosts%20%2F%20Literacy%20Residency%20%2F%20Transform%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Email us about your school</a>
+      <a class="btn btn-ghost-dark" href="mailto:education@justrebe.com?subject=NAESP%20%C2%B7%20ReBe%20Ed%20follow-up&body=Hi%20ReBe%20Ed%20team%2C%0A%0AWe%20connected%20at%20NAESP%20and%20I%27d%20like%20to%20talk%20more%20about%3A%0A%0A%5BThrive%20%2F%20K-2%20Health%20Boosts%20%2F%20Literacy%20Residency%20%2F%20Transform%5D%0A%0AName%3A%0ASchool%20%2F%20District%3A%0ARole%3A%0AEmail%3A%0APhone%3A%0AGrade%20bands%3A%0ABest%20way%20to%20reach%20me%3A%0A%0AThank%20you%21">Email us about your school</a>
     </div>
-    <p class="contact-mail">Questions? <a href="mailto:hello@justrebe.com">hello@justrebe.com</a></p>
+    <p class="contact-mail">Questions? <a href="mailto:education@justrebe.com">education@justrebe.com</a></p>
   </section>
 
 </main>
