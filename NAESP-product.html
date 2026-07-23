@@ -139,7 +139,8 @@
     padding: 4px 12px; border-radius: 999px;
     margin-bottom: 10px;
   }
-  .epics-note-body { font-size: 15px; color: var(--body); line-height: 1.6; max-width: 900px; margin: 0 auto; }
+  .epics-note-body { font-size: 15px; color: var(--body); line-height: 1.6; max-width: 760px; margin: 0 auto; }
+  .epics-words { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
   .epics-note-body strong { color: var(--purple); font-weight: 800; }
   .epics-word {
     display: inline-flex; align-items: center; gap: 5px;
@@ -399,7 +400,9 @@
   .contact p { font-size: 14px; color: var(--body); line-height: 1.55; max-width: 560px; margin: 0 auto 18px; }
   .contact-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
   .contact-btns .btn { padding: 12px 26px; font-size: 14px; font-weight: 800; }
-  .contact-btns .btn-book { padding: 16px 40px; font-size: 16px; }
+  .contact-btns .btn-book { padding: 22px 60px; font-size: 19px; box-shadow: 0 14px 34px rgba(254,185,9,.5); }
+  .contact-alt { margin-top: 16px; font-size: 14px; color: var(--muted); }
+  .contact-alt a { color: var(--teal); font-weight: 700; text-decoration: underline; }
   .contact-btns .btn-ghost-dark { background: transparent; color: var(--teal-deep); border: 2px solid var(--teal-deep); }
   .contact-btns .btn-ghost-dark:hover { background: var(--teal-deep); color: #fff; }
   .contact-mail { margin-top: 14px; font-size: 12px; color: var(--muted); }
@@ -452,13 +455,14 @@
   <section class="epics-note">
     <div class="epics-note-inner">
       <span class="epics-note-tag">What is EPICS?</span>
-      <p class="epics-note-body"><strong>EPICS</strong> is the re&middot;be framework for whole-health wellness &mdash; five pathways every educator and student can grow in:
+      <p class="epics-note-body"><strong>EPICS</strong> is the re&middot;be framework for whole-health wellness &mdash; five pathways every educator and student can grow in.</p>
+      <div class="epics-words">
         <span class="epics-word"><span class="epics-dot" style="background:#B02929;"></span>Emotional</span>
         <span class="epics-word"><span class="epics-dot" style="background:var(--green);"></span>Physical</span>
         <span class="epics-word"><span class="epics-dot" style="background:var(--teal);"></span>Intellectual</span>
         <span class="epics-word"><span class="epics-dot" style="background:var(--orange);"></span>Cultural</span>
         <span class="epics-word"><span class="epics-dot" style="background:var(--purple);"></span>Social / Spiritual</span>
-      </p>
+      </div>
     </div>
   </section>
 
@@ -604,7 +608,18 @@
     </div>
   </section>
 
-  <!-- ===== DOCS ===== -->
+  <!-- ===== LET'S TALK — primary CTA ===== -->
+  <section class="contact" id="contact">
+    <span class="contact-ey">Let's Talk</span>
+    <h2>Ready to bring this to <em>your students</em>?</h2>
+    <p>Book a quick 20-minute call and we'll walk you through the fit and answer your questions &mdash; no pressure, just clarity.</p>
+    <div class="contact-btns">
+      <a class="btn btn-gold btn-book" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2rA9YIW0w0tulZCG3lTBsOKIjizMnU3FXzF0Dt-V7FcPXy6M0e8m84-j1b0t_BuYj867-2G_MR" target="_blank" rel="noopener">Book a call &rarr;</a>
+    </div>
+    <p class="contact-alt">or <a href="mailto:education@justrebe.com?subject=A%20question%20about%20ReBe%20Ed">email us a question</a></p>
+  </section>
+
+  <!-- ===== DOCS (bottom of page) ===== -->
   <section class="docs" id="documents">
     <div class="docs-inner">
       <div class="docs-head">
@@ -631,18 +646,6 @@
         </a>
       </div>
     </div>
-  </section>
-
-  <!-- ===== LET'S TALK (secondary) ===== -->
-  <section class="contact" id="contact">
-    <span class="contact-ey">Let's Talk</span>
-    <h2>Ready to bring this to <em>your students</em>?</h2>
-    <p>Book a quick 20-minute call and we'll walk you through the fit and answer your questions &mdash; no pressure, just clarity.</p>
-    <div class="contact-btns">
-      <a class="btn btn-gold btn-book" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2rA9YIW0w0tulZCG3lTBsOKIjizMnU3FXzF0Dt-V7FcPXy6M0e8m84-j1b0t_BuYj867-2G_MR" target="_blank" rel="noopener">Book a call &rarr;</a>
-      <a class="btn btn-ghost-dark" href="mailto:education@justrebe.com?subject=A%20question%20about%20ReBe%20Ed">Email us a question</a>
-    </div>
-    <p class="contact-mail">Questions? <a href="mailto:education@justrebe.com">education@justrebe.com</a></p>
   </section>
 
 </main>
