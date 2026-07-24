@@ -315,17 +315,10 @@ www.justrebe.com/education`;
           htmlDivider() +
           htmlP(`Warmly,<br><strong>The ReBe Ed team</strong>`, { size: '14px' }),
       });
-      const leadAutoResponse = fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: fromAddr,
-          to: email,
-          subject: leadAutoResponseSubject,
-          text: leadAutoResponseText,
-          html: leadAutoResponseHtml,
-        }),
-      }).catch((e) => console.error('NAESP lead auto-response failed:', e));
+      // Auto-response to the lead is DISABLED per Osil — they should NOT receive
+      // an email on form submit. The funnel wants them to book a call instead.
+      // (The internal team notification below still fires.)
+      const leadAutoResponse = Promise.resolve(null);
 
       const adminSubmittedAt = new Date().toISOString();
       const adminNotifySubject = `New NAESP lead — ${first_name} ${last_name} (${school_organization})`;
