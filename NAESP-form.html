@@ -344,6 +344,10 @@
       source: 'NAESP · rebe-ed landing'
     };
 
+    // Remember who they are so the product page can tag their button clicks
+    // (Book a call / Email us) back to this same person in Kit.
+    try { sessionStorage.setItem('naesp_email', payload.email); } catch (e) {}
+
     fetch('/api/naesp-lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

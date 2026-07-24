@@ -659,5 +659,34 @@
 </footer>
 
   <script defer src="/_vercel/insights/script.js"></script>
+
+  <!-- Funnel tracking: tag the visitor in Kit when they click Book a call /
+       Email us. We only know who they are if they came through the form gate
+       (which stashes their email in sessionStorage); otherwise we do nothing. -->
+  <script>
+  (function () {
+    var email = '';
+    try { email = sessionStorage.getItem('naesp_email') || ''; } catch (e) {}
+    if (!email) return;
+
+    function track(event) {
+      try {
+        fetch('/api/naesp-track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, event: event }),
+          keepalive: true
+        }).catch(function () {});
+      } catch (e) {}
+    }
+
+    document.querySelectorAll('.btn-book, a[href*="calendar.google.com"]').forEach(function (el) {
+      el.addEventListener('click', function () { track('clicked_book'); });
+    });
+    document.querySelectorAll('a[href^="mailto:education"]').forEach(function (el) {
+      el.addEventListener('click', function () { track('clicked_email'); });
+    });
+  })();
+  </script>
 </body>
 </html>
