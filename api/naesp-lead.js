@@ -262,7 +262,7 @@ module.exports = async function handler(req, res) {
       await kitSubscribe({
         email,
         first_name,
-        tags: ['ReBe — All', 'ReBe Ed — Lead', 'NAESP · 2026'],
+        tags: ['ReBe — All', 'ReBe Ed — Lead', 'NAESP · 2026', 'NAESP · Viewed Offerings'],
       });
     } catch (e) {
       console.error('Kit subscribe (NAESP lead):', e);
