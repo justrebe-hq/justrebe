@@ -362,6 +362,31 @@
     <p style="margin:10px 0 0;font-size:12px;color:var(--muted);font-style:italic">Zoom emails you the join link after you register. <strong style="color:var(--body);font-style:normal">You must register to get the link.</strong></p>
   </article>
 
+  <!-- 5. Happy Hour — 1st & 3rd Fridays, 5-6 PM ET (drop-in, no registration) -->
+  <article class="session-card" id="session-happyhour">
+    <div class="sc-meta">
+      <span class="sc-date">1st + 3rd Fridays · 5:00–6:00 PM ET</span>
+      <span class="sc-tag">Community</span>
+    </div>
+    <h3>Happy Hour with Osil</h3>
+    <p class="sc-facil">Come be refreshed in community. Process. Chat. Make connections. No agenda — just drop in.</p>
+    <div class="sc-desc">
+      <p>Every 1st and 3rd Friday. <strong>Next up:</strong> Aug 7 &amp; 21, Sept 4 &amp; 18 — then every month.</p>
+    </div>
+    <div class="sc-actions">
+      <div class="cal-wrap">
+        <button type="button" class="sc-btn cal-trigger" data-cal-event="happyhour">📅 Add to Calendar ▾</button>
+        <div class="cal-menu">
+          <button type="button" data-cal-app="apple"   data-cal-event="happyhour"><span class="cal-icon">🍎</span> Apple Calendar</button>
+          <button type="button" data-cal-app="google"  data-cal-event="happyhour"><span class="cal-icon">📆</span> Google Calendar</button>
+          <button type="button" data-cal-app="outlook" data-cal-event="happyhour"><span class="cal-icon">📧</span> Outlook</button>
+        </div>
+      </div>
+      <a class="sc-btn sc-btn-primary" href="https://us06web.zoom.us/j/9057767620" target="_blank" rel="noopener">Join Zoom room →</a>
+    </div>
+    <p style="margin:10px 0 0;font-size:12px;color:var(--muted);font-style:italic">Drop-in — no registration. Personal Meeting Room (waiting room on).</p>
+  </article>
+
   <!-- Missed a session? Recordings placeholder -->
   <div class="soon-card">
     <div class="sc-info">
@@ -557,6 +582,21 @@ document.querySelectorAll('.bio-modal').forEach(function(m){
       endUtc:   '20260801T140000Z',
       desc: 'ReBe ReFresh Cohort — "Limitless" Physical Health session with Kindsey Pentecost Chadwick (round 2).\n\n"We\'re not just building healthier bodies — we\'re building limitless lives."\n\nThree pillars: Balance, Freedom, Purpose.\n\nYou must register on Zoom to get the personal join link — Zoom emails it to you after you register:\nhttps://us06web.zoom.us/meeting/register/m2SifYI7RcCevRll_-Qa2Q',
       location: 'https://us06web.zoom.us/meeting/register/m2SifYI7RcCevRll_-Qa2Q'
+    },
+    'happyhour': {
+      title: 'ReBe ReFresh Happy Hour with Osil',
+      // 1st & 3rd Fridays, 5:00-6:00 PM ET (EDT, UTC-4). Next 4 occurrences;
+      // continuing every 1st & 3rd Friday after — refresh this list as they pass.
+      startUtc: '20260807T210000Z',
+      endUtc:   '20260807T220000Z',
+      multiDates: [
+        { startUtc: '20260807T210000Z', endUtc: '20260807T220000Z' },
+        { startUtc: '20260821T210000Z', endUtc: '20260821T220000Z' },
+        { startUtc: '20260904T210000Z', endUtc: '20260904T220000Z' },
+        { startUtc: '20260918T210000Z', endUtc: '20260918T220000Z' }
+      ],
+      desc: 'ReBe ReFresh Happy Hour — every 1st and 3rd Friday, 5:00-6:00 PM ET. Drop in. No agenda. Just community, laughter, and the ongoing conversation. Bring your drink of choice.\n\nZoom (Personal Meeting Room — no passcode, waiting room on):\nhttps://us06web.zoom.us/j/9057767620',
+      location: 'https://us06web.zoom.us/j/9057767620'
     }
   };
 
