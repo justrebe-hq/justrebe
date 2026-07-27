@@ -4,9 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>ReBe ReFresh · Private 1:1 Sessions with a Confidant</title>
-<meta name="description" content="A private 1:1 with the ReBe ReFresh confidant of your choice. One unhurried hour, $197. Your confidant reaches out within 48 hours to schedule." />
+<meta name="description" content="A private 1:1 with the ReBe ReFresh confidant of your choice. One unhurried hour, $222. Your confidant reaches out within 48 hours to schedule." />
 <meta property="og:title" content="ReBe ReFresh · Private 1:1 Sessions" />
-<meta property="og:description" content="A private 1:1 with the ReBe ReFresh confidant of your choice. One unhurried hour. $197 per session." />
+<meta property="og:description" content="A private 1:1 with the ReBe ReFresh confidant of your choice. One unhurried hour. $222 per session." />
 <meta property="og:url" content="https://justrebe.com/refresh-private.html" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://justrebe.com/Images/Logo.png" />
@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="https://justrebe.com/Images/Logo.png" />
 <meta name="twitter:title" content="ReBe ReFresh · Private 1:1 Sessions" />
-<meta name="twitter:description" content="A private 1:1 with the ReBe ReFresh confidant of your choice. One unhurried hour. $197 per session." />
+<meta name="twitter:description" content="A private 1:1 with the ReBe ReFresh confidant of your choice. One unhurried hour. $222 per session." />
 <link rel="icon" type="image/jpeg" href="ReBe_Favicon.jpg" />
 <script>document.documentElement.classList.add('js');</script>
 
@@ -288,7 +288,7 @@
     <h1 id="private-hero-h1" class="h1 fade-in d-1">A private session, with the <span class="accent">confidant you choose</span>.</h1>
     <p class="subhead-hero fade-in d-2">Pick the confidant whose story or season fits yours. They'll reach out within 48 hours to schedule directly with you.</p>
     <div class="hero-chips fade-in d-3">
-      <span class="hero-chip hero-chip--gold">$197 per session</span>
+      <span class="hero-chip hero-chip--gold">$222 per session</span>
       <span class="hero-chip hero-chip--ghost">~1 hour</span>
       <span class="hero-chip hero-chip--green">Your choice of confidant</span>
     </div>
@@ -332,7 +332,7 @@
       <div class="step">
         <div class="step-num">2</div>
         <h3>Submit the request</h3>
-        <p>A short form — name, email, what you're working through. Then $197 to hold the session.</p>
+        <p>A short form — name, email, what you're working through. Then $222 to hold the session.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
@@ -420,7 +420,7 @@
 <section class="form-section" id="request-1on1">
   <div class="container">
     <div class="form-intro">
-      <p class="eyebrow eyebrow--center">Private 1:1 · $197 per session</p>
+      <p class="eyebrow eyebrow--center">Private 1:1 · $222 per session</p>
       <h2 class="section-h" style="text-align:center">Request a session with a <em>confidant</em>.</h2>
       <p>We'll route you to your chosen confidant. Payment happens after this form, before scheduling.</p>
     </div>
@@ -450,7 +450,7 @@
       </div>
       <label class="form-check"><input type="checkbox" name="consent_to_contact"><span>I'm okay being contacted by my chosen confidant by email or phone to schedule.</span></label>
       <div class="form-submit">
-        <button type="submit" class="btn" style="width:100%">Continue to payment · $197</button>
+        <button type="submit" class="btn" style="width:100%">Continue to payment · $222</button>
       </div>
     </form>
     <div id="confidant-post-submit" class="post-submit"></div>
@@ -467,7 +467,7 @@
       <details class="faq-item"><summary>What happens in a 1:1?</summary><p>A real, unhurried conversation. Your confidant will listen, ask honest questions, and meet you wherever you are. There's no script — the work shapes itself around what you bring.</p></details>
       <details class="faq-item"><summary>How long is a session?</summary><p>Roughly one hour. Your confidant will confirm exact timing when scheduling with you directly.</p></details>
       <details class="faq-item"><summary>Is this therapy or coaching?</summary><p>No. A confidant session is not therapy, coaching, or pastoral counseling. It's a guided process for inner work, with company. If you're in acute crisis, please reach out to a therapist, your doctor, or 988 first.</p></details>
-      <details class="faq-item"><summary>Can I book more than one session?</summary><p>Yes — book additional sessions any time. Each one is $197.</p></details>
+      <details class="faq-item"><summary>Can I book more than one session?</summary><p>Yes — book additional sessions any time. Each one is $222.</p></details>
       <details class="faq-item"><summary>How does payment and scheduling work?</summary><p>Payment is handled securely at checkout after you submit the form. Your confidant reaches out within 48 hours to schedule directly with you.</p></details>
       <details class="faq-item"><summary>What if I'd rather work in a group?</summary><p>The 5-week ReFresh cohort might be a better fit — <a href="refresh-cohort.html" style="color:var(--green-ink);font-weight:700">see the cohort</a>.</p></details>
     </div>
@@ -654,13 +654,16 @@ document.querySelectorAll('.bio-modal-pop').forEach(function(m){
     postSubmitZone: document.getElementById('confidant-post-submit'),
     supabase: supabase,
     contactEmail: 'refresh@justrebe.com',
-    priceDisplay: '$197',
+    priceDisplay: '$222',
     // Renders the Stripe Checkout button. The form helper still calls this `paypalInit`
     // (legacy name) but the body now creates a Stripe Checkout Session via
     // /api/create-checkout-session and redirects the user to Stripe's hosted page.
     paypalInit: function(container, requestId){
       var testMode=new URLSearchParams(window.location.search).get('testpay')==='ospo';
-      var finalPrice=testMode?1:197;
+      var confSel=document.querySelector('#confidant-form [name="preferred_confidant"]');
+      var isQuintal=confSel&&confSel.value==='Dr. Jason Quintal';
+      var basePrice=isQuintal?197:222; // Dr. Quintal stays at 197; all other confidants 222
+      var finalPrice=testMode?1:basePrice;
       var amtDisplay=finalPrice.toFixed(2);
       var amtCents=Math.round(finalPrice*100);
       if(testMode){ var tb=document.createElement('p'); tb.style.cssText='margin:0 0 14px;color:#B07D14;font-size:13px;font-weight:700;text-align:center;background:#FBF4E4;padding:10px;border-radius:8px'; tb.innerHTML='⚠️ Internal test mode — price is $1.00'; container.parentNode.insertBefore(tb,container); }
